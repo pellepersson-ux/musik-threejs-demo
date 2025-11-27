@@ -53,24 +53,6 @@ body.dark {
 body {
   font-family: var(--font-main);
   background: linear-gradient(to bottom, #fef9f3, #ffffff);
-  color: var(--color-text);
-  line-height: 1.6;
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: var(--spacing-sm);
-  color: var(--accent);
-}
-
-a {
-  color: var(--link);
-  text-decoration: none;
-  transition: color var(--transition-fast);
 }
 
 a:hover {
