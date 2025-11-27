@@ -7,16 +7,32 @@
 
 /* Header */
 .site-header {
-    background-color: var(--color-header-bg);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--spacing-sm) var(--spacing-md);
+    /* Glassmorphism */
+    background-color: rgba(13, 31, 45, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* Layout & Spacing */
+    padding: 0.5rem var(--spacing-md);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow-sm);
+
+    /* Soft Shadow */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+    /* Container for content */
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.header-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .logo {
@@ -26,11 +42,27 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    /* Center the logo */
+    grid-column: 2;
+    justify-self: center;
 }
 
 .main-nav {
     display: flex;
     gap: var(--spacing-md);
+
+    /* Nav on the left */
+    grid-column: 1;
+    justify-self: start;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
@@ -47,10 +79,14 @@
     color: var(--color-primary);
 }
 
-.header-actions {
+.header-controls {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+
+    /* Controls on the right */
+    grid-column: 3;
+    justify-self: end;
 }
 
 /* Main Content */
@@ -98,14 +134,27 @@ body.is-teacher .teacher-only {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .site-header {
+    .header-content {
+        display: flex;
         flex-direction: column;
         gap: var(--spacing-sm);
     }
 
-    .main-nav {
+    .site-header {
+        height: auto;
+        padding: var(--spacing-sm);
+    }
+
+    .main-nav ul {
         flex-wrap: wrap;
         justify-content: center;
         gap: var(--spacing-xs);
+    }
+
+    .logo,
+    .main-nav,
+    .header-controls {
+        grid-column: auto;
+        justify-self: center;
     }
 }

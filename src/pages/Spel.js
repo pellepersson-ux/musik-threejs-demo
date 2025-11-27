@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 export function Spel() {
     const container = document.createElement('div');
@@ -24,11 +25,41 @@ function initThree(mountPoint) {
     renderer.setSize(mountPoint.clientWidth, mountPoint.clientHeight);
     mountPoint.appendChild(renderer.domElement);
 
-    // Cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshNormalMaterial();
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    // Load Guitar Model
+    const loader = new GLTFLoader();
+    let model;
+
+    loader.load('/models/guitar.glb', (gltf) => {
+        model = gltf.scene;
+        scene.add(model);
+
+        // Center and scale the model
+        // Note: Scale depends on the model. For the placeholder box, 1 is fine.
+        // For a real guitar, might need adjustment.
+        model.scale.set(1, 1, 1);
+
+        // Optional: Auto-center
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center); // Center at 0,0,0
+
+    }, undefined, (error) => {
+        console.error('An error occurred loading the model:', error);
+        // Fallback to cube if model fails?
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshNormalMaterial();
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        model = cube;
+    });
 
     camera.position.z = 5;
 
@@ -37,8 +68,10 @@ function initThree(mountPoint) {
         if (!mountPoint.isConnected) return; // Stop if removed from DOM
         requestAnimationFrame(animate);
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        if (model) {
+            model.rotation.y += 0.01;
+            model.rotation.x += 0.005;
+        }
 
         renderer.render(scene, camera);
     }

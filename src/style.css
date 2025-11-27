@@ -3,22 +3,25 @@
   --font-main: 'Outfit', sans-serif;
   --font-heading: 'Outfit', sans-serif;
 
-  /* Light Mode Colors (Playful & Pedagogical) */
-  --color-bg: #ffffff;
-  --color-text: #2d3436;
-  --color-primary: #6c5ce7; /* Purple */
-  --color-secondary: #00b894; /* Green */
-  --color-accent: #fdcb6e; /* Yellow/Orange */
-  --color-danger: #ff7675;
-  --color-surface: #f5f6fa;
-  --color-border: #dfe6e9;
-  --color-header-bg: #ffffff;
-  --color-card-bg: #ffffff;
+  /* Theme Colors (Warm Music Theme) */
+  --bg: #0d1f2d;
+  --text: #f5f1eb;
+  --accent: #e9b44c;
+  --link: #88a9c3;
 
-  /* Grade Level Colors */
-  --color-grade-1-3: #00b894; /* Green */
-  --color-grade-4-6: #0984e3; /* Blue */
-  --color-grade-7-9: #6c5ce7; /* Purple */
+  /* Mapping to existing functional names if needed, or redefining usage */
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-primary: var(--link);
+  /* Using link color as primary for now */
+  --color-secondary: #00b894;
+  /* Keeping some existing for safety */
+  --color-accent: var(--accent);
+  --color-danger: #ff7675;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-header-bg: rgba(13, 31, 45, 0.8);
+  --color-card-bg: rgba(255, 255, 255, 0.05);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -28,25 +31,32 @@
   --spacing-xl: 3rem;
 
   /* Shadows */
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   /* Transitions */
   --transition-fast: 0.2s ease;
 }
 
-/* Dark Mode Overrides */
+/* Dark Mode Overrides - The new theme is inherently dark, so we might inverse for "light" or just keep it. 
+   For now, I'll make the default the requested theme and adjust "dark" class to be maybe a lighter variant or just same.
+   Actually, the user asked for these specific variables. I will apply them to :root.
+   If the user toggles "dark" mode (which is now default), we might want a "light" mode.
+   But the request is "set global CSS variables for a warm music theme".
+   I will set these as the defaults.
+*/
+
 body.dark {
-  --color-bg: #1e1e2e;
-  --color-text: #cdd6f4;
-  --color-primary: #cba6f7;
-  --color-secondary: #a6e3a1;
-  --color-accent: #f9e2af;
-  --color-surface: #313244;
-  --color-border: #45475a;
-  --color-header-bg: #181825;
-  --color-card-bg: #313244;
+  /* If the user wants a toggle, we need a second state. 
+     The requested theme is dark (#0d1f2d). 
+     I will assume the requested theme IS the default, and if there's a toggle, 
+     I might need to invent a light theme or use the previous one. 
+     For now, I'll comment out the old dark mode overrides or map them to the new variables.
+  */
+  --color-bg: #0d1f2d;
+  --color-text: #f5f1eb;
 }
 
 /* Global Reset & Base Styles */
@@ -62,39 +72,66 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Music Note Pattern */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v20c0 4-3 7-7 7s-7-3-7-7 3-7 7-7c1.5 0 2.9.4 4 1.1V10h3z' fill='%23f5f1eb' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: repeat;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
+  color: var(--accent);
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--link);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-secondary);
+  color: var(--accent);
 }
 
 button {
   cursor: pointer;
   font-family: var(--font-main);
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Print Styles */
 @media print {
-  nav, button, .no-print, header, footer {
+
+  nav,
+  button,
+  .no-print,
+  header,
+  footer {
     display: none !important;
   }
+
   body {
     background: white !important;
     color: black !important;
   }
+
   main {
     width: 100% !important;
     margin: 0 !important;
