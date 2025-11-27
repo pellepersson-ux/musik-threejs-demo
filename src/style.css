@@ -1,90 +1,116 @@
-   I will set these as the defaults. */ body.dark {
-     /* If the user wants a toggle, we need a second state. 
-     The requested theme is dark (#0d1f2d). 
-     I will assume the requested theme IS the default, and if there's a toggle, 
-     I might need to invent a light theme or use the previous one. 
-     For now, I'll comment out the old dark mode overrides or map them to the new variables.
-  */
-     --color-bg: #0d1f2d;
-     --color-text: #f5f1eb;
-   }
+:root {
+  /* Typography */
+  --font-main: 'Outfit', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
 
-   /* Global Reset & Base Styles */
-   * {
-     box-sizing: border-box;
-     margin: 0;
-     padding: 0;
-   }
+  /* Theme Colors (Light Music Theme) */
+  --bg: #fef9f3;
+  --text: #2d2d2d;
+  --accent: #d4a017;
+  --link: #5b8ba7;
 
-   body {
-     font-family: var(--font-main);
-     background-color: var(--color-bg);
-     color: var(--color-text);
-     line-height: 1.6;
-     transition: background-color 0.3s ease, color 0.3s ease;
+  /* Mapping to existing functional names */
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-primary: var(--link);
+  --color-secondary: #00b894;
+  --color-accent: var(--accent);
+  --color-danger: #ff7675;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-header-bg: rgba(255, 255, 255, 0.8);
+  --color-card-bg: rgba(255, 255, 255, 0.05);
 
-     /* Music Note Pattern */
-     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v20c0 4-3 7-7 7s-7-3-7-7 3-7 7-7c1.5 0 2.9.4 4 1.1V10h3z' fill='%232d2d2d' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-     background-repeat: repeat;
-   }
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
 
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6 {
-     font-family: var(--font-heading);
-     font-weight: 700;
-     line-height: 1.2;
-     margin-bottom: var(--spacing-sm);
-     color: var(--accent);
-   }
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-   a {
-     color: var(--link);
-     text-decoration: none;
-     transition: color var(--transition-fast);
-   }
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}
 
-   a:hover {
-     color: var(--accent);
-   }
+body.dark {
+  --color-bg: #0d1f2d;
+  --color-text: #f5f1eb;
+}
 
-   button {
-     cursor: pointer;
-     font-family: var(--font-main);
-     border-radius: 8px;
-     box-shadow: var(--shadow-soft);
-     border: none;
-     padding: 0.5rem 1rem;
-     transition: transform 0.1s ease, box-shadow 0.1s ease;
-   }
+/* Global Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-   button:active {
-     transform: translateY(1px);
-     box-shadow: var(--shadow-sm);
-   }
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(to bottom, #fef9f3, #ffffff);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-   /* Print Styles */
-   @media print {
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-sm);
+  color: var(--accent);
+}
 
-     nav,
-     button,
-     .no-print,
-     header,
-     footer {
-       display: none !important;
-     }
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
 
-     body {
-       background: white !important;
-       color: black !important;
-     }
+a:hover {
+  color: var(--accent);
+}
 
-     main {
-       width: 100% !important;
-       margin: 0 !important;
-       padding: 0 !important;
-     }
-   }
+button {
+  cursor: pointer;
+  font-family: var(--font-main);
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Print Styles */
+@media print {
+
+  nav,
+  button,
+  .no-print,
+  header,
+  footer {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  main {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

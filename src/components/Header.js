@@ -5,7 +5,6 @@ export function Header(state) {
   header.innerHTML = `
     <div class="header-content">
       <a href="/" class="logo" data-link aria-label="Tonverkstan Hem">
-        <span class="logo-icon">🎵</span>
         Tonverkstan
       </a>
       
