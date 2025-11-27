@@ -37,7 +37,7 @@ function initThree(mountPoint) {
     const loader = new GLTFLoader();
     let model;
 
-    loader.load('/models/guitar.glb', (gltf) => {
+    loader.load('/models/acoustic-guitar.glb', (gltf) => {
         model = gltf.scene;
         scene.add(model);
 
