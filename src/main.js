@@ -1,34 +1,34 @@
 import './style.css';
 import './styles/layout.css';
 
-// Import Components
+// Komponenter
 import { Header } from './components/Header.js';
 import { Footer } from './components/Footer.js';
 import { HelpOverlay } from './components/HelpOverlay.js';
 
-// Import Pages
+// Sidor
 import { Home } from './pages/Home.js';
-import { Spel } from './pages/Spel.js';
+import { Instrument } from './pages/Instrument.js'; // NY!
+import { Spel } from './pages/Spel.js'; // Se till att denna fil finns hos dig, annars kraschar det
 import { Larare } from './pages/Larare.js';
 import { Om } from './pages/Om.js';
 
 const app = document.querySelector('#app');
 
-// State
+// State (Håller koll på läget)
 const state = {
   currentPage: window.location.pathname,
   isTeacher: new URLSearchParams(window.location.search).has('teacher'),
   isDark: localStorage.getItem('theme') === 'dark',
 };
 
-// Theme Init
-if (state.isDark) {
-  document.body.classList.add('dark');
-}
+// Sätt tema direkt
+if (state.isDark) document.body.classList.add('dark');
 
-// Router Configuration
+// Här bestämmer vi vilken sida som visas för vilken länk
 const routes = {
   '/': Home,
+  '/instrument': Instrument,
   '/spel': Spel,
   '/larare': Larare,
   '/om': Om,
@@ -43,87 +43,54 @@ function navigateTo(url) {
 function render() {
   app.innerHTML = '';
 
-  // Header
-  // Re-render header to update active link state
+  // 1. Lägg till Header
   app.appendChild(Header(state));
 
-  // Main Content
+  // 2. Lägg till Huvudinnehåll
   const main = document.createElement('main');
   main.className = 'site-main';
 
+  // Välj rätt sida från listan, om den inte finns, visa Home
   const PageComponent = routes[state.currentPage] || Home;
-  main.appendChild(PageComponent());
+
+  // Försök rendera sidan
+  try {
+    main.appendChild(PageComponent());
+  } catch (error) {
+    console.error("Kunde inte ladda sidan:", error);
+    main.innerHTML = "<h1>Oups!</h1><p>Något gick fel när sidan skulle laddas.</p>";
+  }
 
   app.appendChild(main);
 
-  // Footer
+  // 3. Lägg till Footer och Hjälp
   app.appendChild(Footer());
-
-  // Help Overlay
-  const help = HelpOverlay();
-  help.id = 'help-overlay';
-  app.appendChild(help);
+  app.appendChild(HelpOverlay());
 }
 
-// Global Event Listeners
-
-// 1. Navigation (SPA Link Interception)
+// Starta allt när sidan laddat
 document.addEventListener('DOMContentLoaded', () => {
+  // Lyssna på klick på länkar
   document.body.addEventListener('click', e => {
     if (e.target.matches('[data-link]')) {
       e.preventDefault();
       navigateTo(e.target.href);
-    } else if (e.target.closest('[data-link]')) {
-      // Handle clicks on children of links (like the logo span)
-      e.preventDefault();
-      navigateTo(e.target.closest('[data-link]').href);
     }
   });
 
-  render(); // Initial render
+  render();
 });
 
-// 2. Browser Back/Forward
+// Lyssna på Bakåt-knappen i webbläsaren
 window.addEventListener('popstate', () => {
   state.currentPage = window.location.pathname;
   render();
 });
 
-// 3. Theme Toggle (Custom Event from Header)
+// Lyssna på Tema-byte
 window.addEventListener('toggle-theme', () => {
   state.isDark = !state.isDark;
   document.body.classList.toggle('dark');
   localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
-  render(); // Re-render to update icon
+  render();
 });
-
-// 4. Keyboard Shortcuts
-window.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'd') {
-    window.dispatchEvent(new CustomEvent('toggle-theme'));
-  }
-  if (e.key.toLowerCase() === 't') {
-    const url = new URL(window.location);
-    if (state.isTeacher) {
-      url.searchParams.delete('teacher');
-    } else {
-      url.searchParams.set('teacher', 'true');
-    }
-    window.location.href = url.toString(); // Reload needed for query param logic usually, or just state update
-  }
-  if (e.key.toLowerCase() === 'h') {
-    const help = document.getElementById('help-overlay');
-    if (help) {
-      help.style.display = help.style.display === 'none' ? 'flex' : 'none';
-    }
-  }
-});
-
-// Service Worker Registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('SW registered:', reg))
-      .catch(err => console.log('SW registration failed:', err));
-  });
-}

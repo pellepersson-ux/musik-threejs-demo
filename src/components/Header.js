@@ -5,26 +5,23 @@ export function Header(state) {
   header.innerHTML = `
     <div class="header-content">
       <a href="/" class="logo" data-link aria-label="Tonverkstan Hem">
-        Tonverkstan
+        Tonverkstan 🎵
       </a>
       
       <nav class="main-nav" aria-label="Huvudmeny">
         <ul>
           <li><a href="/" class="${state.currentPage === '/' ? 'active' : ''}" data-link>Hem</a></li>
+          <li><a href="/instrument" class="${state.currentPage === '/instrument' ? 'active' : ''}" data-link>Instrument</a></li>
           <li><a href="/spel" class="${state.currentPage === '/spel' ? 'active' : ''}" data-link>Spel</a></li>
-          <li><a href="/larare" class="${state.currentPage === '/larare' ? 'active' : ''}" data-link>Lärare</a></li>
           <li><a href="/om" class="${state.currentPage === '/om' ? 'active' : ''}" data-link>Om</a></li>
         </ul>
       </nav>
 
       <div class="header-controls">
         <button class="theme-toggle" aria-label="Växla tema">
-          <!-- Sun Icon (shown when dark) -->
-          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: ${state.isDark ? 'block' : 'none'}"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          <!-- Moon Icon (shown when light) -->
-          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: ${state.isDark ? 'none' : 'block'}"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          ${state.isDark ? '☀️' : '🌙'}
         </button>
-        ${state.isTeacher ? '<span class="teacher-badge" title="Lärarläge aktivt">Lärare</span>' : ''}
+        ${state.isTeacher ? '<span class="teacher-badge">Lärare</span>' : ''}
       </div>
     </div>
   `;
