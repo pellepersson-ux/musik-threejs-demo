@@ -12,6 +12,8 @@ export function Header(state) {
         <ul>
           <li><a href="/" class="${state.currentPage === '/' ? 'active' : ''}" data-link>Hem</a></li>
           <li><a href="/instrument" class="${state.currentPage === '/instrument' ? 'active' : ''}" data-link>Instrument</a></li>
+          <li><a href="/historia" class="${state.currentPage === '/historia' ? 'active' : ''}" data-link>Historia</a></li>
+          <li><a href="/teori" class="${state.currentPage === '/teori' ? 'active' : ''}" data-link>Teori</a></li>
           <li><a href="/spel" class="${state.currentPage === '/spel' ? 'active' : ''}" data-link>Spel</a></li>
         </ul>
       </nav>
