@@ -8,8 +8,8 @@ import { HelpOverlay } from './components/HelpOverlay.js';
 
 // Sidor
 import { Home } from './pages/Home.js';
-import { Instrument } from './pages/Instrument.js'; // NY!
-import { Spel } from './pages/Spel.js'; // Se till att denna fil finns hos dig, annars kraschar det
+import { Instrument } from './pages/Instrument.js';
+import { Spel } from './pages/Spel.js';
 import { Larare } from './pages/Larare.js';
 import { Om } from './pages/Om.js';
 
@@ -68,16 +68,21 @@ function render() {
   app.appendChild(HelpOverlay());
 }
 
-// Starta allt när sidan laddat
+// --- HÄR ÄR FIXEN: Vi startar allt när HTML-koden är redo ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Lyssna på klick på länkar
+
+  // Lyssna på klick på länkar (SÄKER VERSION)
   document.body.addEventListener('click', e => {
-    if (e.target.matches('[data-link]')) {
+    // Kollar om det vi klickade på (eller något ovanför det) är en länk med 'data-link'
+    const targetLink = e.target.closest('[data-link]');
+
+    if (targetLink) {
       e.preventDefault();
-      navigateTo(e.target.href);
+      navigateTo(targetLink.getAttribute('href'));
     }
   });
 
+  // Rita ut sidan första gången
   render();
 });
 

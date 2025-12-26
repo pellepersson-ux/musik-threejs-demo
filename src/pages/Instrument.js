@@ -1,48 +1,33 @@
 export function Instrument() {
-    const container = document.createElement('div');
-    container.className = 'page-content';
+  const section = document.createElement('section');
+  section.className = 'page-instrument';
 
-    // Här bygger vi upp innehållet
-    container.innerHTML = `
-    <section class="intro-section" style="text-align: center; margin-bottom: 2rem;">
-      <h1>Instrument & Skapande 🎸</h1>
-      <p>Välj ditt instrument för att hitta filmer och övningar.</p>
-    </section>
-
-    <div class="grid-container">
-      <div class="card">
+  section.innerHTML = `
+    <h1>Välj ditt Instrument</h1>
+    <p>Klicka på ett kort för att börja utforska!</p>
+    
+    <div class="instrument-grid" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+      
+      <div class="card" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; flex: 1; min-width: 200px;">
         <h3>🎸 Gitarr</h3>
-        <p>Lär dig ackord, tabulatur och enkla låtar.</p>
-        <div class="btn-group">
-          <button class="btn-sm">Se filmer</button>
-        </div>
+        <p>Lär dig strängar och ackord.</p>
+        <button>Gå till Gitarr</button>
       </div>
 
-      <div class="card">
-        <h3>🎹 Piano / Keyboard</h3>
-        <p>Hitta C, spela ackord och kompa dig själv.</p>
-        <div class="btn-group">
-          <button class="btn-sm">Se filmer</button>
-        </div>
+      <div class="card" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; flex: 1; min-width: 200px;">
+        <h3>🎹 Piano</h3>
+        <p>Tangenter och skalor.</p>
+        <button>Gå till Piano</button>
       </div>
 
-      <div class="card">
+      <div class="card" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; flex: 1; min-width: 200px;">
         <h3>🥁 Trummor</h3>
-        <p>Grundkomp, fills och taktarter.</p>
-        <div class="btn-group">
-          <button class="btn-sm">Se filmer</button>
-        </div>
+        <p>Håll takten!</p>
+        <button>Gå till Trummor</button>
       </div>
 
-      <div class="card">
-        <h3>💻 Digitalt Skapande</h3>
-        <p>Garageband, Soundtrap och inspelning.</p>
-        <div class="btn-group">
-          <button class="btn-sm">Tutorials</button>
-        </div>
-      </div>
     </div>
   `;
 
-    return container;
+  return section;
 }
