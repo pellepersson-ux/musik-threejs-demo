@@ -50,15 +50,14 @@ function render() {
   const main = document.createElement('main');
   main.className = 'site-main';
 
-  // Välj rätt sida från listan, om den inte finns, visa Home
+  // Hämta rätt sida, eller visa Home om den inte finns
   const PageComponent = routes[state.currentPage] || Home;
 
-  // Försök rendera sidan
   try {
     main.appendChild(PageComponent());
   } catch (error) {
     console.error("Kunde inte ladda sidan:", error);
-    main.innerHTML = "<h1>Oups!</h1><p>Något gick fel när sidan skulle laddas.</p>";
+    main.innerHTML = `<h1>Oups!</h1><p>Något gick fel när vi laddade ${state.currentPage}</p>`;
   }
 
   app.appendChild(main);
@@ -68,22 +67,8 @@ function render() {
   app.appendChild(HelpOverlay());
 }
 
-// --- HÄR ÄR FIXEN: Vi startar allt när HTML-koden är redo ---
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Lyssna på klick på länkar (SÄKER VERSION)
-  document.body.addEventListener('click', e => {
-    // Kollar om det vi klickade på (eller något ovanför det) är en länk med 'data-link'
-    const targetLink = e.target.closest('[data-link]');
-
-    if (targetLink) {
-      e.preventDefault();
-      navigateTo(targetLink.getAttribute('href'));
-    }
-  });
-
-  // Rita ut sidan första gången
-  render();
+// Rita ut sidan första gången
+render();
 });
 
 // Lyssna på Bakåt-knappen i webbläsaren
