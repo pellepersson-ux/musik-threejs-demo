@@ -13,7 +13,6 @@ export function Header(state) {
           <li><a href="/" class="${state.currentPage === '/' ? 'active' : ''}" data-link>Hem</a></li>
           <li><a href="/instrument" class="${state.currentPage === '/instrument' ? 'active' : ''}" data-link>Instrument</a></li>
           <li><a href="/spel" class="${state.currentPage === '/spel' ? 'active' : ''}" data-link>Spel</a></li>
-          <li><a href="/om" class="${state.currentPage === '/om' ? 'active' : ''}" data-link>Om</a></li>
         </ul>
       </nav>
 
@@ -21,7 +20,6 @@ export function Header(state) {
         <button class="theme-toggle" aria-label="Växla tema">
           ${state.isDark ? '☀️' : '🌙'}
         </button>
-        ${state.isTeacher ? '<span class="teacher-badge">Lärare</span>' : ''}
       </div>
     </div>
   `;
