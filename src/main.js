@@ -69,7 +69,6 @@ function render() {
 
 // Rita ut sidan första gången
 render();
-});
 
 // Lyssna på Bakåt-knappen i webbläsaren
 window.addEventListener('popstate', () => {
