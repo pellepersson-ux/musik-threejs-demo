@@ -1,141 +1,211 @@
-/* --- CYBERPUNK TEMA --- */
 :root {
-  --cyber-dark: #050510;
-  /* Nästan svart, med en gnutta blått */
-  --cyber-blue: #00f3ff;
-  /* Elektrisk cyan */
-  --cyber-pink: #ff0099;
-  /* Hot pink */
-  --cyber-purple: #9d00ff;
-  /* Neonlila */
-  --text-glow: 0 0 8px currentColor;
-  /* Effekten som får text att glöda */
+  --bg-dark: #2c2e35;
+  /* Mörkgrå bakgrund */
+  --text-light: #f5f5f5;
+  /* Ljus text */
+  --header-bg: #1a1a1a;
+  /* Svart meny */
+
+  /* Gradienter från bilden */
+  --hero-gradient: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
+  --card-purple: linear-gradient(135deg, #c471ed 0%, #f64f59 100%);
+  --card-green: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+  --card-orange: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
+  --btn-color: #ff4b1f;
 }
 
 body {
-  /* Ett "digitalt" typsnitt som finns på alla datorer */
-  font-family: 'Courier New', Courier, monospace;
   margin: 0;
-  padding: 0;
-  background-color: var(--cyber-dark);
-  color: var(--cyber-blue);
-  line-height: 1.6;
-  /* En subtil rutnäts-bakgrund för "tron"-känsla */
-  background-image:
-    linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
 }
 
-/* --- HEADER & MENY (Digital HUD) --- */
+/* --- HEADER --- */
 .site-header {
-  background-color: rgba(5, 5, 16, 0.9);
-  /* Något genomskinlig */
-  border-bottom: 2px solid var(--cyber-pink);
-  box-shadow: 0 0 20px var(--cyber-pink);
-  /* Rosa sken under menyn */
+  background-color: var(--header-bg);
   padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo {
+  color: white;
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-decoration: none;
-  color: var(--cyber-pink);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: var(--text-glow);
-  /* Loggan glöder */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .main-nav ul {
-  list-style: none;
   display: flex;
+  list-style: none;
   gap: 25px;
   margin: 0;
   padding: 0;
 }
 
 .main-nav a {
+  color: #ccc;
   text-decoration: none;
-  color: var(--cyber-blue);
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
   color: white;
-  text-shadow: 0 0 10px var(--cyber-blue);
-  /* Länken glöder blått vid hover */
 }
 
-/* --- DÖLJ TEMA-KNAPPEN --- */
-/* Cyberpunk är alltid mörkt, så vi gömmer sol/måne-knappen */
 .theme-toggle {
   display: none;
 }
 
-/* --- HUVUDINNEHÅLL & TYPOGRAFI --- */
-.site-main {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 20px;
-  text-align: center;
+/* Vi gömmer knappen för denna design */
+
+/* --- HERO SECTION (Välkomst-delen) --- */
+.hero-section {
+  background: var(--hero-gradient);
+  color: #2c2e35;
+  /* Mörk text mot ljus bakgrund */
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  text-align: left;
 }
 
-h1 {
-  color: var(--cyber-purple);
-  text-transform: uppercase;
+.hero-content {
+  max-width: 500px;
+}
+
+.hero-content h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px var(--cyber-purple);
-  /* Lila glöd */
+  line-height: 1.1;
 }
 
-h2,
-h3 {
-  color: var(--cyber-pink);
-  text-shadow: 0 0 10px var(--cyber-pink);
+.hero-image {
+  font-size: 8rem;
+  /* Storlek på emojierna */
+  animation: float 3s ease-in-out infinite;
 }
 
-p {
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto 20px auto;
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
-/* --- KNAPPAR (Neon-knappar) --- */
-button {
-  background-color: transparent;
-  border: 2px solid var(--cyber-blue);
-  color: var(--cyber-blue);
-  padding: 1em 2em;
-  font-size: 1em;
-  font-family: inherit;
-  /* Använd samma digitala font */
+.cta-button {
+  display: inline-block;
+  background-color: var(--btn-color);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
   font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 0 5px var(--cyber-blue);
-  /* Liten blå glöd */
-  border-radius: 0;
-  /* Cyberpunk gillar vassa hörn, inte runda */
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(255, 75, 31, 0.4);
+  transition: transform 0.2s;
 }
 
-button:hover {
-  background-color: var(--cyber-blue);
-  color: var(--cyber-dark);
-  box-shadow: 0 0 25px var(--cyber-blue);
-  /* Stor glöd när man pekar! */
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+/* --- CARDS SECTION (Nedre delen) --- */
+.cards-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.cards-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.dashboard-card {
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-card h3 {
+  margin: 10px 0 5px 0;
+  font-size: 1.5rem;
+}
+
+.dashboard-card p {
+  margin: 0;
+  opacity: 0.9;
+  flex-grow: 1;
+}
+
+.dashboard-card .icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.dashboard-card .read-more {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Färger på korten */
+.card-history {
+  background: var(--card-purple);
+}
+
+.card-theory {
+  background: var(--card-green);
+}
+
+.card-game {
+  background: var(--card-orange);
+}
+
+/* --- Footer & Main fix --- */
+.site-main {
+  margin: 0;
+  padding: 0;
+  max-width: none;
 }

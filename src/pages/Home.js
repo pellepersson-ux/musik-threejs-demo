@@ -1,46 +1,48 @@
 export function Home() {
-  const container = document.createElement('div');
-  container.className = 'page-home';
+  const section = document.createElement('section');
+  section.className = 'page-home';
 
-  container.innerHTML = `
-    <section class="hero">
+  section.innerHTML = `
+    <div class="hero-section">
       <div class="hero-content">
-        <h1>Välkommen till Tonverkstan! 🎶</h1>
-        <p class="subtitle">Din digitala musiksal för kreativt lärande.</p>
-        <div class="hero-actions">
-          <a href="/spel" class="btn-primary" data-link>Starta Spelet</a>
-          <a href="/om" class="btn-secondary" data-link>Läs mer om oss</a>
-        </div>
+        <h1>Din Musikaliska Verkstad</h1>
+        <p>Välkommen till Tonverkstan! En plats där du kan lära, skapa och spela musik. Upptäck instrument, lär dig historia eller utmana dig själv i ett spel.</p>
+        <a href="/spel" class="cta-button" data-link>STARTA NU</a>
       </div>
-    </section>
-    
-    <section class="features">
-      <div class="feature-card">
-        <h3>🎹 Interaktiva Spel</h3>
-        <p>Lär dig musik genom att spela och utforska.</p>
+      <div class="hero-image">
+        🎸🎹🥁
       </div>
-      <div class="feature-card">
-        <h3>📚 Lärarresurser</h3>
-        <p>Färdiga lektionsplaner och material för klassrummet.</p>
-      </div>
-      <div class="feature-card">
-        <h3>✨ Anpassningsbart</h3>
-        <p>Växla mellan ljust och mörkt läge för bästa upplevelse.</p>
-      </div>
-    </section>
+    </div>
 
-    <section class="weekly-task">
-      <h2>Veckans Uppgift</h2>
-      <div class="card task-card">
-        <div class="task-header">
-          <h3>Skapa en rytm!</h3>
-          <span class="tag">Årskurs 4-6</span>
-        </div>
-        <p>Använd rytm-maskinen och skapa en takt i 4/4. Försök att använda både fjärdedelar och åttondelar.</p>
-        <button class="btn-primary">Gå till uppgiften</button>
+    <div class="cards-section">
+      <h2>Upptäck, Lär & Skapa</h2>
+      
+      <div class="dashboard-grid">
+        
+        <a href="/historia" class="dashboard-card card-history" data-link>
+          <div class="icon">📜</div>
+          <h3>Musikens Historia</h3>
+          <p>Res genom tiden från barock till pop.</p>
+          <span class="read-more">Läs mer ></span>
+        </a>
+
+        <a href="/teori" class="dashboard-card card-theory" data-link>
+          <div class="icon">🎵</div>
+          <h3>Musikteori</h3>
+          <p>Lär dig noternas hemliga språk.</p>
+          <span class="read-more">Läs mer ></span>
+        </a>
+
+        <a href="/spel" class="dashboard-card card-game" data-link>
+          <div class="icon">🎮</div>
+          <h3>Musikspel</h3>
+          <p>Utmana ditt taktsinne och samla poäng!</p>
+          <span class="read-more">Läs mer ></span>
+        </a>
+
       </div>
-    </section>
+    </div>
   `;
 
-  return container;
+  return section;
 }
