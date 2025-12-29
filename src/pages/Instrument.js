@@ -3,29 +3,36 @@ export function Instrument() {
   section.className = 'page-instrument';
 
   section.innerHTML = `
-    <h1>Välj ditt Instrument</h1>
-    <p>Klicka på ett kort för att börja utforska!</p>
-    
-    <div class="instrument-grid" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
-      
-      <div class="card" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; flex: 1; min-width: 200px;">
-        <h3>🎸 Gitarr</h3>
-        <p>Lär dig strängar och ackord.</p>
-        <button>Gå till Gitarr</button>
+    <div class="cards-section">
+      <div style="text-align: center; margin-bottom: 40px; color: var(--text-light);">
+        <h2>Välj ditt Instrument</h2>
+        <p>Klicka på ett kort för att börja utforska ljuden!</p>
       </div>
 
-      <div class="card" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; flex: 1; min-width: 200px;">
-        <h3>🎹 Piano</h3>
-        <p>Tangenter och skalor.</p>
-        <button>Gå till Piano</button>
-      </div>
+      <div class="dashboard-grid">
+        
+        <a href="/instrument/gitarr" class="dashboard-card card-guitar" data-link>
+          <div class="icon">🎸</div>
+          <h3>Gitarr</h3>
+          <p>Lär dig strängar, ackord och att rocka loss.</p>
+          <span class="read-more">Spela nu ></span>
+        </a>
 
-      <div class="card" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; flex: 1; min-width: 200px;">
-        <h3>🥁 Trummor</h3>
-        <p>Håll takten!</p>
-        <button>Gå till Trummor</button>
-      </div>
+        <a href="/instrument/piano" class="dashboard-card card-piano" data-link>
+          <div class="icon">🎹</div>
+          <h3>Piano</h3>
+          <p>Upptäck tangenter, skalor och melodier.</p>
+          <span class="read-more">Spela nu ></span>
+        </a>
 
+        <a href="/instrument/trummor" class="dashboard-card card-drums" data-link>
+          <div class="icon">🥁</div>
+          <h3>Trummor</h3>
+          <p>Håll takten! Lär dig rytmer och beats.</p>
+          <span class="read-more">Spela nu ></span>
+        </a>
+
+      </div>
     </div>
   `;
 

@@ -209,3 +209,19 @@ body {
   padding: 0;
   max-width: none;
 }
+
+/* --- INSTRUMENT FÄRGER --- */
+/* En isig blå för gitarr */
+.card-guitar {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* En rosa/lila dröm för piano */
+.card-piano {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* En energisk gul/röd för trummor */
+.card-drums {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
