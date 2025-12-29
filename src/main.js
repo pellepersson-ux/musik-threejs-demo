@@ -5,6 +5,8 @@ import { Home } from './pages/Home.js';
 import { Instrument } from './pages/Instrument.js';
 import { Gitarr } from './pages/Gitarr.js';
 import { Bas } from './pages/Bas.js';
+import { Piano } from './pages/Piano.js';
+import { Trummor } from './pages/Trummor.js';
 import { History } from './pages/History.js'; // NY
 import { Theory } from './pages/Theory.js';   // NY
 import { Game } from './pages/Game.js';
@@ -26,6 +28,8 @@ const routes = {
   '/instrument': Instrument,
   '/instrument/bas': Bas,  // <--- LÄGG TILL DENNA RAD
   '/instrument/gitarr': Gitarr,
+  '/instrument/piano': Piano,
+  '/instrument/trummor': Trummor,
   '/historia': History, // NY
   '/teori': Theory,     // NY
   '/spel': Game,
