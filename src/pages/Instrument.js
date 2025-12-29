@@ -32,12 +32,12 @@ export function Instrument() {
           <span class="read-more">Spela nu ></span>
         </a>
 
-        <div class="dashboard-card card bass" onclick="alert('Bas kommer snart!')" style="cursor: pointer;">
+        <a href="/instrument/bas" class="dashboard-card card bass" data-link>
           <div class="icon">🎸</div>
           <h3>Bas</h3>
           <p>Djupa toner som bygger grunden.</p>
           <span class="read-more">Gå till Bas ></span>
-        </div>
+        </a>
 
       </div> </div>
   `;

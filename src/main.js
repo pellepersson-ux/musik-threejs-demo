@@ -3,9 +3,11 @@ import './style.css';
 // 1. IMPORTERA ALLA 5 SIDOR
 import { Home } from './pages/Home.js';
 import { Instrument } from './pages/Instrument.js';
+import { Bas } from './pages/Bas.js';
 import { History } from './pages/History.js'; // NY
 import { Theory } from './pages/Theory.js';   // NY
 import { Game } from './pages/Game.js';
+
 
 import { Header } from './components/Header.js';
 import { Footer } from './components/Footer.js';
@@ -21,6 +23,7 @@ const state = {
 const routes = {
   '/': Home,
   '/instrument': Instrument,
+  '/instrument/bas': Bas,  // <--- LÄGG TILL DENNA RAD
   '/historia': History, // NY
   '/teori': Theory,     // NY
   '/spel': Game,
@@ -52,4 +55,19 @@ render();
 window.addEventListener('popstate', () => {
   state.currentPage = window.location.pathname;
   render();
+});
+
+// Hantera klick på länkar så sidan inte laddar om (SPA-beteende)
+document.body.addEventListener('click', e => {
+  if (e.target.matches('[data-link]') || e.target.closest('[data-link]')) {
+    e.preventDefault();
+
+    // Hitta länken (om man klickade på ikonen inuti a-taggen)
+    const link = e.target.matches('[data-link]') ? e.target : e.target.closest('[data-link]');
+    const href = link.getAttribute('href');
+
+    history.pushState(null, null, href);
+    state.currentPage = href;
+    render();
+  }
 });
