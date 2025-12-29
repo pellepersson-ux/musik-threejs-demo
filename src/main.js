@@ -3,6 +3,7 @@ import './style.css';
 // 1. IMPORTERA ALLA 5 SIDOR
 import { Home } from './pages/Home.js';
 import { Instrument } from './pages/Instrument.js';
+import { Gitarr } from './pages/Gitarr.js';
 import { Bas } from './pages/Bas.js';
 import { History } from './pages/History.js'; // NY
 import { Theory } from './pages/Theory.js';   // NY
@@ -24,6 +25,7 @@ const routes = {
   '/': Home,
   '/instrument': Instrument,
   '/instrument/bas': Bas,  // <--- LÄGG TILL DENNA RAD
+  '/instrument/gitarr': Gitarr,
   '/historia': History, // NY
   '/teori': Theory,     // NY
   '/spel': Game,
