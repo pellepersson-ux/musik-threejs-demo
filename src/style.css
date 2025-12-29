@@ -225,3 +225,21 @@ body {
 .card-drums {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
+
+/* --- Bas (Lila) --- */
+.card.bass {
+  border-top: 4px solid #9b59b6;
+}
+
+.card.bass .icon {
+  color: #9b59b6;
+}
+
+.card.bass button {
+  background-color: #9b59b6;
+  color: white;
+}
+
+.card.bass button:hover {
+  background-color: #8e44ad;
+}

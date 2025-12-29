@@ -33,6 +33,13 @@ export function Instrument() {
         </a>
 
       </div>
+      {/* Bas-kort */}
+        <div className="card bass">
+          <div className="icon">🎸</div>
+          <h3>Bas</h3>
+          <p>Djupa toner som bygger grunden.</p>
+          <button onClick={() => alert('Bas kommer snart!')}>Gå till Bas</button>
+        </div>
     </div>
   `;
 
