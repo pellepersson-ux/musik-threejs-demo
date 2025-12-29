@@ -32,15 +32,14 @@ export function Instrument() {
           <span class="read-more">Spela nu ></span>
         </a>
 
-      </div>
-      {/* Bas-kort */}
-        <div className="card bass">
-          <div className="icon">🎸</div>
+        <div class="dashboard-card card bass" onclick="alert('Bas kommer snart!')" style="cursor: pointer;">
+          <div class="icon">🎸</div>
           <h3>Bas</h3>
           <p>Djupa toner som bygger grunden.</p>
-          <button onClick={() => alert('Bas kommer snart!')}>Gå till Bas</button>
+          <span class="read-more">Gå till Bas ></span>
         </div>
-    </div>
+
+      </div> </div>
   `;
 
   return section;
