@@ -259,3 +259,38 @@ body {
   /* Trycker ner länken till botten */
   display: inline-block;
 }
+
+/* --- Design för undersidor (Bas, etc) --- */
+.page-detail {
+  padding: 40px 20px;
+  /* Ger luft i toppen och på sidorna */
+  min-height: 60vh;
+  /* Ser till att sidan inte känns för kort */
+}
+
+.content-container {
+  max-width: 800px;
+  /* Håller ihop texten så den blir läsbar */
+  margin: 0 auto;
+  /* Centrerar hela blocket mitt på skärmen */
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.video-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  /* Snygg skugga bakom videon */
+  border-radius: 8px;
+  /* Rundade hörn på videospelaren */
+  overflow: hidden;
+}
