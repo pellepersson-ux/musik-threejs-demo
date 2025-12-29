@@ -226,20 +226,36 @@ body {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
-/* --- Bas (Lila) --- */
+/* --- Bas (Lila Gradient) --- */
 .card.bass {
-  border-top: 4px solid #9b59b6;
+  background: linear-gradient(135deg, #8e44ad, #4a235a);
+  /* Ljuslila till mörklila */
+  color: white;
+  border: none;
+  /* Tar bort den gamla kanten */
 }
 
 .card.bass .icon {
-  color: #9b59b6;
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: white;
+  /* Vit ikon */
 }
 
-.card.bass button {
-  background-color: #9b59b6;
+.card.bass h3 {
+  margin-bottom: 10px;
   color: white;
 }
 
-.card.bass button:hover {
-  background-color: #8e44ad;
+.card.bass p {
+  color: rgba(255, 255, 255, 0.9);
+  /* Lite genomskinlig vit text */
+}
+
+.card.bass .read-more {
+  color: white;
+  font-weight: bold;
+  margin-top: auto;
+  /* Trycker ner länken till botten */
+  display: inline-block;
 }
