@@ -2,121 +2,66 @@ export function History() {
   const section = document.createElement('section');
   section.className = 'page-detail';
 
-  // Här är "sidorna" i din lättlästa bok
-  const bookPages = [
-    {
-      text: "För länge sedan, i Antiken, trodde man att musik kunde bota sjukdomar. Musik var som matematik för själen.",
-      icon: "🏛️" // Här kan du byta till en bild-URL senare: image: 'url-till-bild.jpg'
-    },
-    {
-      text: "På 1600-talet kom Barocken. Då ville man ha mycket krusiduller! Vivaldi och Bach var superstjärnorna.",
-      icon: "🎻"
-    },
-    {
-      text: "Sen kom Rocken! På 1950-talet kopplade man in ström i gitarren. Det lät högt och tufft!",
-      icon: "🎸"
-    }
-  ];
-
-  let currentPage = 0;
+  // Byt ut denna länken mot din riktiga StoryBook-länk!
+  const storyBookLink = "https://gemini.google.com/gem/storybook/e35d94951582713e";
 
   section.innerHTML = `
     <div class="content-container">
       <h1>Musikens Historia 📜</h1>
       
-      <div style="text-align: center;">
+      <div style="text-align: center; margin-bottom: 30px;">
         <button id="toggle-book" class="toggle-btn">📖 Öppna Lättläst Bok</button>
       </div>
 
       <div id="standard-text" class="info-text">
-        <p>Här kan du läsa fördjupning om musikens historia...</p>
-        <h3>Antiken</h3>
-        <p>Under antiken (ca 800 f.Kr. – 500 e.Kr.) hade musiken en central roll i samhället...</p>
+        <p>Här kan du läsa fördjupning om musikens historia.</p>
         
-        <h3>Barocken</h3>
-        <p>Barocken (ca 1600–1750) kännetecknas av en ornamenterad och storslagen stil...</p>
+        <h3>Rock'n'rollens födelse</h3>
+        <p>Rockmusiken uppstod under 1950-talet i USA som en smältdegel av blues, country och jazz. Det var en tid av förändring där ungdomen fick en egen röst.</p>
         
-        <h3>Rockens födelse</h3>
-        <p>Rockmusiken uppstod under 1950-talet i USA som en smältdegel av blues, country och jazz...</p>
+        <h3>Instrumenten</h3>
+        <p>Elgitarren blev det centrala instrumentet. Med hjälp av förstärkare kunde man nu spela högre än någonsin tidigare, vilket ändrade dynamiken i musiken helt.</p>
       </div>
 
-      <div id="story-book" class="story-book-container">
-        <div class="book-content">
-          
-          <div class="book-left" style="padding: 40px; background: #fdf6e3; border-right: 2px solid #ddd;">
-             <p id="book-text" class="book-text">${bookPages[0].text}</p>
-          </div>
-
-          <div class="book-right" style="background: #eee; display: flex; align-items: center; justify-content: center; padding: 0;">
-            <img id="book-real-image" src="" alt="Illustration" style="max-width: 100%; max-height: 400px; object-fit: contain; display: none;">
-            <div id="book-icon" class="placeholder-icon" style="font-size: 5rem;">${bookPages[0].icon}</div>
-          </div>
-
-        </div>
+      <div id="story-book-container" style="display: none; margin-top: 20px;">
         
-        <div class="book-controls">
-          <button id="prev-btn" class="book-btn" disabled>← Föregående</button>
-          <span id="page-indicator">Sida 1 av ${bookPages.length}</span>
-          <button id="next-btn" class="book-btn">Nästa →</button>
+        <div class="video-container" style="height: 80vh; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <iframe 
+              src="${storyBookLink}" 
+              width="100%" 
+              height="100%" 
+              style="border: none;"
+              allow="autoplay; fullscreen"
+              allowfullscreen>
+            </iframe>
         </div>
+
+        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #aaa;">
+          Fungerar inte boken? <a href="${storyBookLink}" target="_blank" style="color: var(--primary-color);">Klicka här för att öppna den i nytt fönster.</a>
+        </p>
       </div>
 
     </div>
   `;
 
-  // --- LOGIK FÖR BOKEN ---
-
-  // Hämta elementen vi behöver ändra på
-  const storyBook = section.querySelector('#story-book');
-  const standardText = section.querySelector('#standard-text');
+  // --- LOGIK FÖR ATT BYTA MELLAN TEXT OCH BOK ---
   const toggleBtn = section.querySelector('#toggle-book');
+  const standardText = section.querySelector('#standard-text');
+  const bookContainer = section.querySelector('#story-book-container');
 
-  const bookText = section.querySelector('#book-text');
-  const bookImage = section.querySelector('#book-image');
-  const prevBtn = section.querySelector('#prev-btn');
-  const nextBtn = section.querySelector('#next-btn');
-  const pageIndicator = section.querySelector('#page-indicator');
-
-  // Funktion för att visa/dölja boken
   toggleBtn.addEventListener('click', () => {
-    if (storyBook.style.display === 'block') {
-      storyBook.style.display = 'none';
-      standardText.style.display = 'block';
-      toggleBtn.textContent = '📖 Öppna Lättläst Bok';
-      toggleBtn.style.backgroundColor = '#8e44ad'; // Lila
-    } else {
-      storyBook.style.display = 'block';
+    if (bookContainer.style.display === 'none') {
+      // VISA BOKEN
+      bookContainer.style.display = 'block';
       standardText.style.display = 'none';
       toggleBtn.textContent = '📝 Visa Vanlig Text';
-      toggleBtn.style.backgroundColor = '#e67e22'; // Orange för att visa skillnad
-    }
-  });
-
-  // Funktion för att uppdatera boksidan
-  function updateBook() {
-    const page = bookPages[currentPage];
-    bookText.textContent = page.text;
-    bookImage.textContent = page.icon; // Byt till page.image och <img> tagg om du har riktiga bilder
-
-    pageIndicator.textContent = `Sida ${currentPage + 1} av ${bookPages.length}`;
-
-    // Fixa knapparna (inaktivera om man är först eller sist)
-    prevBtn.disabled = currentPage === 0;
-    nextBtn.disabled = currentPage === bookPages.length - 1;
-  }
-
-  // Knapp-klick
-  prevBtn.addEventListener('click', () => {
-    if (currentPage > 0) {
-      currentPage--;
-      updateBook();
-    }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (currentPage < bookPages.length - 1) {
-      currentPage++;
-      updateBook();
+      toggleBtn.style.backgroundColor = '#e67e22'; // Orange färg
+    } else {
+      // VISA TEXTEN
+      bookContainer.style.display = 'none';
+      standardText.style.display = 'block';
+      toggleBtn.textContent = '📖 Öppna Lättläst Bok';
+      toggleBtn.style.backgroundColor = '#8e44ad'; // Lila färg
     }
   });
 
