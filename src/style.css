@@ -294,3 +294,104 @@ body {
   /* Rundade hörn på videospelaren */
   overflow: hidden;
 }
+
+/* --- StoryBook (Lättläst bok) --- */
+.story-book-container {
+  display: none;
+  /* Dold som standard, visas när man klickar på knappen */
+  background-color: #fdf6e3;
+  /* Pappersfärg */
+  border: 10px solid #5d4037;
+  /* Bokpärm */
+  border-radius: 15px;
+  max-width: 900px;
+  margin: 20px auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+}
+
+.book-content {
+  display: flex;
+  /* Vänster och höger sida */
+  min-height: 400px;
+}
+
+.book-left {
+  flex: 1;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify_content: center;
+  border-right: 2px solid #ddd;
+  /* Mittenskåran i boken */
+}
+
+.book-left img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.book-left .placeholder-icon {
+  font-size: 5rem;
+  /* Om ingen bild finns */
+}
+
+.book-right {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-text {
+  font-size: 1.5rem;
+  /* Större text för lättläst */
+  line-height: 1.6;
+  color: #2c3e50;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+  /* Lite vänligare typsnitt */
+}
+
+.book-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #e0d6c2;
+}
+
+.book-btn {
+  background: #5d4037;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.book-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.toggle-btn {
+  background-color: #8e44ad;
+  /* Samma lila som basen */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: bold;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.05);
+}
