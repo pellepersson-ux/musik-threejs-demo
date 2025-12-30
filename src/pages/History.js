@@ -42,12 +42,16 @@ export function History() {
 
       <div id="story-book" class="story-book-container">
         <div class="book-content">
-          <div class="book-left">
-            <div id="book-image" class="placeholder-icon">${bookPages[0].icon}</div>
+          
+          <div class="book-left" style="padding: 40px; background: #fdf6e3; border-right: 2px solid #ddd;">
+             <p id="book-text" class="book-text">${bookPages[0].text}</p>
           </div>
-          <div class="book-right">
-            <p id="book-text" class="book-text">${bookPages[0].text}</p>
+
+          <div class="book-right" style="background: #eee; display: flex; align-items: center; justify-content: center; padding: 0;">
+            <img id="book-real-image" src="" alt="Illustration" style="max-width: 100%; max-height: 400px; object-fit: contain; display: none;">
+            <div id="book-icon" class="placeholder-icon" style="font-size: 5rem;">${bookPages[0].icon}</div>
           </div>
+
         </div>
         
         <div class="book-controls">
