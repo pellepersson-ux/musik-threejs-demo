@@ -299,97 +299,22 @@ body {
 .story-book-container {
   display: none;
   /* Dold tills man klickar på knappen */
-  max-width: 900px;
+  max-width: 1100px;
+  /* ÄNDRAT: Bredare maxbredd (var 900px) */
   margin: 30px auto;
   font-family: 'Georgia', serif;
-  /* Ser mer ut som boktext */
 }
 
 /* Själva boken - ramen */
 .book-spread {
   display: flex;
-  height: 550px;
-  /* Fast höjd */
+  height: 500px;
+  /* ÄNDRAT: Lite lägre höjd (var 550px) för mer avlång känsla */
   background-color: #fdfaf5;
-  /* Pappersfärg */
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.4),
-    /* Stor skugga bakom */
     inset 20px 0 50px rgba(0, 0, 0, 0.05);
-  /* Skugga för bokryggen */
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid #dcdcdc;
-}
-
-/* VÄNSTER SIDA (Bilden) */
-.book-left {
-  flex: 1;
-  background-color: #222;
-  position: relative;
-  overflow: hidden;
-}
-
-.book-left img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Fyller hela sidan utan vita kanter */
-  display: block;
-}
-
-/* HÖGER SIDA (Texten) */
-.book-right {
-  flex: 1;
-  padding: 40px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  /* En subtil skugga till vänster för att simulera bokryggen */
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 20px);
-}
-
-.book-text {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  color: #2c3e50;
-}
-
-.page-number {
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  font-size: 0.9rem;
-  color: #888;
-}
-
-/* Navigationsknappar under boken */
-.book-controls {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  align-items: center;
-}
-
-.nav-btn {
-  background: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: transform 0.1s;
-}
-
-.nav-btn:hover {
-  transform: scale(1.05);
-  background: #555;
-}
-
-.nav-btn:disabled {
-  background: #ccc;
-  cursor: default;
-  transform: none;
 }
