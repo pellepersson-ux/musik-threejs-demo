@@ -295,25 +295,22 @@ body {
   overflow: hidden;
 }
 
-/* --- STORYBOOK DESIGN (Uppslagen bok) --- */
+/* --- STORYBOOK DESIGN (Anpassad efter PDF-mått 1190x922) --- */
 .story-book-container {
   display: none;
-  /* Dold tills man klickar på knappen */
-  max-width: 1100px;
-  /* Bredare för avlång känsla */
-  margin: 30px auto;
+  max-width: 1000px;
+  /* Lite smalare för att få plats på skärmen */
+  margin: 20px auto;
   font-family: 'Georgia', serif;
   color: #000;
-  /* Grundfärg svart för hela boken */
 }
 
 /* Själva boken - ramen */
 .book-spread {
   display: flex;
-  height: 500px;
-  /* Lite lägre höjd för avlång form */
+  height: 775px;
+  /* REJÄLT HÖJD (Var 500px). Matchar proportionerna exakt. */
   background-color: #fdfaf5;
-  /* Pappersfärg */
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.4),
     inset 20px 0 50px rgba(0, 0, 0, 0.05);
@@ -322,38 +319,32 @@ body {
   border: 1px solid #dcdcdc;
 }
 
-/* VÄNSTER SIDA (Bilden) */
+/* --- Resten är samma som förut, men dubbelkolla att du har detta: --- */
+
 .book-left {
   flex: 1;
-  /* Tar upp 50% av bredden */
   background-color: #222;
   position: relative;
   overflow: hidden;
   border-right: 1px solid #ddd;
-  /* Tunn linje i mitten */
 }
 
 .book-left img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Gör att bilden fyller hela rutan snyggt */
+  /* Viktigt! Fyller hela den nya höga ytan */
   display: block;
 }
 
-/* HÖGER SIDA (Texten) */
 .book-right {
   flex: 1;
-  /* Tar upp andra 50% */
   padding: 40px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  /* Skugga i mitten för bokryggs-effekt */
   background: linear-gradient(to right, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 20px);
-
-  /* VIKTIGT: Tvingar texten att vara svart, oavsett sajtens tema */
   color: #000000 !important;
 }
 
@@ -361,15 +352,15 @@ body {
   font-size: 1.25rem;
   line-height: 1.6;
   color: #000000 !important;
-  /* Svart text */
   text-align: left;
 }
 
-/* Rubriker inuti boken */
+/* Rubriker */
 .book-text h2 {
   color: #000000 !important;
   margin-top: 0;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  /* Lite större rubrik nu när boken är större */
 }
 
 .page-number {
@@ -380,7 +371,6 @@ body {
   color: #888 !important;
 }
 
-/* Navigationsknappar under boken */
 .book-controls {
   display: flex;
   justify-content: center;
