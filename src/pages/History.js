@@ -5,19 +5,26 @@ export function History() {
   // --- BOKENS INNEHÅLL ---
   const pages = [
     {
-      // Sida 0: Omslag
+      // --- Sida 0: OMSLAGET (Ny!) ---
+      // Vi lämnar texten lite renare här så bilden får tala
+      text: "<h1>Välkommen</h1><p>Klicka på omslaget till vänster för att öppna boken och börja läsa om musikens historia.</p>",
+      image: "/images/cover.jpg", // Din nya bild
+      pageContent: "Start"
+    },
+    {
+      // Sida 1: Elvis (Förut sida 0)
       text: "<h2>Rock'n'rollens födelse</h2><p>Populärmusikhistoria – 1950-talet.<br><br>Av Per Magnus Persson</p>",
       image: "/images/elvis-cover.jpg",
       pageContent: "Omslag"
     },
     {
-      // Sida 1: Din nya bild
+      // Sida 2: Radion
       text: "<span style='font-size: 3rem; float: left; line-height: 0.8; margin-right: 10px;'>N</span>är andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
       image: "/images/sida1.jpg",
       pageContent: "1"
     },
     {
-      // Sida 2: Dansen
+      // Sida 3: Dansen
       text: "Under 50-talet uppstod begreppet tonåring. Ungdomar fick egna kläder, frisyrer, språk – och framför allt musik.<br><br>Musiken blev ett sätt att visa vem man var. När vuxenvärlden tyckte att rocken var för högljudd och vild, älskade ungdomarna den ännu mer.",
       image: "/images/dancing-scene.jpg",
       pageContent: "2"
@@ -56,7 +63,7 @@ export function History() {
         </div>
         
         <p style="text-align:center; color: #666; font-size: 0.8rem; margin-top: 10px;">
-          (Klicka på högersidan för att bläddra framåt, vänstersidan för att backa)
+          (Klicka på sidorna för att bläddra)
         </p>
 
       </div>
@@ -72,7 +79,6 @@ export function History() {
   const bookText = section.querySelector('#book-text');
   const pageNum = section.querySelector('#page-num');
 
-  // Vi hämtar hela sid-elementen (vänster och höger)
   const leftPage = section.querySelector('#book-left');
   const rightPage = section.querySelector('#book-right');
 
@@ -91,7 +97,7 @@ export function History() {
     }
   });
 
-  // Funktion som uppdaterar boken
+  // Uppdatera innehåll
   function updateBook() {
     const p = pages[currentPage];
     bookImg.src = p.image;
@@ -100,14 +106,18 @@ export function History() {
 
     // --- Hantera pilar och klickbarhet ---
 
-    // Är vi på första sidan? Inaktivera vänstersidan (så man inte ser pilen)
+    // Är vi på FÖRSTA sidan (Omslaget)? 
+    // Då ska vänster sida vara KLICKBAR (för att öppna), inte inaktiverad.
     if (currentPage === 0) {
-      leftPage.classList.add('disabled');
+      leftPage.classList.remove('disabled'); // Gör den aktiv
+      leftPage.title = "Klicka för att öppna boken"; // Tooltip
     } else {
+      // Annars funkar den som vanligt (Backa)
+      leftPage.title = "Föregående sida";
       leftPage.classList.remove('disabled');
     }
 
-    // Är vi på sista sidan? Inaktivera högersidan
+    // Är vi på sista sidan? Inaktivera höger
     if (currentPage === pages.length - 1) {
       rightPage.classList.add('disabled');
     } else {
@@ -117,15 +127,19 @@ export function History() {
 
   // --- KLICK-NAVIGERING ---
 
-  // Klick på vänster sida -> Gå bakåt
+  // Klick på vänster sida
   leftPage.addEventListener('click', () => {
-    if (currentPage > 0) {
+    if (currentPage === 0) {
+      // SPECIALREGEL: Om vi är på omslaget, gå FRAMÅT istället för bakåt!
+      currentPage++;
+    } else if (currentPage > 0) {
+      // Annars backa som vanligt
       currentPage--;
-      updateBook();
     }
+    updateBook();
   });
 
-  // Klick på höger sida -> Gå framåt
+  // Klick på höger sida -> Gå alltid framåt
   rightPage.addEventListener('click', () => {
     if (currentPage < pages.length - 1) {
       currentPage++;
@@ -133,8 +147,6 @@ export function History() {
     }
   });
 
-  // Kör en gång vid start så rätt bild laddas och pilar ställs in
   updateBook();
-
   return section;
 }
