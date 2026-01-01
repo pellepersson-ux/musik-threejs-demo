@@ -6,19 +6,20 @@ export function History() {
   // Se till att bildfilerna finns i public/images/
   const pages = [
     {
-      // Sida 1: Omslaget
+      // Sida 0: Omslaget (Samma som förut)
       text: "<h2>Rock'n'rollens födelse</h2><p>Populärmusikhistoria – 1950-talet.<br><br>Av Per Magnus Persson</p>",
       image: "/images/elvis-cover.jpg",
       pageContent: "Omslag"
     },
     {
-      // Sida 2: Radion (Text från din bild)
+      // Sida 1: DIN NYA BILD HÄR
+      // Jag behöll texten från förra gången, men ändra den om du vill att den ska passa din nya bild!
       text: "<span style='font-size: 3rem; float: left; line-height: 0.8; margin-right: 10px;'>N</span>är andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
-      image: "/images/radio-scene.jpg",
+      image: "/images/sida1.jpg", // <--- HÄR LIGGER DIN NYA BILD NU
       pageContent: "1"
     },
     {
-      // Sida 3: Dansen (Text från din bild)
+      // Sida 2: Dansen (Samma som förut)
       text: "Under 50-talet uppstod begreppet tonåring. Ungdomar fick egna kläder, frisyrer, språk – och framför allt musik.<br><br>Musiken blev ett sätt att visa vem man var. När vuxenvärlden tyckte att rocken var för högljudd och vild, älskade ungdomarna den ännu mer.",
       image: "/images/dancing-scene.jpg",
       pageContent: "2"
