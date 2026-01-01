@@ -321,55 +321,58 @@ body {
 
 /* --- Resten är samma som förut, men dubbelkolla att du har detta: --- */
 
-.book-left {
-  flex: 1;
-  background-color: #222;
-  position: relative;
-  overflow: hidden;
-  border-right: 1px solid #ddd;
-}
-
-
-/* VÄNSTER SIDA (Bilden) */
+/* --- VÄNSTER SIDA (Bilden + Klickfunktion) --- */
 .book-left {
   flex: 0 0 50%;
   /* Låser bredden till exakt 50% */
   width: 50%;
   box-sizing: border-box;
-  /* Viktigt! */
+  /* Fixar centreringen */
   background-color: #222;
   position: relative;
   overflow: hidden;
   border-right: 1px solid #ddd;
-  /* Mittlinjen */
+  cursor: pointer;
+  /* Visar en hand-ikon så man vet att man kan klicka */
 }
 
 .book-left img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Viktigt! Fyller hela den nya höga ytan */
+  /* Fyller hela höjden snyggt */
   display: block;
 }
 
-.book-right {
-  flex: 1;
-  padding: 40px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 20px);
-  color: #000000 !important;
+/* Pil som dyker upp när man hovrar över vänster sida */
+.book-left:hover::after {
+  content: "⬅";
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 
-/* HÖGER SIDA (Texten) */
+/* Om man är på första sidan ska vänsterpilen inte synas */
+.book-left.disabled {
+  cursor: default;
+}
+
+.book-left.disabled:hover::after {
+  display: none;
+}
+
+/* --- HÖGER SIDA (Texten + Klickfunktion) --- */
 .book-right {
   flex: 0 0 50%;
   /* Låser bredden till exakt 50% */
   width: 50%;
   box-sizing: border-box;
-  /* Gör att paddingen inte breddar sidan */
+  /* Fixar centreringen */
   padding: 40px 50px;
   display: flex;
   flex-direction: column;
@@ -377,6 +380,29 @@ body {
   position: relative;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0) 20px);
   color: #000000 !important;
+  cursor: pointer;
+  /* Visar hand-ikon */
+}
+
+/* Pil som dyker upp när man hovrar över höger sida */
+.book-right:hover::after {
+  content: "➡";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* Om man är på sista sidan ska högerpilen inte synas */
+.book-right.disabled {
+  cursor: default;
+}
+
+.book-right.disabled:hover::after {
+  display: none;
 }
 
 
