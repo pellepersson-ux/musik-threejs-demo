@@ -5,26 +5,28 @@ export function History() {
   // --- BOKENS INNEHÅLL ---
   const pages = [
     {
-      // --- Sida 0: OMSLAGET (Ny!) ---
-      // Vi lämnar texten lite renare här så bilden får tala
-      text: "<h1>Välkommen</h1><p>Klicka på omslaget till vänster för att öppna boken och börja läsa om musikens historia.</p>",
-      image: "/images/cover.jpg", // Din nya bild
+      // --- Sida 0: STÄNGD BOK (Omslaget) ---
+      // Texten här används inte eftersom högersidan är dold, 
+      // men vi måste ha objektet för bilden.
+      text: "",
+      image: "/images/cover.jpg", // <--- Din omslagsbild (500px)
       pageContent: "Start"
     },
     {
-      // Sida 1: Elvis (Förut sida 0)
+      // --- Sida 1: FÖRSTA UPPSLAGET ---
+      // Här öppnas boken. Vänster bild + Höger text.
       text: "<h2>Rock'n'rollens födelse</h2><p>Populärmusikhistoria – 1950-talet.<br><br>Av Per Magnus Persson</p>",
-      image: "/images/elvis-cover.jpg",
+      image: "/images/elvis-cover.jpg", // Bild på vänster sida i uppslaget
       pageContent: "Omslag"
     },
     {
-      // Sida 2: Radion
+      // Sida 2
       text: "<span style='font-size: 3rem; float: left; line-height: 0.8; margin-right: 10px;'>N</span>är andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
       image: "/images/sida1.jpg",
       pageContent: "1"
     },
     {
-      // Sida 3: Dansen
+      // Sida 3
       text: "Under 50-talet uppstod begreppet tonåring. Ungdomar fick egna kläder, frisyrer, språk – och framför allt musik.<br><br>Musiken blev ett sätt att visa vem man var. När vuxenvärlden tyckte att rocken var för högljudd och vild, älskade ungdomarna den ännu mer.",
       image: "/images/dancing-scene.jpg",
       pageContent: "2"
@@ -49,21 +51,21 @@ export function History() {
 
       <div id="story-book" class="story-book-container">
         
-        <div class="book-spread">
+        <div id="book-container" class="book-spread closed">
           
           <div id="book-left" class="book-left">
             <img id="book-img" src="${pages[0].image}" alt="Illustration">
           </div>
           
           <div id="book-right" class="book-right">
-            <div id="book-text" class="book-text">${pages[0].text}</div>
-            <div id="page-num" class="page-number">${pages[0].pageContent}</div>
+            <div id="book-text" class="book-text"></div>
+            <div id="page-num" class="page-number"></div>
           </div>
 
         </div>
         
-        <p style="text-align:center; color: #666; font-size: 0.8rem; margin-top: 10px;">
-          (Klicka på sidorna för att bläddra)
+        <p id="nav-hint" style="text-align:center; color: #666; font-size: 0.8rem; margin-top: 10px;">
+          (Klicka på boken för att öppna)
         </p>
 
       </div>
@@ -72,8 +74,10 @@ export function History() {
 
   // --- LOGIK ---
   const storyBook = section.querySelector('#story-book');
+  const bookContainer = section.querySelector('#book-container'); // Ramen
   const standardText = section.querySelector('#standard-text');
   const toggleBtn = section.querySelector('#toggle-book');
+  const navHint = section.querySelector('#nav-hint');
 
   const bookImg = section.querySelector('#book-img');
   const bookText = section.querySelector('#book-text');
@@ -82,7 +86,7 @@ export function History() {
   const leftPage = section.querySelector('#book-left');
   const rightPage = section.querySelector('#book-right');
 
-  // Visa/Dölj bok
+  // Visa/Dölj hela sektionen
   toggleBtn.addEventListener('click', () => {
     if (storyBook.style.display === 'block') {
       storyBook.style.display = 'none';
@@ -97,27 +101,28 @@ export function History() {
     }
   });
 
-  // Uppdatera innehåll
   function updateBook() {
     const p = pages[currentPage];
     bookImg.src = p.image;
     bookText.innerHTML = p.text;
     pageNum.textContent = p.pageContent;
 
-    // --- Hantera pilar och klickbarhet ---
-
-    // Är vi på FÖRSTA sidan (Omslaget)? 
-    // Då ska vänster sida vara KLICKBAR (för att öppna), inte inaktiverad.
+    // --- HANTERA STÄNGD/ÖPPEN BOK ---
     if (currentPage === 0) {
-      leftPage.classList.remove('disabled'); // Gör den aktiv
-      leftPage.title = "Klicka för att öppna boken"; // Tooltip
+      // Vi är på omslaget -> STÄNG BOKEN
+      bookContainer.classList.add('closed');
+      leftPage.classList.add('closed-cover'); // För att ändra hover-effekt
+      leftPage.title = "Klicka för att öppna";
+      navHint.textContent = "(Klicka på omslaget för att öppna boken)";
     } else {
-      // Annars funkar den som vanligt (Backa)
+      // Vi är inne i boken -> ÖPPNA BOKEN
+      bookContainer.classList.remove('closed');
+      leftPage.classList.remove('closed-cover');
       leftPage.title = "Föregående sida";
-      leftPage.classList.remove('disabled');
+      navHint.textContent = "(Klicka på sidorna för att bläddra)";
     }
 
-    // Är vi på sista sidan? Inaktivera höger
+    // --- Inaktivera högerpil på sista sidan ---
     if (currentPage === pages.length - 1) {
       rightPage.classList.add('disabled');
     } else {
@@ -127,19 +132,17 @@ export function History() {
 
   // --- KLICK-NAVIGERING ---
 
-  // Klick på vänster sida
   leftPage.addEventListener('click', () => {
     if (currentPage === 0) {
-      // SPECIALREGEL: Om vi är på omslaget, gå FRAMÅT istället för bakåt!
+      // Om stängd -> Öppna (Gå till sida 1)
       currentPage++;
     } else if (currentPage > 0) {
-      // Annars backa som vanligt
+      // Om öppen -> Backa
       currentPage--;
     }
     updateBook();
   });
 
-  // Klick på höger sida -> Gå alltid framåt
   rightPage.addEventListener('click', () => {
     if (currentPage < pages.length - 1) {
       currentPage++;
@@ -147,6 +150,8 @@ export function History() {
     }
   });
 
+  // Initiera
   updateBook();
+
   return section;
 }
