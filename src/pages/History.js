@@ -3,30 +3,25 @@ export function History() {
   section.className = 'page-detail';
 
   // --- BOKENS INNEHÅLL ---
+  // --- BOKENS INNEHÅLL ---
   const pages = [
     {
-      // --- Sida 0: STÄNGD BOK (Omslaget) ---
-      // Texten här används inte eftersom högersidan är dold, 
-      // men vi måste ha objektet för bilden.
+      // --- Sida 0: STÄNGD BOK (Ditt omslag) ---
+      // Detta är det enda man ser när boken är stängd
       text: "",
-      image: "/images/cover.jpg", // <--- Din omslagsbild (500px)
+      image: "/images/cover.jpg",
       pageContent: "Start"
     },
     {
-      // --- Sida 1: FÖRSTA UPPSLAGET ---
-      // Här öppnas boken. Vänster bild + Höger text.
-      text: "<h2>Rock'n'rollens födelse</h2><p>Populärmusikhistoria – 1950-talet.<br><br>Av Per Magnus Persson</p>",
-      image: "/images/elvis-cover.jpg", // Bild på vänster sida i uppslaget
-      pageContent: "Omslag"
-    },
-    {
-      // Sida 2
-      text: "<span style='font-size: 3rem; float: left; line-height: 0.8; margin-right: 10px;'>N</span>är andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
+      // --- Sida 1: FÖRSTA UPPSLAGET (Berättelsen börjar direkt) ---
+      // Här har jag slagit ihop rubriken med din text om andra världskriget
+      // Bilden är din "sida1.jpg"
+      text: "<h2>Rock'n'rollens födelse</h2><p><span style='font-size: 3rem; float: left; line-height: 0.8; margin-right: 10px;'>N</span>är andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.</p>",
       image: "/images/sida1.jpg",
       pageContent: "1"
     },
     {
-      // Sida 3
+      // --- Sida 2: NÄSTA SIDA ---
       text: "Under 50-talet uppstod begreppet tonåring. Ungdomar fick egna kläder, frisyrer, språk – och framför allt musik.<br><br>Musiken blev ett sätt att visa vem man var. När vuxenvärlden tyckte att rocken var för högljudd och vild, älskade ungdomarna den ännu mer.",
       image: "/images/dancing-scene.jpg",
       pageContent: "2"
