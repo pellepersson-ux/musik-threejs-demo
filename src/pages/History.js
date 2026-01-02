@@ -1,152 +1,84 @@
 export function History() {
   const section = document.createElement('section');
-  section.className = 'page-detail';
+  section.className = 'history-page';
 
-  // --- BOKENS INNEHÅLL ---
-  // --- BOKENS INNEHÅLL ---
-  const pages = [
-    {
-      // --- Sida 0: STÄNGD BOK (Ditt omslag) ---
-      // Detta är det enda man ser när boken är stängd
-      text: "",
-      image: "/images/cover.jpg",
-      pageContent: "Start"
-    },
-    {
-      // --- Sida 1: FÖRSTA UPPSLAGET (Berättelsen börjar direkt) ---
-      // Här har jag slagit ihop rubriken med din text om andra världskriget
-      // Bilden är din "sida1.jpg"
-      text: "<h2>Rock'n'rollens födelse</h2><p><span style='font-size: 3rem; float: left; line-height: 0.8; margin-right: 10px;'>N</span>är andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.</p>",
-      image: "/images/sida1.jpg",
-      pageContent: "1"
-    },
-    {
-      // --- Sida 2: NÄSTA SIDA ---
-      text: "Under 50-talet uppstod begreppet tonåring. Ungdomar fick egna kläder, frisyrer, språk – och framför allt musik.<br><br>Musiken blev ett sätt att visa vem man var. När vuxenvärlden tyckte att rocken var för högljudd och vild, älskade ungdomarna den ännu mer.",
-      image: "/images/dancing-scene.jpg",
-      pageContent: "2"
-    }
+  // --- DATA FÖR DE OLIKA FLIKARNA ---
+
+  const classicalData = [
+    { period: "Barocken (1600-1750)", info: "Musik med mycket utsmyckningar och kontrapunkt (flera stämmor). Cembalon var viktig.", artists: "Bach, Vivaldi, Händel" },
+    { period: "Wienklassicismen (1750-1820)", info: "Balans, tydlighet och elegans. Pianot ersätter cembalon. Symfoniorkestern växer fram.", artists: "Mozart, Haydn, Beethoven" },
+    { period: "Romantiken (1820-1900)", info: "Stora känslor, dramatik och sagomotiv. Orkestrarna blir enorma.", artists: "Chopin, Wagner, Tjaikovskij" },
+    { period: "Modernismen (1900-nutid)", info: "Regler bryts. Dissonanser (låter skevt) och nya klanger.", artists: "Stravinskij, Schönberg" }
   ];
 
-  let currentPage = 0;
+  const popData = [
+    { period: "50-talet", info: "Rock 'n' Roll föds! Elgitarren tar över världen.", artists: "Elvis Presley, Chuck Berry" },
+    { period: "60-talet", info: "British Invasion och flower power. Popbanden blir superstjärnor.", artists: "The Beatles, Rolling Stones" },
+    { period: "70-talet", info: "Disco, Hårdrock och Punk. En spretig tid med mycket glitter och dist.", artists: "ABBA, Queen, Ramones" },
+    { period: "80-talet", info: "Syntar, trummaskiner och MTV. Musikvideon blir viktig.", artists: "Michael Jackson, Madonna" }
+  ];
 
+  const worldData = [
+    { period: "Västafrika", info: "Rytm är allt! Polyrytmik (flera rytmer samtidigt) och Djembe-trummor.", artists: "Fela Kuti (Afrobeat)" },
+    { period: "Latinamerika", info: "Samba, Bossa Nova och Salsa. Dansvänligt och synkoperat.", artists: "Jobim, Celia Cruz" },
+    { period: "Indien", info: "Raga (skalor) och Tala (rytmcykler). Sitar och Tabla är viktiga instrument.", artists: "Ravi Shankar" },
+    { period: "Sverige (Folkmusik)", info: "Polska, gånglåt och vallmusik. Fiol och nyckelharpa.", artists: "Jan Johansson, Väsen" }
+  ];
+
+  // --- HTML STRUKTUR ---
   section.innerHTML = `
     <div class="content-container">
-      <h1>Musikens Historia 📜</h1>
+      <h1>Musikhistoria 📜</h1>
+      <p class="intro-text">Välj en epok eller stil för att lära dig mer.</p>
       
-      <div style="text-align: center; margin-bottom: 20px;">
-        <button id="toggle-book" class="toggle-btn">📖 Öppna Lättläst Bok</button>
+      <div class="history-tabs">
+        <button class="tab-btn active" data-tab="classical">🎼 Klassiskt</button>
+        <button class="tab-btn" data-tab="pop">🎸 Pop/Rock</button>
+        <button class="tab-btn" data-tab="world">🌍 Världsmusik</button>
       </div>
 
-      <div id="standard-text" class="info-text">
-        <p>Här kan du läsa fördjupning om musikens historia...</p>
-        <h3>Rock'n'rollens födelse</h3>
-        <p>Rockmusiken uppstod under 1950-talet i USA...</p>
-      </div>
-
-      <div id="story-book" class="story-book-container">
-        
-        <div id="book-container" class="book-spread closed">
-          
-          <div id="book-left" class="book-left">
-            <img id="book-img" src="${pages[0].image}" alt="Illustration">
-          </div>
-          
-          <div id="book-right" class="book-right">
-            <div id="book-text" class="book-text"></div>
-            <div id="page-num" class="page-number"></div>
-          </div>
-
+      <div id="history-content" class="timeline">
         </div>
-        
-        <p id="nav-hint" style="text-align:center; color: #666; font-size: 0.8rem; margin-top: 10px;">
-          (Klicka på boken för att öppna)
-        </p>
-
-      </div>
     </div>
   `;
 
   // --- LOGIK ---
-  const storyBook = section.querySelector('#story-book');
-  const bookContainer = section.querySelector('#book-container'); // Ramen
-  const standardText = section.querySelector('#standard-text');
-  const toggleBtn = section.querySelector('#toggle-book');
-  const navHint = section.querySelector('#nav-hint');
+  const contentDiv = section.querySelector('#history-content');
+  const buttons = section.querySelectorAll('.tab-btn');
 
-  const bookImg = section.querySelector('#book-img');
-  const bookText = section.querySelector('#book-text');
-  const pageNum = section.querySelector('#page-num');
-
-  const leftPage = section.querySelector('#book-left');
-  const rightPage = section.querySelector('#book-right');
-
-  // Visa/Dölj hela sektionen
-  toggleBtn.addEventListener('click', () => {
-    if (storyBook.style.display === 'block') {
-      storyBook.style.display = 'none';
-      standardText.style.display = 'block';
-      toggleBtn.textContent = '📖 Öppna Lättläst Bok';
-      toggleBtn.style.backgroundColor = '#8e44ad';
-    } else {
-      storyBook.style.display = 'block';
-      standardText.style.display = 'none';
-      toggleBtn.textContent = '📝 Visa Vanlig Text';
-      toggleBtn.style.backgroundColor = '#e67e22';
-    }
-  });
-
-  function updateBook() {
-    const p = pages[currentPage];
-    bookImg.src = p.image;
-    bookText.innerHTML = p.text;
-    pageNum.textContent = p.pageContent;
-
-    // --- HANTERA STÄNGD/ÖPPEN BOK ---
-    if (currentPage === 0) {
-      // Vi är på omslaget -> STÄNG BOKEN
-      bookContainer.classList.add('closed');
-      leftPage.classList.add('closed-cover'); // För att ändra hover-effekt
-      leftPage.title = "Klicka för att öppna";
-      navHint.textContent = "(Klicka på omslaget för att öppna boken)";
-    } else {
-      // Vi är inne i boken -> ÖPPNA BOKEN
-      bookContainer.classList.remove('closed');
-      leftPage.classList.remove('closed-cover');
-      leftPage.title = "Föregående sida";
-      navHint.textContent = "(Klicka på sidorna för att bläddra)";
-    }
-
-    // --- Inaktivera högerpil på sista sidan ---
-    if (currentPage === pages.length - 1) {
-      rightPage.classList.add('disabled');
-    } else {
-      rightPage.classList.remove('disabled');
-    }
+  // Funktion för att rita ut korten
+  function renderCards(data) {
+    contentDiv.innerHTML = data.map(item => `
+      <div class="time-card fade-in">
+        <div class="year">${item.period}</div>
+        <div class="info">
+          <h3>${item.info.split('.')[0]}</h3> <p>${item.info}</p>
+          <ul>
+            <li><strong>Exempel:</strong> ${item.artists}</li>
+          </ul>
+        </div>
+      </div>
+    `).join('');
   }
 
-  // --- KLICK-NAVIGERING ---
+  // Ladda Klassiskt som start
+  renderCards(classicalData);
 
-  leftPage.addEventListener('click', () => {
-    if (currentPage === 0) {
-      // Om stängd -> Öppna (Gå till sida 1)
-      currentPage++;
-    } else if (currentPage > 0) {
-      // Om öppen -> Backa
-      currentPage--;
-    }
-    updateBook();
+  // Hantera klick på knappar
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Ta bort 'active' från alla knappar
+      buttons.forEach(b => b.classList.remove('active'));
+      // 2. Lägg till 'active' på den klickade
+      btn.classList.add('active');
+
+      // 3. Byt data beroende på vilken knapp
+      const tab = btn.dataset.tab;
+      if (tab === 'classical') renderCards(classicalData);
+      if (tab === 'pop') renderCards(popData);
+      if (tab === 'world') renderCards(worldData);
+    });
   });
-
-  rightPage.addEventListener('click', () => {
-    if (currentPage < pages.length - 1) {
-      currentPage++;
-      updateBook();
-    }
-  });
-
-  // Initiera
-  updateBook();
 
   return section;
 }
