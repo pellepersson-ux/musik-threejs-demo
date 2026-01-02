@@ -1,8 +1,8 @@
 export function Bas() {
-    const section = document.createElement('section');
-    section.className = 'page-detail';
+  const section = document.createElement('section');
+  section.className = 'page-detail';
 
-    section.innerHTML = `
+  section.innerHTML = `
     <div class="content-container">
       <div style="margin-bottom: 20px;">
         <a href="/instrument" class="back-link" data-link>← Tillbaka till instrument</a>
@@ -30,5 +30,5 @@ export function Bas() {
     </div>
   `;
 
-    return section;
+  return section;
 }

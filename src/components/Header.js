@@ -9,13 +9,14 @@ export function Header(state) {
       </a>
       
       <nav class="main-nav" aria-label="Huvudmeny">
-        <ul>
-          <li><a href="/" class="${state.currentPage === '/' ? 'active' : ''}" data-link>Hem</a></li>
-          <li><a href="/instrument" class="${state.currentPage === '/instrument' ? 'active' : ''}" data-link>Instrument</a></li>
-          <li><a href="/historia" class="${state.currentPage === '/historia' ? 'active' : ''}" data-link>Historia</a></li>
-          <li><a href="/teori" class="${state.currentPage === '/teori' ? 'active' : ''}" data-link>Teori</a></li>
-          <li><a href="/spel" class="${state.currentPage === '/spel' ? 'active' : ''}" data-link>Spel</a></li>
-        </ul>
+       <ul class="nav-links">
+        <li><a href="/" class="${state.currentPage === '/' ? 'active' : ''}" data-link>Hem</a></li>
+        <li><a href="/instrument" class="${state.currentPage.startsWith('/instrument') ? 'active' : ''}" data-link>Instrument</a></li>
+        <li><a href="/ensemble" class="${state.currentPage === '/ensemble' ? 'active' : ''}" data-link>Ensemble</a></li>
+        <li><a href="/historia" class="${state.currentPage === '/historia' ? 'active' : ''}" data-link>Historia</a></li>
+        <li><a href="/teori" class="${state.currentPage === '/teori' ? 'active' : ''}" data-link>Teori</a></li>
+        <li><a href="/spel" class="${state.currentPage === '/spel' ? 'active' : ''}" data-link>Spel</a></li>
+      </ul>
       </nav>
 
       <div class="header-controls">
