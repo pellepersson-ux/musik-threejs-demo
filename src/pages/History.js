@@ -3,7 +3,6 @@ export function History() {
   section.className = 'history-page';
 
   // --- 1. DATA ---
-
   const classicalData = [
     { period: "Barocken (1600-1750)", info: "Musik med mycket utsmyckningar och kontrapunkt (flera stämmor). Cembalon var viktig.", artists: "Bach, Vivaldi, Händel" },
     { period: "Wienklassicismen (1750-1820)", info: "Balans, tydlighet och elegans. Pianot ersätter cembalon. Symfoniorkestern växer fram.", artists: "Mozart, Haydn, Beethoven" },
@@ -17,16 +16,19 @@ export function History() {
       info: "Rock 'n' Roll föds! Elgitarren tar över världen.",
       artists: "Elvis Presley, Chuck Berry",
       story: [
+        // SIDA 1 (Starten)
         {
-          text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra...",
-          image: "/images/sida1.jpg"
+          text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.",
+          image: "/images/sida1.jpg" // Se till att du har en bild här, annars syns inget
         },
+        // SIDA 2
         {
-          text: "Radion och senare tv:n fylldes av ny musik...",
+          text: "Radion och senare tv:n fylldes av ny musik. En helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
           image: "https://images.unsplash.com/photo-1499364615650-ec387c130084?auto=format&fit=crop&w=600&q=80"
         },
+        // SIDA 3
         {
-          text: "Rock'n'roll handlade om rytm, dans och revolt...",
+          text: "Rock'n'roll handlade om rytm, dans och revolt. Elvis Presley blev kungen av rock, men många föräldrar tyckte musiken var för vild.",
           image: "https://images.unsplash.com/photo-1549887552-93f8efb8d42a?auto=format&fit=crop&w=600&q=80"
         }
       ]
@@ -60,53 +62,54 @@ export function History() {
     </div>
   `;
 
-  // --- 3. HTML FÖR STORYBOOK MODAL ---
-  // Vi lägger till en klass "closed" från början för animationen
+  // --- 3. HTML FÖR STORYBOOK (Endast uppslag nu) ---
   const modalHTML = `
     <div id="storybook-modal" class="modal hidden">
-      <div id="book-container" class="modal-content book-style closed">
+      <div id="book-container" class="modal-content book-style">
         <span class="close-btn">&times;</span>
-        
-        <div id="book-cover-view" class="book-cover-view">
-           <img src="/images/cover.jpg" alt="Omslag" class="cover-img">
-        </div>
 
-        <div id="book-spread-view" class="book-spread hidden">
-          <div class="book-page-left">
+        <div id="book-spread-view" class="book-spread">
+          
+          <div class="book-page book-page-left" id="left-page-click">
             <img id="book-img" src="" alt="">
+            <div class="page-overlay hint-prev">⬅ Föregående</div>
           </div>
-          <div class="book-page-right">
-            <p id="book-text"></p>
-            <div class="book-controls">
-              <button id="prev-btn">⬅ Föregående</button>
-              <span id="page-indicator"></span>
-              <button id="next-btn">Nästa ➡</button>
-            </div>
-          </div>
-        </div>
 
+          <div class="book-page book-page-right" id="right-page-click">
+            <div class="text-content">
+              <h3 id="book-title" style="margin-top:0;">Rock'n'rollens födelse</h3>
+              <p id="book-text"></p>
+            </div>
+            <span id="page-indicator">1 / 3</span>
+            <div class="page-overlay hint-next">Nästa ➡</div>
+          </div>
+
+        </div>
       </div>
     </div>
   `;
 
   section.insertAdjacentHTML('beforeend', modalHTML);
 
-  // --- 4. LOGIK OCH FUNKTIONER ---
+  // --- 4. LOGIK ---
 
   const contentDiv = section.querySelector('#history-content');
   const buttons = section.querySelectorAll('.tab-btn');
 
-  // Hämta element för Storybook
   const modal = section.querySelector('#storybook-modal');
-  const bookContainer = section.querySelector('#book-container'); // NYHET!
   const closeBtn = section.querySelector('.close-btn');
-  const coverView = section.querySelector('#book-cover-view');
-  const spreadView = section.querySelector('#book-spread-view');
+
+  // Element inuti boken
   const bookImg = section.querySelector('#book-img');
   const bookText = section.querySelector('#book-text');
   const pageIndicator = section.querySelector('#page-indicator');
-  const nextBtn = section.querySelector('#next-btn');
-  const prevBtn = section.querySelector('#prev-btn');
+
+  // Klickytorna
+  const leftPage = section.querySelector('#left-page-click');
+  const rightPage = section.querySelector('#right-page-click');
+
+  let currentStory = [];
+  let currentPageIndex = 0;
 
   function renderCards(data) {
     let type = 'classical';
@@ -121,92 +124,73 @@ export function History() {
         <div class="info">
           <h3>${item.info.split('.')[0]}</h3>
           <p>${item.info}</p>
-          
           ${item.story && item.story.length > 0
         ? `<button class="read-book-btn" onclick="openStory(${index}, '${type}')">📖 Läs Lättläst Bok</button>`
         : ''}
-          
         </div>
       </div>
     `).join('');
   }
 
-  // --- STORYBOOK LOGIK ---
-  let currentStory = [];
-  let currentPageIndex = -1;
-
+  // Global funktion för att öppna boken
   window.openStory = (index, type) => {
     let dataSet = [];
     if (type === 'pop') dataSet = popData;
-    // (Här kan du lägga till logic för classical/world senare)
+    // Lägg till logic för classical/world om de får stories
 
     const item = dataSet[index];
     if (item && item.story && item.story.length > 0) {
       currentStory = item.story;
-      currentPageIndex = -1;
-      updateBookView();
+      currentPageIndex = 0; // Börja alltid på första uppslaget
+      updateBookContent();
       modal.classList.remove('hidden');
-    } else {
-      alert("Ingen bok finns för denna epok än!");
     }
   };
 
-  function updateBookView() {
-    // FALL 1: Boken är stängd
-    if (currentPageIndex === -1) {
-      coverView.classList.remove('hidden');
-      spreadView.classList.add('hidden');
-      bookContainer.classList.add('closed'); // Lägg till klass för animation
+  function updateBookContent() {
+    const page = currentStory[currentPageIndex];
 
-      coverView.onclick = () => {
-        currentPageIndex = 0;
-        updateBookView();
-      };
-    }
-    // FALL 2: Boken är öppen
-    else {
-      coverView.classList.add('hidden');
-      spreadView.classList.remove('hidden');
-      bookContainer.classList.remove('closed'); // Ta bort klass för animation
+    // Uppdatera innehåll
+    bookImg.src = page.image;
+    bookText.innerText = page.text;
+    pageIndicator.innerText = `Sida ${currentPageIndex + 1} av ${currentStory.length}`;
 
-      const page = currentStory[currentPageIndex];
-      bookImg.src = page.image;
-      bookText.innerText = page.text;
-      pageIndicator.innerText = `Sida ${currentPageIndex + 1} av ${currentStory.length}`;
-
-      prevBtn.disabled = false;
-      nextBtn.disabled = currentPageIndex === currentStory.length - 1;
-
-      prevBtn.onclick = () => {
-        if (currentPageIndex === 0) {
-          currentPageIndex = -1;
-        } else {
-          currentPageIndex--;
-        }
-        updateBookView();
-      };
-
-      nextBtn.onclick = () => {
-        if (currentPageIndex < currentStory.length - 1) {
-          currentPageIndex++;
-          updateBookView();
-        }
-      };
-    }
+    // Hantera synlighet/opacity för navigering
+    // Om vi är på första sidan, gör vänster sida "inaktiv" visuellt om man vill, 
+    // men vi behåller bilden synlig. Vi kan ändra cursorn.
+    leftPage.style.cursor = currentPageIndex === 0 ? 'default' : 'pointer';
+    rightPage.style.cursor = currentPageIndex === currentStory.length - 1 ? 'default' : 'pointer';
   }
 
+  // --- NAVIGATION (KLICK PÅ SIDORNA) ---
+
+  leftPage.addEventListener('click', () => {
+    if (currentPageIndex > 0) {
+      currentPageIndex--;
+      updateBookContent();
+    }
+  });
+
+  rightPage.addEventListener('click', () => {
+    if (currentPageIndex < currentStory.length - 1) {
+      currentPageIndex++;
+      updateBookContent();
+    }
+  });
+
+  // Stäng boken
   closeBtn.addEventListener('click', () => {
     modal.classList.add('hidden');
   });
 
-  // --- INITIERING ---
+  // Initiera korten
   renderCards(classicalData);
 
+  // Tab-knappar
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const tab = btn.dataset.tab;
       if (tab === 'classical') renderCards(classicalData);
       if (tab === 'pop') renderCards(popData);
