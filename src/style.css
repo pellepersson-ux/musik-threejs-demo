@@ -819,8 +819,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  /* Mörk bakgrund bakom boken */
+  background: rgba(0, 0, 0, 0.9);
+  /* Lite mörkare bakgrund */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -828,115 +828,140 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
+/* Själva boken - EXAKTA MÅTT */
 .modal-content.book-style {
-  background: white;
-  /* Boksidor är vita */
-  color: #333;
-  /* Mörk text för hög kontrast */
-  width: 90%;
-  max-width: 900px;
-  height: 60vh;
-  /* 60% av skärmhöjden */
-  border-radius: 8px;
+  background: transparent;
+  /* Genomskinlig bakgrund runt boken */
+  width: 1000px;
+  /* Bestämd bredd */
+  height: 775px;
+  /* Bestämd höjd */
   position: relative;
   display: flex;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  /* Så inget sticker ut */
 }
 
-.book-spread {
-  display: flex;
+/* OMSLAGET (När boken är stängd) */
+.book-cover-view {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  /* Bakgrund om bilden inte fyller */
 }
 
-/* Vänster sida: Bild */
-.book-page-left {
-  flex: 1;
-  background: #f0f0f0;
+.book-cover-view img {
+  height: 100%;
+  width: auto;
+  /* Behåll proportioner på omslaget */
+  max-width: 100%;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* UPPSLAGET (När boken är öppen) */
+.book-spread {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 1000px;
+  /* Hela bredden */
+  height: 775px;
+  /* Hela höjden */
+  background: white;
+}
+
+/* Vänster sida: BILD (500px) */
+.book-page-left {
+  width: 500px;
+  /* Exakt halva */
+  height: 775px;
+  /* Hela höjden */
+  flex-shrink: 0;
+  /* Får inte krympa */
+  background: #f0f0f0;
   border-right: 2px solid #ddd;
-  /* "Mitten" av boken */
+  /* Mitten av boken */
+  overflow: hidden;
 }
 
 .book-page-left img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Fyller hela sidan */
+  /* Bilden fyller hela ytan utan att deformeras */
 }
 
-/* Höger sida: Text */
+/* Höger sida: TEXT (500px) */
 .book-page-right {
-  flex: 1;
-  padding: 3rem;
+  width: 500px;
+  /* Exakt halva */
+  height: 775px;
+  /* Hela höjden */
+  flex-shrink: 0;
+  /* Får inte krympa */
+
+  /* HÄR LÖSER VI MITTPUNKTS-PROBLEMET: */
+  padding: 4rem;
+  box-sizing: border-box;
+  /* Gör att paddingen räknas INUTI de 500px */
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-family: 'Georgia', serif;
-  /* Seriff-typsnitt känns mer som bok */
+  background: white;
 }
 
 #book-text {
-  font-size: 1.4rem;
-  /* Stor text (Lättläst!) */
+  font-size: 1.5rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  color: #333;
 }
 
+/* Kontrollerna (Knapparna) */
 .book-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  /* Trycker ner knapparna till botten */
+  width: 100%;
 }
 
 .book-controls button {
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .book-controls button:disabled {
   background: #ccc;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
-/* Kryss för att stänga */
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 20px;
-  font-size: 2rem;
+  right: 15px;
+  font-size: 3rem;
   color: #333;
+  /* Syns bra mot vit bakgrund */
   cursor: pointer;
-  z-index: 10;
-}
-
-/* Knappen ute på tidslinjen */
-.read-book-btn {
-  margin-top: 1rem;
-  background: #ff9f43;
-  /* En annan färg så den syns */
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s;
-}
-
-.read-book-btn:hover {
-  transform: scale(1.05);
+  z-index: 2000;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
 }
