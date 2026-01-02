@@ -19,7 +19,7 @@ export function History() {
       story: [
         {
           text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra...",
-          image: "/images/sida1.jpg" // Din lokala bild
+          image: "/images/sida1.jpg"
         },
         {
           text: "Radion och senare tv:n fylldes av ny musik...",
@@ -61,13 +61,14 @@ export function History() {
   `;
 
   // --- 3. HTML FÖR STORYBOOK MODAL ---
+  // Vi lägger till en klass "closed" från början för animationen
   const modalHTML = `
     <div id="storybook-modal" class="modal hidden">
-      <div class="modal-content book-style">
+      <div id="book-container" class="modal-content book-style closed">
         <span class="close-btn">&times;</span>
         
         <div id="book-cover-view" class="book-cover-view">
-           <img src="/images/cover.jpg" alt="Omslag">
+           <img src="/images/cover.jpg" alt="Omslag" class="cover-img">
         </div>
 
         <div id="book-spread-view" class="book-spread hidden">
@@ -88,7 +89,6 @@ export function History() {
     </div>
   `;
 
-  // Lägg till modalen i slutet av sektionen
   section.insertAdjacentHTML('beforeend', modalHTML);
 
   // --- 4. LOGIK OCH FUNKTIONER ---
@@ -98,6 +98,7 @@ export function History() {
 
   // Hämta element för Storybook
   const modal = section.querySelector('#storybook-modal');
+  const bookContainer = section.querySelector('#book-container'); // NYHET!
   const closeBtn = section.querySelector('.close-btn');
   const coverView = section.querySelector('#book-cover-view');
   const spreadView = section.querySelector('#book-spread-view');
@@ -107,7 +108,6 @@ export function History() {
   const nextBtn = section.querySelector('#next-btn');
   const prevBtn = section.querySelector('#prev-btn');
 
-  // Funktion för att rita ut tidslinje-korten
   function renderCards(data) {
     let type = 'classical';
     if (data === popData) type = 'pop';
@@ -133,7 +133,7 @@ export function History() {
 
   // --- STORYBOOK LOGIK ---
   let currentStory = [];
-  let currentPageIndex = -1; // -1 = Omslag
+  let currentPageIndex = -1;
 
   window.openStory = (index, type) => {
     let dataSet = [];
@@ -143,7 +143,7 @@ export function History() {
     const item = dataSet[index];
     if (item && item.story && item.story.length > 0) {
       currentStory = item.story;
-      currentPageIndex = -1; // Börja alltid med stängd bok
+      currentPageIndex = -1;
       updateBookView();
       modal.classList.remove('hidden');
     } else {
@@ -152,21 +152,22 @@ export function History() {
   };
 
   function updateBookView() {
-    // FALL 1: Boken är stängd (Visa omslag)
+    // FALL 1: Boken är stängd
     if (currentPageIndex === -1) {
       coverView.classList.remove('hidden');
       spreadView.classList.add('hidden');
+      bookContainer.classList.add('closed'); // Lägg till klass för animation
 
-      // Klick på omslag öppnar boken
       coverView.onclick = () => {
         currentPageIndex = 0;
         updateBookView();
       };
     }
-    // FALL 2: Boken är öppen (Visa uppslag)
+    // FALL 2: Boken är öppen
     else {
       coverView.classList.add('hidden');
       spreadView.classList.remove('hidden');
+      bookContainer.classList.remove('closed'); // Ta bort klass för animation
 
       const page = currentStory[currentPageIndex];
       bookImg.src = page.image;
@@ -178,7 +179,7 @@ export function History() {
 
       prevBtn.onclick = () => {
         if (currentPageIndex === 0) {
-          currentPageIndex = -1; // Tillbaka till omslag
+          currentPageIndex = -1;
         } else {
           currentPageIndex--;
         }
@@ -194,17 +195,13 @@ export function History() {
     }
   }
 
-  // Stäng-knapp för modalen
   closeBtn.addEventListener('click', () => {
     modal.classList.add('hidden');
   });
 
   // --- INITIERING ---
-
-  // Ladda Klassiskt som start
   renderCards(classicalData);
 
-  // Hantera klick på flikarna (Tabs)
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
