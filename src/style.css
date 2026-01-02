@@ -750,3 +750,64 @@ body {
     transform: translateY(0);
   }
 }
+
+/* --- HISTORIA SIDA STYLING --- */
+
+/* Behållaren för tidslinjen */
+.timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  /* Centrerar listan */
+}
+
+/* Själva kortet för varje epok */
+.time-card {
+  background: rgba(255, 255, 255, 0.05);
+  /* Mörk, halvgenomskinlig platta */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Tunn ljus kant */
+  border-radius: 12px;
+  /* Rundade hörn */
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  /* Luft mellan korten */
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+/* Liten effekt när man håller musen över */
+.time-card:hover {
+  transform: translateY(-5px);
+  /* Kortet lyfter lite */
+  background: rgba(255, 255, 255, 0.08);
+  /* Blir lite ljusare */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Årtals-etiketten */
+.year {
+  display: inline-block;
+  background: var(--primary-color);
+  /* Använder din lila färg */
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Rubriken i kortet */
+.time-card h3 {
+  margin: 0.5rem 0;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* Listan med exempel */
+.time-card ul {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  color: #ccc;
+}
