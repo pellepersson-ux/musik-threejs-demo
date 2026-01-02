@@ -12,7 +12,26 @@ export function History() {
   ];
 
   const popData = [
-    { period: "50-talet", info: "Rock 'n' Roll föds! Elgitarren tar över världen.", artists: "Elvis Presley, Chuck Berry" },
+    {
+      period: "50-talet",
+      info: "Rock 'n' Roll föds! Elgitarren tar över världen.",
+      artists: "Elvis Presley, Chuck Berry",
+      // HÄR LÄGGER VI TILL BOKEN:
+      story: [
+        {
+          text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.",
+          image: "https://images.unsplash.com/photo-1552554274-0f196620573e?auto=format&fit=crop&w=600&q=80" // Byt mot din ritade bild sen
+        },
+        {
+          text: "Radion och senare tv:n fylldes av ny musik, och en helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
+          image: "https://images.unsplash.com/photo-1499364615650-ec387c130084?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          text: "Rock'n'roll handlade om rytm, dans och revolt. Det var högt, det var snabbt och föräldrarna hatade det.",
+          image: "https://images.unsplash.com/photo-1549887552-93f8efb8d42a?auto=format&fit=crop&w=600&q=80"
+        }
+      ]
+    },
     { period: "60-talet", info: "British Invasion och flower power. Popbanden blir superstjärnor.", artists: "The Beatles, Rolling Stones" },
     { period: "70-talet", info: "Disco, Hårdrock och Punk. En spretig tid med mycket glitter och dist.", artists: "ABBA, Queen, Ramones" },
     { period: "80-talet", info: "Syntar, trummaskiner och MTV. Musikvideon blir viktig.", artists: "Michael Jackson, Madonna" }
@@ -48,14 +67,24 @@ export function History() {
 
   // Funktion för att rita ut korten
   function renderCards(data) {
-    contentDiv.innerHTML = data.map(item => `
+    // Vi måste veta vilken typ av data det är för att hitta rätt index
+    let type = 'classical';
+    if (data === popData) type = 'pop';
+    if (data === worldData) type = 'world';
+
+    contentDiv.innerHTML = data.map((item, index) => `
       <div class="time-card fade-in">
-        <div class="year">${item.period}</div>
+        <div class="card-header">
+           <div class="year">${item.period}</div>
+        </div>
         <div class="info">
-          <h3>${item.info.split('.')[0]}</h3> <p>${item.info}</p>
-          <ul>
-            <li><strong>Exempel:</strong> ${item.artists}</li>
-          </ul>
+          <h3>${item.info.split('.')[0]}</h3>
+          <p>${item.info}</p>
+          
+          ${item.story && item.story.length > 0
+        ? `<button class="read-book-btn" onclick="openStory(${index}, '${type}')">📖 Läs Lättläst Bok</button>`
+        : ''}
+          
         </div>
       </div>
     `).join('');
@@ -80,5 +109,93 @@ export function History() {
     });
   });
 
+  // --- STORYBOOK LOGIK ---
+
+  // Skapa HTML för själva "Bok-fönstret" (ligger dolt först)
+  const modalHTML = `
+    <div id="storybook-modal" class="modal hidden">
+      <div class="modal-content book-style">
+        <span class="close-btn">&times;</span>
+        
+        <div class="book-spread">
+          <div class="book-page-left">
+            <img id="book-img" src="" alt="">
+          </div>
+          <div class="book-page-right">
+            <p id="book-text"></p>
+            <div class="book-controls">
+              <button id="prev-btn">⬅ Föregående</button>
+              <span id="page-indicator">1 / 3</span>
+              <button id="next-btn">Nästa ➡</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  // Lägg till modalen i sektionen
+  section.insertAdjacentHTML('beforeend', modalHTML);
+
+  // Hämta referenser till elementen
+  const modal = section.querySelector('#storybook-modal');
+  const closeBtn = section.querySelector('.close-btn');
+  const bookImg = section.querySelector('#book-img');
+  const bookText = section.querySelector('#book-text');
+  const pageIndicator = section.querySelector('#page-indicator');
+  const nextBtn = section.querySelector('#next-btn');
+  const prevBtn = section.querySelector('#prev-btn');
+
+  let currentStory = [];
+  let currentPageIndex = 0;
+
+  // Funktion för att öppna boken
+  window.openStory = (index, type) => {
+    let dataSet = [];
+    if (type === 'pop') dataSet = popData;
+    // Lägg till logic för classical/world om du vill ha böcker där sen
+
+    const item = dataSet[index];
+    if (item && item.story && item.story.length > 0) {
+      currentStory = item.story;
+      currentPageIndex = 0;
+      updateBookView();
+      modal.classList.remove('hidden'); // Visa fönstret
+    } else {
+      alert("Ingen bok finns för denna epok än!");
+    }
+  };
+
+  // Uppdatera innehållet (Bläddra)
+  function updateBookView() {
+    const page = currentStory[currentPageIndex];
+    bookImg.src = page.image;
+    bookText.innerText = page.text;
+    pageIndicator.innerText = `Sida ${currentPageIndex + 1} av ${currentStory.length}`;
+
+    // Inaktivera knappar om vi är först/sist
+    prevBtn.disabled = currentPageIndex === 0;
+    nextBtn.disabled = currentPageIndex === currentStory.length - 1;
+  }
+
+  // Knapp-lyssnare
+  nextBtn.addEventListener('click', () => {
+    if (currentPageIndex < currentStory.length - 1) {
+      currentPageIndex++;
+      updateBookView();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentPageIndex > 0) {
+      currentPageIndex--;
+      updateBookView();
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
   return section;
 }
