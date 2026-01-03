@@ -1,202 +1,186 @@
 export function History() {
   const section = document.createElement('section');
-  section.className = 'history-page';
 
-  // --- 1. DATA ---
-  const classicalData = [
-    { period: "Barocken (1600-1750)", info: "Musik med mycket utsmyckningar och kontrapunkt (flera stämmor). Cembalon var viktig.", artists: "Bach, Vivaldi, Händel" },
-    { period: "Wienklassicismen (1750-1820)", info: "Balans, tydlighet och elegans. Pianot ersätter cembalon. Symfoniorkestern växer fram.", artists: "Mozart, Haydn, Beethoven" },
-    { period: "Romantiken (1820-1900)", info: "Stora känslor, dramatik och sagomotiv. Orkestrarna blir enorma.", artists: "Chopin, Wagner, Tjaikovskij" },
-    { period: "Modernismen (1900-nutid)", info: "Regler bryts. Dissonanser (låter skevt) och nya klanger.", artists: "Stravinskij, Schönberg" }
-  ];
+  // --- HTML-STRUKTUR ---
+  // Vi bygger upp sidan:
+  // 1. En rubrik och menykort för att välja "Tidslinje" eller "Lättläst (Boken)"
+  // 2. Modalen (Popup-boken) som är dold från början.
 
-  const popData = [
-    {
-      period: "50-talet",
-      info: "Rock 'n' Roll föds! Elgitarren tar över världen.",
-      artists: "Elvis Presley, Chuck Berry",
-      story: [
-        // SIDA 1 (Starten)
-        {
-          text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.",
-          image: "/images/sida1.jpg" // Se till att du har en bild här, annars syns inget
-        },
-        // SIDA 2
-        {
-          text: "Radion och senare tv:n fylldes av ny musik. En helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
-          image: "https://images.unsplash.com/photo-1499364615650-ec387c130084?auto=format&fit=crop&w=600&q=80"
-        },
-        // SIDA 3
-        {
-          text: "Rock'n'roll handlade om rytm, dans och revolt. Elvis Presley blev kungen av rock, men många föräldrar tyckte musiken var för vild.",
-          image: "https://images.unsplash.com/photo-1549887552-93f8efb8d42a?auto=format&fit=crop&w=600&q=80"
-        }
-      ]
-    },
-    { period: "60-talet", info: "British Invasion och flower power. Popbanden blir superstjärnor.", artists: "The Beatles, Rolling Stones" },
-    { period: "70-talet", info: "Disco, Hårdrock och Punk. En spretig tid med mycket glitter och dist.", artists: "ABBA, Queen, Ramones" },
-    { period: "80-talet", info: "Syntar, trummaskiner och MTV. Musikvideon blir viktig.", artists: "Michael Jackson, Madonna" }
-  ];
-
-  const worldData = [
-    { period: "Västafrika", info: "Rytm är allt! Polyrytmik (flera rytmer samtidigt) och Djembe-trummor.", artists: "Fela Kuti (Afrobeat)" },
-    { period: "Latinamerika", info: "Samba, Bossa Nova och Salsa. Dansvänligt och synkoperat.", artists: "Jobim, Celia Cruz" },
-    { period: "Indien", info: "Raga (skalor) och Tala (rytmcykler). Sitar och Tabla är viktiga instrument.", artists: "Ravi Shankar" },
-    { period: "Sverige (Folkmusik)", info: "Polska, gånglåt och vallmusik. Fiol och nyckelharpa.", artists: "Jan Johansson, Väsen" }
-  ];
-
-  // --- 2. HTML STRUKTUR (Huvudsida) ---
   section.innerHTML = `
-    <div class="content-container">
-      <h1>Musikhistoria 📜</h1>
-      <p class="intro-text">Välj en epok eller stil för att lära dig mer.</p>
-      
-      <div class="history-tabs">
-        <button class="tab-btn active" data-tab="classical">🎼 Klassiskt</button>
-        <button class="tab-btn" data-tab="pop">🎸 Pop/Rock</button>
-        <button class="tab-btn" data-tab="world">🌍 Världsmusik</button>
-      </div>
+    <div class="page-detail" style="text-align: center;">
+      <h1>Musikhistoria</h1>
+      <p style="max-width: 600px; margin: 0 auto 40px auto; color: #ccc;">
+        Här kan du utforska hur musiken har utvecklats genom tiderna. 
+        Välj mellan den detaljerade tidslinjen eller vår lättlästa bilderboks-version.
+      </p>
 
-      <div id="history-content" class="timeline">
+      <div class="dashboard-grid" style="max-width: 800px; margin: 0 auto;">
+        
+        <div class="dashboard-card card-history" style="cursor: pointer;">
+          <div class="icon">⏳</div>
+          <h3>Tidslinjen</h3>
+          <p>Fördjupning i årtal, genrer och viktiga händelser.</p>
+          <span class="read-more">Kommer snart...</span>
         </div>
-    </div>
-  `;
 
-  // --- 3. HTML FÖR STORYBOOK (Endast uppslag nu) ---
-  const modalHTML = `
+        <div class="dashboard-card card-game" id="open-book-card" style="cursor: pointer;">
+          <div class="icon">📖</div>
+          <h3>Lättläst Bilderbok</h3>
+          <p>Klicka här för att öppna boken om Rockens historia.</p>
+          <span class="read-more">Öppna boken ➡</span>
+        </div>
+
+      </div>
+    </div>
+
     <div id="storybook-modal" class="modal hidden">
-      <div id="book-container" class="modal-content book-style">
-        <span class="close-btn">&times;</span>
+      
+      <span class="close-btn" style="position:fixed; top: 30px; right: 40px; font-size: 3rem; color: white; cursor: pointer; z-index: 2000;">&times;</span>
 
-        <div id="book-spread-view" class="book-spread">
+      <div class="book-spread-container">
+        
+        <div class="book-page-left" id="left-page-click" style="position: relative; cursor: pointer;">
+          <img id="book-img" src="" alt="Bokillustration">
           
-          <div class="book-page book-page-left" id="left-page-click">
-            <img id="book-img" src="" alt="">
-            <div class="page-overlay hint-prev">⬅ Föregående</div>
+          <div class="page-overlay hint-prev">
+            <span style="background:rgba(0,0,0,0.6); color:white; padding:10px 20px; border-radius:5px;">⬅ Föregående</span>
+          </div>
+        </div>
+
+        <div class="book-page-right" id="right-page-click" style="position: relative; cursor: pointer;">
+          
+          <div class="text-content">
+            <h2 id="book-title" style="margin-top:0; font-family:'Outfit', sans-serif; font-size: 2.2rem; color: #222;">Rubrik</h2>
+            <div id="book-text" style="font-size: 1.2rem; line-height: 1.6; color: #333;">
+              </div>
           </div>
 
-          <div class="book-page book-page-right" id="right-page-click">
-            <div class="text-content">
-              <h3 id="book-title" style="margin-top:0;">Rock'n'rollens födelse</h3>
-              <p id="book-text"></p>
-            </div>
-            <span id="page-indicator">1 / 3</span>
-            <div class="page-overlay hint-next">Nästa ➡</div>
+          <div style="text-align: center; margin-top: auto; padding-top: 20px; font-weight: bold; color: #888;">
+             <span id="page-indicator">1 / 3</span>
+          </div>
+
+          <div class="page-overlay hint-next">
+             <span style="background:rgba(0,0,0,0.6); color:white; padding:10px 20px; border-radius:5px;">Nästa ➡</span>
           </div>
 
         </div>
+
       </div>
     </div>
   `;
 
-  section.insertAdjacentHTML('beforeend', modalHTML);
+  // --- JAVASCRIPT LOGIK ---
 
-  // --- 4. LOGIK ---
+  // 1. DATA - Här lägger du in dina sidor
+  const bookPages = [
+    {
+      title: "Rock'n'rollens födelse",
+      text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik. En helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
+      image: "/images/sida1.jpg" // Se till att denna finns i public/images/
+    },
+    {
+      title: "Elgitarrens intåg",
+      text: "Med artister som Chuck Berry och Elvis Presley blev elgitarren det viktigaste instrumentet. Det lät högt, distat och farligt.<br><br>Rockmusiken handlade om energi och uppror.",
+      image: "/images/sida1.jpg" // Byt till sida2.jpg när du har den
+    },
+    {
+      title: "60-talet och Beatles",
+      text: "På 60-talet exploderade popmusiken från England. The Beatles och The Rolling Stones tog världen med storm och började skriva sina egna låtar, vilket var ovanligt på den tiden.",
+      image: "/images/sida1.jpg" // Byt till sida3.jpg när du har den
+    }
+  ];
 
-  const contentDiv = section.querySelector('#history-content');
-  const buttons = section.querySelectorAll('.tab-btn');
+  let currentPage = 0;
 
-  const modal = section.querySelector('#storybook-modal');
-  const closeBtn = section.querySelector('.close-btn');
+  // 2. FUNKTION FÖR ATT UPPDATERA SIDAN
+  const updateBookView = () => {
+    const pageData = bookPages[currentPage];
 
-  // Element inuti boken
-  const bookImg = section.querySelector('#book-img');
-  const bookText = section.querySelector('#book-text');
-  const pageIndicator = section.querySelector('#page-indicator');
+    // Hämta elementen
+    const titleEl = section.querySelector('#book-title');
+    const textEl = section.querySelector('#book-text');
+    const imgEl = section.querySelector('#book-img');
+    const indicatorEl = section.querySelector('#page-indicator');
 
-  // Klickytorna
-  const leftPage = section.querySelector('#left-page-click');
-  const rightPage = section.querySelector('#right-page-click');
+    const leftPage = section.querySelector('#left-page-click');
+    const rightPage = section.querySelector('#right-page-click');
 
-  let currentStory = [];
-  let currentPageIndex = 0;
+    // Uppdatera innehåll
+    if (titleEl) titleEl.innerText = pageData.title;
+    if (textEl) textEl.innerHTML = pageData.text;
+    if (imgEl) imgEl.src = pageData.image;
+    if (indicatorEl) indicatorEl.innerText = `${currentPage + 1} / ${bookPages.length}`;
 
-  function renderCards(data) {
-    let type = 'classical';
-    if (data === popData) type = 'pop';
-    if (data === worldData) type = 'world';
+    // Visa/Dölj navigering beroende på om vi är först/sist
+    // Vänster sida (Föregående)
+    if (currentPage === 0) {
+      leftPage.style.pointerEvents = 'none'; // Går ej att klicka
+      leftPage.querySelector('.hint-prev').style.display = 'none';
+    } else {
+      leftPage.style.pointerEvents = 'auto';
+      leftPage.querySelector('.hint-prev').style.display = 'flex';
+    }
 
-    contentDiv.innerHTML = data.map((item, index) => `
-      <div class="time-card fade-in">
-        <div class="card-header">
-           <div class="year">${item.period}</div>
-        </div>
-        <div class="info">
-          <h3>${item.info.split('.')[0]}</h3>
-          <p>${item.info}</p>
-          ${item.story && item.story.length > 0
-        ? `<button class="read-book-btn" onclick="openStory(${index}, '${type}')">📖 Läs Lättläst Bok</button>`
-        : ''}
-        </div>
-      </div>
-    `).join('');
-  }
-
-  // Global funktion för att öppna boken
-  window.openStory = (index, type) => {
-    let dataSet = [];
-    if (type === 'pop') dataSet = popData;
-    // Lägg till logic för classical/world om de får stories
-
-    const item = dataSet[index];
-    if (item && item.story && item.story.length > 0) {
-      currentStory = item.story;
-      currentPageIndex = 0; // Börja alltid på första uppslaget
-      updateBookContent();
-      modal.classList.remove('hidden');
+    // Höger sida (Nästa)
+    if (currentPage === bookPages.length - 1) {
+      rightPage.style.pointerEvents = 'none'; // Går ej att klicka
+      rightPage.querySelector('.hint-next').style.display = 'none';
+    } else {
+      rightPage.style.pointerEvents = 'auto';
+      rightPage.querySelector('.hint-next').style.display = 'flex';
     }
   };
 
-  function updateBookContent() {
-    const page = currentStory[currentPageIndex];
+  // 3. EVENT LISTENERS (Knapptryckningar)
 
-    // Uppdatera innehåll
-    bookImg.src = page.image;
-    bookText.innerText = page.text;
-    pageIndicator.innerText = `Sida ${currentPageIndex + 1} av ${currentStory.length}`;
+  const modal = section.querySelector('#storybook-modal');
+  const openBtn = section.querySelector('#open-book-card'); // Kortet vi klickar på
+  const closeBtn = section.querySelector('.close-btn');
+  const nextZone = section.querySelector('#right-page-click');
+  const prevZone = section.querySelector('#left-page-click');
 
-    // Hantera synlighet/opacity för navigering
-    // Om vi är på första sidan, gör vänster sida "inaktiv" visuellt om man vill, 
-    // men vi behåller bilden synlig. Vi kan ändra cursorn.
-    leftPage.style.cursor = currentPageIndex === 0 ? 'default' : 'pointer';
-    rightPage.style.cursor = currentPageIndex === currentStory.length - 1 ? 'default' : 'pointer';
+  // Öppna boken
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      currentPage = 0; // Börja alltid från början
+      updateBookView();
+      modal.classList.remove('hidden');
+    });
   }
 
-  // --- NAVIGATION (KLICK PÅ SIDORNA) ---
-
-  leftPage.addEventListener('click', () => {
-    if (currentPageIndex > 0) {
-      currentPageIndex--;
-      updateBookContent();
-    }
-  });
-
-  rightPage.addEventListener('click', () => {
-    if (currentPageIndex < currentStory.length - 1) {
-      currentPageIndex++;
-      updateBookContent();
-    }
-  });
-
-  // Stäng boken
-  closeBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
-
-  // Initiera korten
-  renderCards(classicalData);
-
-  // Tab-knappar
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      if (tab === 'classical') renderCards(classicalData);
-      if (tab === 'pop') renderCards(popData);
-      if (tab === 'world') renderCards(worldData);
+  // Stäng boken (Kryss)
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
     });
+  }
+
+  // Stäng boken (Klick utanför)
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+    }
   });
+
+  // Bläddra framåt (Klick på höger sida)
+  if (nextZone) {
+    nextZone.addEventListener('click', () => {
+      if (currentPage < bookPages.length - 1) {
+        currentPage++;
+        updateBookView();
+      }
+    });
+  }
+
+  // Bläddra bakåt (Klick på vänster sida)
+  if (prevZone) {
+    prevZone.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateBookView();
+      }
+    });
+  }
 
   return section;
 }
