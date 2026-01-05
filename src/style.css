@@ -1,4 +1,16 @@
 /* =========================================
+   INNEHÅLLSFÖRTECKNING
+   1. Variabler & Grundinställningar
+   2. Header & Navigation
+   3. Hero Section (Startsida)
+   4. Kort & Dashboard (Grid & Färger)
+   5. Tidslinje (Historia)
+   6. Bilderbok (Modal & Layout)
+   7. Undersidor (Layout, Video & Knappar)
+   8. Responsivitet (Mobil)
+   ========================================= */
+
+/* =========================================
    1. VARIABLER & GRUNDINSTÄLLNINGAR
    ========================================= */
 :root {
@@ -15,13 +27,10 @@
   --card-green: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
   --card-orange: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
 
-  /* BOKENS EXAKTA MÅTT */
+  /* Bokens mått */
   --book-height: 775px;
-  /* Höjden på boken */
   --page-width: 500px;
-  /* Bredden på en sida */
   --spread-width: 1000px;
-  /* Totalt uppslag (500 + 500) */
 }
 
 body {
@@ -80,7 +89,6 @@ body {
 
 .theme-toggle {
   display: none;
-  /* Dold */
 }
 
 /* =========================================
@@ -145,7 +153,7 @@ body {
 }
 
 /* =========================================
-   4. KORT & DASHBOARD (Gemensamt)
+   4. KORT & DASHBOARD (Grid & Färger)
    ========================================= */
 .cards-section {
   max-width: 1100px;
@@ -198,7 +206,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Kort-färger */
+/* --- Kort-varianter --- */
 .card-history {
   background: var(--card-purple);
 }
@@ -211,7 +219,7 @@ body {
   background: var(--card-orange);
 }
 
-/* Instrument-specifika kort */
+/* Instrument */
 .card-guitar {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
@@ -224,6 +232,7 @@ body {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
+/* Specialare för Bas */
 .card.bass {
   background: linear-gradient(135deg, #8e44ad, #4a235a);
   border: none;
@@ -240,7 +249,7 @@ body {
 }
 
 /* =========================================
-   5. TIDSLINJE (History Timeline)
+   5. TIDSLINJE (Historia)
    ========================================= */
 .timeline {
   max-width: 800px;
@@ -287,10 +296,9 @@ body {
 }
 
 /* =========================================
-   6. BILDERBOK (MODAL & LÄTTLÄST)
+   6. BILDERBOK (Modal & Layout)
    ========================================= */
-
-/* Modalen (Bakgrunden) */
+/* Modal bakgrund */
 .modal {
   position: fixed;
   top: 0;
@@ -298,7 +306,6 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.9);
-  /* Mörk bakgrund */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -312,9 +319,7 @@ body {
   pointer-events: none;
 }
 
-/* Stäng-knapp (Kryss) */
 .close-btn {
-  /* Positioneras inline i HTML, men detta är fallback */
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -323,32 +328,26 @@ body {
   transform: scale(1.1);
 }
 
-/* --- BOKENS BEHÅLLARE (Exakta mått) --- */
+/* Bokens behållare */
 .book-spread-container {
   display: flex;
   width: var(--spread-width);
-  /* 1000px */
   height: var(--book-height);
-  /* 775px */
   background-color: #fffcf5;
-  /* Pappersfärg */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   overflow: hidden;
   max-width: 100%;
-  /* För säkerhets skull */
   position: relative;
 }
 
-/* --- VÄNSTER SIDA (Bild) --- */
+/* Vänster sida (Bild) */
 .book-page-left {
   flex: 0 0 var(--page-width);
-  /* Låst till 500px */
   height: 100%;
   position: relative;
   background: #000;
   border-right: 2px solid #ddd;
-  /* Mittveck */
   cursor: pointer;
 }
 
@@ -356,18 +355,15 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Fyller hela 500x775px */
   display: block;
 }
 
-/* --- HÖGER SIDA (Text) --- */
+/* Höger sida (Text) */
 .book-page-right {
   flex: 0 0 var(--page-width);
-  /* Låst till 500px */
   height: 100%;
   position: relative;
   padding: 40px;
-  /* Luft inuti sidan */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -375,16 +371,14 @@ body {
   color: #333;
   font-family: 'Georgia', serif;
   overflow-y: auto;
-  /* Scrolla text om den är för lång */
   cursor: pointer;
 }
 
 .text-content {
   flex-grow: 1;
-  /* Trycker ner sidnumrering till botten */
 }
 
-/* --- NAVIGERING OVERLAY (Pilar) --- */
+/* Navigering Overlay (Pilar) */
 .page-overlay {
   position: absolute;
   top: 0;
@@ -398,26 +392,22 @@ body {
   font-weight: bold;
   background: rgba(0, 0, 0, 0.1);
   opacity: 0;
-  /* Dold normalt */
   transition: opacity 0.3s ease;
   pointer-events: none;
-  /* Släpp igenom klick */
 }
 
-/* Visa overlay vid hover */
+/* Hover-effekter boken */
 .book-page-left:hover .hint-prev,
 .book-page-right:hover .hint-next {
   opacity: 1 !important;
-  /* Tvinga fram */
 }
 
-/* Ändra bakgrundsfärg lite vid hover för klick-känsla */
 .book-page-left:hover,
 .book-page-right:hover {
   filter: brightness(0.98);
 }
 
-/* Omslagsbild (Tumnagel innan man öppnar) */
+/* Omslagsbild (Tumnagel) */
 .book-cover-thumbnail {
   width: var(--page-width);
   height: var(--book-height);
@@ -432,44 +422,26 @@ body {
 }
 
 /* =========================================
-   7. RESPONSIVITET (Mobilanpassning)
+   7. UNDERSIDOR (Layout, Video & Knappar)
    ========================================= */
-@media (max-width: 1024px) {
 
-  /* Om skärmen är smalare än 1000px, stapla boken */
-  .book-spread-container {
-    flex-direction: column;
-    width: auto;
-    height: auto;
-    max-height: 90vh;
-    /* Få plats på mobilskärmen */
-    max-width: 500px;
-    overflow-y: auto;
-  }
-
-  .book-page-left,
-  .book-page-right {
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
-    min-height: 300px;
-  }
-
-  .book-page-left img {
-    height: 300px;
-    /* Mindre bild på mobil */
-  }
-
-  .close-btn {
-    top: 10px !important;
-    right: 10px !important;
-    font-size: 2rem !important;
-  }
+/* --- Layout för detaljsidor (Instrument etc) --- */
+.page-detail {
+  padding: 40px 20px;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centrerar horisontellt */
 }
 
-/* =========================================
-   8. ÖVRIGA SIDOR (Ensemble, Video etc)
-   ========================================= */
+.content-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .ensemble-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -477,6 +449,31 @@ body {
   text-align: center;
 }
 
+/* --- Video Container (16:9 & Centrerad) --- */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  /* 16:9 Aspect Ratio */
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 30px auto;
+  /* Centrerad + marginal botten */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Låtlista (Ensemble) --- */
 .song-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -519,24 +516,19 @@ body {
   color: #7f8c8d;
 }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  /* 16:9 */
-  height: 0;
-  background: #000;
-  border-radius: 10px;
-  overflow: hidden;
+/* --- Knappar & Länkar --- */
+.back-link {
+  display: inline-block;
   margin-bottom: 20px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.back-link:hover {
+  text-decoration: underline;
+  color: white;
 }
 
 .instrument-buttons {
@@ -566,55 +558,35 @@ body {
 }
 
 /* =========================================
-   9. FIX FÖR INSTRUMENTSIDOR (Gitarr, Bas etc.)
+   8. RESPONSIVITET (Mobilanpassning)
    ========================================= */
+@media (max-width: 1024px) {
 
-/* Huvud-wrapper för instrumentsidorna */
-.page-detail {
-  padding: 40px 20px;
-  min-height: 60vh;
-  display: flex;
-  /* Nytt: Hjälper till att centrera */
-  flex-direction: column;
-  align-items: center;
-  /* Centrerar allt innehåll horisontellt */
-}
+  /* Boken staplas på höjden */
+  .book-spread-container {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    max-height: 90vh;
+    max-width: 500px;
+    overflow-y: auto;
+  }
 
-/* Behållaren som håller text och video (max 800px bred) */
-.content-container {
-  width: 100%;
-  max-width: 800px;
-  /* Samma bredd som tidslinjen */
-  margin: 0 auto;
-  /* Denna rad är magisk – centrerar boxen */
-  text-align: center;
-  /* Centrerar text och knappar */
-}
+  .book-page-left,
+  .book-page-right {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
 
-/* Justering av videon så den inte sticker iväg */
-.video-container {
-  width: 100%;
-  max-width: 100%;
-  /* Försäkrar att den inte blir bredare än containern */
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  /* Lite extra luft under videon */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  /* Snygg skugga igen */
-}
+  .book-page-left img {
+    height: 300px;
+  }
 
-/* Tillbaka-länken */
-.back-link {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: var(--primary-color);
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-  color: white;
+  .close-btn {
+    top: 10px !important;
+    right: 10px !important;
+    font-size: 2rem !important;
+  }
 }
