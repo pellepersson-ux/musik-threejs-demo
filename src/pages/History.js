@@ -37,6 +37,18 @@ export function History() {
       
       <span class="close-btn" style="position:fixed; top: 30px; right: 40px; font-size: 3rem; color: white; cursor: pointer; z-index: 2000;">&times;</span>
 
+<div class="book-container" style="display: flex; justify-content: center; margin: 40px 0;">
+    <img 
+      src="images/cover.jpg" 
+      alt="Lättläst bok omslag" 
+      class="book-cover-thumbnail" 
+      id="bookCoverTrigger"
+    >
+</div>
+
+<div id="storyBookModal" class="modal hidden">
+   </div>
+
       <div class="book-spread-container">
         
         <div class="book-page-left" id="left-page-click" style="position: relative; cursor: pointer;">
@@ -96,91 +108,127 @@ export function History() {
   const updateBookView = () => {
     const pageData = bookPages[currentPage];
 
-    // Hämta elementen
-    const titleEl = section.querySelector('#book-title');
-    const textEl = section.querySelector('#book-text');
-    const imgEl = section.querySelector('#book-img');
-    const indicatorEl = section.querySelector('#page-indicator');
+    // --- HÄR FORTSÄTTER KODEN INUTI updateBookView ---
 
-    const leftPage = section.querySelector('#left-page-click');
-    const rightPage = section.querySelector('#right-page-click');
-
-    // Uppdatera innehåll
-    if (titleEl) titleEl.innerText = pageData.title;
-    if (textEl) textEl.innerHTML = pageData.text;
-    if (imgEl) imgEl.src = pageData.image;
-    if (indicatorEl) indicatorEl.innerText = `${currentPage + 1} / ${bookPages.length}`;
-
-    // Visa/Dölj navigering beroende på om vi är först/sist
-    // Vänster sida (Föregående)
-    if (currentPage === 0) {
-      leftPage.style.pointerEvents = 'none'; // Går ej att klicka
-      leftPage.querySelector('.hint-prev').style.display = 'none';
-    } else {
-      leftPage.style.pointerEvents = 'auto';
-      leftPage.querySelector('.hint-prev').style.display = 'flex';
+    // 1. Uppdatera bilden (vänster sida)
+    // Vi letar upp img-taggen inuti .book-page-left
+    const imageEl = section.querySelector('.book-page-left img');
+    if (imageEl) {
+      imageEl.src = pageData.image;
     }
 
-    // Höger sida (Nästa)
-    if (currentPage === bookPages.length - 1) {
-      rightPage.style.pointerEvents = 'none'; // Går ej att klicka
-      rightPage.querySelector('.hint-next').style.display = 'none';
-    } else {
-      rightPage.style.pointerEvents = 'auto';
-      rightPage.querySelector('.hint-next').style.display = 'flex';
+    // 2. Uppdatera texten (höger sida)
+    // Vi letar upp div:en med klassen .text-content
+    const textEl = section.querySelector('.text-content');
+    if (textEl) {
+      textEl.innerHTML = pageData.text; // Vi använder innerHTML så att <p> och <h3> fungerar
     }
-  };
 
-  // 3. EVENT LISTENERS (Knapptryckningar)
+    // 3. Uppdatera sidnumrering (om du har lagt in en sån span)
+    const pageNumEl = section.querySelector('.page-number');
+    if (pageNumEl) {
+      pageNumEl.textContent = `Sida ${currentPage + 1} av ${bookPages.length}`;
+    }
 
-  const modal = section.querySelector('#storybook-modal');
-  const openBtn = section.querySelector('#open-book-card'); // Kortet vi klickar på
-  const closeBtn = section.querySelector('.close-btn');
-  const nextZone = section.querySelector('#right-page-click');
-  const prevZone = section.querySelector('#left-page-click');
+    // 4. Visa eller dölj pilar (så man inte kan bläddra bakåt på sida 1)
+    const prevBtn = section.querySelector('.hint-prev');
+    const nextBtn = section.querySelector('.hint-next');
 
-  // Öppna boken
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
-      currentPage = 0; // Börja alltid från början
+    // Om vi är på första sidan (0) -> Dölj "Bakåt"-knappen
+    if (prevBtn) {
+      prevBtn.style.display = (currentPage === 0) ? 'none' : 'flex';
+    }
+
+    // Om vi är på sista sidan -> Dölj "Nästa"-knappen
+    if (nextBtn) {
+      nextBtn.style.display = (currentPage === bookPages.length - 1) ? 'none' : 'flex';
+    }
+  }; // <--- HÄR STÄNGER DU updateBookView-FUNKTIONEN
+  // Hämta elementen
+  const titleEl = section.querySelector('#book-title');
+  const textEl = section.querySelector('#book-text');
+  const imgEl = section.querySelector('#book-img');
+  const indicatorEl = section.querySelector('#page-indicator');
+
+  const leftPage = section.querySelector('#left-page-click');
+  const rightPage = section.querySelector('#right-page-click');
+
+  // Uppdatera innehåll
+  if (titleEl) titleEl.innerText = pageData.title;
+  if (textEl) textEl.innerHTML = pageData.text;
+  if (imgEl) imgEl.src = pageData.image;
+  if (indicatorEl) indicatorEl.innerText = `${currentPage + 1} / ${bookPages.length}`;
+
+  // Visa/Dölj navigering beroende på om vi är först/sist
+  // Vänster sida (Föregående)
+  if (currentPage === 0) {
+    leftPage.style.pointerEvents = 'none'; // Går ej att klicka
+    leftPage.querySelector('.hint-prev').style.display = 'none';
+  } else {
+    leftPage.style.pointerEvents = 'auto';
+    leftPage.querySelector('.hint-prev').style.display = 'flex';
+  }
+
+  // Höger sida (Nästa)
+  if (currentPage === bookPages.length - 1) {
+    rightPage.style.pointerEvents = 'none'; // Går ej att klicka
+    rightPage.querySelector('.hint-next').style.display = 'none';
+  } else {
+    rightPage.style.pointerEvents = 'auto';
+    rightPage.querySelector('.hint-next').style.display = 'flex';
+  }
+};
+
+// 3. EVENT LISTENERS (Knapptryckningar)
+
+const modal = section.querySelector('#storybook-modal');
+const openBtn = section.querySelector('#open-book-card'); // Kortet vi klickar på
+const closeBtn = section.querySelector('.close-btn');
+const nextZone = section.querySelector('#right-page-click');
+const prevZone = section.querySelector('#left-page-click');
+
+// Öppna boken
+if (openBtn) {
+  openBtn.addEventListener('click', () => {
+    currentPage = 0; // Börja alltid från början
+    updateBookView();
+    modal.classList.remove('hidden');
+  });
+}
+
+// Stäng boken (Kryss)
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+}
+
+// Stäng boken (Klick utanför)
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.add('hidden');
+  }
+});
+
+// Bläddra framåt (Klick på höger sida)
+if (nextZone) {
+  nextZone.addEventListener('click', () => {
+    if (currentPage < bookPages.length - 1) {
+      currentPage++;
       updateBookView();
-      modal.classList.remove('hidden');
-    });
-  }
-
-  // Stäng boken (Kryss)
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.add('hidden');
-    });
-  }
-
-  // Stäng boken (Klick utanför)
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.add('hidden');
     }
   });
+}
 
-  // Bläddra framåt (Klick på höger sida)
-  if (nextZone) {
-    nextZone.addEventListener('click', () => {
-      if (currentPage < bookPages.length - 1) {
-        currentPage++;
-        updateBookView();
-      }
-    });
-  }
+// Bläddra bakåt (Klick på vänster sida)
+if (prevZone) {
+  prevZone.addEventListener('click', () => {
+    if (currentPage > 0) {
+      currentPage--;
+      updateBookView();
+    }
+  });
+}
 
-  // Bläddra bakåt (Klick på vänster sida)
-  if (prevZone) {
-    prevZone.addEventListener('click', () => {
-      if (currentPage > 0) {
-        currentPage--;
-        updateBookView();
-      }
-    });
-  }
-
-  return section;
+return section;
 }

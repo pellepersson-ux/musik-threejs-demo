@@ -421,6 +421,37 @@ body {
   transform: scale(1.02);
 }
 
+/* --- OMSLAGSBILD (Startläget) --- */
+.book-cover-thumbnail {
+  width: var(--page-width);
+  /* 500px - Halvt uppslag */
+  height: var(--book-height);
+  /* 775px */
+  object-fit: cover;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  border-radius: 2px 8px 8px 2px;
+  /* Lite rundat på högersidan som en bokkant */
+
+  /* Förbereder animationen */
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transform-origin: center left;
+}
+
+.book-cover-thumbnail:hover {
+  transform: scale(1.02);
+  /* Liten effekt vid hover */
+}
+
+/* --- ANIMATIONEN (När man klickar) --- */
+.book-animating-right {
+  /* Flyttar bilden 250px åt höger (halva sin bredd) för att matcha högersidan */
+  transform: translateX(250px) scale(1.05) !important;
+  opacity: 0;
+  /* Tonar ut medan den flyttar sig */
+  pointer-events: none;
+}
+
 /* =========================================
    7. UNDERSIDOR (Layout, Video & Knappar)
    ========================================= */
