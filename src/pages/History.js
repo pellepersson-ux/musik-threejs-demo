@@ -2,10 +2,6 @@ export function History() {
   const section = document.createElement('section');
 
   // --- HTML-STRUKTUR ---
-  // Vi bygger upp sidan:
-  // 1. En rubrik och menykort för att välja "Tidslinje" eller "Lättläst (Boken)"
-  // 2. Modalen (Popup-boken) som är dold från början.
-
   section.innerHTML = `
     <div class="page-detail" style="text-align: center;">
       <h1>Musikhistoria</h1>
@@ -37,23 +33,20 @@ export function History() {
       
       <span class="close-btn" style="position:fixed; top: 30px; right: 40px; font-size: 3rem; color: white; cursor: pointer; z-index: 2000;">&times;</span>
 
-<div class="book-container" style="display: flex; justify-content: center; margin: 40px 0;">
-    <img 
-      src="images/cover.jpg" 
-      alt="Lättläst bok omslag" 
-      class="book-cover-thumbnail" 
-      id="bookCoverTrigger"
-    >
-</div>
+      <div id="cover-view" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+          <img 
+            src="/images/cover.jpg" 
+            alt="Klicka för att öppna boken" 
+            class="book-cover-thumbnail" 
+            id="bookCoverTrigger"
+            title="Klicka för att öppna"
+          >
+      </div>
 
-<div id="storyBookModal" class="modal hidden">
-   </div>
-
-      <div class="book-spread-container">
+      <div id="spread-view" class="book-spread-container hidden">
         
         <div class="book-page-left" id="left-page-click" style="position: relative; cursor: pointer;">
           <img id="book-img" src="" alt="Bokillustration">
-          
           <div class="page-overlay hint-prev">
             <span style="background:rgba(0,0,0,0.6); color:white; padding:10px 20px; border-radius:5px;">⬅ Föregående</span>
           </div>
@@ -77,28 +70,28 @@ export function History() {
 
         </div>
 
+      </div> 
       </div>
-    </div>
   `;
 
   // --- JAVASCRIPT LOGIK ---
 
-  // 1. DATA - Här lägger du in dina sidor
+  // 1. DATA
   const bookPages = [
     {
       title: "Rock'n'rollens födelse",
       text: "När andra världskriget var över förändrades världen snabbt. I USA började industrin blomstra och ungdomarna fick för första gången egna pengar att spendera.<br><br>Radion och senare tv:n fylldes av ny musik. En helt ny ungdomskultur föddes – en som inte ville lyda föräldrarnas regler.",
-      image: "/images/sida1.jpg" // Se till att denna finns i public/images/
+      image: "/images/sida1.jpg"
     },
     {
       title: "Elgitarrens intåg",
       text: "Med artister som Chuck Berry och Elvis Presley blev elgitarren det viktigaste instrumentet. Det lät högt, distat och farligt.<br><br>Rockmusiken handlade om energi och uppror.",
-      image: "/images/sida1.jpg" // Byt till sida2.jpg när du har den
+      image: "/images/sida1.jpg"
     },
     {
       title: "60-talet och Beatles",
       text: "På 60-talet exploderade popmusiken från England. The Beatles och The Rolling Stones tog världen med storm och började skriva sina egna låtar, vilket var ovanligt på den tiden.",
-      image: "/images/sida1.jpg" // Byt till sida3.jpg när du har den
+      image: "/images/sida1.jpg"
     }
   ];
 
@@ -108,127 +101,126 @@ export function History() {
   const updateBookView = () => {
     const pageData = bookPages[currentPage];
 
-    // --- HÄR FORTSÄTTER KODEN INUTI updateBookView ---
+    // Hämta element
+    const titleEl = section.querySelector('#book-title');
+    const textEl = section.querySelector('#book-text');
+    const imgEl = section.querySelector('#book-img');
+    const indicatorEl = section.querySelector('#page-indicator');
 
-    // 1. Uppdatera bilden (vänster sida)
-    // Vi letar upp img-taggen inuti .book-page-left
-    const imageEl = section.querySelector('.book-page-left img');
-    if (imageEl) {
-      imageEl.src = pageData.image;
-    }
-
-    // 2. Uppdatera texten (höger sida)
-    // Vi letar upp div:en med klassen .text-content
-    const textEl = section.querySelector('.text-content');
-    if (textEl) {
-      textEl.innerHTML = pageData.text; // Vi använder innerHTML så att <p> och <h3> fungerar
-    }
-
-    // 3. Uppdatera sidnumrering (om du har lagt in en sån span)
-    const pageNumEl = section.querySelector('.page-number');
-    if (pageNumEl) {
-      pageNumEl.textContent = `Sida ${currentPage + 1} av ${bookPages.length}`;
-    }
-
-    // 4. Visa eller dölj pilar (så man inte kan bläddra bakåt på sida 1)
+    // Pilar & Zoner
+    const leftPage = section.querySelector('#left-page-click');
+    const rightPage = section.querySelector('#right-page-click');
     const prevBtn = section.querySelector('.hint-prev');
     const nextBtn = section.querySelector('.hint-next');
 
-    // Om vi är på första sidan (0) -> Dölj "Bakåt"-knappen
-    if (prevBtn) {
-      prevBtn.style.display = (currentPage === 0) ? 'none' : 'flex';
+    // Uppdatera innehåll
+    if (titleEl) titleEl.innerText = pageData.title;
+    if (textEl) textEl.innerHTML = pageData.text;
+    if (imgEl) imgEl.src = pageData.image;
+    if (indicatorEl) indicatorEl.innerText = `${currentPage + 1} / ${bookPages.length}`;
+
+    // Visa/Dölj navigering (Första sidan)
+    if (currentPage === 0) {
+      if (leftPage) leftPage.style.pointerEvents = 'none';
+      if (prevBtn) prevBtn.style.display = 'none';
+    } else {
+      if (leftPage) leftPage.style.pointerEvents = 'auto';
+      if (prevBtn) prevBtn.style.display = 'flex';
     }
 
-    // Om vi är på sista sidan -> Dölj "Nästa"-knappen
-    if (nextBtn) {
-      nextBtn.style.display = (currentPage === bookPages.length - 1) ? 'none' : 'flex';
+    // Visa/Dölj navigering (Sista sidan)
+    if (currentPage === bookPages.length - 1) {
+      if (rightPage) rightPage.style.pointerEvents = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+    } else {
+      if (rightPage) rightPage.style.pointerEvents = 'auto';
+      if (nextBtn) nextBtn.style.display = 'flex';
     }
-  }; // <--- HÄR STÄNGER DU updateBookView-FUNKTIONEN
-  // Hämta elementen
-  const titleEl = section.querySelector('#book-title');
-  const textEl = section.querySelector('#book-text');
-  const imgEl = section.querySelector('#book-img');
-  const indicatorEl = section.querySelector('#page-indicator');
+  };
 
-  const leftPage = section.querySelector('#left-page-click');
-  const rightPage = section.querySelector('#right-page-click');
+  // 3. EVENT LISTENERS
 
-  // Uppdatera innehåll
-  if (titleEl) titleEl.innerText = pageData.title;
-  if (textEl) textEl.innerHTML = pageData.text;
-  if (imgEl) imgEl.src = pageData.image;
-  if (indicatorEl) indicatorEl.innerText = `${currentPage + 1} / ${bookPages.length}`;
+  const modal = section.querySelector('#storybook-modal');
+  const openBtn = section.querySelector('#open-book-card');
+  const closeBtn = section.querySelector('.close-btn');
 
-  // Visa/Dölj navigering beroende på om vi är först/sist
-  // Vänster sida (Föregående)
-  if (currentPage === 0) {
-    leftPage.style.pointerEvents = 'none'; // Går ej att klicka
-    leftPage.querySelector('.hint-prev').style.display = 'none';
-  } else {
-    leftPage.style.pointerEvents = 'auto';
-    leftPage.querySelector('.hint-prev').style.display = 'flex';
-  }
+  // Bokens delar
+  const coverView = section.querySelector('#cover-view');
+  const coverTrigger = section.querySelector('#bookCoverTrigger');
+  const spreadView = section.querySelector('#spread-view');
 
-  // Höger sida (Nästa)
-  if (currentPage === bookPages.length - 1) {
-    rightPage.style.pointerEvents = 'none'; // Går ej att klicka
-    rightPage.querySelector('.hint-next').style.display = 'none';
-  } else {
-    rightPage.style.pointerEvents = 'auto';
-    rightPage.querySelector('.hint-next').style.display = 'flex';
-  }
-};
+  const nextZone = section.querySelector('#right-page-click');
+  const prevZone = section.querySelector('#left-page-click');
 
-// 3. EVENT LISTENERS (Knapptryckningar)
-
-const modal = section.querySelector('#storybook-modal');
-const openBtn = section.querySelector('#open-book-card'); // Kortet vi klickar på
-const closeBtn = section.querySelector('.close-btn');
-const nextZone = section.querySelector('#right-page-click');
-const prevZone = section.querySelector('#left-page-click');
-
-// Öppna boken
-if (openBtn) {
-  openBtn.addEventListener('click', () => {
-    currentPage = 0; // Börja alltid från början
-    updateBookView();
-    modal.classList.remove('hidden');
-  });
-}
-
-// Stäng boken (Kryss)
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
-}
-
-// Stäng boken (Klick utanför)
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.classList.add('hidden');
-  }
-});
-
-// Bläddra framåt (Klick på höger sida)
-if (nextZone) {
-  nextZone.addEventListener('click', () => {
-    if (currentPage < bookPages.length - 1) {
-      currentPage++;
+  // A. ÖPPNA MODALEN (Visar omslaget först)
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      // Återställ allt
+      currentPage = 0;
       updateBookView();
-    }
-  });
-}
 
-// Bläddra bakåt (Klick på vänster sida)
-if (prevZone) {
-  prevZone.addEventListener('click', () => {
-    if (currentPage > 0) {
-      currentPage--;
-      updateBookView();
-    }
-  });
-}
+      // Visa modal
+      modal.classList.remove('hidden');
 
-return section;
+      // Visa Omslag, Dölj Boken
+      if (coverView) coverView.style.display = 'flex';
+      if (coverTrigger) coverTrigger.classList.remove('book-animating-right'); // Ta bort ev gammal animation
+      if (spreadView) spreadView.classList.add('hidden');
+    });
+  }
+
+  // B. KLICK PÅ OMSLAGET (Starta animation -> Visa bok)
+  if (coverTrigger) {
+    coverTrigger.addEventListener('click', () => {
+      // 1. Starta animationen
+      coverTrigger.classList.add('book-animating-right');
+
+      // 2. Vänta in animationen (0.5 sekunder)
+      setTimeout(() => {
+        // Dölj omslagsvyn
+        coverView.style.display = 'none';
+
+        // Visa boken
+        spreadView.classList.remove('hidden');
+      }, 450);
+    });
+  }
+
+  // C. STÄNG BOKEN
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    // Återställ så att omslaget syns nästa gång
+    setTimeout(() => {
+      coverTrigger.classList.remove('book-animating-right');
+      coverView.style.display = 'flex';
+      spreadView.classList.add('hidden');
+    }, 300);
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // D. BLÄDDRA
+  if (nextZone) {
+    nextZone.addEventListener('click', () => {
+      if (currentPage < bookPages.length - 1) {
+        currentPage++;
+        updateBookView();
+      }
+    });
+  }
+
+  if (prevZone) {
+    prevZone.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateBookView();
+      }
+    });
+  }
+
+  return section;
 }
