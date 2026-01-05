@@ -564,3 +564,57 @@ body {
 .inst-btn:hover {
   background-color: #d0d0d0;
 }
+
+/* =========================================
+   9. FIX FÖR INSTRUMENTSIDOR (Gitarr, Bas etc.)
+   ========================================= */
+
+/* Huvud-wrapper för instrumentsidorna */
+.page-detail {
+  padding: 40px 20px;
+  min-height: 60vh;
+  display: flex;
+  /* Nytt: Hjälper till att centrera */
+  flex-direction: column;
+  align-items: center;
+  /* Centrerar allt innehåll horisontellt */
+}
+
+/* Behållaren som håller text och video (max 800px bred) */
+.content-container {
+  width: 100%;
+  max-width: 800px;
+  /* Samma bredd som tidslinjen */
+  margin: 0 auto;
+  /* Denna rad är magisk – centrerar boxen */
+  text-align: center;
+  /* Centrerar text och knappar */
+}
+
+/* Justering av videon så den inte sticker iväg */
+.video-container {
+  width: 100%;
+  max-width: 100%;
+  /* Försäkrar att den inte blir bredare än containern */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  /* Lite extra luft under videon */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  /* Snygg skugga igen */
+}
+
+/* Tillbaka-länken */
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  color: white;
+}
