@@ -110,4 +110,152 @@ export function Theory() {
   section.innerHTML = styles + `
     <div class="page-detail" style="text-align: center;">
       <h1>Teori & Samhälle 🎼</h1>
-      <p style="max-width: 600px; margin: 0 auto 40px auto; color: #ccc
+      <p style="max-width: 600px; margin: 0 auto 40px auto; color: #ccc;">
+        Musikens byggstenar, instruktioner och hur musiken påverkar oss.
+      </p>
+
+      <div id="theory-grid-container" class="theory-grid"></div>
+
+    </div>
+
+    <div id="theory-modal" class="theory-modal-overlay hidden-theory">
+      <div class="theory-content">
+        <span class="close-theory">&times;</span>
+        
+        <div id="lesson-video-container" class="video-wrapper hidden-theory">
+           <iframe id="lesson-iframe" src="" allowfullscreen></iframe>
+        </div>
+
+        <h2 id="lesson-title">Rubrik</h2>
+        
+        <img id="lesson-image" class="theory-image hidden-theory" src="" alt="Teori illustration">
+
+        <div id="lesson-text">Textinnehåll...</div>
+      </div>
+    </div>
+  `;
+
+  // --- 3. DATA & INNEHÅLL (Dina lektioner) ---
+  const lessons = [
+    {
+      id: 1,
+      title: "Grundläggande Notvärden",
+      icon: "🎵",
+      description: "Lär dig skillnaden på helnot, halvnot och fjärdedelsnot.",
+      text: `
+        <p>Noter visar hur länge en ton ska spelas. Här är de vanligaste:</p>
+        <ul>
+            <li><b>Helnot:</b> 4 slag (en hel takt i 4/4)</li>
+            <li><b>Halvnot:</b> 2 slag</li>
+            <li><b>Fjärdedelsnot:</b> 1 slag</li>
+        </ul>
+        <p>Bilden nedan visar hur noterna ser ut jämfört med pauser.</p>
+      `,
+      image: "/images/notvarden.jpg", // Byt till din bildfil eller sätt till null
+      youtubeId: null
+    },
+    {
+      id: 2,
+      title: "Lagar & Upphovsrätt",
+      icon: "⚖️",
+      description: "Vad får man egentligen göra med andras musik?",
+      text: `
+        <p>Upphovsrättslagen skyddar musik, texter och konst. Det betyder att du inte får använda någon annans låt i din video utan tillstånd, om den inte är "Royalty Free".</p>
+        <p>Detta är viktigt för dig som vill lägga upp covers på YouTube eller använda musik i skolprojekt.</p>
+      `,
+      image: null,
+      youtubeId: null
+    },
+    {
+      id: 3,
+      title: "Instruktion: Stämma gitarren",
+      icon: "🎸",
+      description: "En snabb videoguide hur du stämmer rätt.",
+      text: "<p>Att ha en stämd gitarr är A och O. Följ videon för att stämma strängarna E A D G B E.</p>",
+      image: null,
+      youtubeId: "M0g8q6lY3Xk" // Exempel-ID (byt till din video)
+    },
+    {
+      id: 4,
+      title: "Musik i Media",
+      icon: "📺",
+      description: "Hur musik påverkar oss i film och reklam.",
+      text: `
+        <p>Musiken i en skräckfilm kan få oss att känna rädsla innan vi ens sett monstret. I reklam används musik för att få oss att köpa saker.</p>
+        <p>Här analyserar vi hur olika instrument skapar olika känslor.</p>
+      `,
+      image: null,
+      youtubeId: null
+    }
+  ];
+
+  // --- 4. LOGIK (Få allt att fungera) ---
+
+  const gridContainer = section.querySelector('#theory-grid-container');
+  const modal = section.querySelector('#theory-modal');
+  const closeBtn = section.querySelector('.close-theory');
+
+  // Element i modalen
+  const titleEl = section.querySelector('#lesson-title');
+  const textEl = section.querySelector('#lesson-text');
+  const imgEl = section.querySelector('#lesson-image');
+  const videoContainer = section.querySelector('#lesson-video-container');
+  const iframeEl = section.querySelector('#lesson-iframe');
+
+  // Generera korten
+  lessons.forEach(lesson => {
+    const card = document.createElement('div');
+    card.className = 'theory-card';
+    card.innerHTML = `
+      <span class="theory-icon">${lesson.icon}</span>
+      <h3>${lesson.title}</h3>
+      <p style="font-size: 0.9rem;">${lesson.description}</p>
+    `;
+
+    // Klick på kort öppnar modal
+    card.addEventListener('click', () => {
+      openLesson(lesson);
+    });
+
+    gridContainer.appendChild(card);
+  });
+
+  // Funktion: Öppna lektion
+  function openLesson(lesson) {
+    titleEl.innerText = lesson.title;
+    textEl.innerHTML = lesson.text;
+
+    // Hantera Bild
+    if (lesson.image) {
+      imgEl.src = lesson.image;
+      imgEl.classList.remove('hidden-theory');
+    } else {
+      imgEl.classList.add('hidden-theory');
+    }
+
+    // Hantera Video
+    if (lesson.youtubeId) {
+      iframeEl.src = `https://www.youtube.com/embed/${lesson.youtubeId}`;
+      videoContainer.classList.remove('hidden-theory');
+    } else {
+      videoContainer.classList.add('hidden-theory');
+      iframeEl.src = "";
+    }
+
+    modal.classList.remove('hidden-theory');
+  }
+
+  // Stäng modal
+  const closeModal = () => {
+    modal.classList.add('hidden-theory');
+    iframeEl.src = ""; // Stänger av ljudet
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  return section;
+}
