@@ -44,7 +44,8 @@ export function History() {
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        color: #888;
+        color: #555; /* Mörkare grå för läsbarhet */
+        font-weight: bold;
         margin-bottom: 5px;
         display: block;
       }
@@ -95,18 +96,18 @@ export function History() {
 
       .article-content h2 { font-family: 'Outfit', sans-serif; color: #e67e22; margin-bottom: 5px; }
       .article-content h3 { font-family: 'Outfit', sans-serif; margin-top: 30px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;}
-      .article-content p { line-height: 1.8; color: #333; font-size: 1.1rem; margin-bottom: 15px; }
-      .article-content ul { margin-bottom: 20px; padding-left: 20px; line-height: 1.6;}
+      .article-content p { line-height: 1.8; color: #222; font-size: 1.1rem; margin-bottom: 15px; } /* Mörkare textfärg #222 */
+      .article-content ul { margin-bottom: 20px; padding-left: 20px; line-height: 1.6; color: #222;}
       .article-content li { margin-bottom: 8px; }
-      .article-period { font-size: 1.2rem; color: #777; font-style: italic; margin-bottom: 20px; display:block; }
+      .article-period { font-size: 1.2rem; color: #444; font-style: italic; margin-bottom: 20px; display:block; }
 
       .close-btn {
         position: absolute; top: 15px; right: 25px;
-        font-size: 3rem; cursor: pointer; color: #ccc;
+        font-size: 3rem; cursor: pointer; color: #333; /* Mörk färg så krysset syns */
         font-family: sans-serif;
         line-height: 0.8;
       }
-      .close-btn:hover { color: #333; }
+      .close-btn:hover { color: #e74c3c; }
 
     </style>
   `;
@@ -116,7 +117,7 @@ export function History() {
     {
       id: "renassans",
       title: "Renässansen",
-      period: "ca 1450-1600", // Ändrat till vanligt bindestreck
+      period: "ca 1450-1600",
       summary: "Pånyttfödelse, upptäcktsresor och polyfoni.",
       content: `
         <p><b>- Pånyttfödelsen -</b></p>
@@ -159,7 +160,7 @@ export function History() {
         <p><b>2. Profan musik (Folklig/Världslig)</b><br>
         Här fanns olika sånger beroende på land. Den viktigaste var <i>Madrigalen</i>, en italiensk sångform där man ofta använde <b>tonmåleri</b>.</p>
         
-        <div style="background:#f9f9f9; padding:15px; border-left: 4px solid #e67e22; margin: 20px 0;">
+        <div style="background:#f9f9f9; padding:15px; border-left: 4px solid #e67e22; margin: 20px 0; color:#333;">
             <b>Vad är tonmåleri?</b><br>
             Det är när musiken målar upp texten. Om texten handlar om att "springa upp och ner", så går melodin också upp och ner!
         </div>
@@ -187,23 +188,23 @@ export function History() {
   section.innerHTML = styles + `
     <div class="page-detail history-container">
       <h1>Musikhistoria 📜</h1>
-      <p style="color: #ccc; max-width:600px; margin: 0 auto 40px auto;">
+      <p style="color: #444; max-width:600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
         Välkommen till arkivet. Här kan du läsa fördjupande texter om olika epoker eller utforska interaktiva berättelser.
       </p>
 
-      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px;">Utforska</h2>
+      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px; color:#333;">Utforska</h2>
       <div class="grid-section">
         
         <div class="history-card card-game" id="open-storybook-btn">
           <span class="card-label">Interaktiv Berättelse</span>
           <h3 class="card-title">Rockens Historia</h3>
-          <p>En lättläst bilderbok om hur rockmusiken föddes.</p>
+          <p style="color:#444;">En lättläst bilderbok om hur rockmusiken föddes.</p>
           <span class="read-more-btn">Öppna boken ➡</span>
         </div>
 
       </div>
 
-      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px; margin-top:50px;">Epoker & Artiklar</h2>
+      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px; margin-top:50px; color:#333;">Epoker & Artiklar</h2>
       <div id="epoch-grid" class="grid-section"></div>
 
     </div>
@@ -235,7 +236,7 @@ export function History() {
       <span class="card-label">Epok</span>
       <h3 class="card-title">${epoch.title}</h3>
       <p style="font-weight:bold; color:#e67e22; margin-bottom:10px;">${epoch.period}</p>
-      <p>${epoch.summary}</p>
+      <p style="color:#444;">${epoch.summary}</p>
       <span class="read-more-btn">Läs artikel ➡</span>
     `;
 
