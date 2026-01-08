@@ -451,12 +451,14 @@ export function History() {
   // --- 3. HTML-STRUKTUR ---
   section.innerHTML = styles + `
     <div class="page-detail history-container">
-      <h1>Musikhistoria 📜</h1>
-      <p style="color: #444; max-width:600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
+      
+      <h1 style="color: #ffffff;">Musikhistoria 📜</h1>
+      
+      <p style="color: #e0e0e0; max-width:600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
         Välkommen till arkivet. Här kan du läsa fördjupande texter om olika epoker eller utforska interaktiva berättelser.
       </p>
 
-      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px; color:#333;">Utforska</h2>
+      <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; color:#ffffff;">Utforska</h2>
       <div class="grid-section">
         
         <div class="history-card card-game" id="open-storybook-btn">
@@ -468,7 +470,7 @@ export function History() {
 
       </div>
 
-      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px; margin-top:50px; color:#333;">Epoker & Artiklar</h2>
+      <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; margin-top:50px; color:#ffffff;">Epoker & Artiklar</h2>
       <div id="epoch-grid" class="grid-section"></div>
 
     </div>
