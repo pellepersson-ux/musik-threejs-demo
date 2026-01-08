@@ -377,6 +377,74 @@ export function History() {
             <li><b>Fri konstnär:</b> En musiker som inte är anställd utan frilansar (typiskt för 1800-talet).</li>
         </ul>
       `
+    },
+    {
+      id: "modernism",
+      title: "Modernismen",
+      period: "ca 1910-nutid",
+      summary: "Reglerna rivs! Atonalitet, experiment, tolvtonsmusik och kaos.",
+      content: `
+        <p><b>- Tiden då reglerna revs -</b></p>
+
+        <h3>Vad var Modernismen?</h3>
+        <p>Om tidigare epoker handlade om att förfina och utveckla musiken, så handlade modernismen om att bryta mot reglerna. Kompositörerna tyckte att man hade gjort allt som gick att göra med vackra melodier och dur/moll. Nu ville man experimentera! Musik behövde inte längre vara "vacker" - den kunde vara ful, konstig, matematisk eller chockerande.</p>
+
+        <h3>Samtiden - Vad hände i världen?</h3>
+        <p>1900-talet var en tid av enorm förändring som påverkade konsten djupt.</p>
+        <ul>
+            <li><b>Världskrig och kaos:</b> Två världskrig skapade en känsla av oro och kaos. Många konstnärer kände att den "gamla vackra världen" var borta, och musiken måste spegla den nya, hårda verkligheten.</li>
+            <li><b>Teknikens under:</b> För första gången kunde man spela in musik (grammofon, radio). Plötsligt kunde man höra musik utan att gå på konsert!</li>
+            <li><b>Industrialism:</b> Maskiner, bilar och fabriksljud blev en del av vardagen, och vissa kompositörer inspirerades av detta buller.</li>
+        </ul>
+
+        <h3>Musiken - Hur lät den?</h3>
+        <p>Det är svårt att säga exakt hur det lät eftersom det fanns så många olika stilar (ismer), men här är några gemensamma drag:</p>
+        <ul>
+            <li><b>Dissonanser:</b> Toner som skär sig mot varandra (låter "falskt" eller spänt) blev vanliga. Man behövde inte längre "lösa upp" spänningen till ett vackert ackord.</li>
+            <li><b>Atonalitet:</b> Musik som inte går i någon tonart alls. Det finns inget "hemma" (grundton) i musiken.</li>
+            <li><b>Rytmisk komplexitet:</b> Rytmerna blev ryckiga, oregelbundna och svåra att förutse.</li>
+            <li><b>Klangfärg:</b> Hur instrumenten lät blev viktigare än själva melodin.</li>
+        </ul>
+
+        <h3>Viktiga Genrer (Stilar/Ismer)</h3>
+        <p>Under modernismen splittrades musiken i många "ismer":</p>
+        
+        <p><b>1. Impressionism (Intryck)</b><br>
+        Startade i Frankrike. Musiken ska vara som en otydlig, drömsk tavla. Man suddade ut gränserna och fokuserade på klangfärg.<br>
+        <i>Låter som:</i> Vatten, dimma eller drömmar. (T.ex. Debussy).</p>
+
+        <p><b>2. Expressionism (Uttryck)</b><br>
+        Motsatsen till impressionism. Här ville man uttrycka starka, ofta mörka känslor som ångest och skräck.<br>
+        <i>Låter som:</i> En skräckfilm, stressigt och dissonant. (T.ex. Schönberg).</p>
+
+        <p><b>3. Neoclassicism (Ny-klassicism)</b><br>
+        Man tröttnade på det överdrivna känslosamma och blickade tillbaka till Barocken och Klassicismen, men "kryddade" den gamla stilen med moderna, "fel" toner.</p>
+
+        <h3>Instrument & Nya ljud</h3>
+        <p>Man använde fortfarande orkestern, men på nya sätt:</p>
+        <ul>
+            <li><b>Prepared Piano:</b> Man lade suddgummin, skruvar och spikar mellan strängarna i flygeln för att det skulle låta som slagverk.</li>
+            <li><b>Elektronisk musik:</b> Syntar och bandspelare gjorde att man kunde skapa ljud som aldrig hörts förut.</li>
+            <li><b>Slagverk:</b> Fick en mycket större roll än tidigare.</li>
+        </ul>
+
+        <h3>Kända Kompositörer</h3>
+        <ul>
+            <li><b>Claude Debussy (1862-1918):</b> Impressionist. Han ville frigöra sig från de tyska reglerna. Mest kända verk: <i>Clair de Lune</i> (Månsken).</li>
+            <li><b>Igor Stravinsky (1882-1971):</b> En kameleont som bytte stil ofta. Hans balett <i>Våroffer</i> (Le Sacre du Printemps) orsakade ett upplopp vid premiären i Paris 1913 för att musiken var så rå och rytmisk. Publiken slogs med varandra!</li>
+            <li><b>Arnold Schönberg (1874-1951):</b> Uppfann tolvtonsmusiken. En matematisk metod där alla 12 toner i oktaven måste spelas innan man får börja om. Det låter väldigt speciellt och "snett" för ett ovant öra.</li>
+            <li><b>John Cage (1912-1992):</b> Den store experimentlustan. Han skrev stycket <i>4'33"</i> där pianisten sitter helt tyst vid pianot i 4 minuter och 33 sekunder. "Musiken" är ljuden från publiken (hostningar, stolskrap).</li>
+        </ul>
+
+        <h3>Begreppslista (Bra för prov/läxa)</h3>
+        <ul>
+            <li><b>Atonalitet:</b> Musik utan tonart (inget dur eller moll).</li>
+            <li><b>Dissonans:</b> Toner som krockar/skär sig.</li>
+            <li><b>Klangfärg:</b> "Färgen" på ljudet (hur instrumentet låter).</li>
+            <li><b>Tolvtonsmusik:</b> En metod där alla 12 toner är lika viktiga (ingen grundton).</li>
+            <li><b>Avantgarde:</b> De som går först och experimenterar med det allra nyaste och konstigaste.</li>
+        </ul>
+      `
     }
   ];
 
