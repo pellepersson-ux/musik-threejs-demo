@@ -305,7 +305,7 @@ export function History() {
         Beethovens pappa ville att sonen skulle bli en "ny Mozart" och tvingade honom att öva hårt. Beethoven är känd för sitt heta temperament och för sitt tragiska öde: han blev döv mitt i karriären. Trots att han blev stendöv fortsatte han att komponera mästerverk in i det sista.<br>
         <i>Kända verk:</i> Ödessymfonin (nr 5), Missa Solemnis, Egmont.</p>
 
-        <h3>Begreppslista (Bra för prov/läxa)</h3>
+        <h3>Begreppslista</h3>
         <ul>
             <li><b>Crescendo:</b> Musiken blir gradvis starkare.</li>
             <li><b>Diminuendo:</b> Musiken blir gradvis svagare.</li>
@@ -368,7 +368,7 @@ export function History() {
             <li><b>Richard Wagner (1813-1883):</b> Tysk operakompositör som förändrade musikhistorien med sin mäktiga (och ibland tunga) musik. Känd för Valkyrieritten (känd från många filmer).</li>
         </ul>
 
-        <h3>Begreppslista (Bra för prov/läxa)</h3>
+        <h3>Begreppslista</h3>
         <ul>
             <li><b>Programmusik:</b> Musik som berättar en handling eller beskriver något utan text.</li>
             <li><b>Nationalromantik:</b> Musik som hyllar det egna landet/kulturen (ofta med inslag av folkmusik).</li>
@@ -436,7 +436,7 @@ export function History() {
             <li><b>John Cage (1912-1992):</b> Den store experimentlustan. Han skrev stycket <i>4'33"</i> där pianisten sitter helt tyst vid pianot i 4 minuter och 33 sekunder. "Musiken" är ljuden från publiken (hostningar, stolskrap).</li>
         </ul>
 
-        <h3>Begreppslista (Bra för prov/läxa)</h3>
+        <h3>Begreppslista</h3>
         <ul>
             <li><b>Atonalitet:</b> Musik utan tonart (inget dur eller moll).</li>
             <li><b>Dissonans:</b> Toner som krockar/skär sig.</li>
