@@ -7,9 +7,9 @@ import { Gitarr } from './pages/Gitarr.js';
 import { Bas } from './pages/Bas.js';
 import { Piano } from './pages/Piano.js';
 import { Trummor } from './pages/Trummor.js';
-import { Ensemble } from './pages/Ensemble.js'; // Lägg till denna import
-import { History } from './pages/History.js'; // NY
-import { Theory } from './pages/Theory.js';   // NY
+import { Ensemble } from './pages/Ensemble.js';
+import { History } from './pages/History.js';
+import { Theory } from './pages/Theory.js';
 import { Game } from './pages/Game.js';
 
 
@@ -27,13 +27,13 @@ const state = {
 const routes = {
   '/': Home,
   '/instrument': Instrument,
-  '/instrument/bas': Bas,  // <--- LÄGG TILL DENNA RAD
+  '/instrument/bas': Bas,
   '/instrument/gitarr': Gitarr,
   '/instrument/piano': Piano,
   '/instrument/trummor': Trummor,
-  '/ensemble': Ensemble,      // <--- LÄGG TILL DENNA RAD
-  '/historia': History, // NY
-  '/teori': Theory,     // NY
+  '/ensemble': Ensemble,
+  '/historia': History,
+  '/teori': Theory,
   '/spel': Game,
 };
 
