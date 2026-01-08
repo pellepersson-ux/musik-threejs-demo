@@ -315,6 +315,68 @@ export function History() {
             <li><b>Wienklassicismen:</b> Annat namn på epoken eftersom de tre stora kompositörerna verkade i staden Wien.</li>
         </ul>
       `
+    },
+    {
+      id: "romantik",
+      title: "Romantiken",
+      period: "ca 1815-1910",
+      summary: "Känslor, fantasi, fria konstnärer, nationalromantik och jätteorkestrar.",
+      content: `
+        <p><b>- Känslornas och fantasins tid -</b></p>
+
+        <h3>Vad var Romantiken?</h3>
+        <p>Under romantiken handlade allt om känslor, fantasi och drömmar. Om klassicismen (Wienklassicismen) var "hjärnan" (logik och ordning), så var romantiken "hjärtat". Kompositörerna ville inte längre följa strikta regler. De ville beskriva det overkliga, sagor, naturen och människans innersta tankar.</p>
+
+        <h3>Samtiden - Vad hände i världen?</h3>
+        <ul>
+            <li><b>Den fria konstnären:</b> Tidigare var musiker anställda av en kyrka eller en kung (som tjänare). Nu blev de "fria konstnärer" som sålde sin musik och höll konserter för att tjäna pengar. De blev tidens kändisar!</li>
+            <li><b>Industrialismen:</b> Städerna växte och fabriker byggdes. Många drömde sig bort från de smutsiga städerna ut till den vackra naturen, vilket märks i musiken.</li>
+            <li><b>Nationalism:</b> Många länder ville hitta sin egen identitet. Man började använda folkmusik från det egna landet i den klassiska musiken (detta kallas Nationalromantik).</li>
+        </ul>
+
+        <h3>Musiken - Hur lät den?</h3>
+        <p>Musiken blev "större" och mer dramatisk än någonsin tidigare.</p>
+        <ul>
+            <li><b>Fria former:</b> Man bröt mot de gamla reglerna. Ett stycke kunde vara jättekort (bara någon minut) eller jättelångt (över en timme).</li>
+            <li><b>Melodier:</b> Melodierna blev längre, mer slingrande och känslosamma.</li>
+            <li><b>Harmonik:</b> Man använde fler och konstigare ackord (kromatisk harmonik) för att skapa spänning och mystik.</li>
+            <li><b>Programmusik:</b> Detta blev väldigt populärt. Det är instrumental musik som ska berätta en saga eller beskriva en tavla/naturscen utan att använda ord. Lyssnaren får "fantisera" ihop handlingen.</li>
+        </ul>
+
+        <h3>Instrument</h3>
+        <ul>
+            <li><b>Pianot:</b> Detta var pianots guldålder! Instrumentet utvecklades och blev starkare. Virtuoser (superskickliga musiker) som Frédéric Chopin och Franz Liszt skrev svår musik som skulle imponera på publiken.</li>
+            <li><b>Jätteorkestern:</b> Orkestern växte enormt. Man lade till fler instrument (t.ex. tuba, piccoloflöjt, mer slagverk) för att kunna spela både svagare och mycket, mycket starkare än förr.</li>
+        </ul>
+
+        <h3>Viktiga Genrer (Stilar)</h3>
+        <p><b>1. Lied (Sång)</b><br>
+        En intim form för bara piano och en sångare. Texten var ofta en dikt om olycklig kärlek eller naturen. Schubert var mästaren här.</p>
+
+        <p><b>2. Nationalromantik</b><br>
+        Kompositörer ville hylla sitt hemland. I Norge skrev Edvard Grieg musik som lät som norska fjäll och troll (I bergakungens sal). I Finland skrev Jean Sibelius musik om finska sagor (Finlandia).</p>
+
+        <p><b>3. Opera</b><br>
+        Operan blev större och mer dramatisk. <br>
+        <i>Richard Wagner:</i> Ville skapa ett "allkonstverk" där musik, teater och konst smälte samman. Hans operor varade ofta i 4-5 timmar och handlade om gudar och hjältar.</p>
+
+        <h3>Kända Kompositörer</h3>
+        <ul>
+            <li><b>Franz Schubert (1797-1828):</b> Känd för sina vackra sånger (Lieder). Han dog ung men lämnade efter sig massor av musik.</li>
+            <li><b>Frédéric Chopin (1810-1849):</b> "Pianots poet". Han skrev nästan enbart musik för piano. Hans musik är ofta drömsk och tekniskt svår.</li>
+            <li><b>Pjotr Tjajkovskij (1840-1893):</b> Rysk kompositör som skrev fantastiska melodier. Känd för baletterna Svansjön och Nötknäpparen.</li>
+            <li><b>Richard Wagner (1813-1883):</b> Tysk operakompositör som förändrade musikhistorien med sin mäktiga (och ibland tunga) musik. Känd för Valkyrieritten (känd från många filmer).</li>
+        </ul>
+
+        <h3>Begreppslista (Bra för prov/läxa)</h3>
+        <ul>
+            <li><b>Programmusik:</b> Musik som berättar en handling eller beskriver något utan text.</li>
+            <li><b>Nationalromantik:</b> Musik som hyllar det egna landet/kulturen (ofta med inslag av folkmusik).</li>
+            <li><b>Virtuos:</b> En tekniskt mycket skicklig musiker (en "stjärna").</li>
+            <li><b>Lied:</b> Sång för piano och röst (tysk text).</li>
+            <li><b>Fri konstnär:</b> En musiker som inte är anställd utan frilansar (typiskt för 1800-talet).</li>
+        </ul>
+      `
     }
   ];
 
