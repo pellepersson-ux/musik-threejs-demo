@@ -186,69 +186,133 @@ export function History() {
       id: "barock",
       title: "Barocken",
       period: "ca 1600-1750",
-      summary: "Pampig stil, opera, generalbas och giganter som Bach och Vivaldi.",
+      summary: "Pampig stil, motorisk rytm, opera och giganter som Bach och Vivaldi.",
       content: `
         <p><b>- Den pampiga och utsmyckade stilen -</b></p>
 
         <h3>Vad var Barocken?</h3>
-        <p>Ordet barock beskriver en stil som var utsmyckande (ornamental) och teatralisk. Vissa menade att den var pompös och överdriven, och ordet hade från början en ganska negativ klang. Men idag räknas denna tid som en av de viktigaste i musikhistorien med några av våra mest kända kompositörer.</p>
+        <p>Ordet barock beskriver en stil som var utsmyckad (ornamental) och teatralisk. Vissa menade att den var pompös och överdriven, och ordet hade från början en ganska negativ klang. Idag räknas dock denna tid som en av de viktigaste i musikhistorien.</p>
 
         <h3>Samtiden - Vad hände i världen?</h3>
-        <p>Under den här tiden var kyrkan och kungliga hov fortfarande de viktigaste platserna för musik, men efterfrågan på musik ökade även utanför dessa.</p>
+        <p>Kyrkan och kungliga hov var fortfarande de viktigaste platserna för musik, men fler människor fick tillgång till den.</p>
         <ul>
-            <li><b>Musiken som "färskvara":</b> Det blev viktigt att kunna skriva musik snabbt! Ibland spelades ett stycke bara en enda gång innan det kastades bort.</li>
-            <li><b>Instrumentbyggarkonst:</b> I staden Cremona i Italien byggde mästare som Stradivari fioler som än idag räknas som världens bästa.</li>
+            <li><b>Musiken som "färskvara":</b> Det var viktigt att skriva nytt snabbt! Ibland spelades ett stycke bara en gång innan det kasserades.</li>
+            <li><b>Vetenskap & System:</b> Precis som Isaac Newton försökte förklara världen med fysiska lagar, ville kompositörerna skapa ordning och system i musiken.</li>
         </ul>
 
         <h3>Musiken - Hur lät den?</h3>
-        <p>Barockmusiken är ofta energisk och dekorativ. Här är de viktigaste kännetecknen:</p>
+        <p>Barockmusiken är ofta energisk och drivande. De viktigaste kännetecknen är:</p>
         <ul>
-            <li><b>Generalbas (Basso Continuo):</b> En basstämma som spelar genom hela låten (ofta cello eller fagott) tillsammans med ett instrument som spelar ackord (t.ex. cembalo eller orgel). Det fungerade som den tidens "kompgrupp".</li>
-            <li><b>Terrassdynamik:</b> Man växlade plötsligt mellan starkt och svagt (som trappsteg), istället för att gradvis öka eller minska styrkan.</li>
-            <li><b>Motorisk rytm:</b> Musiken har ofta en stadig, "tuffande" puls som driver framåt, nästan lite mekaniskt.</li>
-            <li><b>Polyfoni (Kontrapunkt):</b> Precis som under renässansen var det populärt med flera samtidiga melodier som flätas samman.</li>
+            <li><b>Motorisk rytm:</b> En stadig puls som driver framåt likt en motor eller symaskin. Tempot ändras sällan under låtens gång.</li>
+            <li><b>Generalbas (Basso Continuo):</b> Barockens "kompgrupp". En basstämma som spelar genom hela låten (ofta cello eller fagott) tillsammans med ett instrument som spelar ackord (t.ex. cembalo eller orgel).</li>
+            <li><b>Terrassdynamik:</b> Man växlade plötsligt mellan starkt och svagt (som trappsteg), istället för att gradvis öka volymen.</li>
+            <li><b>Polyfoni:</b> Flera melodier som flätas samman samtidigt (precis som under renässansen).</li>
+        </ul>
+
+        <h3>Barockorkestern - En nyhet</h3>
+        <p>Under denna tid föddes orkestern, men den såg inte ut som dagens jätteorkestrar.</p>
+        <ul>
+            <li><b>Liten storlek:</b> En barockorkester bestod ofta av bara 15-25 musiker (idag kan de vara över 80).</li>
+            <li><b>Ingen dirigent:</b> Det fanns ingen dirigent som stod framför och viftade med en pinne. Istället leddes orkestern av den som spelade cembalo eller av förste violinisten.</li>
+            <li><b>Stråkar i fokus:</b> Orkesterns kärna var stråkinstrumenten (violin, viola, cello) och generalbasen.</li>
+            <li><b>Övriga instrument:</b> Blåsinstrument som oboe och fagott spelade ofta samma melodi som stråkarna för att ge mer färg. Trumpeter och pukor användes mest vid festliga tillfällen.</li>
         </ul>
 
         <h3>Instrument</h3>
-        <p>Under barocken fick instrumenten en större roll.</p>
         <ul>
-            <li><b>Cembalo:</b> Ett tangentinstrument där strängarna knäpps (inte slås an som på ett piano). Det ger ett spetsigt ljud som är typiskt för barocken.</li>
-            <li><b>Violin (Fiol):</b> Blev mycket populärt under 1600-talet.</li>
-            <li><b>Orgel:</b> Kyrkans viktigaste instrument.</li>
+            <li><b>Cembalo:</b> Ett tangentinstrument där strängarna knäpps (inte slås an som på ett piano). Det ger ett spetsigt, metalliskt ljud.</li>
+            <li><b>Violin (Fiol):</b> Blev mycket populärt tack vare instrumentbyggare som Stradivarius.</li>
+            <li><b>Orgel:</b> Kyrkans "drottninginstrument".</li>
         </ul>
 
         <h3>Viktiga Genrer (Stilar)</h3>
-        <p>Här föddes flera former som vi fortfarande lyssnar på idag.</p>
-        
         <p><b>1. Opera (Profan musik)</b><br>
-        En "teater med musik" som blev en stor succé.</p>
+        En "teater med musik" som föddes i Italien runt år 1600.</p>
         <ul>
-            <li><b>Kastratsångare:</b> Manliga sångare som kastrerades som barn för att behålla sina ljusa röster. De blev tidens stora idoler och sexsymboler.</li>
-            <li><b>Recitativ & Aria:</b> Operan delades upp i <i>recitativ</i> (pratsång som för handlingen framåt) och <i>aria</i> (vacker sång där sångaren fick briljera med sin teknik).</li>
+            <li><b>Kastratsångare:</b> Manliga sångare som kastrerades som barn för att behålla sina ljusa röster. De var tidens största superstjärnor.</li>
+            <li><b>Recitativ & Aria:</b> Operan delades upp i <i>recitativ</i> (pratsång som för handlingen framåt) och <i>aria</i> (vacker sång där känslorna fick ta plats).</li>
         </ul>
 
         <p><b>2. Kyrklig musik</b></p>
         <ul>
-            <li><b>Oratorium:</b> Kyrkans motsvarighet till opera. Man sjöng en berättelse (ofta ur Bibeln) men utan kostymer och skådespel.</li>
-            <li><b>Kantat:</b> Ett kortare sångverk som kunde vara både kyrkligt eller världsligt.</li>
+            <li><b>Oratorium:</b> Kyrkans motsvarighet till opera (en berättelse) men utan kostymer och skådespel.</li>
+            <li><b>Fuga:</b> Ett avancerat stycke där en melodi "jagas" av andra stämmor (typiskt för J.S. Bach).</li>
         </ul>
 
         <h3>Kända Kompositörer</h3>
         <ul>
-            <li><b>Johann Sebastian Bach (1685-1750):</b> Barockens store mästare. Han var en oerhört skicklig organist men blev inte känd som kompositör förrän efter sin död. Han skrev Toccata & Fuga i d-moll och Air.</li>
-            <li><b>Georg Friedrich Händel (1685-1759):</b> Tysk kompositör som flyttade till London och blev superstjärna på opera och oratorier. Hans mest kända verk är Messias (där sången "Halleluja" ingår).</li>
-            <li><b>Antonio Vivaldi (1678-1741):</b> Italienare som arbetade på en skola för föräldralösa flickor. Han skrev massor av musik, bland annat De fyra årstiderna.</li>
-            <li><b>Johann Pachelbel:</b> Känd för Pachelbels Kanon.</li>
+            <li><b>Johann Sebastian Bach (1685-1750):</b> Barockens gigant. Mästerlig på orgel och kontrapunkt (flätade melodier). Känd för Toccata & Fuga i d-moll.</li>
+            <li><b>Georg Friedrich Händel (1685-1759):</b> Känd för mäktiga körverk och oratorier, t.ex. Messias (med sången "Halleluja").</li>
+            <li><b>Antonio Vivaldi (1678-1741):</b> "Den röde prästen" från Italien som skrev De fyra årstiderna.</li>
         </ul>
+
+        <h3>Begreppslista</h3>
+        <ul>
+            <li><b>Motorisk rytm:</b> En stadig, maskinell puls.</li>
+            <li><b>Generalbas:</b> Basstämma + ackord (ryggraden i barockmusik).</li>
+            <li><b>Terrassdynamik:</b> Plötsliga växlingar mellan starkt/svagt.</li>
+            <li><b>Polyfoni:</b> Flerstämmighet.</li>
+            <li><b>Cembalo:</b> Barockens vanligaste tangentinstrument.</li>
+        </ul>
+      `
+    },
+    {
+      id: "klassicism",
+      title: "Klassicismen",
+      period: "ca 1750-1825",
+      summary: "Förnuft, balans, homofoni och giganterna Haydn, Mozart & Beethoven.",
+      content: `
+        <p><b>- Förnuftets och balansens tid -</b></p>
+
+        <h3>Vad var Klassicismen?</h3>
+        <p>Klassicismen kallas ofta för "förnuftets era". Efter barockens snirkliga och tunga stil ville man nu ha ordning, reda och tydlighet. Musiken skulle vara logisk och balanserad. Man talade om att melodin var musikens "själ" - den skulle vara enkel, vacker och lätt att nynna på.</p>
+
+        <h3>Samtiden - Vad hände i världen?</h3>
+        <p>Detta var en tid då människor började fundera mycket på hur samhället skulle organiseras och på individens fri- och rättigheter (det vi kallar upplysningstiden). Kompositörerna var inte bara hantverkare längre utan började ses som konstnärer som ville skapa en perfekt helhet.</p>
+
+        <h3>Musiken - Hur lät den?</h3>
+        <p>Musiken under klassicismen skiljer sig tydligt från barocken. Här är de viktigaste kännetecknen:</p>
+        <ul>
+            <li><b>Balans och Enkelhet:</b> Melodierna blev enklare och mindre "oroliga" än under barocken. Idealet var en tydlig melodi med ett enkelt ackompanjemang (detta kallas <i>homofoni</i>).</li>
+            <li><b>Nyanser (Dynamik):</b> Under barocken växlade man plötsligt mellan starkt och svagt (terrassdynamik). Under klassicismen började man istället smyga med volymen:
+                <ul>
+                    <li><i>Crescendo:</i> Musiken växer och blir starkare.</li>
+                    <li><i>Diminuendo:</i> Musiken avtar och blir svagare.</li>
+                </ul>
+            </li>
+            <li><b>Känslor med kontroll:</b> Man ville uttrycka känslor, men alltid på ett behärskat och "smakfullt" sätt.</li>
+        </ul>
+
+        <h3>Viktiga Genrer (Stilar)</h3>
+        <ul>
+            <li><b>Symfoni:</b> Ett stort verk för orkester (Haydn och Beethoven skrev många sådana).</li>
+            <li><b>Opera:</b> Operan utvecklades och musiken blev nu minst lika viktig som texten. Mozart skrev operor som <i>Don Juan</i> och <i>Trollflöjten</i> som spelas flitigt än idag.</li>
+            <li><b>Oratorium:</b> En berättande form liknande opera men utan teater. Haydn skrev ett berömt oratorium som heter <i>Skapelsen</i>.</li>
+        </ul>
+
+        <h3>Kända Kompositörer</h3>
+        <p>De tre stora giganterna bodde alla i Wien under delar av sina liv, därför kallas epoken ibland för <b>Wienklassicismen</b>.</p>
+        
+        <p><b>Joseph Haydn (1732-1809):</b><br>
+        Kallas ofta "symfonins fader". Han hade en tuff uppväxt och kastades ut från körskolan, men jobbade sig upp och blev anställd hos den rika furstefamiljen Esterházy.<br>
+        <i>Kända verk:</i> Oratoriet Skapelsen, Trumpetkonserten, Symfoni nr 48.</p>
+
+        <p><b>Wolfgang Amadeus Mozart (1756-1791):</b><br>
+        Världens mest kända underbarn. Redan som 4-åring spelade han fiol och cembalo, och vid 5 års ålder började han komponera. Han reste runt i hela Europa och visade upp sig. Han dog fattig och ung, men hann skriva otroliga mängder musik.<br>
+        <i>Kända verk:</i> Eine kleine Nachtmusik, operorna Trollflöjten och Figaros bröllop.</p>
+
+        <p><b>Ludwig van Beethoven (1770-1827):</b><br>
+        Beethovens pappa ville att sonen skulle bli en "ny Mozart" och tvingade honom att öva hårt. Beethoven är känd för sitt heta temperament och för sitt tragiska öde: han blev döv mitt i karriären. Trots att han blev stendöv fortsatte han att komponera mästerverk in i det sista.<br>
+        <i>Kända verk:</i> Ödessymfonin (nr 5), Missa Solemnis, Egmont.</p>
 
         <h3>Begreppslista (Bra för prov/läxa)</h3>
         <ul>
-            <li><b>Generalbas:</b> Ett instrument som spelar baslinjen + ett som lägger ackord (t.ex. cello + cembalo).</li>
-            <li><b>Terrassdynamik:</b> Plötsliga växlingar mellan stark och svag volym.</li>
-            <li><b>Opera:</b> Musikteater med kostym och handling.</li>
-            <li><b>Oratorium:</b> Stor berättande körsång/musik för kyrkan (utan teater/kostym).</li>
-            <li><b>Aria:</b> En sång i en opera där känslorna och sångtekniken är i fokus.</li>
-            <li><b>Recitativ:</b> "Pratsång" i opera som berättar vad som händer.</li>
+            <li><b>Crescendo:</b> Musiken blir gradvis starkare.</li>
+            <li><b>Diminuendo:</b> Musiken blir gradvis svagare.</li>
+            <li><b>Pianissimo:</b> Mycket svagt.</li>
+            <li><b>Fortissimo:</b> Mycket starkt.</li>
+            <li><b>Homofoni:</b> En tydlig melodi med komp (klassicismens ideal).</li>
+            <li><b>Wienklassicismen:</b> Annat namn på epoken eftersom de tre stora kompositörerna verkade i staden Wien.</li>
         </ul>
       `
     }
