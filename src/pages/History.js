@@ -22,7 +22,7 @@ export function History() {
         text-align: left;
       }
 
-      /* --- KORT DESIGN (Både bok och artiklar) --- */
+      /* --- KORT DESIGN --- */
       .history-card {
         background: #fff;
         border-radius: 12px;
@@ -71,7 +71,7 @@ export function History() {
       .card-game .read-more-btn { color: #9b59b6; }
 
 
-      /* --- ARTIKEL-MODAL (För textläsning) --- */
+      /* --- ARTIKEL-MODAL --- */
       .article-modal-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(0,0,0,0.85);
@@ -90,7 +90,7 @@ export function History() {
         position: relative;
         padding: 50px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        font-family: 'Georgia', serif; /* Mer bok-känsla på texten */
+        font-family: 'Georgia', serif; 
       }
 
       .article-content h2 { font-family: 'Outfit', sans-serif; color: #e67e22; margin-bottom: 5px; }
@@ -108,15 +108,6 @@ export function History() {
       }
       .close-btn:hover { color: #333; }
 
-      /* --- BOK-MODAL STYLES (Kvar från förr) --- */
-      .book-modal-content {
-         /* (Behövs för boken, vi återanvänder strukturen från förra koden om vi vill, 
-             men här fokuserar vi på att inte krocka) */
-         display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;
-      }
-      /* (Här kan vi lägga in bok-CSS om vi vill köra boken samtidigt, 
-          men för tydlighetens skull separerar vi funktionerna nedan) */
-
     </style>
   `;
 
@@ -125,27 +116,26 @@ export function History() {
     {
       id: "renassans",
       title: "Renässansen",
-      period: "ca 1450–1600",
+      period: "ca 1450-1600", // Ändrat till vanligt bindestreck
       summary: "Pånyttfödelse, upptäcktsresor och polyfoni.",
-      // Här ligger din långa text formaterad som HTML
       content: `
-        <p><b>– Pånyttfödelsen –</b></p>
+        <p><b>- Pånyttfödelsen -</b></p>
         
         <h3>Vad var renässansen?</h3>
         <p>Ordet renässans betyder "pånyttfödelse". Under den här tiden vaknade ett nytt intresse för antikens Grekland och Rom. Man ville utforska världen, människan och kulturen på nytt. Det var en tid av upptäckter och nya idéer.</p>
 
-        <h3>Samtiden – Vad hände i världen?</h3>
-        <p>Medan medeltiden ofta fokuserade på Gud och kyrkan, handlade renässansen mer om <b>humanism</b> – en vilja att lära sig om människan och omvärlden.</p>
+        <h3>Samtiden - Vad hände i världen?</h3>
+        <p>Medan medeltiden ofta fokuserade på Gud och kyrkan, handlade renässansen mer om <b>humanism</b> - en vilja att lära sig om människan och omvärlden.</p>
         <ul>
           <li><b>Upptäcktsresor:</b> Christofer Columbus "upptäckte" Amerika.</li>
           <li><b>Vetenskap:</b> Nicolaus Copernicus räknade ut att jorden snurrar runt solen (och inte tvärtom).</li>
           <li><b>Konst & Uppfinningar:</b> Leonardo da Vinci (känd som ett "universalgeni") målade, uppfann och studerade kroppen.</li>
         </ul>
 
-        <h3>Musiken – Hur lät den?</h3>
+        <h3>Musiken - Hur lät den?</h3>
         <p>Under renässansen blev musiken mer "tät" och fyllig än under medeltiden. Här är de viktigaste kännetecknen:</p>
         <ul>
-          <li><b>Polyfoni (Flerstämmighet):</b> Istället för en ensam melodi hade man nu ofta 4–5 olika stämmor som sjöngs samtidigt. Varje stämma hade sin egen melodi (detta kallas självständiga stämmor).</li>
+          <li><b>Polyfoni (Flerstämmighet):</b> Istället för en ensam melodi hade man nu ofta 4-5 olika stämmor som sjöngs samtidigt. Varje stämma hade sin egen melodi (detta kallas självständiga stämmor).</li>
           <li><b>Imitation:</b> En teknik där stämmorna härmar varandra. En stämma börjar, och strax efter kommer nästa in med samma melodi.</li>
           <li><b>A Cappella:</b> Detta var körsångens "gyllene era". A cappella betyder "som i kapellet" och innebär sång helt utan instrument.</li>
           <li><b>Modala skalor:</b> Man använde inte dur och moll som vi gör idag, utan så kallade kyrkotonarter (modala skalor).</li>
@@ -176,9 +166,9 @@ export function History() {
 
         <h3>Kända Kompositörer</h3>
         <ul>
-            <li><b>Josquin des Prez (1440–1521):</b> En superstjärna under sin tid. Han var så känd att Leonardo da Vinci målade av honom.</li>
-            <li><b>Giovanni Pierluigi da Palestrina (1525–1594):</b> Mästare på kyrkomusik och mässor.</li>
-            <li><b>Thomas Tallis (1505–1585):</b> Skrev bland annat ett stycke för hela 40 stämmor (Spem in alium).</li>
+            <li><b>Josquin des Prez (1440-1521):</b> En superstjärna under sin tid. Han var så känd att Leonardo da Vinci målade av honom.</li>
+            <li><b>Giovanni Pierluigi da Palestrina (1525-1594):</b> Mästare på kyrkomusik och mässor.</li>
+            <li><b>Thomas Tallis (1505-1585):</b> Skrev bland annat ett stycke för hela 40 stämmor (Spem in alium).</li>
         </ul>
 
         <h3>Begreppslista</h3>
@@ -193,7 +183,6 @@ export function History() {
     }
   ];
 
-
   // --- 3. HTML-STRUKTUR ---
   section.innerHTML = styles + `
     <div class="page-detail history-container">
@@ -206,4 +195,72 @@ export function History() {
       <div class="grid-section">
         
         <div class="history-card card-game" id="open-storybook-btn">
-          <span class="card-
+          <span class="card-label">Interaktiv Berättelse</span>
+          <h3 class="card-title">Rockens Historia</h3>
+          <p>En lättläst bilderbok om hur rockmusiken föddes.</p>
+          <span class="read-more-btn">Öppna boken ➡</span>
+        </div>
+
+      </div>
+
+      <h2 style="text-align:left; border-bottom:1px solid #ddd; padding-bottom:10px; margin-top:50px;">Epoker & Artiklar</h2>
+      <div id="epoch-grid" class="grid-section"></div>
+
+    </div>
+
+    <div id="article-modal" class="article-modal-overlay hidden-force">
+      <div class="article-content">
+        <span class="close-btn" id="close-article">&times;</span>
+        <h2 id="article-title">Titel</h2>
+        <span id="article-period" class="article-period">Årtal</span>
+        <div id="article-body">Text...</div>
+      </div>
+    </div>
+  `;
+
+  // --- 4. LOGIK ---
+
+  const epochGrid = section.querySelector('#epoch-grid');
+  const articleModal = section.querySelector('#article-modal');
+  const closeArticleBtn = section.querySelector('#close-article');
+
+  const artTitle = section.querySelector('#article-title');
+  const artPeriod = section.querySelector('#article-period');
+  const artBody = section.querySelector('#article-body');
+
+  epochs.forEach(epoch => {
+    const card = document.createElement('div');
+    card.className = 'history-card';
+    card.innerHTML = `
+      <span class="card-label">Epok</span>
+      <h3 class="card-title">${epoch.title}</h3>
+      <p style="font-weight:bold; color:#e67e22; margin-bottom:10px;">${epoch.period}</p>
+      <p>${epoch.summary}</p>
+      <span class="read-more-btn">Läs artikel ➡</span>
+    `;
+
+    card.addEventListener('click', () => {
+      artTitle.innerText = epoch.title;
+      artPeriod.innerText = epoch.period;
+      artBody.innerHTML = epoch.content;
+      articleModal.classList.remove('hidden-force');
+    });
+
+    epochGrid.appendChild(card);
+  });
+
+  closeArticleBtn.addEventListener('click', () => {
+    articleModal.classList.add('hidden-force');
+  });
+
+  articleModal.addEventListener('click', (e) => {
+    if (e.target === articleModal) articleModal.classList.add('hidden-force');
+  });
+
+  const bookBtn = section.querySelector('#open-storybook-btn');
+  bookBtn.addEventListener('click', () => {
+    alert("Här kan vi koppla in bilderboken igen!");
+  });
+
+  return section;
+}
