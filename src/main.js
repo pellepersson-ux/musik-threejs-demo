@@ -9,6 +9,7 @@ import { Piano } from './pages/Piano.js';
 import { Trummor } from './pages/Trummor.js';
 import { Ensemble } from './pages/Ensemble.js';
 import { History } from './pages/History.js';
+import { WorldMusic } from './pages/WorldMusic.js';
 import { Theory } from './pages/Theory.js';
 import { Game } from './pages/Game.js';
 
@@ -58,24 +59,23 @@ function render() {
   app.appendChild(HelpOverlay());
 }
 
-render();
+function render() {
+  const app = document.querySelector('#app');
+  app.innerHTML = ''; // Rensa föregående sida
 
-window.addEventListener('popstate', () => {
-  state.currentPage = window.location.pathname;
-  render();
-});
+  // Här kollar vi vilken adress (URL) vi är på
+  // Om du kör lokalt kanske adressen bara är "/world"
 
-// Hantera klick på länkar så sidan inte laddar om (SPA-beteende)
-document.body.addEventListener('click', e => {
-  if (e.target.matches('[data-link]') || e.target.closest('[data-link]')) {
-    e.preventDefault();
-
-    // Hitta länken (om man klickade på ikonen inuti a-taggen)
-    const link = e.target.matches('[data-link]') ? e.target : e.target.closest('[data-link]');
-    const href = link.getAttribute('href');
-
-    history.pushState(null, null, href);
-    state.currentPage = href;
-    render();
+  if (state.currentPage === '/' || state.currentPage === '/home') {
+    app.appendChild(Home());
   }
-});
+  else if (state.currentPage === '/history') {
+    app.appendChild(History());
+  }
+  else if (state.currentPage === '/world') {  // <--- LÄGG TILL DENNA!
+    app.appendChild(WorldMusic());
+  }
+  else if (state.currentPage === '/quiz') {
+    app.appendChild(Quiz());
+  }
+}
