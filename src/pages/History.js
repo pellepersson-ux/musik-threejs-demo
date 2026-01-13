@@ -245,17 +245,61 @@ export function History() {
     {
       id: "klassicism",
       title: "Klassicismen",
-      period: "ca 1750-1825",
+      period: "ca 1750-1815",
       summary: "Förnuft, balans och giganterna Haydn, Mozart & Beethoven.",
       content: `
-        <p><b>- Förnuft och balans -</b></p>
-        <h3>Musiken</h3>
+        <p><b>- FAKTABLAD: MUSIK UNDER KLASSICISMEN -</b></p>
+
+        <h3>Vad betyder Klassicism?</h3>
+        <p>Ordet härstammar från latinets <i>classicus</i> som syftade på medborgare av högsta rang. När vi pratar om "klassisk" stil menar vi ideal som hämtades från de gamla grekerna och romarna: balans, enkelhet, elegans, proportion och kontroll.</p> 
+        <p>Inom musiken kallas perioden ofta för <b>Wienklassicismen</b> eftersom de tre största tonsättarna (Haydn, Mozart och Beethoven) var verksamma i Wien.</p>
+
+        <h3>1. Samtiden – Förnuft och Upplysning</h3>
+        <p>Klassicismen sammanföll med Upplysningstiden.</p>
         <ul>
-            <li><b>Homofoni:</b> En tydlig melodi med enkelt komp.</li>
-            <li><b>Nyanser:</b> Crescendo och Diminuendo.</li>
+            <li><b>Vetenskap och förnuft:</b> Man började ifrågasätta kyrkans gamla regler och istället tro på människans eget förnuft och naturvetenskapen.</li>
+            <li><b>Minskad kyrkomusik:</b> Eftersom kyrkans makt minskade skrevs det inte alls lika mycket musik för kyrkan som under tidigare epoker. De flesta kända verk från den här tiden är inte religiösa (även om undantag finns, som Mozarts Requiem).</li>
         </ul>
-        <h3>Kända Kompositörer</h3>
-        <ul><li>Haydn</li><li>Mozart</li><li>Beethoven</li></ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken blev "lättare" och luftigare jämfört med barockens tunga musik. Här är de viktigaste skillnaderna:</p>
+        <ul>
+            <li><b>Homofoni:</b> Detta är motsatsen till renässansens och barockens röriga flerstämmighet (polyfoni). Under klassicismen ville man ha en tydlig melodi som kompades av enkla ackord.</li>
+            <li><b>Kortare melodier:</b> Melodierna delades upp i kortare fraser. Det skulle kännas balanserat och symmetriskt.</li>
+            <li><b>Mer känslor och variation:</b> I ett barockstycke var man oftast glad eller ledsen genom hela låten. Under klassicismen kunde humöret svänga snabbt inom samma stycke – från glatt till sorgset.</li>
+            <li><b>Dynamik:</b> Man började använda <i>crescendo</i> (spela gradvis starkare) och <i>diminuendo</i> (spela gradvis svagare) för att skapa spänning, istället för att bara växla plötsligt mellan starkt och svagt.</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+            <li><b>Pianot tar över:</b> Under 1700-talet uppfanns pianot (fortepianot). Det ersatte cembalon eftersom man på pianot kunde spela både starkt och svagt (därav namnet piano-forte).</li>
+            <li><b>Större orkestrar:</b> Orkestern växte och fick fler instrument än under barocken.</li>
+        </ul>
+
+        <h3>4. Viktiga Musikstilar och Genrer</h3>
+        <ul>
+            <li><b>Symfoni:</b> En stor "sonat för orkester". En symfoni har oftast fyra satser (delar). Första satsen är oftast snabb och byggd enligt en speciell form (sonatform).</li>
+            <li><b>Stråkkvartett:</b> Kammarmusik för fyra stråkar (två fioler, en viola och en cello). Haydn kallas ofta för stråkkvartettens "okrönte konung".</li>
+            <li><b>Opera (Opera Buffa):</b> Under barocken handlade operor ofta om gudar och hjältar (Opera Seria). Mozart utvecklade den komiska operan, <i>Opera Buffa</i>, som handlade om vanliga människor och var rolig och underhållande.</li>
+            <li><b>Solokonsert:</b> Ett verk där ett soloinstrument spelar med orkestern, t.ex. pianokonsert eller violinkonsert.</li>
+        </ul>
+
+        <h3>5. De tre "Giganterna" (Första Wienskolan)</h3>
+        <p>Tre tonsättare dominerade totalt. De kände varandra: Haydn var lärare åt både Mozart och Beethoven.</p>
+        <ul>
+            <li><b>Joseph Haydn (1732–1809):</b> Den äldste av dem. Han var enormt viktig för utvecklingen av både symfonin och stråkkvartetten.</li>
+            <li><b>Wolfgang Amadeus Mozart (1756–1791):</b> Underbarnet som skrev perfekt musik i alla genrer. Han är epokens främsta representant.</li>
+            <li><b>Ludwig van Beethoven (1770–1827):</b> Han började som klassicist men hans senare musik blev så dramatisk att han startade nästa epok (Romantiken).</li>
+        </ul>
+
+        <h3>6. Exempel på kompositioner (Lyssningstips)</h3>
+        <ul>
+            <li><i>Eine Kleine Nachtmusik</i> – W.A. Mozart. (Ett perfekt exempel på klassicismens elegans och balans).</li>
+            <li><i>Månskenssonaten</i> (Pianosonat) – Ludwig van Beethoven.</li>
+            <li><i>Nattens Drottning</i> (Aria ur Trollflöjten) – W.A. Mozart. (Känd opera-aria med extremt höga toner).</li>
+            <li><i>Klarinettkonsert i A-dur</i> – W.A. Mozart.</li>
+            <li><i>Stråkkvartett nr 61 i D-moll</i> – Joseph Haydn.</li>
+        </ul>
       `
     },
     {
