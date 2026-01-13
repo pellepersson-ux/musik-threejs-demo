@@ -308,15 +308,62 @@ export function History() {
       period: "ca 1815-1910",
       summary: "Känslor, fantasi, nationalromantik och jätteorkestrar.",
       content: `
-        <p><b>- Känslor och fantasi -</b></p>
-        <h3>Musiken</h3>
+        <p><b>- FAKTABLAD: MUSIK UNDER ROMANTIKEN -</b></p>
+
+        <h3>Vad betyder Romantiken?</h3>
+        <p>När vi pratar om Romantiken i musikhistorien handlar det inte nödvändigtvis om kärlek (även om det ofta förekommer). Det är ett estetiskt begrepp som hämtades från konsten och litteraturen. Om klassicismen handlade om ordning och reda, så handlade romantiken om känslor och frihet.</p>
+
+        <h3>1. Samtiden – Den fria konstnären</h3>
+        <p>Under romantiken förändrades kompositörens roll i samhället.</p>
         <ul>
-            <li><b>Friare form:</b> Inga strikta regler.</li>
-            <li><b>Stora känslor:</b> Dramatiskt och passionerat.</li>
-            <li><b>Programmusik:</b> Musik som berättar en saga.</li>
+            <li><b>Från anställd till fri:</b> Tidigare (som under klassicismen) var kompositören ofta anställd av en kung eller kyrkan. Under romantiken blev tonsättaren en "fri konstnär" som fick klara sig själv. Beethoven var en symbol för denna förändring – en visionär som skrev för framtiden snarare än på beställning.</li>
+            <li><b>Känslorna styr:</b> Idealet var den lidande konstnären som lät sina inre känslor bestämma hur musiken skulle låta, snarare än gamla regler.</li>
         </ul>
-        <h3>Kända Kompositörer</h3>
-        <ul><li>Schubert</li><li>Chopin</li><li>Wagner</li><li>Grieg</li></ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken under romantiken skiljer sig från den tidigare klassicismen på flera sätt:</p>
+        <ul>
+            <li><b>Friare form:</b> Under klassicismen var balans och symmetri viktigast. Romantikens kompositörer ville ha friare och mindre formella strukturer för att kunna uttrycka starkare känslor.</li>
+            <li><b>Programmusik och Berättande:</b> Musiken skulle ofta berätta en saga eller beskriva en bild (t.ex. <i>I Bergakungens sal</i>).</li>
+            <li><b>Virtuositet:</b> Det dök upp "superstjärnor" (virtuoser) som var extremt duktiga på att spela sina instrument, särskilt piano (t.ex. Chopin och Liszt).</li>
+            <li><b>Större orkestrar:</b> Orkestrarna växte och blev enorma mot slutet av perioden (Senromantiken), för att kunna skapa mäktiga klanger.</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+            <li><b>Piano:</b> Pianot var romantikens viktigaste instrument. Det fanns i många hem och tonsättare som Chopin och Schumann skrev fantastisk musik för det. Genom pianot kunde man uttrycka allt från svagaste viskning till stormande känslor.</li>
+            <li><b>Orkestern:</b> Utvecklades ständigt. Nya instrument tillkom och man använde fler av varje sort för att få mer kraft.</li>
+        </ul>
+
+        <h3>4. Musikstilar och Genrer</h3>
+        <ul>
+            <li><b>Lied (Sånger):</b> En dikt tonsatt för sång och piano. Franz Schubert var mästaren här och skrev över 600 sånger.</li>
+            <li><b>Opera och Musikdrama:</b> Operan förändrades. Richard Wagner skapade "musikdramer" där sång, musik, teater och scenografi smälte samman till en helhet (Gesamtkunstwerk). Han använde nordisk mytologi och sagor i sina verk.</li>
+            <li><b>Balett:</b> Musiken till dans blev mer avancerad. Tjajkovskij skrev musik till kända baletter som <i>Svansjön</i> och <i>Nötknäpparen</i>.</li>
+            <li><b>Symfonisk dikt:</b> Ett orkesterverk i en enda sats som beskriver något utommusikaliskt, t.ex. en tavla eller en dikt (exempelvis Rachmaninovs <i>Dödens ö</i>).</li>
+        </ul>
+
+        <h3>5. Viktiga Tonsättare</h3>
+        <p>Det finns många kända namn från denna tid. Här är några av de viktigaste:</p>
+        <ul>
+            <li><b>Franz Schubert (1797–1828):</b> Levde i Beethovens skugga men var ett geni på att skriva melodier. Dog ung men hann skriva enormt mycket musik.</li>
+            <li><b>Frédéric Chopin (1810–1849):</b> "Pianots poet". Skrev nästan enbart för piano.</li>
+            <li><b>Robert Schumann (1810–1856):</b> En typisk romantiker som hade svårt med sin mentala hälsa. Hans musik är ofta drömmande och personlig.</li>
+            <li><b>Clara Schumann (1819–1896):</b> En av sin tids absolut bästa pianister. Hon var också kompositör, men tidens syn på kvinnor gjorde att hon tvivlade på sin egen förmåga att skapa musik.</li>
+            <li><b>Pjotr Tjajkovskij (1840–1893):</b> Rysk kompositör känd för sina vackra melodier och baletter.</li>
+            <li><b>Edvard Grieg (1843–1907):</b> Norges stora tonsättare som ofta använde nordiska folktoner i sin musik.</li>
+            <li><b>Gustav Mahler (1860–1911):</b> Känd för sina gigantiska symfonier som markerar slutet på romantiken.</li>
+        </ul>
+
+        <h3>6. Exempel på kompositioner (Lyssningstips)</h3>
+        <ul>
+            <li><i>Ave Maria</i> – Franz Schubert. (En av världens mest kända sånger).</li>
+            <li><i>I Bergakungens sal</i> (ur Peer Gynt) – Edvard Grieg.</li>
+            <li><i>Regndroppspreludiet</i> (Preludium nr 15) – Frédéric Chopin.</li>
+            <li><i>Svansjön</i> (Musik ur baletten) – Pjotr Tjajkovskij.</li>
+            <li><i>Träumerei</i> (ur Kinderszenen) – Robert Schumann.</li>
+            <li><i>Pianokonsert nr 2 i C-moll</i> – Sergej Rachmaninov.</li>
+        </ul>
       `
     },
     {
