@@ -93,8 +93,10 @@ export function History() {
 
       .article-content h2 { font-family: 'Outfit', sans-serif; color: #e67e22; margin-bottom: 5px; }
       .article-content h3 { font-family: 'Outfit', sans-serif; margin-top: 30px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+      .article-content h4 { font-family: 'Outfit', sans-serif; margin-top: 20px; color: #444; font-size: 1.1rem; }
       .article-content p { line-height: 1.8; color: #222; font-size: 1.1rem; margin-bottom: 15px; }
       .article-content ul { margin-bottom: 20px; padding-left: 20px; line-height: 1.6; color: #222;}
+      .article-content li { margin-bottom: 8px; }
       .article-period { font-size: 1.2rem; color: #444; font-style: italic; margin-bottom: 20px; display:block; }
 
       .close-btn {
@@ -107,7 +109,7 @@ export function History() {
     </style>
   `;
 
-  // --- 2. DATA: BARA HISTORIA ---
+  // --- 2. DATA: EPOKER ---
   const epochs = [
     {
       id: "renassans",
@@ -115,17 +117,67 @@ export function History() {
       period: "ca 1450-1600",
       summary: "Pånyttfödelse, upptäcktsresor och polyfoni.",
       content: `
-        <p><b>- Pånyttfödelsen -</b></p>
-        <h3>Vad var renässansen?</h3>
-        <p>Ordet renässans betyder "pånyttfödelse". Under den här tiden vaknade ett nytt intresse för antikens Grekland och Rom. Man ville utforska världen, människan och kulturen på nytt.</p>
-        <h3>Musiken</h3>
+        <p><b>- FAKTABLAD: MUSIK UNDER RENÄSSANSEN -</b></p>
+        
+        <h3>Vad betyder Renässans?</h3>
+        <p>Ordet renässans betyder "pånyttfödelse". Det man ville väcka till liv igen var idéer och ideal från de gamla grekerna och romarna (antiken). Perioden präglades av en nyfikenhet på människan, kulturen och världen.</p>
+
+        <h3>1. Samtiden – Nytänkarnas tid</h3>
+        <p>Under renässansen hände mycket som förändrade hur människor såg på världen. Det var en tid för upptäckter och vetenskap.</p>
         <ul>
-          <li><b>Polyfoni:</b> Flerstämmighet med självständiga stämmor.</li>
-          <li><b>Imitation:</b> Stämmor härmar varandra.</li>
-          <li><b>A Cappella:</b> Sång utan instrument (kyrkans ideal).</li>
+            <li><b>Kända personer:</b> Upptäckaren Christofer Columbus, astronomen Nicolaus Copernicus och universalgeniet Leonardo da Vinci (som var både konstnär och uppfinnare) verkade under denna tid.</li>
+            <li><b>Boktryckarkonsten:</b> Man kunde nu trycka böcker, vilket gjorde att noter och musik kunde spridas enklare. Till exempel publicerades böcker med Josquin des Prez mässor.</li>
         </ul>
-        <h3>Kända Kompositörer</h3>
-        <ul><li>Josquin des Prez</li><li>Giovanni Pierluigi da Palestrina</li></ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken under renässansen utvecklades och blev mer komplex än under medeltiden. Här är de viktigaste dragen:</p>
+        <ul>
+            <li><b>Polyfoni (Flerstämmighet):</b> Istället för en enda melodi hade musiken ofta 4–5 olika stämmor som var lika viktiga och hade självständiga melodier.</li>
+            <li><b>Imitation:</b> En vanlig teknik var att stämmorna härmade (imiterade) varandra. En stämma kunde börja med en melodi, och strax efter kom nästa stämma in med samma melodi.</li>
+            <li><b>A cappella:</b> Renässansen kallas ofta för a cappella-musikens gyllene era. Det betyder sång utan instrument (ordagrant "som i kapellet").</li>
+            <li><b>Modala skalor:</b> Man använde inte dur och moll som vi gör idag, utan så kallade kyrkotonarter eller modala skalor.</li>
+        </ul>
+        <p><i>Prova själv: Du kan spela modala skalor på ett piano genom att bara använda de vita tangenterna. En skala är C till C, en annan D till D, en tredje E till E, osv.</i></p>
+
+        <h3>3. Instrumenten</h3>
+        <p>Även om sång var väldigt viktigt användes också instrument:</p>
+        <ul>
+            <li><b>Luta:</b> Ett stränginstrument som påminner om en gitarr.</li>
+            <li><b>Viola da gamba:</b> Ett stråkinstrument (föregångare till cellon, men med band på greppbrädan).</li>
+            <li><b>Krumhorn:</b> Ett blåsinstrument med en speciell klang.</li>
+        </ul>
+
+        <h3>4. Musikstilar och Genrer</h3>
+        <p>Man skiljde på sakral (kyrklig) och profan (folklig/världslig) musik.</p>
+        
+        <h4>Sakral musik (Kyrklig)</h4>
+        <ul>
+            <li><b>Mässa:</b> Tonsättning av gudstjänstens texter, t.ex. "Kyrie" och "Gloria".</li>
+            <li><b>Motett:</b> En mindre körsång med religiös text, ofta på latin.</li>
+        </ul>
+
+        <h4>Profan musik (Folklig/Världslig)</h4>
+        <p>Denna musik var ofta mer varierad och fanns i olika former i olika länder:</p>
+        <ul>
+            <li><b>Madrigal:</b> En mycket populär sångform som startade i Italien men blev en enorm trend i England efter 1588. Madrigaler innehöll ofta tonmåleri, där musiken beskriver texten (t.ex. att melodin går neråt när man sjunger ordet "ner").</li>
+            <li>Andra former var <b>Chanson</b> (Frankrike) och <b>Lied</b> (Tyskland).</li>
+        </ul>
+
+        <h3>5. Viktiga Tonsättare</h3>
+        <ul>
+            <li><b>Josquin des Prez (1440–1521):</b> En superstjärna under sin tid. Han reste runt i Europa och hans musik älskades av både Martin Luther och Leonardo da Vinci.</li>
+            <li><b>Giovanni Pierluigi da Palestrina (1525–1594):</b> Mästare på kyrkomusik, särskilt mässor.</li>
+            <li><b>Thomas Tallis (1505–1585):</b> Engelsk kompositör som skrev ett känt verk för hela 40 stämmor!</li>
+            <li><b>William Byrd (1543–1623):</b> Känd för sin polyfona musik.</li>
+        </ul>
+
+        <h3>6. Exempel på kompositioner (Lyssningstips)</h3>
+        <ul>
+            <li><i>Ave Maria ... Virgo serena</i> – Josquin des Prez (Ett av hans mest kända verk).</li>
+            <li><i>Spem in alium</i> – Thomas Tallis (Ett mäktigt verk för 40 stämmor).</li>
+            <li><i>Fair Phyllis I Saw</i> – John Farmer (En engelsk madrigal med tydligt tonmåleri och humor).</li>
+            <li><i>Missa Brevis (Credo)</i> – Palestrina.</li>
+        </ul>
       `
     },
     {
