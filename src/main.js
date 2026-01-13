@@ -1,6 +1,6 @@
 import './style.css';
 
-// 1. IMPORTERA ALLA 5 SIDOR
+// 1. IMPORTERA ALLA SIDOR
 import { Home } from './pages/Home.js';
 import { Instrument } from './pages/Instrument.js';
 import { Gitarr } from './pages/Gitarr.js';
@@ -9,11 +9,11 @@ import { Piano } from './pages/Piano.js';
 import { Trummor } from './pages/Trummor.js';
 import { Ensemble } from './pages/Ensemble.js';
 import { History } from './pages/History.js';
-import { WorldMusic } from './pages/WorldMusic.js';
+import { WorldMusic } from './pages/WorldMusic.js'; // Denna är viktig!
 import { Theory } from './pages/Theory.js';
 import { Game } from './pages/Game.js';
 
-
+// Importera komponenter
 import { Header } from './components/Header.js';
 import { Footer } from './components/Footer.js';
 import { HelpOverlay } from './components/HelpOverlay.js';
@@ -24,9 +24,11 @@ const state = {
   currentPage: window.location.pathname,
 };
 
-// 2. KOPPLA LÄNKAR TILL SIDOR
+// 2. KOPPLA LÄNKAR TILL SIDOR (ROUTER)
+// Här bestämmer du vilken URL som visar vilken sida
 const routes = {
   '/': Home,
+  '/home': Home, // Bra att ha om någon skriver /home
   '/instrument': Instrument,
   '/instrument/bas': Bas,
   '/instrument/gitarr': Gitarr,
@@ -34,48 +36,63 @@ const routes = {
   '/instrument/trummor': Trummor,
   '/ensemble': Ensemble,
   '/historia': History,
+  '/world': WorldMusic, // <--- HÄR LÄGGER VI TILL VÄRLDSMUSIKEN!
   '/teori': Theory,
   '/spel': Game,
+  '/quiz': Game // Om du vill att /quiz också ska gå till spelet
 };
 
+// 3. RENDER-FUNKTIONEN (Bara EN funktion!)
 function render() {
   app.innerHTML = '';
+
+  // Lägg till Header
   app.appendChild(Header(state));
 
   const main = document.createElement('main');
   main.className = 'site-main';
 
+  // Hitta rätt sida baserat på adressen. Finns den inte? Visa Home.
   const PageComponent = routes[state.currentPage] || Home;
 
   try {
     main.appendChild(PageComponent());
   } catch (error) {
     console.error("Kunde inte ladda sidan:", error);
-    main.innerHTML = `<h1>Oups!</h1><p>Något gick fel.</p>`;
+    main.innerHTML = `<h1>Oups!</h1><p>Något gick fel med sidan: ${state.currentPage}</p>`;
   }
 
+  // Lägg till main, footer och hjälp
   app.appendChild(main);
   app.appendChild(Footer());
   app.appendChild(HelpOverlay());
 }
 
-function render() {
-  const app = document.querySelector('#app');
-  app.innerHTML = ''; // Rensa föregående sida
+// 4. NAVIGATIONSLOGIK (Så sidan inte laddar om)
 
-  // Här kollar vi vilken adress (URL) vi är på
-  // Om du kör lokalt kanske adressen bara är "/world"
+// Hantera bakåt/framåt i webbläsaren
+window.addEventListener('popstate', () => {
+  state.currentPage = window.location.pathname;
+  render();
+});
 
-  if (state.currentPage === '/' || state.currentPage === '/home') {
-    app.appendChild(Home());
+// Hantera klick på länkar
+document.body.addEventListener('click', e => {
+  // Kolla om vi klickade på en länk med attributet data-link
+  if (e.target.matches('[data-link]') || e.target.closest('[data-link]')) {
+    e.preventDefault();
+
+    const link = e.target.matches('[data-link]') ? e.target : e.target.closest('[data-link]');
+    const href = link.getAttribute('href');
+
+    // Uppdatera adressfältet utan att ladda om
+    history.pushState(null, null, href);
+
+    // Uppdatera vårt state och rita om sidan
+    state.currentPage = href;
+    render();
   }
-  else if (state.currentPage === '/history') {
-    app.appendChild(History());
-  }
-  else if (state.currentPage === '/world') {  // <--- LÄGG TILL DENNA!
-    app.appendChild(WorldMusic());
-  }
-  else if (state.currentPage === '/quiz') {
-    app.appendChild(Quiz());
-  }
-}
+});
+
+// 5. STARTA APPEN
+render();
