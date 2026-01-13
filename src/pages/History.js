@@ -64,12 +64,19 @@ export function History() {
         color: #e67e22;
       }
 
-      /* Specialfärg för spelet/boken */
+      /* Specialfärg för spelet/boken (LILA) */
       .card-game {
-        border-left-color: #9b59b6; /* Lila */
+        border-left-color: #9b59b6; 
         background: #fdfafec0;
       }
       .card-game .read-more-btn { color: #9b59b6; }
+
+      /* Specialfärg för Teori/Lag (BLÅ) */
+      .card-theory {
+        border-left-color: #3498db;
+        background: #f0f8ff;
+      }
+      .card-theory .read-more-btn { color: #3498db; }
 
 
       /* --- ARTIKEL-MODAL --- */
@@ -96,10 +103,14 @@ export function History() {
 
       .article-content h2 { font-family: 'Outfit', sans-serif; color: #e67e22; margin-bottom: 5px; }
       .article-content h3 { font-family: 'Outfit', sans-serif; margin-top: 30px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+      .article-content h4 { font-family: 'Outfit', sans-serif; margin-top: 20px; color: #444; font-size: 1.1rem; }
       .article-content p { line-height: 1.8; color: #222; font-size: 1.1rem; margin-bottom: 15px; }
       .article-content ul { margin-bottom: 20px; padding-left: 20px; line-height: 1.6; color: #222;}
       .article-content li { margin-bottom: 8px; }
       .article-period { font-size: 1.2rem; color: #444; font-style: italic; margin-bottom: 20px; display:block; }
+
+      /* Anpassa modal-titeln om det är teori (Blå) */
+      .article-content.theory-mode h2 { color: #3498db; }
 
       .close-btn {
         position: absolute; top: 15px; right: 25px;
@@ -112,7 +123,81 @@ export function History() {
     </style>
   `;
 
-  // --- 2. DATA: EPOKER & ARTIKLAR ---
+  // --- 2. DATA: UPPHOVSRÄTT ---
+  const lawData = {
+    title: "Musik & Upphovsrätt",
+    subtitle: "Rättigheter & Skyldigheter",
+    summary: "Vem äger musiken? Vad får du göra på YouTube? En guide om Stim, SAMI och lagen.",
+    content: `
+      <p><b>- En guide för årskurs 7–9 -</b></p>
+      <p>Musik är något vi lyssnar på, skapar och delar varje dag. Men vem äger egentligen musiken? Och vad får du göra med låtar som du gillar? Här reder vi ut begreppen utifrån upphovsrättslagen.</p>
+
+      <h3>1. Vad är upphovsrätt?</h3>
+      <p>Upphovsrätten är en lag som skyddar skapande. Den som har skapat ett "litterärt eller konstnärligt verk" har automatiskt upphovsrätt till det. Det spelar ingen roll om det är en topplistelåt, en film, ett datorprogram eller en text du skrivit i skolan – principen är densamma.</p>
+      <p>Lagen ger skaparen ensamrätt att bestämma över sitt verk. Det innebär att ingen annan får sprida det eller göra om det utan tillstånd.</p>
+
+      <h4>Två delar av upphovsrätten</h4>
+      <ul>
+        <li><b>Den ekonomiska rätten:</b> Rätten att tjäna pengar på verket och bestämma hur det ska spridas (t.ex. tryckas, spelas in eller läggas ut på nätet).</li>
+        <li><b>Den ideella rätten:</b> Rätten att bli namngiven. När någon använder din musik eller text måste de ange att det är du som har gjort den. Ingen får heller ändra i ditt verk på ett sätt som är kränkande för dig.</li>
+      </ul>
+
+      <h3>2. Vem äger musiken?</h3>
+      <p>I musikbranschen är det ofta flera personer inblandade i en enda låt. Det är viktigt att skilja på vilka som gör vad, eftersom de företräds av olika organisationer.</p>
+
+      <h4>Upphovspersoner (Låtskrivarna)</h4>
+      <p>Detta är de som skrivit texten och musiken/kompositionen. De äger själva verket (låten).</p>
+      <ul>
+        <li><b>Organisation: Stim</b> bevakar deras rättigheter. När musik spelas offentligt ser Stim till att låtskrivarna får betalt.</li>
+      </ul>
+
+      <h4>Utövande konstnärer (Artisterna)</h4>
+      <p>Detta är de som framför musiken – sångare och musiker som spelar på inspelningen.</p>
+      <ul>
+        <li><b>Organisation: SAMI</b> bevakar artisternas och musikernas rättigheter.</li>
+      </ul>
+
+      <p><i>Viktigt att veta: Om du spelar upp en låt offentligt (t.ex. på ett disco där ni tar inträde) behöver ni ofta licens från både Stim (för låtskrivaren) och SAMI (för artisten).</i></p>
+
+      <h3>3. Dina rättigheter – När du skapar musik</h3>
+      <p>När du gör en egen låt, spelar in en video eller skriver en text i skolan har du samma skydd som kända artister.</p>
+      <ul>
+        <li><b>Du bestämmer:</b> Ingen får ta din låt och lägga upp den på Spotify eller YouTube utan att fråga dig.</li>
+        <li><b>Du ska nämnas:</b> Om någon citerar din text eller använder din musik ska ditt namn finnas med.</li>
+        <li><b>Privat bruk:</b> Du får göra kopior av andras verk för privat bruk (t.ex. spara en låtlistan offline till dig själv), men du får inte sprida dem till hela världen.</li>
+      </ul>
+
+      <h3>4. Dina skyldigheter – När du använder andras musik</h3>
+      <p>Vad får du göra i skolan och på fritiden?</p>
+
+      <h4>I skolan (Undervisning)</h4>
+      <p>Det finns ett undantag i lagen för skolor. Lärare och elever får använda verk i undervisningen för att "illustrera" något. Ni får också spela in era egna framträdanden av andras låtar om det är för utbildningssyfte, men dessa inspelningar får inte spridas utanför skolan.</p>
+
+      <h4>På internet och sociala medier</h4>
+      <p>Här gäller strikta regler. Att lägga ut något på internet räknas som att göra det "tillgängligt för allmänheten".</p>
+      <ul>
+        <li>Du får inte ta en känd låt och lägga som bakgrundsmusik i en video du publicerar öppet (t.ex. på YouTube eller TikTok) utan tillstånd.</li>
+        <li>Plattformar som TikTok och YouTube har ofta egna avtal med musikbolagen, men om avtal saknas kan din video tas bort eller så kan du bli skyldig pengar.</li>
+      </ul>
+
+      <h4>Konsert vs. Musikal (Stora och små rättigheter)</h4>
+      <p>Om ni ska sätta upp en föreställning i skolan är det skillnad på hur musiken används:</p>
+      <ul>
+        <li><b>Små rättigheter:</b> Om ni spelar musik på en konsert, eller som pausmusik, täcks detta ofta av en vanlig Stim-licens.</li>
+        <li><b>Stora rättigheter:</b> Om ni sätter upp en musikal eller teater där musiken driver handlingen framåt (t.ex. Grease eller Lejonkungen), räcker inte en vanlig licens. Då måste man söka tillstånd direkt från de som äger musikalen. Detta kallas "stora rättigheter".</li>
+      </ul>
+
+      <h3>Sammanfattning</h3>
+      <ul>
+        <li><b>Fråga om lov:</b> Huvudregeln är att du måste ha tillstånd för att använda andras musik offentligt.</li>
+        <li><b>Namnge källan:</b> Ange alltid vem som skrivit musiken eller tagit bilden.</li>
+        <li><b>Skilj på privat och offentligt:</b> Det du gör hemma för dig själv är oftast okej. Det du lägger ut på nätet räknas som offentligt och kräver att du följer lagen.</li>
+      </ul>
+      <p style="font-size:0.9rem; color:#666; margin-top:30px;">Källor: Lag (1960:729) om upphovsrätt till litterära och konstnärliga verk, samt information från Stim och SAMI.</p>
+    `
+  };
+
+  // --- 3. DATA: EPOKER (HISTORIA) ---
   const epochs = [
     {
       id: "renassans",
@@ -121,64 +206,29 @@ export function History() {
       summary: "Pånyttfödelse, upptäcktsresor och polyfoni.",
       content: `
         <p><b>- Pånyttfödelsen -</b></p>
-        
         <h3>Vad var renässansen?</h3>
-        <p>Ordet renässans betyder "pånyttfödelse". Under den här tiden vaknade ett nytt intresse för antikens Grekland och Rom. Man ville utforska världen, människan och kulturen på nytt. Det var en tid av upptäckter och nya idéer.</p>
-
-        <h3>Samtiden - Vad hände i världen?</h3>
-        <p>Medan medeltiden ofta fokuserade på Gud och kyrkan, handlade renässansen mer om <b>humanism</b> - en vilja att lära sig om människan och omvärlden.</p>
+        <p>Ordet renässans betyder "pånyttfödelse". Under den här tiden vaknade ett nytt intresse för antikens Grekland och Rom. Man ville utforska världen, människan och kulturen på nytt.</p>
+        <h3>Samtiden</h3>
         <ul>
           <li><b>Upptäcktsresor:</b> Christofer Columbus "upptäckte" Amerika.</li>
-          <li><b>Vetenskap:</b> Nicolaus Copernicus räknade ut att jorden snurrar runt solen (och inte tvärtom).</li>
-          <li><b>Konst & Uppfinningar:</b> Leonardo da Vinci (känd som ett "universalgeni") målade, uppfann och studerade kroppen.</li>
+          <li><b>Vetenskap:</b> Nicolaus Copernicus räknade ut att jorden snurrar runt solen.</li>
+          <li><b>Konst:</b> Leonardo da Vinci målade och uppfann.</li>
         </ul>
-
-        <h3>Musiken - Hur lät den?</h3>
-        <p>Under renässansen blev musiken mer "tät" och fyllig än under medeltiden. Här är de viktigaste kännetecknen:</p>
+        <h3>Musiken</h3>
+        <p>Musiken blev tät och fyllig.</p>
         <ul>
-          <li><b>Polyfoni (Flerstämmighet):</b> Istället för en ensam melodi hade man nu ofta 4-5 olika stämmor som sjöngs samtidigt. Varje stämma hade sin egen melodi (detta kallas självständiga stämmor).</li>
-          <li><b>Imitation:</b> En teknik där stämmorna härmar varandra. En stämma börjar, och strax efter kommer nästa in med samma melodi.</li>
-          <li><b>A Cappella:</b> Detta var körsångens "gyllene era". A cappella betyder "som i kapellet" och innebär sång helt utan instrument.</li>
-          <li><b>Modala skalor:</b> Man använde inte dur och moll som vi gör idag, utan så kallade kyrkotonarter (modala skalor).</li>
+          <li><b>Polyfoni:</b> Flerstämmighet med självständiga stämmor.</li>
+          <li><b>Imitation:</b> Stämmor härmar varandra.</li>
+          <li><b>A Cappella:</b> Sång utan instrument (kyrkans ideal).</li>
         </ul>
-
-        <h3>Instrument</h3>
-        <p>Även om körsång var viktigast, användes instrument flitigt. Några vanliga var:</p>
-        <ul>
-          <li><b>Luta:</b> Ett stränginstrument, föregångare till gitarren.</li>
-          <li><b>Viola da gamba:</b> Ett stråkinstrument som man höll mellan knäna.</li>
-          <li><b>Krumhorn:</b> Ett blåsinstrument med en böjd form.</li>
-          <li><b>Orgel:</b> Tillåtet i kyrkan.</li>
-        </ul>
-
-        <h3>Viktiga Genrer (Stilar)</h3>
-        <p>Man delade ofta upp musiken i två kategorier: Sakral (kyrklig) och Profan (folklig/världslig).</p>
-        <p><b>1. Sakral musik (Kyrklig)</b><br>
-        <i>Mässa:</i> Musik skriven till gudstjänstens texter (t.ex. Kyrie, Gloria).<br>
-        <i>Motett:</i> En mindre körsång med religiös text, ofta på latin.</p>
-        
-        <p><b>2. Profan musik (Folklig/Världslig)</b><br>
-        Här fanns olika sånger beroende på land. Den viktigaste var <i>Madrigalen</i>, en italiensk sångform där man ofta använde <b>tonmåleri</b>.</p>
-        
-        <div style="background:#f9f9f9; padding:15px; border-left: 4px solid #e67e22; margin: 20px 0; color:#333;">
-            <b>Vad är tonmåleri?</b><br>
-            Det är när musiken målar upp texten. Om texten handlar om att "springa upp och ner", så går melodin också upp och ner!
-        </div>
-
+        <h3>Viktiga Genrer</h3>
+        <p><b>Sakral (Kyrklig):</b> Mässa och Motett.<br>
+        <b>Profan (Världslig):</b> Madrigaler (ofta med tonmåleri).</p>
         <h3>Kända Kompositörer</h3>
         <ul>
-            <li><b>Josquin des Prez (1440-1521):</b> En superstjärna under sin tid. Han var så känd att Leonardo da Vinci målade av honom.</li>
-            <li><b>Giovanni Pierluigi da Palestrina (1525-1594):</b> Mästare på kyrkomusik och mässor.</li>
-            <li><b>Thomas Tallis (1505-1585):</b> Skrev bland annat ett stycke för hela 40 stämmor (Spem in alium).</li>
-        </ul>
-
-        <h3>Begreppslista</h3>
-        <ul>
-            <li><b>Polyfoni:</b> Flerstämmighet där alla stämmor är lika viktiga.</li>
-            <li><b>A cappella:</b> Sång utan instrument.</li>
-            <li><b>Sakral musik:</b> Musik för kyrkan/religiöst bruk.</li>
-            <li><b>Profan musik:</b> Världslig musik (fest, kärlekssånger).</li>
-            <li><b>Imitation:</b> När en stämma härmar en annan.</li>
+            <li>Josquin des Prez</li>
+            <li>Giovanni Pierluigi da Palestrina</li>
+            <li>Thomas Tallis</li>
         </ul>
       `
     },
@@ -188,71 +238,26 @@ export function History() {
       period: "ca 1600-1750",
       summary: "Pampig stil, motorisk rytm, opera och giganter som Bach och Vivaldi.",
       content: `
-        <p><b>- Den pampiga och utsmyckade stilen -</b></p>
-
+        <p><b>- Den pampiga stilen -</b></p>
         <h3>Vad var Barocken?</h3>
-        <p>Ordet barock beskriver en stil som var utsmyckad (ornamental) och teatralisk. Vissa menade att den var pompös och överdriven, och ordet hade från början en ganska negativ klang. Idag räknas dock denna tid som en av de viktigaste i musikhistorien.</p>
-
-        <h3>Samtiden - Vad hände i världen?</h3>
-        <p>Kyrkan och kungliga hov var fortfarande de viktigaste platserna för musik, men fler människor fick tillgång till den.</p>
+        <p>En tid av utsmyckad, teatralisk och pampig konst. Musiken skulle spegla ordning och system (likt vetenskapen).</p>
+        <h3>Musiken</h3>
         <ul>
-            <li><b>Musiken som "färskvara":</b> Det var viktigt att skriva nytt snabbt! Ibland spelades ett stycke bara en gång innan det kasserades.</li>
-            <li><b>Vetenskap & System:</b> Precis som Isaac Newton försökte förklara världen med fysiska lagar, ville kompositörerna skapa ordning och system i musiken.</li>
+            <li><b>Motorisk rytm:</b> Stadig puls som en maskin.</li>
+            <li><b>Generalbas:</b> Basstämma + ackord (ryggraden i musiken).</li>
+            <li><b>Terrassdynamik:</b> Plötsliga växlingar mellan starkt och svagt.</li>
         </ul>
-
-        <h3>Musiken - Hur lät den?</h3>
-        <p>Barockmusiken är ofta energisk och drivande. De viktigaste kännetecknen är:</p>
+        <h3>Viktiga Genrer</h3>
         <ul>
-            <li><b>Motorisk rytm:</b> En stadig puls som driver framåt likt en motor eller symaskin. Tempot ändras sällan under låtens gång.</li>
-            <li><b>Generalbas (Basso Continuo):</b> Barockens "kompgrupp". En basstämma som spelar genom hela låten (ofta cello eller fagott) tillsammans med ett instrument som spelar ackord (t.ex. cembalo eller orgel).</li>
-            <li><b>Terrassdynamik:</b> Man växlade plötsligt mellan starkt och svagt (som trappsteg), istället för att gradvis öka volymen.</li>
-            <li><b>Polyfoni:</b> Flera melodier som flätas samman samtidigt (precis som under renässansen).</li>
+            <li><b>Opera:</b> Föddes ca 1600. Blandning av teater och musik.</li>
+            <li><b>Fuga:</b> Avancerad flerstämmighet (Bach).</li>
+            <li><b>Konserter:</b> För solist och orkester (Vivaldi).</li>
         </ul>
-
-        <h3>Barockorkestern - En nyhet</h3>
-        <p>Under denna tid föddes orkestern, men den såg inte ut som dagens jätteorkestrar.</p>
-        <ul>
-            <li><b>Liten storlek:</b> En barockorkester bestod ofta av bara 15-25 musiker (idag kan de vara över 80).</li>
-            <li><b>Ingen dirigent:</b> Det fanns ingen dirigent som stod framför och viftade med en pinne. Istället leddes orkestern av den som spelade cembalo eller av förste violinisten.</li>
-            <li><b>Stråkar i fokus:</b> Orkesterns kärna var stråkinstrumenten (violin, viola, cello) och generalbasen.</li>
-            <li><b>Övriga instrument:</b> Blåsinstrument som oboe och fagott spelade ofta samma melodi som stråkarna för att ge mer färg. Trumpeter och pukor användes mest vid festliga tillfällen.</li>
-        </ul>
-
-        <h3>Instrument</h3>
-        <ul>
-            <li><b>Cembalo:</b> Ett tangentinstrument där strängarna knäpps (inte slås an som på ett piano). Det ger ett spetsigt, metalliskt ljud.</li>
-            <li><b>Violin (Fiol):</b> Blev mycket populärt tack vare instrumentbyggare som Stradivarius.</li>
-            <li><b>Orgel:</b> Kyrkans "drottninginstrument".</li>
-        </ul>
-
-        <h3>Viktiga Genrer (Stilar)</h3>
-        <p><b>1. Opera (Profan musik)</b><br>
-        En "teater med musik" som föddes i Italien runt år 1600.</p>
-        <ul>
-            <li><b>Kastratsångare:</b> Manliga sångare som kastrerades som barn för att behålla sina ljusa röster. De var tidens största superstjärnor.</li>
-            <li><b>Recitativ & Aria:</b> Operan delades upp i <i>recitativ</i> (pratsång som för handlingen framåt) och <i>aria</i> (vacker sång där känslorna fick ta plats).</li>
-        </ul>
-
-        <p><b>2. Kyrklig musik</b></p>
-        <ul>
-            <li><b>Oratorium:</b> Kyrkans motsvarighet till opera (en berättelse) men utan kostymer och skådespel.</li>
-            <li><b>Fuga:</b> Ett avancerat stycke där en melodi "jagas" av andra stämmor (typiskt för J.S. Bach).</li>
-        </ul>
-
         <h3>Kända Kompositörer</h3>
         <ul>
-            <li><b>Johann Sebastian Bach (1685-1750):</b> Barockens gigant. Mästerlig på orgel och kontrapunkt (flätade melodier). Känd för Toccata & Fuga i d-moll.</li>
-            <li><b>Georg Friedrich Händel (1685-1759):</b> Känd för mäktiga körverk och oratorier, t.ex. Messias (med sången "Halleluja").</li>
-            <li><b>Antonio Vivaldi (1678-1741):</b> "Den röde prästen" från Italien som skrev De fyra årstiderna.</li>
-        </ul>
-
-        <h3>Begreppslista</h3>
-        <ul>
-            <li><b>Motorisk rytm:</b> En stadig, maskinell puls.</li>
-            <li><b>Generalbas:</b> Basstämma + ackord (ryggraden i barockmusik).</li>
-            <li><b>Terrassdynamik:</b> Plötsliga växlingar mellan starkt/svagt.</li>
-            <li><b>Polyfoni:</b> Flerstämmighet.</li>
-            <li><b>Cembalo:</b> Barockens vanligaste tangentinstrument.</li>
+            <li>Johann Sebastian Bach (Toccata & Fuga)</li>
+            <li>Georg Friedrich Händel (Messias)</li>
+            <li>Antonio Vivaldi (De fyra årstiderna)</li>
         </ul>
       `
     },
@@ -262,58 +267,19 @@ export function History() {
       period: "ca 1750-1825",
       summary: "Förnuft, balans, homofoni och giganterna Haydn, Mozart & Beethoven.",
       content: `
-        <p><b>- Förnuftets och balansens tid -</b></p>
-
+        <p><b>- Förnuft och balans -</b></p>
         <h3>Vad var Klassicismen?</h3>
-        <p>Klassicismen kallas ofta för "förnuftets era". Efter barockens snirkliga och tunga stil ville man nu ha ordning, reda och tydlighet. Musiken skulle vara logisk och balanserad. Man talade om att melodin var musikens "själ" - den skulle vara enkel, vacker och lätt att nynna på.</p>
-
-        <h3>Samtiden - Vad hände i världen?</h3>
-        <p>Detta var en tid då människor började fundera mycket på hur samhället skulle organiseras och på individens fri- och rättigheter (det vi kallar upplysningstiden). Kompositörerna var inte bara hantverkare längre utan började ses som konstnärer som ville skapa en perfekt helhet.</p>
-
-        <h3>Musiken - Hur lät den?</h3>
-        <p>Musiken under klassicismen skiljer sig tydligt från barocken. Här är de viktigaste kännetecknen:</p>
+        <p>En motreaktion mot barocken. Nu ville man ha enkelhet, balans och tydlighet. Melodin var det viktigaste.</p>
+        <h3>Musiken</h3>
         <ul>
-            <li><b>Balans och Enkelhet:</b> Melodierna blev enklare och mindre "oroliga" än under barocken. Idealet var en tydlig melodi med ett enkelt ackompanjemang (detta kallas <i>homofoni</i>).</li>
-            <li><b>Nyanser (Dynamik):</b> Under barocken växlade man plötsligt mellan starkt och svagt (terrassdynamik). Under klassicismen började man istället smyga med volymen:
-                <ul>
-                    <li><i>Crescendo:</i> Musiken växer och blir starkare.</li>
-                    <li><i>Diminuendo:</i> Musiken avtar och blir svagare.</li>
-                </ul>
-            </li>
-            <li><b>Känslor med kontroll:</b> Man ville uttrycka känslor, men alltid på ett behärskat och "smakfullt" sätt.</li>
+            <li><b>Homofoni:</b> En tydlig melodi med enkelt komp.</li>
+            <li><b>Nyanser:</b> Crescendo (starkare) och Diminuendo (svagare).</li>
+            <li><b>Balans:</b> Känslor men under kontroll.</li>
         </ul>
-
-        <h3>Viktiga Genrer (Stilar)</h3>
-        <ul>
-            <li><b>Symfoni:</b> Ett stort verk för orkester (Haydn och Beethoven skrev många sådana).</li>
-            <li><b>Opera:</b> Operan utvecklades och musiken blev nu minst lika viktig som texten. Mozart skrev operor som <i>Don Juan</i> och <i>Trollflöjten</i> som spelas flitigt än idag.</li>
-            <li><b>Oratorium:</b> En berättande form liknande opera men utan teater. Haydn skrev ett berömt oratorium som heter <i>Skapelsen</i>.</li>
-        </ul>
-
-        <h3>Kända Kompositörer</h3>
-        <p>De tre stora giganterna bodde alla i Wien under delar av sina liv, därför kallas epoken ibland för <b>Wienklassicismen</b>.</p>
-        
-        <p><b>Joseph Haydn (1732-1809):</b><br>
-        Kallas ofta "symfonins fader". Han hade en tuff uppväxt och kastades ut från körskolan, men jobbade sig upp och blev anställd hos den rika furstefamiljen Esterházy.<br>
-        <i>Kända verk:</i> Oratoriet Skapelsen, Trumpetkonserten, Symfoni nr 48.</p>
-
-        <p><b>Wolfgang Amadeus Mozart (1756-1791):</b><br>
-        Världens mest kända underbarn. Redan som 4-åring spelade han fiol och cembalo, och vid 5 års ålder började han komponera. Han reste runt i hela Europa och visade upp sig. Han dog fattig och ung, men hann skriva otroliga mängder musik.<br>
-        <i>Kända verk:</i> Eine kleine Nachtmusik, operorna Trollflöjten och Figaros bröllop.</p>
-
-        <p><b>Ludwig van Beethoven (1770-1827):</b><br>
-        Beethovens pappa ville att sonen skulle bli en "ny Mozart" och tvingade honom att öva hårt. Beethoven är känd för sitt heta temperament och för sitt tragiska öde: han blev döv mitt i karriären. Trots att han blev stendöv fortsatte han att komponera mästerverk in i det sista.<br>
-        <i>Kända verk:</i> Ödessymfonin (nr 5), Missa Solemnis, Egmont.</p>
-
-        <h3>Begreppslista</h3>
-        <ul>
-            <li><b>Crescendo:</b> Musiken blir gradvis starkare.</li>
-            <li><b>Diminuendo:</b> Musiken blir gradvis svagare.</li>
-            <li><b>Pianissimo:</b> Mycket svagt.</li>
-            <li><b>Fortissimo:</b> Mycket starkt.</li>
-            <li><b>Homofoni:</b> En tydlig melodi med komp (klassicismens ideal).</li>
-            <li><b>Wienklassicismen:</b> Annat namn på epoken eftersom de tre stora kompositörerna verkade i staden Wien.</li>
-        </ul>
+        <h3>Wienklassicismens Giganter</h3>
+        <p><b>Haydn:</b> "Symfonins fader".<br>
+        <b>Mozart:</b> Underbarnet som skrev operor (Trollflöjten) och symfonier.<br>
+        <b>Beethoven:</b> Länken till romantiken. Blev döv men fortsatte komponera.</p>
       `
     },
     {
@@ -322,59 +288,22 @@ export function History() {
       period: "ca 1815-1910",
       summary: "Känslor, fantasi, fria konstnärer, nationalromantik och jätteorkestrar.",
       content: `
-        <p><b>- Känslornas och fantasins tid -</b></p>
-
+        <p><b>- Känslor och fantasi -</b></p>
         <h3>Vad var Romantiken?</h3>
-        <p>Under romantiken handlade allt om känslor, fantasi och drömmar. Om klassicismen (Wienklassicismen) var "hjärnan" (logik och ordning), så var romantiken "hjärtat". Kompositörerna ville inte längre följa strikta regler. De ville beskriva det overkliga, sagor, naturen och människans innersta tankar.</p>
-
-        <h3>Samtiden - Vad hände i världen?</h3>
+        <p>Hjärtat fick styra över hjärnan. Man fascinerades av sagor, naturen, drömmar och det övernaturliga.</p>
+        <h3>Musiken</h3>
         <ul>
-            <li><b>Den fria konstnären:</b> Tidigare var musiker anställda av en kyrka eller en kung (som tjänare). Nu blev de "fria konstnärer" som sålde sin musik och höll konserter för att tjäna pengar. De blev tidens kändisar!</li>
-            <li><b>Industrialismen:</b> Städerna växte och fabriker byggdes. Många drömde sig bort från de smutsiga städerna ut till den vackra naturen, vilket märks i musiken.</li>
-            <li><b>Nationalism:</b> Många länder ville hitta sin egen identitet. Man började använda folkmusik från det egna landet i den klassiska musiken (detta kallas Nationalromantik).</li>
+            <li><b>Friare form:</b> Inga strikta regler.</li>
+            <li><b>Stora känslor:</b> Dramatiskt och passionerat.</li>
+            <li><b>Programmusik:</b> Musik som berättar en saga utan ord.</li>
+            <li><b>Jätteorkestern:</b> Orkestern blev enorm.</li>
         </ul>
-
-        <h3>Musiken - Hur lät den?</h3>
-        <p>Musiken blev "större" och mer dramatisk än någonsin tidigare.</p>
-        <ul>
-            <li><b>Fria former:</b> Man bröt mot de gamla reglerna. Ett stycke kunde vara jättekort (bara någon minut) eller jättelångt (över en timme).</li>
-            <li><b>Melodier:</b> Melodierna blev längre, mer slingrande och känslosamma.</li>
-            <li><b>Harmonik:</b> Man använde fler och konstigare ackord (kromatisk harmonik) för att skapa spänning och mystik.</li>
-            <li><b>Programmusik:</b> Detta blev väldigt populärt. Det är instrumental musik som ska berätta en saga eller beskriva en tavla/naturscen utan att använda ord. Lyssnaren får "fantisera" ihop handlingen.</li>
-        </ul>
-
-        <h3>Instrument</h3>
-        <ul>
-            <li><b>Pianot:</b> Detta var pianots guldålder! Instrumentet utvecklades och blev starkare. Virtuoser (superskickliga musiker) som Frédéric Chopin och Franz Liszt skrev svår musik som skulle imponera på publiken.</li>
-            <li><b>Jätteorkestern:</b> Orkestern växte enormt. Man lade till fler instrument (t.ex. tuba, piccoloflöjt, mer slagverk) för att kunna spela både svagare och mycket, mycket starkare än förr.</li>
-        </ul>
-
-        <h3>Viktiga Genrer (Stilar)</h3>
-        <p><b>1. Lied (Sång)</b><br>
-        En intim form för bara piano och en sångare. Texten var ofta en dikt om olycklig kärlek eller naturen. Schubert var mästaren här.</p>
-
-        <p><b>2. Nationalromantik</b><br>
-        Kompositörer ville hylla sitt hemland. I Norge skrev Edvard Grieg musik som lät som norska fjäll och troll (I bergakungens sal). I Finland skrev Jean Sibelius musik om finska sagor (Finlandia).</p>
-
-        <p><b>3. Opera</b><br>
-        Operan blev större och mer dramatisk. <br>
-        <i>Richard Wagner:</i> Ville skapa ett "allkonstverk" där musik, teater och konst smälte samman. Hans operor varade ofta i 4-5 timmar och handlade om gudar och hjältar.</p>
-
         <h3>Kända Kompositörer</h3>
         <ul>
-            <li><b>Franz Schubert (1797-1828):</b> Känd för sina vackra sånger (Lieder). Han dog ung men lämnade efter sig massor av musik.</li>
-            <li><b>Frédéric Chopin (1810-1849):</b> "Pianots poet". Han skrev nästan enbart musik för piano. Hans musik är ofta drömsk och tekniskt svår.</li>
-            <li><b>Pjotr Tjajkovskij (1840-1893):</b> Rysk kompositör som skrev fantastiska melodier. Känd för baletterna Svansjön och Nötknäpparen.</li>
-            <li><b>Richard Wagner (1813-1883):</b> Tysk operakompositör som förändrade musikhistorien med sin mäktiga (och ibland tunga) musik. Känd för Valkyrieritten (känd från många filmer).</li>
-        </ul>
-
-        <h3>Begreppslista</h3>
-        <ul>
-            <li><b>Programmusik:</b> Musik som berättar en handling eller beskriver något utan text.</li>
-            <li><b>Nationalromantik:</b> Musik som hyllar det egna landet/kulturen (ofta med inslag av folkmusik).</li>
-            <li><b>Virtuos:</b> En tekniskt mycket skicklig musiker (en "stjärna").</li>
-            <li><b>Lied:</b> Sång för piano och röst (tysk text).</li>
-            <li><b>Fri konstnär:</b> En musiker som inte är anställd utan frilansar (typiskt för 1800-talet).</li>
+            <li>Franz Schubert (Lied/Sånger)</li>
+            <li>Frédéric Chopin (Pianovirtuos)</li>
+            <li>Richard Wagner (Opera)</li>
+            <li>Edvard Grieg (Nationalromantik)</li>
         </ul>
       `
     },
@@ -385,80 +314,33 @@ export function History() {
       summary: "Reglerna rivs! Atonalitet, experiment, tolvtonsmusik och kaos.",
       content: `
         <p><b>- Tiden då reglerna revs -</b></p>
-
         <h3>Vad var Modernismen?</h3>
-        <p>Om tidigare epoker handlade om att förfina och utveckla musiken, så handlade modernismen om att bryta mot reglerna. Kompositörerna tyckte att man hade gjort allt som gick att göra med vackra melodier och dur/moll. Nu ville man experimentera! Musik behövde inte längre vara "vacker" - den kunde vara ful, konstig, matematisk eller chockerande.</p>
-
-        <h3>Samtiden - Vad hände i världen?</h3>
-        <p>1900-talet var en tid av enorm förändring som påverkade konsten djupt.</p>
+        <p>1900-talet innebar världskrig och snabb teknisk utveckling. Konsten blev experimentell, provocerande och ibland "ful".</p>
+        <h3>Musiken</h3>
         <ul>
-            <li><b>Världskrig och kaos:</b> Två världskrig skapade en känsla av oro och kaos. Många konstnärer kände att den "gamla vackra världen" var borta, och musiken måste spegla den nya, hårda verkligheten.</li>
-            <li><b>Teknikens under:</b> För första gången kunde man spela in musik (grammofon, radio). Plötsligt kunde man höra musik utan att gå på konsert!</li>
-            <li><b>Industrialism:</b> Maskiner, bilar och fabriksljud blev en del av vardagen, och vissa kompositörer inspirerades av detta buller.</li>
+            <li><b>Dissonanser:</b> Det låter skevt och falskt.</li>
+            <li><b>Atonalitet:</b> Ingen tonart alls.</li>
+            <li><b>Nya ljud:</b> Syntar, inspelningar och "prepared piano".</li>
         </ul>
-
-        <h3>Musiken - Hur lät den?</h3>
-        <p>Det är svårt att säga exakt hur det lät eftersom det fanns så många olika stilar (ismer), men här är några gemensamma drag:</p>
-        <ul>
-            <li><b>Dissonanser:</b> Toner som skär sig mot varandra (låter "falskt" eller spänt) blev vanliga. Man behövde inte längre "lösa upp" spänningen till ett vackert ackord.</li>
-            <li><b>Atonalitet:</b> Musik som inte går i någon tonart alls. Det finns inget "hemma" (grundton) i musiken.</li>
-            <li><b>Rytmisk komplexitet:</b> Rytmerna blev ryckiga, oregelbundna och svåra att förutse.</li>
-            <li><b>Klangfärg:</b> Hur instrumenten lät blev viktigare än själva melodin.</li>
-        </ul>
-
-        <h3>Viktiga Genrer (Stilar/Ismer)</h3>
-        <p>Under modernismen splittrades musiken i många "ismer":</p>
-        
-        <p><b>1. Impressionism (Intryck)</b><br>
-        Startade i Frankrike. Musiken ska vara som en otydlig, drömsk tavla. Man suddade ut gränserna och fokuserade på klangfärg.<br>
-        <i>Låter som:</i> Vatten, dimma eller drömmar. (T.ex. Debussy).</p>
-
-        <p><b>2. Expressionism (Uttryck)</b><br>
-        Motsatsen till impressionism. Här ville man uttrycka starka, ofta mörka känslor som ångest och skräck.<br>
-        <i>Låter som:</i> En skräckfilm, stressigt och dissonant. (T.ex. Schönberg).</p>
-
-        <p><b>3. Neoclassicism (Ny-klassicism)</b><br>
-        Man tröttnade på det överdrivna känslosamma och blickade tillbaka till Barocken och Klassicismen, men "kryddade" den gamla stilen med moderna, "fel" toner.</p>
-
-        <h3>Instrument & Nya ljud</h3>
-        <p>Man använde fortfarande orkestern, men på nya sätt:</p>
-        <ul>
-            <li><b>Prepared Piano:</b> Man lade suddgummin, skruvar och spikar mellan strängarna i flygeln för att det skulle låta som slagverk.</li>
-            <li><b>Elektronisk musik:</b> Syntar och bandspelare gjorde att man kunde skapa ljud som aldrig hörts förut.</li>
-            <li><b>Slagverk:</b> Fick en mycket större roll än tidigare.</li>
-        </ul>
-
-        <h3>Kända Kompositörer</h3>
-        <ul>
-            <li><b>Claude Debussy (1862-1918):</b> Impressionist. Han ville frigöra sig från de tyska reglerna. Mest kända verk: <i>Clair de Lune</i> (Månsken).</li>
-            <li><b>Igor Stravinsky (1882-1971):</b> En kameleont som bytte stil ofta. Hans balett <i>Våroffer</i> (Le Sacre du Printemps) orsakade ett upplopp vid premiären i Paris 1913 för att musiken var så rå och rytmisk. Publiken slogs med varandra!</li>
-            <li><b>Arnold Schönberg (1874-1951):</b> Uppfann tolvtonsmusiken. En matematisk metod där alla 12 toner i oktaven måste spelas innan man får börja om. Det låter väldigt speciellt och "snett" för ett ovant öra.</li>
-            <li><b>John Cage (1912-1992):</b> Den store experimentlustan. Han skrev stycket <i>4'33"</i> där pianisten sitter helt tyst vid pianot i 4 minuter och 33 sekunder. "Musiken" är ljuden från publiken (hostningar, stolskrap).</li>
-        </ul>
-
-        <h3>Begreppslista</h3>
-        <ul>
-            <li><b>Atonalitet:</b> Musik utan tonart (inget dur eller moll).</li>
-            <li><b>Dissonans:</b> Toner som krockar/skär sig.</li>
-            <li><b>Klangfärg:</b> "Färgen" på ljudet (hur instrumentet låter).</li>
-            <li><b>Tolvtonsmusik:</b> En metod där alla 12 toner är lika viktiga (ingen grundton).</li>
-            <li><b>Avantgarde:</b> De som går först och experimenterar med det allra nyaste och konstigaste.</li>
-        </ul>
+        <h3>Stilar</h3>
+        <p><b>Impressionism:</b> Drömskt och otydligt (Debussy).<br>
+        <b>Expressionism:</b> Ångest och skräck (Schönberg).<br>
+        <b>Avantgarde:</b> Experiment (John Cage).</p>
       `
     }
   ];
 
-  // --- 3. HTML-STRUKTUR ---
+  // --- 4. HTML-STRUKTUR ---
   section.innerHTML = styles + `
     <div class="page-detail history-container">
       
-      <h1 style="color: #ffffff;">Musikhistoria 📜</h1>
+      <h1 style="color: #ffffff;">Musikhistoria & Teori 📜</h1>
       
       <p style="color: #e0e0e0; max-width:600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
-        Välkommen till arkivet. Här kan du läsa fördjupande texter om olika epoker eller utforska interaktiva berättelser.
+        Här hittar du både interaktiva berättelser, fakta om upphovsrätt och fördjupning i musikhistoriens epoker.
       </p>
 
-      <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; color:#ffffff;">Utforska</h2>
+      <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; color:#ffffff;">Utforska & Teori</h2>
       <div class="grid-section">
         
         <div class="history-card card-game" id="open-storybook-btn">
@@ -468,15 +350,23 @@ export function History() {
           <span class="read-more-btn">Öppna boken ➡</span>
         </div>
 
+        <div class="history-card card-theory" id="law-card">
+          <span class="card-label">Fakta & Lagar</span>
+          <h3 class="card-title">${lawData.title}</h3>
+          <p style="font-weight:bold; color:#3498db; margin-bottom:10px;">${lawData.subtitle}</p>
+          <p style="color:#444;">${lawData.summary}</p>
+          <span class="read-more-btn">Läs guiden ➡</span>
+        </div>
+
       </div>
 
-      <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; margin-top:50px; color:#ffffff;">Epoker & Artiklar</h2>
+      <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; margin-top:50px; color:#ffffff;">Musikhistoriens Epoker</h2>
       <div id="epoch-grid" class="grid-section"></div>
 
     </div>
 
     <div id="article-modal" class="article-modal-overlay hidden-force">
-      <div class="article-content">
+      <div class="article-content" id="modal-content-box">
         <span class="close-btn" id="close-article">&times;</span>
         <h2 id="article-title">Titel</h2>
         <span id="article-period" class="article-period">Årtal</span>
@@ -485,16 +375,18 @@ export function History() {
     </div>
   `;
 
-  // --- 4. LOGIK ---
+  // --- 5. LOGIK ---
 
   const epochGrid = section.querySelector('#epoch-grid');
   const articleModal = section.querySelector('#article-modal');
+  const modalContentBox = section.querySelector('#modal-content-box');
   const closeArticleBtn = section.querySelector('#close-article');
 
   const artTitle = section.querySelector('#article-title');
   const artPeriod = section.querySelector('#article-period');
   const artBody = section.querySelector('#article-body');
 
+  // Skapa Epok-korten
   epochs.forEach(epoch => {
     const card = document.createElement('div');
     card.className = 'history-card';
@@ -507,6 +399,9 @@ export function History() {
     `;
 
     card.addEventListener('click', () => {
+      // Återställ till standardfärg (Orange)
+      modalContentBox.classList.remove('theory-mode');
+
       artTitle.innerText = epoch.title;
       artPeriod.innerText = epoch.period;
       artBody.innerHTML = epoch.content;
@@ -516,6 +411,19 @@ export function History() {
     epochGrid.appendChild(card);
   });
 
+  // Logik för Lag/Teori-kortet
+  const lawCard = section.querySelector('#law-card');
+  lawCard.addEventListener('click', () => {
+    // Byt till Blå stil på titeln i modalen
+    modalContentBox.classList.add('theory-mode');
+
+    artTitle.innerText = lawData.title;
+    artPeriod.innerText = ""; // Inget årtal för lagar
+    artBody.innerHTML = lawData.content;
+    articleModal.classList.remove('hidden-force');
+  });
+
+  // Stäng modal
   closeArticleBtn.addEventListener('click', () => {
     articleModal.classList.add('hidden-force');
   });
