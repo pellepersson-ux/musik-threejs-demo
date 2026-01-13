@@ -173,9 +173,9 @@ export function History() {
 
         <h3>6. Exempel på kompositioner (Lyssningstips)</h3>
         <ul>
-            <li><i>Ave Maria ... Virgo serena</i> – Josquin des Prez (Ett av hans mest kända verk).</li>
-            <li><i>Spem in alium</i> – Thomas Tallis (Ett mäktigt verk för 40 stämmor).</li>
-            <li><i>Fair Phyllis I Saw</i> – John Farmer (En engelsk madrigal med tydligt tonmåleri och humor).</li>
+            <li><i>Ave Maria ... Virgo serena</i> – Josquin des Prez.</li>
+            <li><i>Spem in alium</i> – Thomas Tallis.</li>
+            <li><i>Fair Phyllis I Saw</i> – John Farmer.</li>
             <li><i>Missa Brevis (Credo)</i> – Palestrina.</li>
         </ul>
       `
@@ -186,15 +186,60 @@ export function History() {
       period: "ca 1600-1750",
       summary: "Pampig stil, motorisk rytm, opera och Bach.",
       content: `
-        <p><b>- Den pampiga stilen -</b></p>
-        <h3>Musiken</h3>
+        <p><b>- FAKTABLAD: MUSIK UNDER BAROCKEN -</b></p>
+
+        <h3>Vad betyder Barock?</h3>
+        <p>Ordet barock kommer troligen från portugisiskans "barocco", som betyder "ojämn pärla". I början användes ordet lite nedsättande för att beskriva något som var överdrivet, konstigt och svulstigt. Men idag är det namnet på en av musikhistoriens mest grandiosa epoker.</p>
+
+        <h3>1. Samtiden – Prakt och Makt</h3>
+        <p>Barocken var en tid av stora kontraster.</p>
         <ul>
-            <li><b>Motorisk rytm:</b> Stadig puls som en maskin.</li>
-            <li><b>Generalbas:</b> Basstämma + ackord.</li>
-            <li><b>Terrassdynamik:</b> Plötsliga växlingar mellan starkt och svagt.</li>
+            <li><b>Kunglig glans:</b> Detta var de enväldiga kungarnas tid (t.ex. Ludvig XIV i Frankrike). Man byggde enorma slott och kyrkor smyckade med guld och detaljer för att visa makt och rikedom.</li>
+            <li><b>Vetenskap:</b> Samtidigt som kungarna regerade, gjorde vetenskapsmän som Isaac Newton stora framsteg (tyngdlagen). Man började organisera världen, vilket även märktes i musiken som blev mer strukturerad.</li>
         </ul>
-        <h3>Kända Kompositörer</h3>
-        <ul><li>Johann Sebastian Bach</li><li>Georg Friedrich Händel</li><li>Antonio Vivaldi</li></ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken förändrades ganska drastiskt från renässansen. Här är de viktigaste begreppen:</p>
+        <ul>
+            <li><b>Generalbas (Basso Continuo):</b> Detta är barockens absolut viktigaste kännetecken! Det är en basstämma som spelas genom hela låten och utgör grunden (kompet). Den spelades oftast av ett basinstrument (t.ex. cello) och ett ackordinstrument (t.ex. cembalo).</li>
+            <li><b>Dur och Moll:</b> Under barocken övergav man de gamla "kyrkotonarterna" och började använda dur och moll, precis som vi gör i det mesta av dagens popmusik.</li>
+            <li><b>Terrassdynamik:</b> Man hade svårt att spela crescendo (stegvis starkare) och diminuendo (stegvis svagare) på instrument som cembalon. Istället växlade man plötsligt mellan starkt (forte) och svagt (piano), som terrasser i ett landskap.</li>
+            <li><b>Affektläran:</b> Man trodde att musik kunde påverka människors känslor (affekter) direkt. En låt skulle dock bara uttrycka <i>en</i> känsla. Var låten glad i början, skulle den vara glad hela vägen.</li>
+            <li><b>Melodi och ackompanjemang:</b> I början av barocken (monodin) gick man ifrån renässansens röriga flerstämmighet. Man ville ha en tydlig sångmelodi med ett enkelt komp till, för att texten skulle höras bättre (detta ledde till operans födelse).</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+            <li><b>Cembalo:</b> Barockens "piano". Skillnaden är att strängarna knäpps (som på en gitarr) istället för att slås an med hammare. Detta ger ett spetsigt och tydligt ljud, men man kan inte påverka volymen genom att trycka hårdare på tangenterna.</li>
+            <li><b>Orgel:</b> Kyrkorgeln var enormt viktig och utvecklades till ett mäktigt instrument.</li>
+            <li><b>Stråkinstrument:</b> Fiolen (violinen) tog över helt från de äldre instrumenten och blev orkesterns viktigaste instrument.</li>
+        </ul>
+
+        <h3>4. Nya Musikstilar</h3>
+        <p>Under barocken föddes flera genrer som vi lyssnar på än idag:</p>
+        <ul>
+            <li><b>Opera:</b> Uppstod i Italien runt år 1600. Man ville återskapa de gamla grekiska dramerna men lade till musik. Det är teater där man sjunger replikerna.</li>
+            <li><b>Oratorium:</b> Påminner om opera (med kör, solister och orkester) men har religiös text och spelas inte upp som teater (ingen scenografi eller skådespeleri).</li>
+            <li><b>Konsert (Concerto):</b> En form där en solist (eller en liten grupp) spelar "mot" hela orkestern. Vivaldis <i>De fyra årstiderna</i> är violinkonserter.</li>
+            <li><b>Fuga:</b> En mycket avancerad form av kanon där en melodi (tema) presenteras och sedan vandrar runt mellan olika stämmor enligt stränga regler. Bach var mästaren på detta.</li>
+        </ul>
+
+        <h3>5. De stora "Barock-giganterna"</h3>
+        <ul>
+            <li><b>Claudio Monteverdi (1567–1643):</b> Övergångsfiguren mellan renässans och barock. Han skrev en av de allra första riktiga operorna, <i>L'Orfeo</i>.</li>
+            <li><b>Antonio Vivaldi (1678–1741):</b> Kallades "Den röde prästen". Han verkade i Venedig och var expert på violinkonserter.</li>
+            <li><b>Johann Sebastian Bach (1685–1750):</b> Den kanske viktigaste tonsättaren i hela musikhistorien. Han var inte superkänd som kompositör under sin livstid (mer som organist), men hans musik ses idag som perfektion. När han dog 1750 anser man att barocken tog slut.</li>
+            <li><b>Georg Friedrich Händel (1685–1759):</b> Tysk som flyttade till London och blev superkändis. Skrev pampig musik för kungahuset och stora oratorier.</li>
+        </ul>
+
+        <h3>6. Exempel på kompositioner (Lyssningstips)</h3>
+        <ul>
+            <li><i>Våren</i> (ur De fyra årstiderna) – Antonio Vivaldi.</li>
+            <li><i>Toccata och fuga i d-moll</i> – J.S. Bach.</li>
+            <li><i>Halleluja-kören</i> (ur Messias) – G.F. Händel.</li>
+            <li><i>Air</i> – J.S. Bach (Lugn och vacker orkestermusik).</li>
+            <li><i>L'Orfeo</i> – Claudio Monteverdi (Tidig opera).</li>
+        </ul>
       `
     },
     {
