@@ -369,18 +369,64 @@ export function History() {
     {
       id: "modernism",
       title: "Modernismen",
-      period: "ca 1910-nutid",
+      period: "ca 1900-nutid",
       summary: "Reglerna rivs! Atonalitet, experiment och kaos.",
       content: `
-        <p><b>- Tiden då reglerna revs -</b></p>
-        <h3>Musiken</h3>
+        <p><b>- FAKTABLAD: MUSIK UNDER MODERNISMEN -</b></p>
+        
+        <h3>Vad är Modernism?</h3>
+        <p>Modernismen inom musiken inleddes strax efter år 1900. Det var en tid då kompositörerna kände att de gamla reglerna för hur musik skulle låta var "förbrukade". Man ville experimentera och hitta helt nya sätt att uttrycka sig på.</p>
+        <p>Perioden brukar ibland delas upp i modernism (början av 1900-talet) och postmodernism (från ca 1960-talet), men man använder ofta samlingsnamnet "1900-talsmusik".</p>
+
+        <h3>1. Samtiden – Experimentens epok</h3>
+        <p>Modernismen handlade om att bryta mot traditioner.</p>
         <ul>
-            <li><b>Dissonanser:</b> Det låter skevt och falskt.</li>
-            <li><b>Atonalitet:</b> Ingen tonart alls.</li>
-            <li><b>Nya ljud:</b> Syntar och inspelningar.</li>
+            <li><b>Nya regler:</b> Många tyckte att den gamla musiken (som byggde på dur och moll) hade tänjts till bristningsgränsen under romantiken. Man behövde "nya sätt att ge kompositioner form och fason".</li>
+            <li><b>Framtidstro och uppror:</b> Det var en tid av experiment där man sa adjö till det gamla och skapade massor av nya stilar och trender.</li>
         </ul>
-        <h3>Kända Kompositörer</h3>
-        <ul><li>Stravinsky</li><li>Schönberg</li><li>John Cage</li></ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken under 1900-talet kan låta väldigt olika, men här är några vanliga drag som skiljer den från tidigare epoker:</p>
+        <ul>
+            <li><b>Dissonanser och Atonalitet:</b> Tidigare ansågs vissa toner skära sig (låta falskt) och man var tvungen att "lösa upp" dem till vackra ackord. Under modernismen "befriade" man dissonansen. Musiken behövde inte längre gå i dur eller moll (tonalitet), utan kunde vara atonal (utan tonart).</li>
+            <li><b>Rytm i fokus:</b> Rytmerna blev viktigare och mer komplicerade. Man kunde använda "oregelbundna" takter och accenter som gjorde musiken ryckig och oförutsägbar, som i Stravinskijs <i>Våroffer</i>.</li>
+            <li><b>Nya klangfärger:</b> Man började använda instrumenten på nya sätt för att skapa konstiga ljud, och senare kom även elektroniska instrument och inspelade ljud (tonband).</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+            <li><b>Orkestern:</b> Fanns kvar, men användes annorlunda. Slagverk fick en mycket större roll (ibland spelade bara slagverkare!).</li>
+            <li><b>Elektronik:</b> Under andra halvan av seklet kom synthesizers och datorer.</li>
+            <li><b>Preparerat piano:</b> Uppfinnaren John Cage kom på att man kunde lägga skruvar, gummi och annat inuti flygeln för att få det att låta som en hel slagverksorkester.</li>
+        </ul>
+
+        <h3>4. Musikstilar och Genrer</h3>
+        <p>Eftersom alla experimenterade åt olika håll uppstod många olika stilar:</p>
+        <ul>
+            <li><b>Impressionism:</b> (Tidigt 1900-tal). Precis som i konsten ville man måla stämningar och ögonblick snarare än berätta en tydlig historia. Musiken var ofta drömsk och svävande (t.ex. Debussy).</li>
+            <li><b>Expressionism:</b> Musik som uttryckte stark ångest och våldsamma känslor, ofta genom atonal musik (t.ex. Schönberg).</li>
+            <li><b>Neoklassicism:</b> En stil där man tittade tillbaka på 1700-talet (som Mozart och Bach) men kryddade musiken med moderna, "felaktiga" toner (t.ex. Stravinskij).</li>
+            <li><b>Minimalism:</b> Musik som bygger på att man upprepar korta melodisnuttar om och om igen under lång tid, vilket skapar en hypnos-liknande känsla (t.ex. Philip Glass).</li>
+            <li><b>Aleatorisk musik (Slumpmusik):</b> Musik där slumpen avgör vad som händer. John Cage kunde använda tärningar eller stjärnkartor för att bestämma vilka toner som skulle spelas.</li>
+        </ul>
+
+        <h3>5. Viktiga Tonsättare</h3>
+        <ul>
+            <li><b>Claude Debussy (1862–1918):</b> Fransman som skapade impressionismen.</li>
+            <li><b>Igor Stravinskij (1882–1971):</b> En kameleont som bytte stil flera gånger. Hans balett <i>Våroffer</i> orsakade skandal och slagsmål på premiären för att den var så modern.</li>
+            <li><b>Arnold Schönberg (1874–1951):</b> Uppfann "tolvtonsmetoden", ett matematiskt sätt att komponera så att alla 12 toner används lika mycket (inget dur eller moll).</li>
+            <li><b>John Cage (1912–1992):</b> Amerikansk filosof och kompositör som ifrågasatte vad musik egentligen är. Mest känd för att ha skrivit ett stycke som är helt tyst.</li>
+            <li><b>Philip Glass (1937–):</b> Känd minimalist som även skrivit mycket filmmusik.</li>
+        </ul>
+
+        <h3>6. Exempel på kompositioner (Lyssningstips)</h3>
+        <ul>
+            <li><i>Våroffer</i> (Le Sacre du Printemps) – Igor Stravinskij. (Balettmusik med våldsamma rytmer som förändrade allt).</li>
+            <li><i>Boléro</i> – Maurice Ravel. (Ett enda långt crescendo där samma melodi upprepas om och om igen i 15 minuter).</li>
+            <li><i>4’33”</i> – John Cage. (Ett verk där musikern sitter tyst i 4 minuter och 33 sekunder. Publikens hostningar och ljudet i rummet blir musiken).</li>
+            <li><i>Gymnopédies</i> – Erik Satie. (Lugn, enkel och vacker pianomusik).</li>
+            <li><i>Koyaanisqatsi</i> – Philip Glass. (Minimalistisk musik, ofta använd i film).</li>
+        </ul>
       `
     }
   ];
@@ -389,7 +435,7 @@ export function History() {
   section.innerHTML = styles + `
     <div class="page-detail history-container">
       
-      <h1 style="color: #ffffff;">Musikhistoria 📜</h1>
+      <h1 style="color: #ffffff;">Musikhistoria 📜 </h1>
       <p style="color: #e0e0e0; max-width:600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
         Res genom tiderna och upptäck hur musiken har utvecklats från medeltid till nutid.
       </p>
@@ -398,7 +444,10 @@ export function History() {
       <div class="grid-section">
         <div class="history-card card-game" id="open-storybook-btn">
           <span class="card-label">Interaktiv Berättelse</span>
-          <h3 class="card-title">Rockens Historia</h3>
+          <h3 class="card-title">Rockens Historia 
+
+[Image of electric guitar]
+</h3>
           <p style="color:#444;">En lättläst bilderbok om hur rockmusiken föddes.</p>
           <span class="read-more-btn">Öppna boken ➡</span>
         </div>
