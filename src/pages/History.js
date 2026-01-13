@@ -1,17 +1,3 @@
-Det har du helt rätt i! Det är mycket mer logiskt.Historia ska handla om dåtid, och Teori / Samhälle om hur det fungerar.
-
-Då gör vi så här:
-
-Vi städar History.js: Vi tar bort upphovsrätten därifrån så att den bara handlar om musikhistoria och "Rockens historia" - boken.
-
-Vi skapar / uppdaterar Theory.js: Vi lägger in upphovsrättstexten där i en snygg blå design(eftersom teori ofta kodas blått i läromedel, medan historia är orange / gult).
-
-Här kommer koden för båda filerna.
-
-1. Uppdaterad src / pages / History.js
-  (Nu renodlad för historia igen, med vit text på rubrikerna)
-
-JavaScript
 
 export function History() {
   const section = document.createElement('section');
