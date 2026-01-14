@@ -74,24 +74,16 @@ export function WorldMusic() {
             .polygonSideColor(() => 'rgba(0, 100, 0, 0.15)')
 
             // --- HÄR ÄR FIXEN FÖR NAMNEN (Hover) ---
+            // --- FELSÖKNINGSLÄGE ---
             .polygonLabel(d => {
-                // Vi kollar vad som finns i datan
-                const props = d.properties;
+                // Skriv ut datan i webbläsarens konsol (F12)
+                console.log("DATA FÖR DETTA LAND:", d.properties);
 
-                // Hämta landskod (två bokstäver)
-                const code = props.ISO_A2;
-
-                // Försök hitta namnet på olika ställen i filen
-                let countryName = props.ADMIN || props.NAME || props.gu_a3 || "Okänt land";
-
-                // Om vi har ett svenskt namn i musicData, använd det istället!
-                if (musicData[code]) {
-                    countryName = musicData[code].name;
-                }
-
+                // Skriv ut ALLA egenskaper direkt i rutan så vi ser vad som finns
                 return `
-                    <div style="background: #333; color: #fff; padding: 5px 10px; border-radius: 4px; font-family: sans-serif;">
-                       <b>${countryName}</b>
+                    <div style="background: black; color: yellow; padding: 10px; max-width: 200px;">
+                        <b>TEST-DATA:</b><br>
+                        ${Object.keys(d.properties).join(', ')}
                     </div>
                 `;
             })
