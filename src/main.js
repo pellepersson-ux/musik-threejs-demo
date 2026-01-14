@@ -1,51 +1,61 @@
-import './style.css'; // Eller din styles-import
+import './style.css';
 import { Header } from './components/Header.js';
-import { Footer } from './components/Footer.js'; // Antar att denna finns baserat på bilderna
-import { Home } from './pages/Home.js';
+import { Footer } from './components/Footer.js'; // Om du har kvar footer
+
+// Importera alla sidor
+import { Home } from './pages/Home.js'; // Se till att denna fil finns!
 import { Game } from './pages/Game.js';
-import { WorldMusic } from './pages/WorldMusic.js'; // Din nya sida
+import { WorldMusic } from './pages/WorldMusic.js';
+import { History } from './pages/History.js';       // Lägger till dessa tre
+import { Theory } from './pages/Theory.js';
+import { Instrument } from './pages/Instrument.js';
 
 const app = document.querySelector('#app');
 
 function renderPage(pageName) {
-  // 1. Töm appen
   app.innerHTML = '';
-
-  // 2. Lägg till Header (som nu har Världsmusik-knappen)
   app.appendChild(Header());
 
-  // 3. Lägg till själva sidan
   const main = document.createElement('main');
   main.className = 'site-main';
 
-  if (pageName === 'home') {
-    // Om Home.js exporterar en funktion, kör den. Annars gör vi en enkel fallback.
-    try {
+  // Enkel "router" som väljer rätt sida
+  switch (pageName) {
+    case 'home':
+      // Om Home.js krånglar, visar vi en enkel text istället för att krascha
+      try { main.appendChild(Home()); }
+      catch { main.innerHTML = '<h1>Hem</h1><p>Välkommen!</p>'; }
+      break;
+    case 'history':
+      main.appendChild(History());
+      break;
+    case 'theory':
+      main.appendChild(Theory());
+      break;
+    case 'instrument':
+      main.appendChild(Instrument());
+      break;
+    case 'game':
+      main.appendChild(Game());
+      break;
+    case 'world':
+      main.appendChild(WorldMusic());
+      break;
+    default:
       main.appendChild(Home());
-    } catch (e) {
-      main.innerHTML = '<h1>Välkommen hem!</h1><p>Klicka i menyn.</p>';
-    }
-  } else if (pageName === 'game') {
-    main.appendChild(Game());
-  } else if (pageName === 'world') {
-    main.appendChild(WorldMusic());
   }
 
   app.appendChild(main);
+  if (typeof Footer === 'function') app.appendChild(Footer());
 
-  // 4. Lägg till Footer (om du vill ha den)
-  // app.appendChild(Footer()); 
-
-  // 5. Koppla händelser till knapparna i Headern
-  // Vi måste göra detta EFTER att headern lagts till i DOM:en
-  document.querySelector('#nav-home').addEventListener('click', () => renderPage('home'));
-  document.querySelector('#nav-game').addEventListener('click', () => renderPage('game'));
-
-  const worldBtn = document.querySelector('#nav-world');
-  if (worldBtn) {
-    worldBtn.addEventListener('click', () => renderPage('world'));
-  }
+  // Koppla event listeners till knapparna
+  document.querySelector('#nav-home')?.addEventListener('click', () => renderPage('home'));
+  document.querySelector('#nav-history')?.addEventListener('click', () => renderPage('history'));
+  document.querySelector('#nav-theory')?.addEventListener('click', () => renderPage('theory'));
+  document.querySelector('#nav-instrument')?.addEventListener('click', () => renderPage('instrument'));
+  document.querySelector('#nav-game')?.addEventListener('click', () => renderPage('game'));
+  document.querySelector('#nav-world')?.addEventListener('click', () => renderPage('world'));
 }
 
-// Starta appen på startsidan
+// Starta på hemsidan
 renderPage('home');
