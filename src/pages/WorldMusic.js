@@ -7,47 +7,53 @@ export function WorldMusic() {
     section.style.position = "relative";
     section.style.overflow = "hidden";
 
-    // --- 1. DATA: Nu med KOORDINATER (lat/lng) för texten ---
+    // --- 1. DATA: Nu med "name" (för etiketten) och koordinater ---
     const musicData = {
         SE: {
-            title: "Sverige: Folkmusik",
+            name: "Sverige", // Det som står svävande på globen
+            title: "Sverige: Folkmusik", // Det som står i rutan när man klickar
             text: "Fiol, nyckelharpa och dansen 'polska'.",
-            lat: 62.0, lng: 15.0 // Koordinater för texten
+            lat: 62.0, lng: 15.0
         },
         IE: {
+            name: "Irland",
             title: "Irland: Jigs & Reels",
             text: "Snabba fioler, tin whistle och pubkultur.",
             lat: 53.0, lng: -8.0
         },
         BR: {
+            name: "Brasilien",
             title: "Brasilien: Samba",
             text: "Rytmisk karnevalsmusik och Bossa Nova.",
             lat: -14.2, lng: -51.9
         },
         IN: {
+            name: "Indien",
             title: "Indien: Raga",
             text: "Sitar, Tabla och meditativa toner.",
             lat: 20.5, lng: 78.9
         },
         US: {
+            name: "USA",
             title: "USA: Blues & Jazz",
             text: "Rötterna till modern pop och rock.",
             lat: 39.0, lng: -100.0
         },
         ES: {
+            name: "Spanien",
             title: "Spanien: Flamenco",
             text: "Passionerad gitarr, sång och dans.",
             lat: 40.0, lng: -3.7
         },
         CN: {
+            name: "Kina",
             title: "Kina: Opera",
             text: "Pekingopera och pentatoniska skalor.",
             lat: 35.0, lng: 104.0
         }
     };
 
-    // Skapa en lista av länderna för att kunna rita ut texten
-    // Vi gör om objektet ovan till en array
+    // Gör om datan till en lista för etiketterna
     const labels = Object.keys(musicData).map(key => ({
         iso: key,
         ...musicData[key]
@@ -58,7 +64,7 @@ export function WorldMusic() {
     <style>
       #globe-viz { width: 100%; height: 100%; }
       .overlay-title {
-        position: absolute; top: 100px; left: 20px; /* Flyttad ner lite pga menyn */
+        position: absolute; top: 100px; left: 20px;
         color: #fff; font-family: 'Outfit', sans-serif; 
         pointer-events: none; z-index: 10;
       }
@@ -85,7 +91,7 @@ export function WorldMusic() {
 
     <div class="overlay-title">
       <h1>Världsmusik 🌏</h1>
-      <p>Snurra på jorden och klicka på texterna!</p>
+      <p>Snurra på jorden och klicka på länderna!</p>
     </div>
 
     <div id="globe-viz"></div>
@@ -101,11 +107,8 @@ export function WorldMusic() {
   `;
 
     // --- 3. INITIERA GLOBEN ---
-    // Vi använder setTimeout för att vara säkra på att div:en finns
     setTimeout(() => {
         const vizDiv = section.querySelector('#globe-viz');
-
-        // Hämta biblioteken om de inte finns (Säkerhetsåtgärd)
         if (!window.Globe) return;
 
         const world = Globe()
@@ -113,39 +116,48 @@ export function WorldMusic() {
             .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
             .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
 
-            // --- HÄR ÄR NYHETEN: TEXT PÅ GLOBEN ---
+            // --- ETIKETTER (Text som svävar) ---
             .labelsData(labels)
             .labelLat(d => d.lat)
             .labelLng(d => d.lng)
-            .labelText(d => d.iso) // Visar landskoden (t.ex. "SE"). Ändra till d.title om du vill ha hela namnet!
+            .labelText(d => d.name) // Nu använder vi 'name' (t.ex "Sverige") istället för koden
             .labelSize(1.5)
             .labelDotRadius(0.5)
-            .labelColor(() => '#ffcb77') // Gulaktig text
+            .labelColor(() => '#ffcb77')
             .labelResolution(2)
 
-            // Hantera klick på länder
-            .polygonsData(null)
+            // --- LÄNDERNA (Polygoner) ---
+            .polygonsData([]) // Vi fyller på dessa i fetch nedan
             .polygonAltitude(0.06)
             .polygonCapColor(() => 'rgba(200, 200, 200, 0.6)')
             .polygonSideColor(() => 'rgba(0, 100, 0, 0.15)')
+
+            // Här fixar vi "undefined"-felet i hover-rutan!
             .polygonLabel(({ properties: d }) => `
-                <div style="background: #333; color: #fff; padding: 5px;">
-                  <b>${d.NAME}</b>
+                <div style="background: #333; color: #fff; padding: 5px; border-radius: 4px;">
+                  <b>${d.ADMIN}</b> 
                 </div>
             `)
+            // ADMIN är namnet på landet i den nya kartfilen vi hämtar nedan
+
             .onPolygonClick(({ properties: d }) => {
-                if (musicData[d.ISO_A2]) showModal(musicData[d.ISO_A2]);
+                // ISO_A2 är landskoden (t.ex. "SE") i den nya kartfilen
+                if (musicData[d.ISO_A2]) {
+                    showModal(musicData[d.ISO_A2]);
+                }
             });
 
-        // Ladda kartdata
-        fetch('//unpkg.com/world-atlas/countries-110m.json').then(res => res.json()).then(data => {
-            const countries = window.topojson.feature(data, data.objects.countries).features;
-            world.polygonsData(countries);
-            world.controls().autoRotate = true;
-            world.controls().autoRotateSpeed = 0.5;
-        });
+        // --- HÄMTA BÄTTRE KARTDATA (GeoJSON) ---
+        // Denna fil innehåller både former OCH namn (ADMIN)
+        fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+            .then(res => res.json())
+            .then(countries => {
+                world.polygonsData(countries.features);
+                world.controls().autoRotate = true;
+                world.controls().autoRotateSpeed = 0.5;
+            });
 
-        // Modal-logik
+        // Modal-logik (Popup-rutan)
         const modal = section.querySelector('#modal');
         const closeBtn = section.querySelector('.close-btn');
 
