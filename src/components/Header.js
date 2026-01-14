@@ -1,36 +1,22 @@
-export function Header(state) {
+export function Header() {
   const header = document.createElement('header');
   header.className = 'site-header';
+  header.style.padding = '1rem';
+  header.style.background = '#222';
+  header.style.color = 'white';
+  header.style.display = 'flex';
+  header.style.justifyContent = 'space-between';
+  header.style.alignItems = 'center';
+  header.style.borderBottom = '2px solid #444';
 
   header.innerHTML = `
-    <div class="header-content">
-      <a href="/" class="logo" data-link aria-label="Tonverkstan Hem">
-        Tonverkstan 🎵
-      </a>
-      
-      <nav class="main-nav" aria-label="Huvudmeny">
-       <ul class="nav-links">
-        <li><a href="/" class="${state.currentPage === '/' ? 'active' : ''}" data-link>Hem</a></li>
-        <li><a href="/instrument" class="${state.currentPage.startsWith('/instrument') ? 'active' : ''}" data-link>Instrument</a></li>
-        <li><a href="/ensemble" class="${state.currentPage === '/ensemble' ? 'active' : ''}" data-link>Ensemble</a></li>
-        <li><a href="/historia" class="${state.currentPage === '/historia' ? 'active' : ''}" data-link>Historia</a></li>
-        <li><a href="/teori" class="${state.currentPage === '/teori' ? 'active' : ''}" data-link>Teori</a></li>
-        <li><a href="/spel" class="${state.currentPage === '/spel' ? 'active' : ''}" data-link>Spel</a></li>
-      </ul>
-      </nav>
-
-      <div class="header-controls">
-        <button class="theme-toggle" aria-label="Växla tema">
-          ${state.isDark ? '☀️' : '🌙'}
-        </button>
-      </div>
-    </div>
+    <div class="logo" style="font-weight: bold; font-size: 1.5rem;">Tonverkstan 🎶</div>
+    <nav class="main-nav">
+      <button id="nav-home" style="margin: 0 5px; padding: 8px 15px; cursor: pointer;">Hem 🏠</button>
+      <button id="nav-game" style="margin: 0 5px; padding: 8px 15px; cursor: pointer;">Spel 🎮</button>
+      <button id="nav-world" style="margin: 0 5px; padding: 8px 15px; cursor: pointer;">Världsmusik 🌍</button>
+    </nav>
   `;
-
-  const themeToggle = header.querySelector('.theme-toggle');
-  themeToggle.addEventListener('click', () => {
-    window.dispatchEvent(new CustomEvent('toggle-theme'));
-  });
 
   return header;
 }
