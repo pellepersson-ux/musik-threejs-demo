@@ -7,57 +7,18 @@ export function WorldMusic() {
     section.style.position = "relative";
     section.style.overflow = "hidden";
 
-    // --- 1. DATA: Nu med "name" (för etiketten) och koordinater ---
+    // --- 1. DIN SVENSKA DATA ---
+    // Här lägger du bara in de länder du har specifik musikinfo om.
+    // Alla andra länder får sitt engelska namn automatiskt.
     const musicData = {
-        SE: {
-            name: "Sverige", // Det som står svävande på globen
-            title: "Sverige: Folkmusik", // Det som står i rutan när man klickar
-            text: "Fiol, nyckelharpa och dansen 'polska'.",
-            lat: 62.0, lng: 15.0
-        },
-        IE: {
-            name: "Irland",
-            title: "Irland: Jigs & Reels",
-            text: "Snabba fioler, tin whistle och pubkultur.",
-            lat: 53.0, lng: -8.0
-        },
-        BR: {
-            name: "Brasilien",
-            title: "Brasilien: Samba",
-            text: "Rytmisk karnevalsmusik och Bossa Nova.",
-            lat: -14.2, lng: -51.9
-        },
-        IN: {
-            name: "Indien",
-            title: "Indien: Raga",
-            text: "Sitar, Tabla och meditativa toner.",
-            lat: 20.5, lng: 78.9
-        },
-        US: {
-            name: "USA",
-            title: "USA: Blues & Jazz",
-            text: "Rötterna till modern pop och rock.",
-            lat: 39.0, lng: -100.0
-        },
-        ES: {
-            name: "Spanien",
-            title: "Spanien: Flamenco",
-            text: "Passionerad gitarr, sång och dans.",
-            lat: 40.0, lng: -3.7
-        },
-        CN: {
-            name: "Kina",
-            title: "Kina: Opera",
-            text: "Pekingopera och pentatoniska skalor.",
-            lat: 35.0, lng: 104.0
-        }
+        SE: { name: "Sverige", title: "Sverige: Folkmusik", text: "Fiol, nyckelharpa och polska.", lat: 62.0, lng: 15.0 },
+        IE: { name: "Irland", title: "Irland: Folk", text: "Jigs, reels och pubkultur.", lat: 53.0, lng: -8.0 },
+        BR: { name: "Brasilien", title: "Brasilien: Samba", text: "Karneval och Bossa Nova.", lat: -14.2, lng: -51.9 },
+        IN: { name: "Indien", title: "Indien: Raga", text: "Sitar och Tabla.", lat: 20.5, lng: 78.9 },
+        US: { name: "USA", title: "USA: Blues & Jazz", text: "Musikhistoriens vagga.", lat: 39.0, lng: -100.0 },
+        ES: { name: "Spanien", title: "Spanien: Flamenco", text: "Gitarr och dans.", lat: 40.0, lng: -3.7 },
+        CN: { name: "Kina", title: "Kina: Opera", text: "Pekingopera.", lat: 35.0, lng: 104.0 }
     };
-
-    // Gör om datan till en lista för etiketterna
-    const labels = Object.keys(musicData).map(key => ({
-        iso: key,
-        ...musicData[key]
-    }));
 
     // --- 2. HTML STRUKTUR ---
     section.innerHTML = `
@@ -77,11 +38,11 @@ export function WorldMusic() {
       .modal-overlay.active { opacity: 1; pointer-events: all; }
       .modal-box {
         background: #fff; max-width: 500px; width: 100%;
-        padding: 30px; border-radius: 12px; position: relative;
+        padding: 30px; border-radius: 12px; position: relative; color: #333;
       }
       .close-btn {
         position: absolute; top: 10px; right: 15px;
-        font-size: 2rem; cursor: pointer;
+        font-size: 2rem; cursor: pointer; color: #333;
       }
       .hint-text {
         position: absolute; bottom: 20px; width: 100%; text-align: center;
@@ -91,11 +52,11 @@ export function WorldMusic() {
 
     <div class="overlay-title">
       <h1>Världsmusik 🌏</h1>
-      <p>Snurra på jorden och klicka på länderna!</p>
+      <p>Håll musen över länderna för att se namn!</p>
     </div>
 
     <div id="globe-viz"></div>
-    <div class="hint-text">Laddar 3D-karta...</div>
+    <div class="hint-text">Laddar karta...</div>
 
     <div id="modal" class="modal-overlay">
       <div class="modal-box">
@@ -106,7 +67,7 @@ export function WorldMusic() {
     </div>
   `;
 
-    // --- 3. INITIERA GLOBEN ---
+    // --- 3. LOGIK ---
     setTimeout(() => {
         const vizDiv = section.querySelector('#globe-viz');
         if (!window.Globe) return;
@@ -116,56 +77,63 @@ export function WorldMusic() {
             .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
             .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
 
-            // --- ETIKETTER (Text som svävar) ---
-            .labelsData(labels)
-            .labelLat(d => d.lat)
-            .labelLng(d => d.lng)
-            .labelText(d => d.name) // Nu använder vi 'name' (t.ex "Sverige") istället för koden
-            .labelSize(1.5)
-            .labelDotRadius(0.5)
-            .labelColor(() => '#ffcb77')
-            .labelResolution(2)
-
-            // --- LÄNDERNA (Polygoner) ---
-            .polygonsData([]) // Vi fyller på dessa i fetch nedan
+            // Konfigurera länderna
             .polygonAltitude(0.06)
             .polygonCapColor(() => 'rgba(200, 200, 200, 0.6)')
             .polygonSideColor(() => 'rgba(0, 100, 0, 0.15)')
+            .onPolygonHover(hoverD => {
+                world.polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
+                    .polygonCapColor(d => d === hoverD ? '#3498db' : 'rgba(200, 200, 200, 0.6)');
+            })
 
-            // Här fixar vi "undefined"-felet i hover-rutan!
-            .polygonLabel(({ properties: d }) => `
-                <div style="background: #333; color: #fff; padding: 5px; border-radius: 4px;">
-                  <b>${d.ADMIN}</b> 
-                </div>
-            `)
-            // ADMIN är namnet på landet i den nya kartfilen vi hämtar nedan
+            // --- HÄR ÄR FIXEN FÖR NAMNEN ---
+            .polygonLabel(d => {
+                // d = hela dataobjektet för landet
+                // d.properties = där infon ligger i GeoJSON-filen
 
-            .onPolygonClick(({ properties: d }) => {
-                // ISO_A2 är landskoden (t.ex. "SE") i den nya kartfilen
-                if (musicData[d.ISO_A2]) {
-                    showModal(musicData[d.ISO_A2]);
+                const code = d.properties.ISO_A2; // Landskod (t.ex SE)
+                const geoJsonName = d.properties.ADMIN || d.properties.NAME; // Namn från filen (t.ex Sweden)
+
+                // 1. Kolla om vi har ett svenskt namn i vår lista
+                let displayName = geoJsonName;
+                if (musicData[code]) {
+                    displayName = musicData[code].name;
+                }
+
+                // 2. Returnera HTML-rutan
+                return `
+                    <div style="background: #333; color: #fff; padding: 4px 8px; border-radius: 4px; font-family: sans-serif;">
+                      <b>${displayName}</b>
+                    </div>
+                `;
+            })
+
+            .onPolygonClick(d => {
+                const code = d.properties.ISO_A2;
+                if (musicData[code]) {
+                    showModal(musicData[code]);
                 }
             });
 
-        // --- HÄMTA BÄTTRE KARTDATA (GeoJSON) ---
-        // Denna fil innehåller både former OCH namn (ADMIN)
+        // Hämta kartdata som garanterat har 'ADMIN' och 'ISO_A2'
         fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
             .then(res => res.json())
             .then(countries => {
                 world.polygonsData(countries.features);
+
+                // Rotera långsamt
                 world.controls().autoRotate = true;
                 world.controls().autoRotateSpeed = 0.5;
             });
 
-        // Modal-logik (Popup-rutan)
+        // Modal (Popup) hantering
         const modal = section.querySelector('#modal');
         const closeBtn = section.querySelector('.close-btn');
-
-        function showModal(data) {
+        const showModal = (data) => {
             section.querySelector('#modal-title').textContent = data.title;
             section.querySelector('#modal-text').textContent = data.text;
             modal.classList.add('active');
-        }
+        };
         closeBtn.onclick = () => modal.classList.remove('active');
         modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
