@@ -4,7 +4,7 @@ export function Game() {
   section.style.textAlign = 'center';
   section.style.height = 'calc(100vh - 80px)';
   section.style.overflow = 'hidden';
-  section.style.background = 'linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)'; // "Disco" gradient
+  section.style.background = 'linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)';
   section.style.color = '#fff';
   section.style.display = 'flex';
   section.style.flexDirection = 'column';
@@ -12,7 +12,6 @@ export function Game() {
   section.style.alignItems = 'center';
 
   // --- Ljudmotor (Web Audio API) ---
-  // Skapar en enkel synthesizer ton
   let audioCtx;
   function playTone() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -23,11 +22,11 @@ export function Game() {
     osc.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 
-    // Slumpa frekvens (tonhöjd) för variation
-    const freqs = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]; // C-dur skala
+    // Slumpa frekvens (tonhöjd)
+    const freqs = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
     osc.frequency.value = freqs[Math.floor(Math.random() * freqs.length)];
 
-    osc.type = 'triangle'; // Mjukare ljud än square/sawtooth
+    osc.type = 'triangle';
 
     // Volymkurva (fade out)
     gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
@@ -54,7 +53,6 @@ export function Game() {
         margin-bottom: 40px;
       }
       
-      /* Den stora knappen (Drum Pad) */
       .drum-pad {
         width: 200px;
         height: 200px;
@@ -108,3 +106,37 @@ export function Game() {
   const rankText = section.querySelector('#rank-text');
 
   let score = 0;
+
+  const titles = [
+    { limit: 0, text: "Publik" },
+    { limit: 10, text: "Roadie 🔌" },
+    { limit: 25, text: "Trummis 🥁" },
+    { limit: 50, text: "Gitarrist 🎸" },
+    { limit: 100, text: "Rockstjärna ⭐" },
+    { limit: 200, text: "Legend 👑" }
+  ];
+
+  pad.addEventListener('click', () => {
+    score++;
+    scoreSpan.innerText = score;
+    playTone();
+
+    const currentTitle = titles.slice().reverse().find(t => score >= t.limit);
+    if (currentTitle) {
+      rankText.innerText = currentTitle.text;
+    }
+
+    pad.classList.remove('pulse-anim');
+    void pad.offsetWidth;
+    pad.classList.add('pulse-anim');
+
+    if (score % 5 === 0) {
+      const r = Math.floor(Math.random() * 255);
+      const g = Math.floor(Math.random() * 255);
+      const b = Math.floor(Math.random() * 255);
+      pad.style.background = `radial-gradient(circle at 30% 30%, rgb(${r},${g},${b}), #000)`;
+    }
+  });
+
+  return section;
+}
