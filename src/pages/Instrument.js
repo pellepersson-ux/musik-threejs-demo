@@ -2,16 +2,16 @@ export function Instrument() {
   const container = document.createElement('div');
   container.className = 'instrument-page';
 
-  // --- 1. DATA: Nu med spellistor för varje instrument ---
-  // Du kan enkelt lägga till fler rader i "videos"-listorna.
+  // --- 1. DATA ---
   const instruments = [
     {
       id: 'piano',
       name: 'Piano & Keyboard',
       desc: 'Från vackra melodier till svängiga ackord.',
+      // Bild på tangenter
       img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80',
       videos: [
-        { title: 'Introduktion: Hitta på tangenterna', id: '71-cFCI-v14' }, // Byt ID
+        { title: 'Introduktion: Hitta på tangenterna', id: '71-cFCI-v14' },
         { title: 'Dina första ackord (C, F, G)', id: '4I_nY6t-XoA' },
         { title: 'Spela bastoner med vänster hand', id: 'vG-2q-k_OQ8' }
       ]
@@ -20,6 +20,7 @@ export function Instrument() {
       id: 'guitar',
       name: 'Gitarr',
       desc: 'Lär dig ackord, riff och olika kompstilar.',
+      // Bild på akustisk/elgitarr
       img: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Introduktion: Strängarna & Greppbrädan', id: 'CgVqX0a49HM' },
@@ -28,30 +29,32 @@ export function Instrument() {
       ]
     },
     {
+      id: 'bass',
+      name: 'Elbas',
+      desc: 'Det tunga fundamentet. Coolast i bandet.',
+      // NY BILD: Tydlig Elbas (tjocka strängar)
+      img: 'https://images.unsplash.com/photo-1460039230329-eb070fc6c77c?auto=format&fit=crop&w=600&q=80',
+      videos: [
+        { title: 'Introduktion till Elbas', id: 'PYU7tJ6s5V8' },
+        { title: 'Spela med plektrum vs fingrar', id: 'D5h3q8T6r4k' },
+        { title: 'Gångbas: Grunderna', id: 'I5X8x5z9w6w' }
+      ]
+    },
+    {
       id: 'drums',
       name: 'Trummor',
       desc: 'Håll takten! Lär dig grundkomp och fills.',
+      // Bild på trumset
       img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Första trumkompet (Basic Rock)', id: 'htblwKyO4t4' },
         { title: 'Fills: Hur man gör övergångar', id: 'X7X2S_3wL0E' },
         { title: 'Hi-hat teknik', id: 'k9y4kXq2q9A' }
       ]
-    },
-    {
-      id: 'bass',
-      name: 'Elbas',
-      desc: 'Grundtoner och sväng. Limmet i bandet.',
-      img: 'https://images.unsplash.com/photo-1563983389645-09c3149479b6?auto=format&fit=crop&w=600&q=80',
-      videos: [
-        { title: 'Introduktion till Elbas', id: 'PYU7tJ6s5V8' },
-        { title: 'Spela med plektrum vs fingrar', id: 'D5h3q8T6r4k' },
-        { title: 'Gångbas: Grunderna', id: 'I5X8x5z9w6w' }
-      ]
     }
   ];
 
-  // --- 2. CSS ---
+  // --- 2. CSS (Samma snygga design som förut) ---
   const style = document.createElement('style');
   style.innerHTML = `
     .instrument-page {
@@ -63,7 +66,7 @@ export function Instrument() {
     }
     .inst-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Lite smalare kort för att få plats med fler */
       gap: 30px;
       margin-top: 40px;
     }
@@ -75,6 +78,8 @@ export function Instrument() {
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
       text-align: left;
+      display: flex;
+      flex-direction: column;
     }
     .inst-card:hover {
       transform: translateY(-8px);
@@ -88,6 +93,7 @@ export function Instrument() {
     }
     .inst-content {
       padding: 20px;
+      flex-grow: 1; /* Gör att alla kort blir lika höga */
     }
     .inst-content h3 {
       margin: 0 0 10px 0;
@@ -104,7 +110,7 @@ export function Instrument() {
       border: 1px solid rgba(79, 172, 254, 0.3);
     }
 
-    /* MODAL (VIDEOSPELARE & SPELLISTA) */
+    /* MODAL STYLING */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -125,8 +131,8 @@ export function Instrument() {
     .modal-content {
       position: relative;
       width: 95%;
-      max-width: 900px;
-      height: 80vh; /* Höjd baserad på skärmen */
+      max-width: 1000px;
+      height: 80vh;
       background: #111;
       border-radius: 12px;
       box-shadow: 0 0 30px rgba(79, 172, 254, 0.2);
@@ -136,9 +142,8 @@ export function Instrument() {
       overflow: hidden;
     }
     
-    /* Layout inuti modalen */
     .video-area {
-      flex: 2; /* Tar upp mer plats */
+      flex: 2;
       background: #000;
       position: relative;
     }
@@ -152,7 +157,7 @@ export function Instrument() {
       flex: 1;
       background: #1a1a1a;
       padding: 20px;
-      overflow-y: auto; /* Scroll om listan är lång */
+      overflow-y: auto;
       border-top: 1px solid #333;
     }
     .playlist-title {
@@ -192,7 +197,6 @@ export function Instrument() {
       margin-top: 2px;
     }
 
-    /* Close button */
     .close-modal {
       position: absolute;
       top: 15px;
@@ -208,14 +212,14 @@ export function Instrument() {
       z-index: 10;
     }
 
-    /* För desktop: Sätt videon och listan bredvid varandra */
+    /* Desktop layout: Video till vänster, lista till höger */
     @media (min-width: 800px) {
       .modal-content {
         flex-direction: row;
         height: 600px;
       }
       .playlist-area {
-        width: 300px; /* Fast bredd på listan */
+        width: 350px;
         flex: none;
         border-top: none;
         border-left: 1px solid #333;
@@ -227,7 +231,7 @@ export function Instrument() {
   `;
   container.appendChild(style);
 
-  // --- 3. HTML STRUKTUR (Huvudsidan) ---
+  // --- 3. RENDERING AV SIDAN ---
   const headerDiv = document.createElement('div');
   headerDiv.innerHTML = `
     <h1>Instrument & Lektioner 🎸🎹</h1>
@@ -238,7 +242,6 @@ export function Instrument() {
   const grid = document.createElement('div');
   grid.className = 'inst-grid';
 
-  // Loopa ut korten
   instruments.forEach(inst => {
     const card = document.createElement('div');
     card.className = 'inst-card';
@@ -251,7 +254,6 @@ export function Instrument() {
       </div>
     `;
 
-    // Klick öppnar modalen med rätt data
     card.addEventListener('click', (e) => {
       e.stopPropagation();
       openModal(inst);
@@ -261,21 +263,18 @@ export function Instrument() {
   });
   container.appendChild(grid);
 
-  // --- 4. MODAL STRUKTUR ---
+  // --- 4. MODAL ELEMENT ---
   const modal = document.createElement('div');
   modal.className = 'modal-overlay';
   modal.innerHTML = `
     <div class="modal-content">
       <div class="close-modal">✖</div>
-      
       <div class="video-area">
         <iframe id="yt-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
-
       <div class="playlist-area">
         <h3 id="playlist-title" class="playlist-title">Lektioner</h3>
-        <div id="playlist-container">
-          </div>
+        <div id="playlist-container"></div>
       </div>
     </div>
   `;
@@ -288,11 +287,9 @@ export function Instrument() {
   const closeBtn = modal.querySelector('.close-modal');
 
   function openModal(instrument) {
-    // Sätt rubriken i listan
     playlistTitleHeader.innerText = `Lektioner: ${instrument.name}`;
-    playlistContainer.innerHTML = ''; // Rensa gammal lista
+    playlistContainer.innerHTML = '';
 
-    // Skapa knappar för varje video
     instrument.videos.forEach((video, index) => {
       const btn = document.createElement('button');
       btn.className = 'playlist-btn';
@@ -302,9 +299,7 @@ export function Instrument() {
       `;
 
       btn.onclick = () => {
-        // Byt video
         iframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
-        // Markera knappen som aktiv
         modal.querySelectorAll('.playlist-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       };
@@ -312,11 +307,10 @@ export function Instrument() {
       playlistContainer.appendChild(btn);
     });
 
-    // Starta första videon automatiskt
+    // Starta första videon
     if (instrument.videos.length > 0) {
       const firstVideo = instrument.videos[0];
       iframe.src = `https://www.youtube.com/embed/${firstVideo.id}?autoplay=1`;
-      // Markera första knappen
       playlistContainer.children[0].classList.add('active');
     }
 
@@ -325,7 +319,7 @@ export function Instrument() {
 
   function closeModal() {
     modal.classList.remove('active');
-    setTimeout(() => { iframe.src = ''; }, 300); // Stäng av ljudet
+    setTimeout(() => { iframe.src = ''; }, 300);
   }
 
   closeBtn.addEventListener('click', closeModal);
