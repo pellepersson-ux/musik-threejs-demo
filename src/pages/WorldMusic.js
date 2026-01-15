@@ -1,3 +1,5 @@
+import Globe from 'globe.gl'; // Om du använder npm, annars funkar script-taggen
+
 export function WorldMusic() {
     const container = document.createElement('div');
     container.className = 'page-world';
@@ -10,58 +12,48 @@ export function WorldMusic() {
     container.appendChild(globeDiv);
     let hoverD = null;
 
-    // --- PRESTANDA-CHECKEN 🕵️‍♂️ ---
+    // --- PRESTANDA-CHECK (Säkra versionen) ---
     function getPerformanceConfig() {
-        // 1. Kolla antal kärnor (Chromebooks har ofta 2 eller 4, speldatorer 8+)
         const cores = navigator.hardwareConcurrency || 4;
-
-        // 2. Kolla RAM-minne (om webbläsaren tillåter det, annars gissa på 8GB)
-        const ram = navigator.deviceMemory || 8;
-
-        // 3. Kolla om det är en Chromebook (CrOS) eller Mobil
         const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|CrOS/i.test(navigator.userAgent);
 
-        // BEDÖMNINGEN:
-        // Om datorn har 4 eller färre kärnor, mindre än 4GB RAM, eller är mobil/Chromebook -> LÅG PRESTANDA
-        const isLowSpec = cores <= 4 || ram < 4 || isMobileOrTablet;
-
-        if (isLowSpec) {
-            console.log("Detecting low-spec device. Running optimized mode. 🚀");
+        // Om datorn är svag (Chromebook/Mobil)
+        if (cores <= 4 || isMobileOrTablet) {
+            console.log("Läge: Prestanda (Chromebook/Mobil) 🚀");
             return {
-                geoJsonUrl: 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson', // Enkel karta
-                atmosphere: false, // Ingen atmosfär
-                resolution: 1,     // Standard upplösning
-                refreshRate: 2     // Rita bara om varannan frame om möjligt (sparar batteri)
+                atmosphere: false,  // Ingen atmosfär (sparar mycket kraft)
+                resolution: 1       // Standard skärpa
             };
         } else {
-            console.log("Detecting high-spec device. Running beautiful mode. ✨");
+            // Om datorn är stark
+            console.log("Läge: Snyggt (Desktop) ✨");
             return {
-                geoJsonUrl: 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson', // Detaljerad karta
-                atmosphere: true,  // Snyggt skimmer
-                resolution: 2,     // Skarpare kanter
-                refreshRate: 1
+                atmosphere: true,   // Snyggt blått skimmer
+                resolution: 2       // Krispigare upplösning
             };
         }
     }
 
-    // Hämta inställningarna
     const config = getPerformanceConfig();
 
-    // --- LADDA GLOBEN MED RÄTT INSTÄLLNINGAR ---
-    fetch(config.geoJsonUrl)
+    // VIKTIGT: Vi använder den lätta kartan för ALLA nu (ne_110m).
+    // Den tunga kartan var orsaken till kraschen.
+    const MAP_URL = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson';
+
+    fetch(MAP_URL)
         .then(res => res.json())
         .then(countries => {
-
             const world = Globe()
                 (globeDiv)
                 .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
                 .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
                 .polygonsData(countries.features)
 
-                // Här använder vi inställningarna från checken:
-                .showAtmosphere(config.atmosphere)
+                // --- ADAPTIVA INSTÄLLNINGAR ---
+                .showAtmosphere(config.atmosphere) // Bara på starka datorer
+                .pixelRatio(config.resolution)     // Skarpare på starka datorer
+                // ------------------------------
 
-                // Allmänna inställningar
                 .polygonAltitude(0.01)
                 .polygonSideColor(() => 'rgba(0,0,0,0)')
                 .polygonStrokeColor(() => '#111')
@@ -76,7 +68,6 @@ export function WorldMusic() {
                     if (d) alert(`Du valde: ${d.properties.NAME} 🎵`);
                 });
 
-            // Responsivitet
             window.addEventListener('resize', () => {
                 world.width(window.innerWidth);
                 world.height(window.innerHeight);
