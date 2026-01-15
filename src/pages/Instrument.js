@@ -2,14 +2,14 @@ export function Instrument() {
   const container = document.createElement('div');
   container.className = 'instrument-page';
 
-  // --- 1. DATA: Här lägger du in instrument och Youtube-ID ---
+  // --- 1. DATA: Instrumentlistan (Nu utan Fiol) ---
   const instruments = [
     {
       id: 'piano',
       name: 'Piano',
       desc: 'Kungen av instrument. 88 tangenter av möjligheter.',
       img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80',
-      videoId: '71-cFCI-v14' // Exempelvideo (Byt gärna)
+      videoId: '71-cFCI-v14'
     },
     {
       id: 'guitar',
@@ -17,13 +17,6 @@ export function Instrument() {
       desc: 'Från lägereld till rockscen. Strängar som berör.',
       img: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80',
       videoId: 'CgVqX0a49HM'
-    },
-    {
-      id: 'violin',
-      name: 'Fiol',
-      desc: 'Orkesterns röst. Vackert, vemodigt och virtuost.',
-      img: 'https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=600&q=80',
-      videoId: 'I_mRp61xYlA'
     },
     {
       id: 'drums',
@@ -35,7 +28,7 @@ export function Instrument() {
     {
       id: 'sax',
       name: 'Saxofon',
-      desc: 'Jazzensjäl. Ett blåsinstrument med attityd.',
+      desc: 'Jazzens själ. Ett blåsinstrument med attityd.',
       img: 'https://images.unsplash.com/photo-1573871666457-7c7329118cf9?auto=format&fit=crop&w=600&q=80',
       videoId: '3s25y8VjD2c'
     },
@@ -49,7 +42,6 @@ export function Instrument() {
   ];
 
   // --- 2. LAYOUT & CSS ---
-  // Vi lägger CSS här så det alltid funkar direkt
   const style = document.createElement('style');
   style.innerHTML = `
     .instrument-page {
@@ -159,7 +151,7 @@ export function Instrument() {
   // --- 3. HTML STRUKTUR ---
   const headerDiv = document.createElement('div');
   headerDiv.innerHTML = `
-    <h1>Upptäck Instrumenten 🎻🎹</h1>
+    <h1>Upptäck Instrumenten 🎹🎸</h1>
     <p>Klicka på ett instrument för att se och höra hur det låter!</p>
   `;
   container.appendChild(headerDiv);
@@ -167,7 +159,6 @@ export function Instrument() {
   const grid = document.createElement('div');
   grid.className = 'inst-grid';
 
-  // Loopa ut korten
   instruments.forEach(inst => {
     const card = document.createElement('div');
     card.className = 'inst-card';
@@ -180,9 +171,7 @@ export function Instrument() {
       </div>
     `;
 
-    // Klick-event för kortet
     card.addEventListener('click', (e) => {
-      // Stoppa eventuella bubblande event så inte main.js reagerar
       e.stopPropagation();
       openModal(inst.videoId);
     });
@@ -191,7 +180,7 @@ export function Instrument() {
   });
   container.appendChild(grid);
 
-  // --- 4. MODAL STRUKTUR (Gömd från början) ---
+  // --- 4. MODAL & LOGIK ---
   const modal = document.createElement('div');
   modal.className = 'modal-overlay';
   modal.innerHTML = `
@@ -204,7 +193,6 @@ export function Instrument() {
   `;
   container.appendChild(modal);
 
-  // --- 5. LOGIK FÖR MODAL ---
   const iframe = modal.querySelector('#yt-player');
   const closeBtn = modal.querySelector('.close-modal');
 
@@ -215,15 +203,10 @@ export function Instrument() {
 
   function closeModal() {
     modal.classList.remove('active');
-    setTimeout(() => {
-      iframe.src = ''; // Stäng av ljudet när man stänger
-    }, 300);
+    setTimeout(() => { iframe.src = ''; }, 300);
   }
 
-  // Stäng på kryss
   closeBtn.addEventListener('click', closeModal);
-
-  // Stäng om man klickar utanför videon
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
