@@ -36,6 +36,9 @@ function renderPage(pageName) {
     case 'instrument':
       main.appendChild(Instrument());
       break;
+    case 'ensemble':
+      main.appendChild(Ensemble());
+      break;
     case 'game':
       main.appendChild(Game());
       break;
@@ -54,6 +57,7 @@ function renderPage(pageName) {
   document.querySelector('#nav-history')?.addEventListener('click', () => renderPage('history'));
   document.querySelector('#nav-theory')?.addEventListener('click', () => renderPage('theory'));
   document.querySelector('#nav-instrument')?.addEventListener('click', () => renderPage('instrument'));
+  document.querySelector('#nav-ensemble')?.addEventListener('click', () => renderPage('ensemble'));
   document.querySelector('#nav-game')?.addEventListener('click', () => renderPage('game'));
   document.querySelector('#nav-world')?.addEventListener('click', () => renderPage('world'));
 }
