@@ -1,46 +1,45 @@
 export function Instrument() {
-  const section = document.createElement('section');
-  section.className = 'page-instrument';
+  const container = document.createElement('div');
+  container.className = 'instrument-page';
 
-  section.innerHTML = `
-    <div class="cards-section">
-      <div style="text-align: center; margin-bottom: 40px; color: var(--text-light);">
-        <h2>Välj ditt Instrument</h2>
-        <p>Klicka på ett kort för att börja utforska ljuden!</p>
-      </div>
-
-      <div class="dashboard-grid">
-        
-        <a href="/instrument/gitarr" class="dashboard-card card-guitar" data-link>
-          <div class="icon">🎸</div>
-          <h3>Gitarr</h3>
-          <p>Lär dig strängar, ackord och att rocka loss.</p>
-          <span class="read-more">Spela nu ></span>
-        </a>
-
-        <a href="/instrument/piano" class="dashboard-card card-piano" data-link>
-          <div class="icon">🎹</div>
-          <h3>Piano</h3>
-          <p>Upptäck tangenter, skalor och melodier.</p>
-          <span class="read-more">Spela nu ></span>
-        </a>
-
-        <a href="/instrument/trummor" class="dashboard-card card-drums" data-link>
-          <div class="icon">🥁</div>
-          <h3>Trummor</h3>
-          <p>Håll takten! Lär dig rytmer och beats.</p>
-          <span class="read-more">Spela nu ></span>
-        </a>
-
-        <a href="/instrument/bas" class="dashboard-card card bass" data-link>
-          <div class="icon">🎸</div>
-          <h3>Bas</h3>
-          <p>Djupa toner som bygger grunden.</p>
-          <span class="read-more">Gå till Bas ></span>
-        </a>
-
-      </div> </div>
-  `;
-
-  return section;
-}
+  // --- 1. DATA: Här lägger du in instrument och Youtube-ID ---
+  const instruments = [
+    {
+      id: 'piano',
+      name: 'Piano',
+      desc: 'Kungen av instrument. 88 tangenter av möjligheter.',
+      img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80',
+      videoId: '71-cFCI-v14' // Exempelvideo (Byt gärna)
+    },
+    {
+      id: 'guitar',
+      name: 'Gitarr',
+      desc: 'Från lägereld till rockscen. Strängar som berör.',
+      img: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80',
+      videoId: 'CgVqX0a49HM'
+    },
+    {
+      id: 'violin',
+      name: 'Fiol',
+      desc: 'Orkesterns röst. Vackert, vemodigt och virtuost.',
+      img: 'https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=600&q=80',
+      videoId: 'I_mRp61xYlA'
+    },
+    {
+      id: 'drums',
+      name: 'Trummor',
+      desc: 'Bandets hjärta. Det är du som sätter pulsen.',
+      img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=600&q=80',
+      videoId: 'htblwKyO4t4'
+    },
+    {
+      id: 'sax',
+      name: 'Saxofon',
+      desc: 'Jazzensjäl. Ett blåsinstrument med attityd.',
+      img: 'https://images.unsplash.com/photo-1573871666457-7c7329118cf9?auto=format&fit=crop&w=600&q=80',
+      videoId: '3s25y8VjD2c'
+    },
+    {
+      id: 'bass',
+      name: 'Elbas',
+      desc: '
