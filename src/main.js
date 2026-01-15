@@ -9,6 +9,7 @@ import { WorldMusic } from './pages/WorldMusic.js';
 import { History } from './pages/History.js';       // Lägger till dessa tre
 import { Theory } from './pages/Theory.js';
 import { Instrument } from './pages/Instrument.js';
+import { Ensemble } from './pages/Ensemble.js';
 
 const app = document.querySelector('#app');
 
