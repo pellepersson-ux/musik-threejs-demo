@@ -1,64 +1,82 @@
 export function WorldMusic() {
     const container = document.createElement('div');
     container.className = 'page-world';
-    container.style.height = 'calc(100vh - 80px)'; // Anpassa höjden efter din header
+    container.style.height = 'calc(100vh - 80px)';
     container.style.width = '100%';
     container.style.overflow = 'hidden';
-    container.style.background = '#020207'; // Rymd-svart bakgrund
+    container.style.background = '#020207';
 
-    // Skapa en behållare för själva globen
     const globeDiv = document.createElement('div');
     container.appendChild(globeDiv);
-
-    // Variabel för att hålla koll på vilket land musen är över
     let hoverD = null;
 
-    // --- HÄR STARTAR VI GLOBEN ---
-    // Vi hämtar den "lätta" kartan (110m) för att spara prestanda på Chromebooks
-    fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
+    // --- PRESTANDA-CHECKEN 🕵️‍♂️ ---
+    function getPerformanceConfig() {
+        // 1. Kolla antal kärnor (Chromebooks har ofta 2 eller 4, speldatorer 8+)
+        const cores = navigator.hardwareConcurrency || 4;
+
+        // 2. Kolla RAM-minne (om webbläsaren tillåter det, annars gissa på 8GB)
+        const ram = navigator.deviceMemory || 8;
+
+        // 3. Kolla om det är en Chromebook (CrOS) eller Mobil
+        const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|CrOS/i.test(navigator.userAgent);
+
+        // BEDÖMNINGEN:
+        // Om datorn har 4 eller färre kärnor, mindre än 4GB RAM, eller är mobil/Chromebook -> LÅG PRESTANDA
+        const isLowSpec = cores <= 4 || ram < 4 || isMobileOrTablet;
+
+        if (isLowSpec) {
+            console.log("Detecting low-spec device. Running optimized mode. 🚀");
+            return {
+                geoJsonUrl: 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson', // Enkel karta
+                atmosphere: false, // Ingen atmosfär
+                resolution: 1,     // Standard upplösning
+                refreshRate: 2     // Rita bara om varannan frame om möjligt (sparar batteri)
+            };
+        } else {
+            console.log("Detecting high-spec device. Running beautiful mode. ✨");
+            return {
+                geoJsonUrl: 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson', // Detaljerad karta
+                atmosphere: true,  // Snyggt skimmer
+                resolution: 2,     // Skarpare kanter
+                refreshRate: 1
+            };
+        }
+    }
+
+    // Hämta inställningarna
+    const config = getPerformanceConfig();
+
+    // --- LADDA GLOBEN MED RÄTT INSTÄLLNINGAR ---
+    fetch(config.geoJsonUrl)
         .then(res => res.json())
         .then(countries => {
 
-            // Skapa globen
             const world = Globe()
                 (globeDiv)
                 .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
                 .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
                 .polygonsData(countries.features)
 
-                // --- PRESTANDA-OPTIMERINGAR (För Chromebooks) ---
-                .showAtmosphere(false)       // Stänger av "glöden" runt jorden (Tungt!)
-                .polygonAltitude(0.01)       // Håller länderna platta
-                .polygonSideColor(() => 'rgba(0,0,0,0)') // Osynliga sidor på länderna sparar kraft
-                // ------------------------------------------------
+                // Här använder vi inställningarna från checken:
+                .showAtmosphere(config.atmosphere)
 
-                // Färgsättning
-                .polygonCapColor(d => d === hoverD ? 'white' : '#1a2a6c') // Vit vid hover, annars blå
-                .polygonStrokeColor(() => '#111') // Mörka gränser mellan länder
-                .polygonLabel(({ properties: d }) => `
-          <div style="background: rgba(0,0,0,0.8); color: white; padding: 5px; border-radius: 4px;">
-            ${d.NAME}
-          </div>
-        `)
+                // Allmänna inställningar
+                .polygonAltitude(0.01)
+                .polygonSideColor(() => 'rgba(0,0,0,0)')
+                .polygonStrokeColor(() => '#111')
+                .polygonCapColor(d => d === hoverD ? 'white' : '#1a2a6c')
 
-                // Hover-effekt (tänder och släcker länder)
                 .onPolygonHover(d => {
                     hoverD = d;
-                    world.polygonCapColor(world.polygonCapColor()); // Rita om färgerna
-                    globeDiv.style.cursor = d ? 'pointer' : 'default'; // Byt muspekare
+                    world.polygonCapColor(world.polygonCapColor());
+                    globeDiv.style.cursor = d ? 'pointer' : 'default';
                 })
-
-                // Klick-effekt
                 .onPolygonClick(d => {
-                    if (d) {
-                        console.log("Du klickade på:", d.properties.NAME);
-                        // Här kan du lägga in din musikspelare sen!
-                        // playMusic(d.properties.NAME); 
-                        alert(`Du valde: ${d.properties.NAME} 🎵`);
-                    }
+                    if (d) alert(`Du valde: ${d.properties.NAME} 🎵`);
                 });
 
-            // Se till att globen fyller fönstret om man ändrar storlek
+            // Responsivitet
             window.addEventListener('resize', () => {
                 world.width(window.innerWidth);
                 world.height(window.innerHeight);
