@@ -3,12 +3,12 @@ export function Instrument() {
   container.className = 'instrument-page';
 
   // --- 1. DATA ---
+  // Här ser du att Piano och Gitarr är två helt separata "objekt" {} i listan.
   const instruments = [
     {
       id: 'piano',
-      name: 'Piano & Keyboard',
+      name: 'Piano & Keyboard', // EGET KORT
       desc: 'Från vackra melodier till svängiga ackord.',
-      // Bild på tangenter
       img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Introduktion: Hitta på tangenterna', id: '71-cFCI-v14' },
@@ -18,9 +18,8 @@ export function Instrument() {
     },
     {
       id: 'guitar',
-      name: 'Gitarr',
+      name: 'Gitarr', // EGET KORT
       desc: 'Lär dig ackord, riff och olika kompstilar.',
-      // Bild på akustisk/elgitarr
       img: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Introduktion: Strängarna & Greppbrädan', id: 'CgVqX0a49HM' },
@@ -32,8 +31,8 @@ export function Instrument() {
       id: 'bass',
       name: 'Elbas',
       desc: 'Det tunga fundamentet. Coolast i bandet.',
-      // NY BILD: Tydlig Elbas (tjocka strängar)
-      img: 'https://images.unsplash.com/photo-1460039230329-eb070fc6c77c?auto=format&fit=crop&w=600&q=80',
+      // HÄR ÄR DEN NYA RÄTTA BILDEN PÅ EN BAS:
+      img: 'https://images.unsplash.com/photo-1563983389645-09c3149479b6?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Introduktion till Elbas', id: 'PYU7tJ6s5V8' },
         { title: 'Spela med plektrum vs fingrar', id: 'D5h3q8T6r4k' },
@@ -44,7 +43,6 @@ export function Instrument() {
       id: 'drums',
       name: 'Trummor',
       desc: 'Håll takten! Lär dig grundkomp och fills.',
-      // Bild på trumset
       img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Första trumkompet (Basic Rock)', id: 'htblwKyO4t4' },
@@ -54,7 +52,7 @@ export function Instrument() {
     }
   ];
 
-  // --- 2. CSS (Samma snygga design som förut) ---
+  // --- 2. CSS ---
   const style = document.createElement('style');
   style.innerHTML = `
     .instrument-page {
@@ -66,7 +64,7 @@ export function Instrument() {
     }
     .inst-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Lite smalare kort för att få plats med fler */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
       margin-top: 40px;
     }
@@ -93,7 +91,7 @@ export function Instrument() {
     }
     .inst-content {
       padding: 20px;
-      flex-grow: 1; /* Gör att alla kort blir lika höga */
+      flex-grow: 1;
     }
     .inst-content h3 {
       margin: 0 0 10px 0;
@@ -212,7 +210,6 @@ export function Instrument() {
       z-index: 10;
     }
 
-    /* Desktop layout: Video till vänster, lista till höger */
     @media (min-width: 800px) {
       .modal-content {
         flex-direction: row;
@@ -231,7 +228,7 @@ export function Instrument() {
   `;
   container.appendChild(style);
 
-  // --- 3. RENDERING AV SIDAN ---
+  // --- 3. RENDERING ---
   const headerDiv = document.createElement('div');
   headerDiv.innerHTML = `
     <h1>Instrument & Lektioner 🎸🎹</h1>
@@ -263,7 +260,7 @@ export function Instrument() {
   });
   container.appendChild(grid);
 
-  // --- 4. MODAL ELEMENT ---
+  // --- 4. MODAL ---
   const modal = document.createElement('div');
   modal.className = 'modal-overlay';
   modal.innerHTML = `
@@ -307,7 +304,6 @@ export function Instrument() {
       playlistContainer.appendChild(btn);
     });
 
-    // Starta första videon
     if (instrument.videos.length > 0) {
       const firstVideo = instrument.videos[0];
       iframe.src = `https://www.youtube.com/embed/${firstVideo.id}?autoplay=1`;
