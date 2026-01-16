@@ -27,11 +27,12 @@ export function Instrument() {
       ]
     },
     {
-      // HÄR ÄR BASEN MED RÄTT BILDLÄNK:
+      // --- HÄR ÄR DEN NYA BASBILDEN ---
+      // En tydlig 4-strängad elbas (Fender-stil)
       id: 'bass',
       name: 'Elbas',
       desc: 'Det tunga fundamentet. Coolast i bandet.',
-      img: 'https://images.unsplash.com/photo-1563983389645-09c3149479b6?auto=format&fit=crop&w=600&q=80',
+      img: 'https://images.unsplash.com/photo-1550985543-f4420876c70e?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Introduktion till Elbas', id: 'PYU7tJ6s5V8' },
         { title: 'Spela med plektrum vs fingrar', id: 'D5h3q8T6r4k' },
