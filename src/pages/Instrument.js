@@ -3,11 +3,10 @@ export function Instrument() {
   container.className = 'instrument-page';
 
   // --- 1. DATA ---
-  // Här ser du att Piano och Gitarr är två helt separata "objekt" {} i listan.
   const instruments = [
     {
       id: 'piano',
-      name: 'Piano & Keyboard', // EGET KORT
+      name: 'Piano & Keyboard',
       desc: 'Från vackra melodier till svängiga ackord.',
       img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=600&q=80',
       videos: [
@@ -18,7 +17,7 @@ export function Instrument() {
     },
     {
       id: 'guitar',
-      name: 'Gitarr', // EGET KORT
+      name: 'Gitarr',
       desc: 'Lär dig ackord, riff och olika kompstilar.',
       img: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=600&q=80',
       videos: [
@@ -28,10 +27,10 @@ export function Instrument() {
       ]
     },
     {
+      // HÄR ÄR BASEN MED RÄTT BILDLÄNK:
       id: 'bass',
       name: 'Elbas',
       desc: 'Det tunga fundamentet. Coolast i bandet.',
-      // HÄR ÄR DEN NYA RÄTTA BILDEN PÅ EN BAS:
       img: 'https://images.unsplash.com/photo-1563983389645-09c3149479b6?auto=format&fit=crop&w=600&q=80',
       videos: [
         { title: 'Introduktion till Elbas', id: 'PYU7tJ6s5V8' },
