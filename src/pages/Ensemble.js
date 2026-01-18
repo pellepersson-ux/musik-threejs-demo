@@ -3,17 +3,17 @@ export function Ensemble() {
   container.className = 'ensemble-page';
 
   // ==========================================
-  // 1. DATA: DINA LÅTAR OCH STÄMMOR
+  // 1. DATA: LÅTAR (Med omslagsbild/Poster)
   // ==========================================
-  // Här lägger du in sökvägarna till dina videofiler.
+  // OBS: För att videon ska funka måste filerna finnas i mappen 'public/videos/'
   const songs = [
     {
       id: 1,
       title: 'Smoke on the Water',
-      desc: 'Klassisk rocklåt. Fokus på det ikoniska riffet.',
-      // Huvudvideo (Hela bandet)
+      desc: 'Klassiskt rockriff. Fokus på timing.',
+      // Omslagsbild (visas innan man startar)
+      poster: 'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&w=800&q=80',
       fullMix: '/videos/smoke_full.mp4',
-      // Instrument-specifika videor
       parts: {
         guitar: '/videos/smoke_guitar.mp4',
         keys: '/videos/smoke_keys.mp4',
@@ -25,6 +25,7 @@ export function Ensemble() {
       id: 2,
       title: 'Billie Jean',
       desc: 'Svängig basgång och tight trumkomp.',
+      poster: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80',
       fullMix: '/videos/billie_full.mp4',
       parts: {
         guitar: '/videos/billie_guitar.mp4',
@@ -32,8 +33,7 @@ export function Ensemble() {
         bass: '/videos/billie_bass.mp4',
         drums: '/videos/billie_drums.mp4'
       }
-    },
-    // Lägg till fler låtar här...
+    }
   ];
 
   // ==========================================
@@ -58,29 +58,37 @@ export function Ensemble() {
       -webkit-text-fill-color: transparent;
     }
 
-    /* LÅTLISTA (KORT) */
+    /* KORTEN I LÅTLISTAN */
     .song-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
     }
 
     .song-card {
       background: #1a1a1a;
       border: 1px solid #333;
-      border-radius: 10px;
-      padding: 25px;
+      border-radius: 12px;
+      overflow: hidden;
       cursor: pointer;
       transition: transform 0.2s, border-color 0.2s;
+      text-align: left;
     }
     .song-card:hover {
       transform: translateY(-5px);
       border-color: #4facfe;
     }
-    .song-card h3 { margin: 0 0 10px 0; color: #fff; }
-    .song-card p { margin: 0; color: #aaa; font-size: 0.9rem; }
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1px solid #333;
+    }
+    .card-info { padding: 20px; }
+    .card-info h3 { margin: 0 0 10px 0; color: #fff; }
+    .card-info p { margin: 0; color: #aaa; font-size: 0.9rem; }
 
-    /* VIDEOSPELARE VY */
+    /* VY 2: SPELAREN */
     .player-view {
       display: flex;
       flex-direction: column;
@@ -88,13 +96,13 @@ export function Ensemble() {
       animation: fadeIn 0.5s;
     }
 
-    /* DEN SNYGGA TILLBAKA-KNAPPEN */
+    /* TILLBAKA-KNAPPEN (DIN DESIGN) */
     .back-btn {
       background: transparent;
       border: 2px solid #4facfe;
       color: #fff;
       padding: 10px 25px;
-      border-radius: 50px; /* Piller-form */
+      border-radius: 50px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
@@ -102,8 +110,8 @@ export function Ensemble() {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
-      align-self: flex-start; /* Sätt den till vänster */
+      margin-bottom: 25px;
+      align-self: flex-start; 
     }
 
     .back-btn:hover {
@@ -113,53 +121,57 @@ export function Ensemble() {
       transform: translateX(-5px);
     }
 
-    /* VIDEORUTA */
+    /* VIDEO WRAPPER - NU MED FAST FORMAT 16:9 */
     .video-wrapper {
       width: 100%;
       max-width: 800px;
-      background: #000;
-      border-radius: 10px;
+      aspect-ratio: 16 / 9; /* Tvingar rutan att vara widescreen */
+      background: #000;     /* Svart bakgrund om videon laddar */
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
       margin-bottom: 30px;
+      position: relative;
     }
-    video { width: 100%; display: block; }
 
-    /* INSTRUMENT-KNAPPAR CONTAINER */
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Gör att hela videon syns */
+      display: block;
+    }
+
+    /* INSTRUMENT KNAPPAR */
     .instrument-controls {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 10px;
     }
 
-    /* INSTRUMENT-KNAPP STYLE */
     .inst-btn {
       background: #222;
-      color: #fff;
+      color: #ccc;
       border: 1px solid #444;
-      padding: 12px 20px;
+      padding: 12px 24px;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
-      min-width: 100px;
       transition: all 0.2s;
     }
     .inst-btn:hover {
       background: #333;
       border-color: #fff;
+      color: #fff;
     }
     .inst-btn.active {
       background: #4facfe;
       color: #000;
       border-color: #4facfe;
       font-weight: bold;
+      box-shadow: 0 0 10px rgba(79, 172, 254, 0.4);
     }
-    
-    /* Mix-knappen (för att se hela bandet igen) */
     .mix-btn {
-      background: #333; 
       border-color: #666;
     }
 
@@ -173,22 +185,18 @@ export function Ensemble() {
   // ==========================================
   // 3. LOGIK
   // ==========================================
-
-  // Titel
   const titleEl = document.createElement('h1');
-  titleEl.innerText = "Låtarkiv";
+  titleEl.innerText = "Replokal Online";
   container.appendChild(titleEl);
 
   const contentArea = document.createElement('div');
   container.appendChild(contentArea);
 
-  // ----------------------------------------
-  // VY 1: LÅTLISTAN
-  // ----------------------------------------
+  // --- VY 1: LISTAN ---
   function renderSongList() {
     contentArea.innerHTML = '';
-    titleEl.innerText = "Välj en låt att öva på";
     titleEl.style.display = 'block';
+    titleEl.innerText = "Välj låt att öva på";
 
     const grid = document.createElement('div');
     grid.className = 'song-grid';
@@ -196,80 +204,86 @@ export function Ensemble() {
     songs.forEach(song => {
       const card = document.createElement('div');
       card.className = 'song-card';
+
+      // Vi lägger till en bild i kortet också för snyggare look
       card.innerHTML = `
-        <h3>${song.title}</h3>
-        <p>${song.desc}</p>
+        <img src="${song.poster}" class="card-img" alt="Omslag">
+        <div class="card-info">
+          <h3>${song.title}</h3>
+          <p>${song.desc}</p>
+        </div>
       `;
-      card.onclick = () => renderSongDetail(song);
+      card.onclick = () => renderPlayer(song);
       grid.appendChild(card);
     });
 
     contentArea.appendChild(grid);
   }
 
-  // ----------------------------------------
-  // VY 2: SPELAREN & INSTRUMENTEN
-  // ----------------------------------------
-  function renderSongDetail(song) {
+  // --- VY 2: SPELAREN ---
+  function renderPlayer(song) {
     contentArea.innerHTML = '';
-    titleEl.style.display = 'none'; // Dölj stora rubriken för renare look
+    titleEl.style.display = 'none';
 
     const wrapper = document.createElement('div');
     wrapper.className = 'player-view';
 
-    // 1. TILLBAKA-KNAPP
+    // Back button
     const backBtn = document.createElement('button');
     backBtn.className = 'back-btn';
     backBtn.innerHTML = `<span>←</span> Tillbaka till listan`;
     backBtn.onclick = renderSongList;
     wrapper.appendChild(backBtn);
 
-    // Rubrik för låten
-    const songTitle = document.createElement('h2');
-    songTitle.innerText = song.title;
-    songTitle.style.marginBottom = '20px';
-    wrapper.appendChild(songTitle);
+    // Låttitel
+    const songHeader = document.createElement('h2');
+    songHeader.innerText = song.title;
+    songHeader.style.marginBottom = '15px';
+    wrapper.appendChild(songHeader);
 
-    // 2. VIDEO ELEMENT
+    // VIDEO ELEMENT
     const videoWrapper = document.createElement('div');
     videoWrapper.className = 'video-wrapper';
 
     const videoEl = document.createElement('video');
     videoEl.controls = true;
-    videoEl.src = song.fullMix; // Börja med hela bandet
+    videoEl.poster = song.poster; // Visar bilden innan play trycks
+    videoEl.src = song.fullMix;   // Startar med full mix
 
     videoWrapper.appendChild(videoEl);
     wrapper.appendChild(videoWrapper);
 
-    // 3. INSTRUMENT-KNAPPAR
+    // KNAPPAR
     const controls = document.createElement('div');
     controls.className = 'instrument-controls';
 
-    // Lista över knapparna vi vill skapa
     const instruments = [
-      { label: 'Hela Bandet (Mix)', src: song.fullMix, isMix: true },
-      { label: 'Elgitarr', src: song.parts.guitar },
-      { label: 'Keyboard', src: song.parts.keys },
-      { label: 'Bas', src: song.parts.bass },
-      { label: 'Trummor', src: song.parts.drums }
+      { label: 'Hela Bandet', src: song.fullMix, isMix: true },
+      { label: '🎸 Elgitarr', src: song.parts.guitar },
+      { label: '🎹 Keyboard', src: song.parts.keys },
+      { label: '🎸 Bas', src: song.parts.bass },
+      { label: '🥁 Trummor', src: song.parts.drums }
     ];
 
     instruments.forEach(inst => {
       const btn = document.createElement('button');
       btn.className = 'inst-btn';
-      if (inst.isMix) btn.classList.add('active', 'mix-btn'); // Mixen är aktiv från start
+      if (inst.isMix) btn.classList.add('active', 'mix-btn');
       btn.innerText = inst.label;
 
       btn.onclick = () => {
-        // Byt video
-        const currentTime = videoEl.currentTime; // Spara tiden så vi fortsätter där vi var
-        videoEl.src = inst.src;
-        videoEl.currentTime = currentTime;
-        videoEl.play();
+        // Behåll tidpunkten när vi byter vinkel/instrument
+        const time = videoEl.currentTime;
+        const isPlaying = !videoEl.paused;
 
-        // Uppdatera aktiv klass på knapparna
-        const allBtns = controls.querySelectorAll('.inst-btn');
-        allBtns.forEach(b => b.classList.remove('active'));
+        videoEl.src = inst.src;
+        videoEl.currentTime = time;
+
+        // Om videon spelades, fortsätt spela. Annars vänta.
+        if (isPlaying) videoEl.play();
+
+        // Uppdatera knapparna
+        wrapper.querySelectorAll('.inst-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       };
 
@@ -278,19 +292,16 @@ export function Ensemble() {
 
     wrapper.appendChild(controls);
 
-    // Instruktionstext under knapparna
-    const infoText = document.createElement('p');
-    infoText.style.marginTop = "20px";
-    infoText.style.color = "#888";
-    infoText.style.fontStyle = "italic";
-    infoText.innerText = "Klicka på ett instrument för att se den stämman.";
-    wrapper.appendChild(infoText);
+    // Text för feedback om inget händer
+    const helpText = document.createElement('p');
+    helpText.innerHTML = "<em>Obs: Om videon är svart saknas filen i mappen.</em>";
+    helpText.style.color = "#555";
+    helpText.style.marginTop = "30px";
+    wrapper.appendChild(helpText);
 
     contentArea.appendChild(wrapper);
   }
 
-  // Kör igång listan
   renderSongList();
-
   return container;
 }
