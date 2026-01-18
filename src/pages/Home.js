@@ -153,4 +153,105 @@ export function Home() {
     .card-content p {
       margin: 0;
       color: #bbb;
-      font-size:
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .card-arrow {
+      color: #4facfe;
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Mobilanpassning */
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.5rem; }
+    }
+  `;
+  container.appendChild(style);
+
+  // ==========================================
+  // 3. LOGIK & RENDERING
+  // ==========================================
+
+  // --- HERO SEKTION ---
+  const hero = document.createElement('div');
+  hero.className = 'hero-section';
+  hero.innerHTML = `
+    <h1 class="hero-title">Välkommen till<br>Tonverkstan 🎵</h1>
+    <p class="hero-subtitle">
+      Din digitala plattform för musikutbildning. Utforska instrument, 
+      dyk ner i historien eller spela med i vår ensemble.
+    </p>
+    <button class="cta-btn" id="start-btn">Kom igång</button>
+  `;
+  container.appendChild(hero);
+
+  // --- FUNKTION FÖR ATT HANTERA LÄNKAR ---
+  // Detta försöker hitta dina knappar i menyn och klicka på dem
+  const handleNavClick = (linkId) => {
+    // 1. Försök hitta menylänken (om de har IDn)
+    const menuLink = document.getElementById(linkId);
+    if (menuLink) {
+      menuLink.click();
+      return;
+    }
+
+    // 2. Fallback: Om vi inte hittar menyn, logga det (här kan vi behöva justera beroende på din meny-kod)
+    console.log("Försökte navigera till:", linkId);
+
+    // 3. Alternativ: Skicka ett 'hash'-byte som många sidor lyssnar på
+    const hashPart = linkId.replace('-link', '');
+    window.location.hash = hashPart;
+
+    // 4. Dispatcha ett event som din main.js kan lyssna på
+    const event = new CustomEvent('navigate', { detail: hashPart });
+    document.dispatchEvent(event);
+  };
+
+  // Klick på "Kom igång" leder till Ensemble (exempelvis)
+  hero.querySelector('#start-btn').onclick = () => handleNavClick('ensemble-link');
+
+
+  // --- FEATURES GRID ---
+  const grid = document.createElement('div');
+  grid.className = 'features-grid';
+
+  features.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'feature-card';
+
+    card.innerHTML = `
+      <div class="card-img-wrapper">
+        <img src="${item.img}" class="card-img" alt="${item.title}">
+      </div>
+      <div class="card-content">
+        <div>
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+        </div>
+        <div class="card-arrow">Gå till sidan <span>→</span></div>
+      </div>
+    `;
+
+    // När man klickar på kortet
+    card.onclick = () => handleNavClick(item.linkId);
+
+    grid.appendChild(card);
+  });
+
+  container.appendChild(grid);
+
+  return container;
+}
