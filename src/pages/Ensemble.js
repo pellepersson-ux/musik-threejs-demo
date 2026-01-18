@@ -1,243 +1,158 @@
 export function Ensemble() {
   const container = document.createElement('div');
-  container.className = 'ensemble-page';
+  container.className = 'page-ensemble';
 
-  // ==========================================
-  // 1. DATA: LÅTLISTA
-  // ==========================================
-  const videos = [
-    {
-      id: 'video1',
-      title: 'Hjältarna - (Ensemble)',
-      src: '/videos/Hjaltarna.mp4',
-      desc: 'En energifylld öppningslåt med hela ensemblen.'
-    },
-    {
-      id: 'video2',
-      title: 'Stjärnorna - (Kör)',
-      src: '/videos/Stjarnorna.mp4',
-      desc: 'Enstämmig körsång med fokus på klang.'
-    },
-    {
-      id: 'video3',
-      title: 'Nattens ljus - (Solo)',
-      src: '/videos/NattensLjus.mp4',
-      desc: 'Ett stämningsfullt solo med pianoackompanjemang.'
-    }
-  ];
-
-  // ==========================================
-  // 2. CSS STYLING
-  // ==========================================
+  // --- STYLING (CSS) ---
+  // Vi lägger in CSS direkt här för att göra det enkelt att få snygga hover-effekter
   const style = document.createElement('style');
   style.innerHTML = `
-    .ensemble-page {
-      padding: 40px 20px;
-      max-width: 1000px; /* Lite bredare för videons skull */
-      margin: 0 auto;
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      text-align: center;
+    .ensemble-container {
+      padding: 40px;
+      background: linear-gradient(135deg, #1e1e2f 0%, #0f0f1a 100%);
+      min-height: calc(100vh - 80px); /* Justera efter din header */
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
     }
-
-    h1 {
-      margin-bottom: 40px;
-      font-size: 2.5rem;
+    .ensemble-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .ensemble-header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
       background: linear-gradient(to right, #4facfe, #00f2fe);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    /* GRID FÖR LISTAN */
-    .video-grid {
+    .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
-    /* VIDEOCARD (FÖRANVISNING) */
-    .video-card {
+    .card {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
     }
-
-    .video-card:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .card:hover {
       transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.1);
       border-color: #4facfe;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
-
-    .video-card h3 {
-      margin: 0 0 10px 0;
-      color: #fff;
-    }
-
-    .video-card p {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin: 0;
-    }
-
-    .play-icon {
-      font-size: 2rem;
+    .card h3 {
+      margin-top: 0;
       color: #4facfe;
+      font-size: 1.5rem;
+    }
+    .tag {
+      display: inline-block;
+      background: #4facfe;
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
       margin-bottom: 15px;
     }
-
-    /* VIDEOSPELARE VY */
-    .player-view {
+    .info-row {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeIn 0.5s;
-    }
-
-    .video-wrapper {
-      width: 100%;
-      max-width: 800px;
-      background: #000;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(79, 172, 254, 0.2);
-      margin-bottom: 20px;
-    }
-
-    video {
-      width: 100%;
-      display: block;
-    }
-
-    .video-info {
-      text-align: left;
-      max-width: 800px;
-      width: 100%;
-      margin-top: 10px;
-      padding: 20px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 8px;
-    }
-
-    /* SNYGGA KNAPPAR */
-    .back-btn {
-      background: transparent;
-      border: 2px solid #4facfe;
-      color: #fff;
-      padding: 10px 25px;
-      border-radius: 50px; /* Piller-form */
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .back-btn:hover {
-      background: #4facfe;
-      color: #000; /* Svart text mot blå bakgrund */
-      box-shadow: 0 0 15px rgba(79, 172, 254, 0.6);
-      transform: translateX(-5px); /* Rör sig lite åt vänster */
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      justify-content: space-between;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #ccc;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 10px;
     }
   `;
   container.appendChild(style);
 
-  // ==========================================
-  // 3. LOGIK & RENDERING
-  // ==========================================
+  // --- HTML STRUKTUR ---
+  const content = document.createElement('div');
+  content.className = 'ensemble-container';
 
-  // Huvudrubrik
-  const title = document.createElement('h1');
-  title.innerText = "Vår Ensemble";
-  container.appendChild(title);
+  // Rubrik
+  const header = document.createElement('div');
+  header.className = 'ensemble-header';
+  header.innerHTML = `
+    <h1>Våra Ensembler</h1>
+    <p>Att spela tillsammans är det roligaste som finns. Hitta din grupp här!</p>
+  `;
+  content.appendChild(header);
 
-  // Behållare för innehåll (Lista eller Spelare)
-  const contentContainer = document.createElement('div');
-  container.appendChild(contentContainer);
+  // Lista med Ensembler (DATA)
+  // Här kan du enkelt lägga till eller ta bort grupper
+  const ensembles = [
+    {
+      title: "Pop- & Rockband",
+      level: "Nybörjare / Fortsättning",
+      desc: "Drömmer du om att stå på scen? Vi sätter ihop band där ni får lära er att repa, lyssna på varandra och skriva egna låtar.",
+      time: "Måndagar 17:00",
+      teacher: "Jonas"
+    },
+    {
+      title: "Skolkören",
+      level: "Alla åldrar",
+      desc: "Sjung ut med glädje! Vi blandar pop, visa och traditionell körmusik. Inga förkunskaper krävs, bara sånglust.",
+      time: "Onsdagar 18:30",
+      teacher: "Anna"
+    },
+    {
+      title: "Blåsorkestern",
+      level: "Fortsättning",
+      desc: "För dig som spelat trumpet, trombon, saxofon eller klarinett i minst ett år. Vi spelar allt från filmmusik till funk.",
+      time: "Torsdagar 16:00",
+      teacher: "Erik"
+    },
+    {
+      title: "Jazzgruppen",
+      level: "Avancerad",
+      desc: "Vi dyker ner i jazzens värld med improvisation och samspel. Fokus på standards och egna tolkningar.",
+      time: "Tisdagar 19:00",
+      teacher: "Maria"
+    },
+    {
+      title: "Slagverksensemble",
+      level: "Alla nivåer",
+      desc: "Rytm, rytm, rytm! Vi spelar på allt från trumset till marimba och soptunnor. En energikick utan dess like.",
+      time: "Måndagar 18:00",
+      teacher: "David"
+    }
+  ];
 
-  // Funktion: Visa listan
-  function renderList() {
-    contentContainer.innerHTML = '';
+  // Skapa rutnätet för korten
+  const grid = document.createElement('div');
+  grid.className = 'grid-container';
 
-    const grid = document.createElement('div');
-    grid.className = 'video-grid';
+  // Loopa igenom datan och skapa HTML för varje kort
+  ensembles.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <span class="tag">${item.level}</span>
+      <h3>${item.title}</h3>
+      <p>${item.desc}</p>
+      <div class="info-row">
+        <span>🕒 ${item.time}</span>
+        <span>👨‍🏫 ${item.teacher}</span>
+      </div>
+    `;
 
-    videos.forEach(video => {
-      const card = document.createElement('div');
-      card.className = 'video-card';
-      card.innerHTML = `
-        <div class="play-icon">▶</div>
-        <h3>${video.title}</h3>
-        <p>${video.desc}</p>
-      `;
-
-      card.onclick = () => renderPlayer(video);
-      grid.appendChild(card);
+    // Klick-event (Valfritt: Kan leda till anmälan)
+    card.addEventListener('click', () => {
+      alert(`Kul att du är intresserad av ${item.title}! Prata med ${item.teacher}.`);
     });
 
-    contentContainer.appendChild(grid);
-  }
+    grid.appendChild(card);
+  });
 
-  // Funktion: Visa videospelare
-  function renderPlayer(videoData) {
-    contentContainer.innerHTML = ''; // Rensa listan
-
-    const playerView = document.createElement('div');
-    playerView.className = 'player-view';
-
-    // 1. Tillbaka-knapp (NU UPPDATERAD DESIGN)
-    const backBtn = document.createElement('button');
-    backBtn.className = 'back-btn';
-    backBtn.innerHTML = `<span>←</span> Tillbaka till låtlistan`;
-    backBtn.onclick = renderList;
-    playerView.appendChild(backBtn);
-
-    // 2. Videorutan
-    const wrapper = document.createElement('div');
-    wrapper.className = 'video-wrapper';
-
-    const videoEl = document.createElement('video');
-    videoEl.controls = true;
-    videoEl.autoplay = true; // Startar direkt
-
-    // Fallback om videon inte finns
-    videoEl.innerHTML = `Din webbläsare stödjer inte video.`;
-    videoEl.src = videoData.src;
-
-    wrapper.appendChild(videoEl);
-    playerView.appendChild(wrapper);
-
-    // 3. Info under videon
-    const info = document.createElement('div');
-    info.className = 'video-info';
-    info.innerHTML = `
-      <h2 style="color: #4facfe; margin-top: 0;">${videoData.title}</h2>
-      <p>${videoData.desc}</p>
-    `;
-    playerView.appendChild(info);
-
-    contentContainer.appendChild(playerView);
-  }
-
-  // Starta med att visa listan
-  renderList();
+  content.appendChild(grid);
+  container.appendChild(content);
 
   return container;
 }
