@@ -3,12 +3,13 @@ export function History() {
   container.className = 'history-page';
 
   // ==========================================
-  // 1. DATA: KLASSISK MUSIK
+  // 1. DATA: KLASSISK MUSIK (Uppdaterade bilder)
   // ==========================================
   const classicalData = [
     {
       title: "Renässansen (1450–1600)",
-      img: "https://images.unsplash.com/photo-1596201309322-927909033333?auto=format&fit=crop&w=800&q=80",
+      // Hämtas från public/images/Renassansen.jpg
+      img: "/images/Renassansen.jpg",
       content: `
         <h3>Vad betyder Renässans?</h3>
         <p>Ordet renässans betyder "pånyttfödelse". Det man ville väcka till liv igen var idéer och ideal från de gamla grekerna och romarna (antiken). Perioden präglades av en nyfikenhet på människan, kulturen och världen.</p>
@@ -58,7 +59,7 @@ export function History() {
     },
     {
       title: "Barocken (1600–1750)",
-      img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+      img: "/images/Barocken.jpg",
       content: `
         <h3>Vad betyder Barock?</h3>
         <p>Ordet barock kommer troligen från portugisiskans "barocco", som betyder "ojämn pärla". I början användes ordet lite nedsättande för att beskriva något som var överdrivet, konstigt och svulstigt. Men idag är det namnet på en av musikhistoriens mest grandiosa epoker.</p>
@@ -115,7 +116,7 @@ export function History() {
     },
     {
       title: "Wienklassicismen (1750–1820)",
-      img: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?auto=format&fit=crop&w=800&q=80",
+      img: "/images/Klassicismen.jpg",
       content: `
         <h3>Vad betyder Klassicism?</h3>
         <p>Ordet härstammar från latinets <em>classicus</em> som syftade på medborgare av högsta rang. När vi pratar om "klassisk" stil menar vi ideal som hämtades från de gamla grekerna och romarna: balans, enkelhet, elegans, proportion och kontroll. Inom musiken kallas perioden ofta för <strong>Wienklassicismen</strong> eftersom de tre största tonsättarna (Haydn, Mozart och Beethoven) var verksamma i Wien.</p>
@@ -170,7 +171,7 @@ export function History() {
     },
     {
       title: "Romantiken (1820–1900)",
-      img: "https://images.unsplash.com/photo-1552422535-c4581306965b?auto=format&fit=crop&w=800&q=80",
+      img: "/images/Romantiken.jpg",
       content: `
         <h3>Vad betyder Romantiken?</h3>
         <p>När vi pratar om Romantiken i musikhistorien handlar det inte nödvändigtvis om kärlek (även om det ofta förekommer). Det är ett estetiskt begrepp som hämtades från konsten och litteraturen. Om klassicismen handlade om ordning och reda, så handlade romantiken om känslor och frihet.</p>
@@ -229,7 +230,7 @@ export function History() {
     },
     {
       title: "Modernismen (1900–Nutid)",
-      img: "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?auto=format&fit=crop&w=800&q=80",
+      img: "/images/Modernismen.jpg",
       content: `
         <h3>Vad är Modernism?</h3>
         <p>Modernismen inom musiken inleddes strax efter år 1900. Det var en tid då kompositörerna kände att de gamla reglerna för hur musik skulle låta var "förbrukade". Man ville experimentera och hitta helt nya sätt att uttrycka sig på. Perioden brukar ibland delas upp i modernism (början av 1900-talet) och postmodernism (från ca 1960-talet), men man använder ofta samlingsnamnet "1900-talsmusik".</p>
@@ -612,7 +613,8 @@ export function History() {
     const item = document.createElement('div');
     item.className = 'accordion-item';
 
-    const imgHtml = imgUrl ? `<img src="${imgUrl}" class="section-img">` : '';
+    // Check if valid imgUrl exists (not undefined or empty)
+    const imgHtml = imgUrl ? `<img src="${imgUrl}" class="section-img" alt="${title}">` : '';
 
     item.innerHTML = `
       <div class="accordion-header">
