@@ -3,191 +3,145 @@ export function Home() {
   container.className = 'home-page';
 
   // ==========================================
-  // 1. DATA: KORT (Nu uppdelade och med bilder)
+  // 1. DATA
   // ==========================================
   const features = [
     {
       title: "Musikhistoria",
       desc: "Res genom tiden från Barocken till Rock 'n' Roll.",
       img: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?auto=format&fit=crop&w=800&q=80",
-      linkId: 'historia-link' // Måste matcha ID på din menyknapp om du har sådana, annars hanterar vi det nedan
+      targetText: "Historia" // Texten som står i din meny
     },
     {
       title: "Teori",
       desc: "Lär dig noternas språk, takter och skalor.",
       img: "https://images.unsplash.com/photo-1514119688622-5a5665a9e62d?auto=format&fit=crop&w=800&q=80",
-      linkId: 'teori-link'
+      targetText: "Teori"
     },
     {
-      title: "Ensemble & Instrument",
-      desc: "Kolla in våra filmer och lär dig spela olika instrument.",
+      title: "Instrument",
+      desc: "Kolla in våra filmer och lär dig spela.",
       img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80",
-      linkId: 'ensemble-link'
+      targetText: "Instrument"
+    },
+    {
+      title: "Ensemble",
+      desc: "Spela med i våra låtar!",
+      img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=800&q=80",
+      targetText: "Ensemble"
     },
     {
       title: "Spel",
       desc: "Utmana ditt taktsinne och samla poäng!",
       img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
-      linkId: 'spel-link'
+      targetText: "Spel"
     }
   ];
 
   // ==========================================
-  // 2. CSS STYLING (DARK MODE)
+  // 2. CSS (FIXAR DEN GRÖNA FÄRGEN)
   // ==========================================
   const style = document.createElement('style');
   style.innerHTML = `
+    /* Tvingar bort det gröna genom att sätta bakgrund på hela denna vy */
     .home-page {
+      background-color: #121212 !important; /* Mörk bakgrund */
+      min-height: 100vh; /* Täcker hela höjden */
+      width: 100%;
       padding: 60px 20px;
-      max-width: 1100px;
-      margin: 0 auto;
+      box-sizing: border-box;
       color: #e0e0e0;
       font-family: 'Segoe UI', Roboto, sans-serif;
       text-align: center;
+      position: absolute; /* Säkerställer att den lägger sig överst */
+      top: 0;
+      left: 0;
+      z-index: 1; /* Ligger under menyn men över bakgrunden */
     }
 
-    /* HERO SECTION - NU MÖRK OCH STILREN */
-    .hero-section {
-      margin-bottom: 80px;
-      padding: 40px 20px;
-      animation: fadeIn 0.8s ease-out;
-      /* Ingen grön bakgrund längre! */
+    /* Justering så innehållet inte hamnar bakom menyn */
+    .content-wrapper {
+      max-width: 1100px;
+      margin: 60px auto 0 auto; /* Extra marginal i toppen */
     }
 
     .hero-title {
-      font-size: 4rem;
+      font-size: 3.5rem;
       margin-bottom: 20px;
       font-weight: 800;
-      /* Gradient text-effekt */
       background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      line-height: 1.1;
     }
 
     .hero-subtitle {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #aaa;
       max-width: 700px;
       margin: 0 auto 40px auto;
-      line-height: 1.6;
     }
 
     .cta-btn {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       color: #000;
-      padding: 16px 45px;
+      padding: 15px 45px;
       border-radius: 50px;
-      font-size: 1.1rem;
       font-weight: 700;
       border: none;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+      font-size: 1.1rem;
+      transition: transform 0.2s;
     }
+    .cta-btn:hover { transform: scale(1.05); }
 
-    .cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
-    }
-
-    /* GRID FÖR KORTEN */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 30px;
+      margin-bottom: 50px;
     }
 
-    /* KORT DESIGN */
     .feature-card {
-      background: #1a1a1a;
+      background: #1e1e1e;
       border: 1px solid #333;
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s;
       text-align: left;
       display: flex;
       flex-direction: column;
-      position: relative;
     }
-
     .feature-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
       border-color: #4facfe;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    /* Bilden i kortet */
-    .card-img-wrapper {
-      height: 180px;
-      overflow: hidden;
-      border-bottom: 1px solid #333;
     }
 
     .card-img {
       width: 100%;
-      height: 100%;
+      height: 160px;
       object-fit: cover;
-      transition: transform 0.5s ease;
     }
 
-    .feature-card:hover .card-img {
-      transform: scale(1.1); /* Zoom-effekt på bilden */
-    }
+    .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-content h3 { margin: 0 0 10px 0; color: #fff; }
+    .card-content p { color: #bbb; font-size: 0.9rem; margin-bottom: 15px; }
+    .card-arrow { color: #4facfe; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
 
-    .card-content {
-      padding: 25px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card-content h3 {
-      margin: 0 0 10px 0;
-      color: #fff;
-      font-size: 1.4rem;
-    }
-
-    .card-content p {
-      margin: 0;
-      color: #bbb;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .card-arrow {
-      color: #4facfe;
-      font-weight: bold;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Mobilanpassning */
-    @media (max-width: 600px) {
-      .hero-title { font-size: 2.5rem; }
-    }
+    @media (max-width: 600px) { .hero-title { font-size: 2.5rem; } }
   `;
   container.appendChild(style);
 
   // ==========================================
-  // 3. LOGIK & RENDERING
+  // 3. LOGIK FÖR ATT KUNNA NAVIGERA
   // ==========================================
 
-  // --- HERO SEKTION ---
+  // Wrapper för att centrera innehållet snyggt
+  const wrapper = document.createElement('div');
+  wrapper.className = 'content-wrapper';
+
+  // --- HERO ---
   const hero = document.createElement('div');
-  hero.className = 'hero-section';
   hero.innerHTML = `
     <h1 class="hero-title">Välkommen till<br>Tonverkstan 🎵</h1>
     <p class="hero-subtitle">
@@ -196,62 +150,57 @@ export function Home() {
     </p>
     <button class="cta-btn" id="start-btn">Kom igång</button>
   `;
-  container.appendChild(hero);
+  wrapper.appendChild(hero);
 
-  // --- FUNKTION FÖR ATT HANTERA LÄNKAR ---
-  // Detta försöker hitta dina knappar i menyn och klicka på dem
-  const handleNavClick = (linkId) => {
-    // 1. Försök hitta menylänken (om de har IDn)
-    const menuLink = document.getElementById(linkId);
-    if (menuLink) {
-      menuLink.click();
-      return;
-    }
-
-    // 2. Fallback: Om vi inte hittar menyn, logga det (här kan vi behöva justera beroende på din meny-kod)
-    console.log("Försökte navigera till:", linkId);
-
-    // 3. Alternativ: Skicka ett 'hash'-byte som många sidor lyssnar på
-    const hashPart = linkId.replace('-link', '');
-    window.location.hash = hashPart;
-
-    // 4. Dispatcha ett event som din main.js kan lyssna på
-    const event = new CustomEvent('navigate', { detail: hashPart });
-    document.dispatchEvent(event);
-  };
-
-  // Klick på "Kom igång" leder till Ensemble (exempelvis)
-  hero.querySelector('#start-btn').onclick = () => handleNavClick('ensemble-link');
-
-
-  // --- FEATURES GRID ---
+  // --- GRID ---
   const grid = document.createElement('div');
   grid.className = 'features-grid';
 
   features.forEach(item => {
     const card = document.createElement('div');
     card.className = 'feature-card';
-
     card.innerHTML = `
-      <div class="card-img-wrapper">
-        <img src="${item.img}" class="card-img" alt="${item.title}">
-      </div>
+      <img src="${item.img}" class="card-img">
       <div class="card-content">
-        <div>
-          <h3>${item.title}</h3>
-          <p>${item.desc}</p>
-        </div>
-        <div class="card-arrow">Gå till sidan <span>→</span></div>
+        <div><h3>${item.title}</h3><p>${item.desc}</p></div>
+        <div class="card-arrow">Gå till sidan →</div>
       </div>
     `;
 
-    // När man klickar på kortet
-    card.onclick = () => handleNavClick(item.linkId);
-
+    // Klick-event: Leta efter menyknappen och klicka på den
+    card.onclick = () => simulateMenuClick(item.targetText);
     grid.appendChild(card);
   });
 
-  container.appendChild(grid);
+  wrapper.appendChild(grid);
+  container.appendChild(wrapper);
+
+  // Klick på "Kom igång" går till Instrument (exempelvis)
+  setTimeout(() => {
+    const btn = hero.querySelector('#start-btn');
+    if (btn) btn.onclick = () => simulateMenuClick("Instrument");
+  }, 0);
+
+  // --- HJÄLPFUNKTION: Simulerar klick i menyn ---
+  function simulateMenuClick(textToFind) {
+    // 1. Hämta alla knappar eller länkar på sidan
+    const allButtons = document.querySelectorAll('button, a, nav div');
+
+    let found = false;
+    for (let btn of allButtons) {
+      // Om knappen innehåller texten (t.ex. "Historia"), klicka på den!
+      if (btn.innerText.includes(textToFind) && !btn.classList.contains('feature-card')) {
+        btn.click();
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      console.log(`Kunde inte hitta en menyknapp med texten "${textToFind}"`);
+      alert(`Kunde inte navigera automatiskt. Klicka på "${textToFind}" i menyn högst upp.`);
+    }
+  }
 
   return container;
 }
