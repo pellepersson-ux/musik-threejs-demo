@@ -172,9 +172,59 @@ export function History() {
       title: "Romantiken (1820–1900)",
       img: "https://images.unsplash.com/photo-1552422535-c4581306965b?auto=format&fit=crop&w=800&q=80",
       content: `
-        <p><strong>Sammanfattning (Inväntar fullständig text):</strong></p>
-        <p>Känslorna tog över! Musiken skulle vara dramatisk, drömsk och berätta sagor. Orkestrarna växte till enorma storlekar.</p>
-        <p><strong>Tonsättare:</strong> Chopin, Wagner, Tchaikovsky.</p>
+        <h3>Vad betyder Romantiken?</h3>
+        <p>När vi pratar om Romantiken i musikhistorien handlar det inte nödvändigtvis om kärlek (även om det ofta förekommer). Det är ett estetiskt begrepp som hämtades från konsten och litteraturen. Om klassicismen handlade om ordning och reda, så handlade romantiken om känslor och frihet.</p>
+
+        <h3>1. Samtiden – Den fria konstnären</h3>
+        <p>Under romantiken förändrades kompositörens roll i samhället.</p>
+        <ul>
+          <li><strong>Från anställd till fri:</strong> Tidigare var kompositören ofta anställd av kung eller kyrka. Nu blev tonsättaren en "fri konstnär" som fick klara sig själv. Beethoven var symbolen för denna förändring.</li>
+          <li><strong>Känslorna styr:</strong> Idealet var den lidande konstnären som lät inre känslor bestämma musikens form snarare än gamla regler.</li>
+        </ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken skiljer sig från klassicismen på flera sätt:</p>
+        <ul>
+          <li><strong>Friare form:</strong> Man ville ha mindre formella strukturer för att kunna uttrycka starkare känslor.</li>
+          <li><strong>Programmusik och Berättande:</strong> Musiken skulle ofta berätta en saga eller beskriva en bild (t.ex. <em>I Bergakungens sal</em>).</li>
+          <li><strong>Virtuositet:</strong> Det dök upp "superstjärnor" (virtuoser) som var extremt duktiga på sina instrument, särskilt piano (t.ex. Chopin och Liszt).</li>
+          <li><strong>Större orkestrar:</strong> Orkestrarna växte och blev enorma mot slutet av perioden (Senromantiken) för att skapa mäktiga klanger.</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+          <li><strong>Piano:</strong> Romantikens viktigaste instrument. Genom pianot kunde man uttrycka allt från svagaste viskning till stormande känslor.</li>
+          <li><strong>Orkestern:</strong> Utvecklades ständigt med nya instrument och fler av varje sort för mer kraft.</li>
+        </ul>
+
+        <h3>4. Musikstilar och Genrer</h3>
+        <ul>
+          <li><strong>Lied (Sånger):</strong> En dikt tonsatt för sång och piano. Franz Schubert var mästaren här.</li>
+          <li><strong>Opera och Musikdrama:</strong> Wagner skapade "musikdramer" där sång, musik, teater och scenografi smälte samman (<em>Gesamtkunstwerk</em>). Ofta nordisk mytologi.</li>
+          <li><strong>Balett:</strong> Musiken till dans blev mer avancerad, t.ex. Tjajkovskijs <em>Svansjön</em>.</li>
+          <li><strong>Symfonisk dikt:</strong> Ett orkesterverk i en sats som beskriver något utommusikaliskt, t.ex. en dikt.</li>
+        </ul>
+
+        <h3>5. Viktiga Tonsättare</h3>
+        <ul>
+          <li><strong>Franz Schubert (1797–1828):</strong> Melodiernas mästare. Dog ung men skrev över 600 sånger.</li>
+          <li><strong>Frédéric Chopin (1810–1849):</strong> "Pianots poet". Skrev nästan enbart för piano.</li>
+          <li><strong>Robert Schumann (1810–1856):</strong> Typisk romantiker, drömmande och personlig musik.</li>
+          <li><strong>Clara Schumann (1819–1896):</strong> En av sin tids absolut bästa pianister och kompositör, trots tidens syn på kvinnliga skapare.</li>
+          <li><strong>Pjotr Tjajkovskij (1840–1893):</strong> Rysk kompositör känd för vackra melodier och baletter.</li>
+          <li><strong>Edvard Grieg (1843–1907):</strong> Norges stora tonsättare som använde nordiska folktoner.</li>
+          <li><strong>Gustav Mahler (1860–1911):</strong> Känd för gigantiska symfonier som markerar slutet på romantiken.</li>
+        </ul>
+
+        <h3>6. Lyssningstips</h3>
+        <ul>
+          <li>"Ave Maria" (Schubert)</li>
+          <li>"I Bergakungens sal" ur Peer Gynt (Grieg)</li>
+          <li>"Regndroppspreludiet" (Chopin)</li>
+          <li>Musik ur baletten "Svansjön" (Tjajkovskij)</li>
+          <li>"Träumerei" (R. Schumann)</li>
+          <li>Pianokonsert nr 2 i C-moll (Rachmaninov)</li>
+        </ul>
       `
     },
     {
