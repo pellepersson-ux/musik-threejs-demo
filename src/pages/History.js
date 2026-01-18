@@ -16,54 +16,43 @@ export function History() {
         <h3>1. Samtiden – Nytänkarnas tid</h3>
         <p>Under renässansen hände mycket som förändrade hur människor såg på världen. Det var en tid för upptäckter och vetenskap.</p>
         <ul>
-          <li><strong>Kända personer:</strong> Upptäckaren Christofer Columbus, astronomen Nicolaus Copernicus och universalgeniet Leonardo da Vinci (som var både konstnär och uppfinnare) verkade under denna tid.</li>
-          <li><strong>Boktryckarkonsten:</strong> Man kunde nu trycka böcker, vilket gjorde att noter och musik kunde spridas enklare. Till exempel publicerades böcker med Josquin des Prez mässor.</li>
+          <li><strong>Kända personer:</strong> Upptäckaren Christofer Columbus, astronomen Nicolaus Copernicus och universalgeniet Leonardo da Vinci.</li>
+          <li><strong>Boktryckarkonsten:</strong> Man kunde nu trycka böcker, vilket gjorde att noter och musik kunde spridas enklare.</li>
         </ul>
 
         <h3>2. Musiken – Hur lät den?</h3>
-        <p>Musiken under renässansen utvecklades och blev mer komplex än under medeltiden. Här är de viktigaste dragen:</p>
+        <p>Musiken blev mer komplex än under medeltiden:</p>
         <ul>
-          <li><strong>Polyfoni (Flerstämmighet):</strong> Istället för en enda melodi hade musiken ofta 4–5 olika stämmor som var lika viktiga och hade självständiga melodier.</li>
-          <li><strong>Imitation:</strong> En vanlig teknik var att stämmorna härmade (imiterade) varandra. En stämma kunde börja med en melodi, och strax efter kom nästa stämma in med samma melodi.</li>
-          <li><strong>A cappella:</strong> Renässansen kallas ofta för a cappella-musikens gyllene era. Det betyder sång utan instrument (ordagrant "som i kapellet").</li>
-          <li><strong>Modala skalor:</strong> Man använde inte dur och moll som vi gör idag, utan så kallade kyrkotonarter eller modala skalor. (Prova själv: Spela på vita tangenter från D till D eller E till E).</li>
+          <li><strong>Polyfoni (Flerstämmighet):</strong> 4–5 olika stämmor som var lika viktiga och hade självständiga melodier.</li>
+          <li><strong>Imitation:</strong> Stämmorna härmade (imiterade) varandra.</li>
+          <li><strong>A cappella:</strong> Sång utan instrument.</li>
+          <li><strong>Modala skalor:</strong> Man använde kyrkotonarter istället för dur och moll.</li>
         </ul>
 
         <h3>3. Instrumenten</h3>
-        <p>Även om sång var väldigt viktigt användes också instrument:</p>
         <ul>
           <li><strong>Luta:</strong> Ett stränginstrument som påminner om en gitarr.</li>
-          <li><strong>Viola da gamba:</strong> Ett stråkinstrument (föregångare till cellon, men med band på greppbrädan).</li>
+          <li><strong>Viola da gamba:</strong> Ett stråkinstrument med band på greppbrädan.</li>
           <li><strong>Krumhorn:</strong> Ett blåsinstrument med en speciell klang.</li>
         </ul>
 
         <h3>4. Musikstilar och Genrer</h3>
-        <p>Man skiljde på sakral (kyrklig) och profan (folklig/världslig) musik.</p>
-        <p><strong>Sakral musik:</strong></p>
-        <ul>
-          <li><strong>Mässa:</strong> Tonsättning av gudstjänstens texter, t.ex. "Kyrie" och "Gloria".</li>
-          <li><strong>Motett:</strong> En mindre körsång med religiös text, ofta på latin.</li>
-        </ul>
-        <p><strong>Profan musik:</strong></p>
-        <ul>
-          <li><strong>Madrigal:</strong> En mycket populär sångform som startade i Italien men blev en enorm trend i England efter 1588. Madrigaler innehöll ofta <em>tonmåleri</em>, där musiken beskriver texten.</li>
-          <li>Andra former var <em>Chanson</em> (Frankrike) och <em>Lied</em> (Tyskland).</li>
-        </ul>
+        <p><strong>Sakral musik (Kyrklig):</strong> Mässa och Motett.</p>
+        <p><strong>Profan musik (Världslig):</strong> Madrigal (ofta med tonmåleri), Chanson och Lied.</p>
 
         <h3>5. Viktiga Tonsättare</h3>
         <ul>
-          <li><strong>Josquin des Prez (1440–1521):</strong> En superstjärna under sin tid. Älskades av både Martin Luther och da Vinci.</li>
-          <li><strong>Giovanni Pierluigi da Palestrina (1525–1594):</strong> Mästare på kyrkomusik, särskilt mässor.</li>
-          <li><strong>Thomas Tallis (1505–1585):</strong> Engelsk kompositör, känd för ett verk med 40 stämmor.</li>
-          <li><strong>William Byrd (1543–1623):</strong> Känd för sin polyfona musik.</li>
+          <li>Josquin des Prez</li>
+          <li>Giovanni Pierluigi da Palestrina</li>
+          <li>Thomas Tallis</li>
+          <li>William Byrd</li>
         </ul>
 
         <h3>6. Lyssningstips</h3>
         <ul>
-          <li>"Ave Maria ... Virgo serena" av Josquin des Prez</li>
-          <li>"Spem in alium" av Thomas Tallis (40 stämmor!)</li>
-          <li>"Fair Phyllis I Saw" av John Farmer (Madrigal med humor)</li>
-          <li>"Missa Brevis" (Credo) av Palestrina</li>
+          <li>"Ave Maria ... Virgo serena" (Josquin des Prez)</li>
+          <li>"Spem in alium" (Tallis)</li>
+          <li>"Fair Phyllis I Saw" (Farmer)</li>
         </ul>
       `
     },
@@ -71,9 +60,57 @@ export function History() {
       title: "Barocken (1600–1750)",
       img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
       content: `
-        <p><strong>Sammanfattning (Inväntar fullständig text):</strong></p>
-        <p>Musiken blev pampig, tung och dekorativ – precis som tidens peruker och arkitektur. 'Generalbas' var grunden i nästan allt och cembalon hördes överallt. Det var nu operan föddes och orkestermusiken började ta form.</p>
-        <p><strong>Tonsättare:</strong> Bach, Vivaldi, Händel.</p>
+        <h3>Vad betyder Barock?</h3>
+        <p>Ordet barock kommer troligen från portugisiskans "barocco", som betyder "ojämn pärla". I början användes ordet lite nedsättande för att beskriva något som var överdrivet, konstigt och svulstigt. Men idag är det namnet på en av musikhistoriens mest grandiosa epoker.</p>
+
+        <h3>1. Samtiden – Prakt och Makt</h3>
+        <p>Barocken var en tid av stora kontraster.</p>
+        <ul>
+          <li><strong>Kunglig glans:</strong> Detta var de enväldiga kungarnas tid (t.ex. Ludvig XIV). Man byggde enorma slott och kyrkor smyckade med guld och detaljer för att visa makt.</li>
+          <li><strong>Vetenskap:</strong> Samtidigt gjorde vetenskapsmän som Isaac Newton stora framsteg (tyngdlagen). Man började organisera världen, vilket även märktes i musiken som blev mer strukturerad.</li>
+        </ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken förändrades drastiskt från renässansen. Här är de viktigaste begreppen:</p>
+        <ul>
+          <li><strong>Generalbas (Basso Continuo):</strong> Barockens viktigaste kännetecken! En basstämma som spelas genom hela låten (ofta cello + cembalo).</li>
+          <li><strong>Dur och Moll:</strong> Man övergav de gamla kyrkotonarterna och började använda dur och moll, precis som i dagens popmusik.</li>
+          <li><strong>Terassdynamik:</strong> Man växlade plötsligt mellan starkt (forte) och svagt (piano), som terrasser, istället för att öka volymen stegvis.</li>
+          <li><strong>Affektläran:</strong> Tron att musik kunde påverka känslor direkt. En låt skulle uttrycka <em>en</em> känsla från början till slut.</li>
+          <li><strong>Melodi och ackompanjemang:</strong> Tydlig sångmelodi med enkelt komp (monodi), vilket ledde till operans födelse.</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+          <li><strong>Cembalo:</strong> Barockens "piano". Strängarna knäpps vilket ger ett spetsigt ljud. Man kan inte påverka volymen genom anslaget.</li>
+          <li><strong>Orgel:</strong> Kyrkorgeln utvecklades till ett mäktigt instrument.</li>
+          <li><strong>Stråkinstrument:</strong> Fiolen (violinen) tog över och blev orkesterns viktigaste instrument.</li>
+        </ul>
+
+        <h3>4. Nya Musikstilar</h3>
+        <ul>
+          <li><strong>Opera:</strong> Teater där man sjunger replikerna. Uppstod i Italien runt 1600.</li>
+          <li><strong>Oratorium:</strong> Som opera (kör, solister, orkester) men med religiös text och utan skådespeleri.</li>
+          <li><strong>Konsert (Concerto):</strong> En solist (eller liten grupp) spelar "mot" hela orkestern.</li>
+          <li><strong>Fuga:</strong> En avancerad form av kanon där en melodi vandrar mellan stämmor enligt stränga regler.</li>
+        </ul>
+
+        <h3>5. De stora "Barock-giganterna"</h3>
+        <ul>
+          <li><strong>Claudio Monteverdi (1567–1643):</strong> Övergångsfigur. Skrev en av de första operorna, <em>L'Orfeo</em>.</li>
+          <li><strong>Antonio Vivaldi (1678–1741):</strong> "Den röde prästen". Expert på violinkonserter (De fyra årstiderna).</li>
+          <li><strong>Johann Sebastian Bach (1685–1750):</strong> Kanske historiens viktigaste tonsättare. Mästare på kontrapunkt och fuga. När han dog tog barocken slut.</li>
+          <li><strong>Georg Friedrich Händel (1685–1759):</strong> Tysk som blev superkändis i London. Skrev pampig musik och oratorier.</li>
+        </ul>
+
+        <h3>6. Lyssningstips</h3>
+        <ul>
+          <li>"Våren" ur De fyra årstiderna (Vivaldi)</li>
+          <li>"Toccata och fuga i d-moll" (Bach)</li>
+          <li>"Halleluja-kören" ur Messias (Händel)</li>
+          <li>"Air" (Bach)</li>
+          <li>"L'Orfeo" (Monteverdi)</li>
+        </ul>
       `
     },
     {
@@ -305,7 +342,7 @@ export function History() {
       display: block;
     }
 
-    /* ACCORDION STYLES (Används nu för BÅDA flikarna) */
+    /* ACCORDION STYLES */
     .accordion-item {
       background: #1a1a1a;
       border: 1px solid #333;
@@ -327,7 +364,7 @@ export function History() {
     }
     .accordion-title {
       font-weight: bold;
-      color: #fca311; /* Accentfärg */
+      color: #fca311;
       font-size: 1.2rem;
     }
     .accordion-content {
@@ -337,7 +374,7 @@ export function History() {
       background: rgba(0,0,0,0.2);
     }
     .accordion-content.open {
-      max-height: 2500px; /* Tillräckligt högt för långa texter */
+      max-height: 2500px;
       transition: max-height 0.6s ease-in;
     }
     .accordion-inner {
