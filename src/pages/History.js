@@ -117,9 +117,55 @@ export function History() {
       title: "Wienklassicismen (1750–1820)",
       img: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?auto=format&fit=crop&w=800&q=80",
       content: `
-        <p><strong>Sammanfattning (Inväntar fullständig text):</strong></p>
-        <p>Balans, klarhet och elegans. Melodin hamnade i fokus. Pianot konkurrerade ut cembalon och den moderna symfoniorkestern etablerades i Wien.</p>
-        <p><strong>Tonsättare:</strong> Mozart, Haydn, Beethoven (tidig).</p>
+        <h3>Vad betyder Klassicism?</h3>
+        <p>Ordet härstammar från latinets <em>classicus</em> som syftade på medborgare av högsta rang. När vi pratar om "klassisk" stil menar vi ideal som hämtades från de gamla grekerna och romarna: balans, enkelhet, elegans, proportion och kontroll. Inom musiken kallas perioden ofta för <strong>Wienklassicismen</strong> eftersom de tre största tonsättarna (Haydn, Mozart och Beethoven) var verksamma i Wien.</p>
+
+        <h3>1. Samtiden – Förnuft och Upplysning</h3>
+        <p>Klassicismen sammanföll med Upplysningstiden.</p>
+        <ul>
+          <li><strong>Vetenskap och förnuft:</strong> Man började ifrågasätta kyrkans gamla regler och istället tro på människans eget förnuft och naturvetenskapen.</li>
+          <li><strong>Minskad kyrkomusik:</strong> Eftersom kyrkans makt minskade skrevs det inte alls lika mycket musik för kyrkan som tidigare. De flesta kända verk från den här tiden är inte religiösa.</li>
+        </ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken blev "lättare" och luftigare jämfört med barockens tunga musik.</p>
+        <ul>
+          <li><strong>Homofoni:</strong> Motsatsen till barockens polyfoni. Man ville ha en tydlig melodi som kompades av enkla ackord.</li>
+          <li><strong>Kortare melodier:</strong> Melodierna delades upp i kortare fraser för att kännas balanserade och symmetriska.</li>
+          <li><strong>Mer känslor och variation:</strong> Humöret kunde svänga snabbt inom samma stycke – från glatt till sorgset (till skillnad från barockens "en känsla per låt").</li>
+          <li><strong>Dynamik:</strong> Man började använda <em>crescendo</em> (gradvis starkare) och <em>diminuendo</em> (gradvis svagare) för att skapa spänning.</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+          <li><strong>Pianot tar över:</strong> Under 1700-talet uppfanns pianot (fortepianot). Det ersatte cembalon eftersom man på pianot kunde spela både starkt och svagt.</li>
+          <li><strong>Större orkestrar:</strong> Orkestern växte och fick fler instrument än under barocken.</li>
+        </ul>
+
+        <h3>4. Viktiga Musikstilar och Genrer</h3>
+        <ul>
+          <li><strong>Symfoni:</strong> En stor "sonat för orkester", oftast med fyra satser.</li>
+          <li><strong>Stråkkvartett:</strong> Kammarmusik för fyra stråkar (två fioler, en viola och en cello). Haydn kallas "stråkkvartettens okrönte konung".</li>
+          <li><strong>Opera (Opera Buffa):</strong> Komisk opera som handlade om vanliga människor och var rolig (utvecklades av Mozart).</li>
+          <li><strong>Solokonsert:</strong> Ett verk där ett soloinstrument spelar med orkestern.</li>
+        </ul>
+
+        <h3>5. De tre "Giganterna" (Första Wienskolan)</h3>
+        <p>Tre tonsättare dominerade totalt:</p>
+        <ul>
+          <li><strong>Joseph Haydn (1732–1809):</strong> Den äldste. Enormt viktig för symfonin och stråkkvartetten. Lärare åt de andra två.</li>
+          <li><strong>Wolfgang Amadeus Mozart (1756–1791):</strong> Underbarnet som skrev perfekt musik i alla genrer. Epokens främsta representant.</li>
+          <li><strong>Ludwig van Beethoven (1770–1827):</strong> Började som klassicist men hans senare musik blev så dramatisk att han startade nästa epok (Romantiken).</li>
+        </ul>
+
+        <h3>6. Lyssningstips</h3>
+        <ul>
+          <li>"Eine Kleine Nachtmusik" (Mozart)</li>
+          <li>"Månskenssonaten" (Beethoven)</li>
+          <li>"Nattens Drottning" ur Trollflöjten (Mozart)</li>
+          <li>Klarinettkonsert i A-dur (Mozart)</li>
+          <li>Stråkkvartett nr 61 i D-moll (Haydn)</li>
+        </ul>
       `
     },
     {
