@@ -1,305 +1,243 @@
 export function Ensemble() {
+  const container = document.createElement('div');
+  container.className = 'ensemble-page';
 
-  const section = document.createElement('section');
-
-  section.className = 'ensemble-page';
-
-
-
-  // --- HÄR LÄGGER DU IN DINA LÅTAR ---
-
-  const songs = [
-
+  // ==========================================
+  // 1. DATA: LÅTLISTA
+  // ==========================================
+  const videos = [
     {
-
-      id: "we-will-rock-you",
-
-      title: "We Will Rock You",
-
-      artist: "Queen",
-
-      thumbnail: "https://img.youtube.com/vi/-tJYN-eG1zk/hqdefault.jpg",
-
-      parts: {
-
-        drums: "k-TR64OQdOA",
-
-        bass: "E-WHW-QNswE",
-
-        guitar: "fJ9rUzIMcZQ",
-
-        keyboard: ""
-
-      }
-
+      id: 'video1',
+      title: 'Hjältarna - (Ensemble)',
+      src: '/videos/Hjaltarna.mp4',
+      desc: 'En energifylld öppningslåt med hela ensemblen.'
     },
-
     {
-
-      id: "seven-nation-army",
-
-      title: "Seven Nation Army",
-
-      artist: "The White Stripes",
-
-      thumbnail: "https://img.youtube.com/vi/0J2QdDbelmY/hqdefault.jpg",
-
-      parts: {
-
-        drums: "G64u8vV2t6Q",
-
-        bass: "H2P5j8G7fXU",
-
-        guitar: "V-mQyRuHIuA",
-
-        keyboard: ""
-
-      }
-
+      id: 'video2',
+      title: 'Stjärnorna - (Kör)',
+      src: '/videos/Stjarnorna.mp4',
+      desc: 'Enstämmig körsång med fokus på klang.'
+    },
+    {
+      id: 'video3',
+      title: 'Nattens ljus - (Solo)',
+      src: '/videos/NattensLjus.mp4',
+      desc: 'Ett stämningsfullt solo med pianoackompanjemang.'
     }
-
   ];
 
-
-
-  let currentSong = null;
-
-  let currentInstrument = 'drums';
-
-
-
-  // --- SKAPA HTML-STRUKTUREN ---
-
-  section.innerHTML = `
-
-<div class="ensemble-container">
-
-<h1>Ensemblespel 🎸🥁🎹</h1>
-
-<p class="subtitle">Välj en låt och öva på din stämma!</p>
-
-
-
-<div id="song-grid" class="song-grid">
-
-${songs.map(song => `
-
-<div class="song-card" data-id="${song.id}">
-
-<img src="${song.thumbnail}" alt="${song.title}">
-
-<div class="song-info">
-
-<h3>${song.title}</h3>
-
-<p>${song.artist}</p>
-
-</div>
-
-</div>
-
-`).join('')}
-
-</div>
-
-
-
-<div id="practice-room" class="practice-room" style="display: none;">
-
-<button id="back-btn" class="back-btn">⬅ Tillbaka till låtlistan</button>
-
-
-<h2 id="current-song-title">Låttitel</h2>
-
-
-<div class="video-container">
-
-<iframe id="video-player"
-
-width="100%" height="100%"
-
-src=""
-
-frameborder="0"
-
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-
-allowfullscreen>
-
-</iframe>
-
-</div>
-
-
-
-<div class="controls">
-
-<p>Välj instrument:</p>
-
-<div id="instrument-buttons" class="instrument-buttons">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-
-
-  // --- LOGIK ---
-
-  const songGrid = section.querySelector('#song-grid');
-
-  const practiceRoom = section.querySelector('#practice-room');
-
-  const videoPlayer = section.querySelector('#video-player');
-
-  const backBtn = section.querySelector('#back-btn');
-
-  const instrumentButtons = section.querySelector('#instrument-buttons');
-
-  const currentSongTitle = section.querySelector('#current-song-title');
-
-
-
-  // Klick på en låt i listan
-
-  section.querySelectorAll('.song-card').forEach(card => {
-
-    card.addEventListener('click', () => {
-
-      const songId = card.dataset.id;
-
-      loadSong(songId);
-
-    });
-
-  });
-
-
-
-  // Klick på "Tillbaka"
-
-  backBtn.addEventListener('click', () => {
-
-    practiceRoom.style.display = 'none';
-
-    songGrid.style.display = 'grid';
-
-    videoPlayer.src = ""; // Stoppar videon
-
-    currentSong = null;
-
-  });
-
-
-
-  function loadSong(id) {
-
-    currentSong = songs.find(s => s.id === id);
-
-    if (!currentSong) return;
-
-
-
-    // Byt vy
-
-    songGrid.style.display = 'none';
-
-    practiceRoom.style.display = 'block';
-
-    currentSongTitle.textContent = `${currentSong.title} - ${currentSong.artist}`;
-
-
-
-    renderButtons();
-
-
-
-    // Starta standardinstrumentet
-
-    const firstAvailable = Object.keys(currentSong.parts).find(key => currentSong.parts[key] !== "") || 'drums';
-
-    playVideo(firstAvailable);
-
-  }
-
-
-
-  function renderButtons() {
-
-    instrumentButtons.innerHTML = '';
-
-
-
-    const labels = {
-
-      drums: "🥁 Trummor",
-
-      bass: "🎸 Bas",
-
-      guitar: "🎸 Gitarr",
-
-      keyboard: "🎹 Keyboard/Piano",
-
-      vocals: "🎤 Sång"
-
-    };
-
-
-
-    for (const [instrument, videoId] of Object.entries(currentSong.parts)) {
-
-      if (videoId) {
-
-        const btn = document.createElement('button');
-
-        btn.textContent = labels[instrument] || instrument;
-
-        btn.className = 'inst-btn';
-
-        if (instrument === currentInstrument) btn.classList.add('active');
-
-
-
-        btn.addEventListener('click', () => {
-
-          playVideo(instrument);
-
-          document.querySelectorAll('.inst-btn').forEach(b => b.classList.remove('active'));
-
-          btn.classList.add('active');
-
-        });
-
-
-
-        instrumentButtons.appendChild(btn);
-
-      }
-
+  // ==========================================
+  // 2. CSS STYLING
+  // ==========================================
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .ensemble-page {
+      padding: 40px 20px;
+      max-width: 1000px; /* Lite bredare för videons skull */
+      margin: 0 auto;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
     }
 
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* GRID FÖR LISTAN */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    /* VIDEOCARD (FÖRANVISNING) */
+    .video-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+      border-color: #4facfe;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .video-card h3 {
+      margin: 0 0 10px 0;
+      color: #fff;
+    }
+
+    .video-card p {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin: 0;
+    }
+
+    .play-icon {
+      font-size: 2rem;
+      color: #4facfe;
+      margin-bottom: 15px;
+    }
+
+    /* VIDEOSPELARE VY */
+    .player-view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.5s;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(79, 172, 254, 0.2);
+      margin-bottom: 20px;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-info {
+      text-align: left;
+      max-width: 800px;
+      width: 100%;
+      margin-top: 10px;
+      padding: 20px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+    }
+
+    /* SNYGGA KNAPPAR */
+    .back-btn {
+      background: transparent;
+      border: 2px solid #4facfe;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 50px; /* Piller-form */
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .back-btn:hover {
+      background: #4facfe;
+      color: #000; /* Svart text mot blå bakgrund */
+      box-shadow: 0 0 15px rgba(79, 172, 254, 0.6);
+      transform: translateX(-5px); /* Rör sig lite åt vänster */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  `;
+  container.appendChild(style);
+
+  // ==========================================
+  // 3. LOGIK & RENDERING
+  // ==========================================
+
+  // Huvudrubrik
+  const title = document.createElement('h1');
+  title.innerText = "Vår Ensemble";
+  container.appendChild(title);
+
+  // Behållare för innehåll (Lista eller Spelare)
+  const contentContainer = document.createElement('div');
+  container.appendChild(contentContainer);
+
+  // Funktion: Visa listan
+  function renderList() {
+    contentContainer.innerHTML = '';
+
+    const grid = document.createElement('div');
+    grid.className = 'video-grid';
+
+    videos.forEach(video => {
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = `
+        <div class="play-icon">▶</div>
+        <h3>${video.title}</h3>
+        <p>${video.desc}</p>
+      `;
+
+      card.onclick = () => renderPlayer(video);
+      grid.appendChild(card);
+    });
+
+    contentContainer.appendChild(grid);
   }
 
+  // Funktion: Visa videospelare
+  function renderPlayer(videoData) {
+    contentContainer.innerHTML = ''; // Rensa listan
 
+    const playerView = document.createElement('div');
+    playerView.className = 'player-view';
 
-  function playVideo(instrument) {
+    // 1. Tillbaka-knapp (NU UPPDATERAD DESIGN)
+    const backBtn = document.createElement('button');
+    backBtn.className = 'back-btn';
+    backBtn.innerHTML = `<span>←</span> Tillbaka till låtlistan`;
+    backBtn.onclick = renderList;
+    playerView.appendChild(backBtn);
 
-    currentInstrument = instrument;
+    // 2. Videorutan
+    const wrapper = document.createElement('div');
+    wrapper.className = 'video-wrapper';
 
-    const videoId = currentSong.parts[instrument];
+    const videoEl = document.createElement('video');
+    videoEl.controls = true;
+    videoEl.autoplay = true; // Startar direkt
 
-    videoPlayer.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+    // Fallback om videon inte finns
+    videoEl.innerHTML = `Din webbläsare stödjer inte video.`;
+    videoEl.src = videoData.src;
 
+    wrapper.appendChild(videoEl);
+    playerView.appendChild(wrapper);
+
+    // 3. Info under videon
+    const info = document.createElement('div');
+    info.className = 'video-info';
+    info.innerHTML = `
+      <h2 style="color: #4facfe; margin-top: 0;">${videoData.title}</h2>
+      <p>${videoData.desc}</p>
+    `;
+    playerView.appendChild(info);
+
+    contentContainer.appendChild(playerView);
   }
 
+  // Starta med att visa listan
+  renderList();
 
-
-  return section;
-
+  return container;
 }
