@@ -2,32 +2,51 @@ export function History() {
   const container = document.createElement('div');
   container.className = 'history-page';
 
-  // --- 1. DATA: KLASSISK MUSIK ---
+  // --- 1. DATA: KLASSISK MUSIK (Alla 5 epoker) ---
   const classicalData = [
+    {
+      title: "Renässansen (1450–1600)",
+      year: "1450–1600",
+      desc: "Musikens pånyttfödelse! Kyrkomusiken blomstrade med flerstämmig sång (polyfoni). Boktryckarkonsten gjorde att noter kunde spridas snabbare. Instrument som lutan var populära.",
+      composers: "Palestrina, Josquin des Prez, Tallis",
+      // Bild: Gammal målning / Luta
+      img: "https://images.unsplash.com/photo-1596201309322-927909033333?auto=format&fit=crop&w=800&q=80"
+    },
     {
       title: "Barocken (1600–1750)",
       year: "1600–1750",
-      desc: "Musiken var pampig och dekorativ, precis som perukerna. Cembalon var viktig och man gillade 'kontrapunkt' (flera melodier samtidigt).",
-      composers: "Bach, Vivaldi, Händel",
-      img: "https://images.unsplash.com/photo-1558584876-06830501a52e?auto=format&fit=crop&w=800&q=80"
+      desc: "Musiken blev pampig, tung och dekorativ – precis som tidens peruker och arkitektur. 'Generalbas' och cembalon var grunden i nästan allt. Operan föddes under denna tid.",
+      composers: "J.S. Bach, Vivaldi, Händel",
+      // Bild: Cembalo / Barockkyrka
+      img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Wienklassicismen (1750–1820)",
       year: "1750–1820",
-      desc: "Allt skulle vara lagom, balanserat och elegant. Melodin blev viktigast. Pianot ersatte cembalon och symfoniorkestern växte fram.",
+      desc: "Balans och elegans. Musiken blev lättare och melodin hamnade i fokus. Pianot ersatte cembalon och den moderna symfoniorkestern tog form i Wien.",
       composers: "Mozart, Haydn, Beethoven (tidig)",
-      img: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80"
+      // Bild: Violin / Noter
+      img: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Romantiken (1820–1900)",
       year: "1820–1900",
-      desc: "Känslor, sagor och dramatik! Musiken blev större, starkare och friare. Man ville beskriva naturen och det övernaturliga.",
-      composers: "Beethoven (sen), Chopin, Wagner",
-      img: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?auto=format&fit=crop&w=800&q=80"
+      desc: "Känslorna tog över! Musiken skulle vara dramatisk, drömsk och berätta sagor. Orkestrarna blev enorma och solisterna blev superstjärnor (virtuoser).",
+      composers: "Chopin, Wagner, Tchaikovsky, Grieg",
+      // Bild: Dramatisk pianospelare / Konst
+      img: "https://images.unsplash.com/photo-1552422535-c4581306965b?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Modernismen (1900–Nutid)",
+      year: "1900–Nutid",
+      desc: "Alla regler bröts. Tonsättare experimenterade med dissonanser (falska toner), nya ljud och rytmer. Allt från impressionism till tolvtonsmusik och elektronisk musik ryms här.",
+      composers: "Stravinsky, Schönberg, Cage, Reich",
+      // Bild: Abstrakt / Modern konst
+      img: "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
-  // --- 2. DATA: ROCK 'N' ROLL (Din akademiska text) ---
+  // --- 2. DATA: ROCK 'N' ROLL (Din text) ---
   const rockChapters = [
     {
       title: "1. Inledning: Rock’n’roll som fenomen",
@@ -71,6 +90,7 @@ export function History() {
       margin-bottom: 40px;
       border-bottom: 1px solid #444;
       padding-bottom: 20px;
+      flex-wrap: wrap; /* För små skärmar */
     }
     .tab-btn {
       background: transparent;
@@ -93,17 +113,17 @@ export function History() {
 
     /* CONTENT AREAS */
     .content-section {
-      display: none; /* Dölj som standard */
+      display: none;
       animation: fadeIn 0.5s;
     }
     .content-section.active {
-      display: block; /* Visa om aktiv */
+      display: block;
     }
 
     /* KLASSISK STIL (Timeline Cards) */
     .classical-card {
       display: flex;
-      flex-direction: column; /* Mobil-first */
+      flex-direction: column;
       background: rgba(255,255,255,0.05);
       margin-bottom: 30px;
       border-radius: 12px;
@@ -111,8 +131,9 @@ export function History() {
       border: 1px solid #333;
     }
     .c-img {
-      height: 200px;
+      height: 250px;
       object-fit: cover;
+      width: 100%;
     }
     .c-info {
       padding: 20px;
@@ -121,11 +142,21 @@ export function History() {
       color: #4facfe;
       font-weight: bold;
       font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    .c-info h2 {
+      margin-top: 0;
+      color: white;
+    }
+    .c-desc {
+      margin-bottom: 15px;
+      line-height: 1.5;
     }
     .c-composers {
-      margin-top: 10px;
       font-style: italic;
       color: #aaa;
+      border-top: 1px solid #444;
+      padding-top: 10px;
     }
 
     /* ROCK STIL (Accordion) */
@@ -149,7 +180,7 @@ export function History() {
     }
     .accordion-title {
       font-weight: bold;
-      color: #fca311; /* Lite mer 'rockig' accentfärg */
+      color: #fca311; 
     }
     .accordion-content {
       max-height: 0;
@@ -159,11 +190,11 @@ export function History() {
     }
     .accordion-content.open {
       padding: 20px;
-      max-height: 500px; /* Tillräckligt för texten */
+      max-height: 800px; 
     }
     .rock-img {
       width: 100%;
-      height: 150px;
+      height: 200px;
       object-fit: cover;
       margin-bottom: 15px;
       border-radius: 4px;
@@ -174,13 +205,18 @@ export function History() {
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Desktop layout för klassiska kort */
     @media (min-width: 700px) {
       .classical-card {
         flex-direction: row;
+        align-items: stretch;
       }
       .c-img {
         width: 40%;
         height: auto;
+      }
+      .c-info {
+        width: 60%;
       }
     }
   `;
@@ -214,18 +250,19 @@ export function History() {
 
   // KLASSISK SECTION
   const classicalSection = document.createElement('div');
-  classicalSection.className = 'content-section active'; // Börjar synlig
+  classicalSection.className = 'content-section active';
 
+  // Här bygger vi korten för ALLA 5 epoker
   classicalData.forEach(period => {
     const card = document.createElement('div');
     card.className = 'classical-card';
     card.innerHTML = `
-      <img src="${period.img}" class="c-img">
+      <img src="${period.img}" class="c-img" alt="${period.title}">
       <div class="c-info">
         <h2>${period.title}</h2>
         <div class="c-year">${period.year}</div>
-        <p>${period.desc}</p>
-        <div class="c-composers">Kända namn: ${period.composers}</div>
+        <p class="c-desc">${period.desc}</p>
+        <div class="c-composers"><strong>Kända namn:</strong> ${period.composers}</div>
       </div>
     `;
     classicalSection.appendChild(card);
@@ -234,13 +271,12 @@ export function History() {
 
   // ROCK SECTION
   const rockSection = document.createElement('div');
-  rockSection.className = 'content-section'; // Börjar dold
+  rockSection.className = 'content-section';
 
-  // Intro text för rocken
   const rockIntro = document.createElement('div');
   rockIntro.innerHTML = `
     <h2 style="color:#fca311; text-align:center;">The History of Rock & Roll</h2>
-    <p style="text-align:center; max-width:600px; margin:0 auto 30px auto;">
+    <p style="text-align:center; max-width:600px; margin:0 auto 30px auto; font-style:italic;">
       En djupdykning i hur 1950-talet förändrade musiken för alltid.
     </p>
   `;
@@ -250,7 +286,6 @@ export function History() {
     const item = document.createElement('div');
     item.className = 'accordion-item';
 
-    // Om bild finns, lägg till den i content
     const imgHtml = chap.img ? `<img src="${chap.img}" class="rock-img">` : '';
 
     item.innerHTML = `
@@ -270,10 +305,7 @@ export function History() {
 
     headerEl.addEventListener('click', () => {
       const isOpen = contentEl.classList.contains('open');
-
-      // Stäng alla andra (valfritt, men snyggt)
       rockSection.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-
       if (!isOpen) {
         contentEl.classList.add('open');
       }
