@@ -231,9 +231,58 @@ export function History() {
       title: "Modernismen (1900–Nutid)",
       img: "https://images.unsplash.com/photo-1513883049090-d0b7439799bf?auto=format&fit=crop&w=800&q=80",
       content: `
-        <p><strong>Sammanfattning (Inväntar fullständig text):</strong></p>
-        <p>Alla regler bröts. Dissonanser, nya klanger och komplexa rytmer. Allt från impressionism till elektronisk musik.</p>
-        <p><strong>Tonsättare:</strong> Stravinsky, Schönberg, Cage.</p>
+        <h3>Vad är Modernism?</h3>
+        <p>Modernismen inom musiken inleddes strax efter år 1900. Det var en tid då kompositörerna kände att de gamla reglerna för hur musik skulle låta var "förbrukade". Man ville experimentera och hitta helt nya sätt att uttrycka sig på. Perioden brukar ibland delas upp i modernism (början av 1900-talet) och postmodernism (från ca 1960-talet), men man använder ofta samlingsnamnet "1900-talsmusik".</p>
+
+        <h3>1. Samtiden – Experimentens epok</h3>
+        <p>Modernismen handlade om att bryta mot traditioner.</p>
+        <ul>
+          <li><strong>Nya regler:</strong> Många tyckte att den gamla musiken (som byggde på dur och moll) hade tänjts till bristningsgränsen under romantiken. Man behövde "nya sätt att ge kompositioner form och fason".</li>
+          <li><strong>Framtidstro och uppror:</strong> Det var en tid av experiment där man sa adjö till det gamla och skapade massor av nya stilar och trender.</li>
+        </ul>
+
+        <h3>2. Musiken – Hur lät den?</h3>
+        <p>Musiken under 1900-talet kan låta väldigt olika, men här är några vanliga drag:</p>
+        <ul>
+          <li><strong>Dissonanser och Atonalitet:</strong> Tidigare ansågs vissa toner skära sig (låta falskt) och man var tvungen att "lösa upp" dem till vackra ackord. Under modernismen "befriade" man dissonansen. Musiken behövde inte längre gå i dur eller moll (tonalitet), utan kunde vara atonal (utan tonart).</li>
+          <li><strong>Rytm i fokus:</strong> Rytmerna blev viktigare och mer komplicerade. Man kunde använda "oregelbundna" takter och accenter som gjorde musiken ryckig och oförutsägbar, som i Stravinskijs <em>Våroffer</em>.</li>
+          <li><strong>Nya klangfärger:</strong> Man började använda instrumenten på nya sätt för att skapa konstiga ljud, och senare kom även elektroniska instrument och inspelade ljud (tonband).</li>
+        </ul>
+
+        <h3>3. Instrumenten</h3>
+        <ul>
+          <li><strong>Orkestern:</strong> Fanns kvar, men användes annorlunda. Slagverk fick en mycket större roll (ibland spelade bara slagverkare!).</li>
+          <li><strong>Elektronik:</strong> Under andra halvan av seklet kom synthesizers och datorer.</li>
+          <li><strong>Preparerat piano:</strong> Uppfinnaren John Cage kom på att man kunde lägga skruvar, gummi och annat inuti flygeln för att få det att låta som en hel slagverksorkester.</li>
+        </ul>
+
+        <h3>4. Musikstilar och Genrer</h3>
+        <p>Eftersom alla experimenterade åt olika håll uppstod många olika stilar:</p>
+        <ul>
+          <li><strong>Impressionism:</strong> (Tidigt 1900-tal). Precis som i konsten ville man måla stämningar och ögonblick snarare än berätta en tydlig historia. Musiken var ofta drömsk och svävande (t.ex. Debussy).</li>
+          <li><strong>Expressionism:</strong> Musik som uttryckte stark ångest och våldsamma känslor, ofta genom atonal musik (t.ex. Schönberg).</li>
+          <li><strong>Neoklassicism:</strong> En stil där man tittade tillbaka på 1700-talet (som Mozart och Bach) men kryddade musiken med moderna, "felaktiga" toner (t.ex. Stravinskij).</li>
+          <li><strong>Minimalism:</strong> Musik som bygger på att man upprepar korta melodisnuttar om och om igen under lång tid, vilket skapar en hypnos-liknande känsla (t.ex. Philip Glass).</li>
+          <li><strong>Aleatorisk musik (Slumpmusik):</strong> Musik där slumpen avgör vad som händer. John Cage kunde använda tärningar eller stjärnkartor för att bestämma vilka toner som skulle spelas.</li>
+        </ul>
+
+        <h3>5. Viktiga Tonsättare</h3>
+        <ul>
+          <li><strong>Claude Debussy (1862–1918):</strong> Fransman som skapade impressionismen.</li>
+          <li><strong>Igor Stravinskij (1882–1971):</strong> En kameleont som bytte stil flera gånger. Hans balett <em>Våroffer</em> orsakade skandal och slagsmål på premiären för att den var så modern.</li>
+          <li><strong>Arnold Schönberg (1874–1951):</strong> Uppfann "tolvtonsmetoden", ett matematiskt sätt att komponera så att alla 12 toner används lika mycket (inget dur eller moll).</li>
+          <li><strong>John Cage (1912–1992):</strong> Amerikansk filosof och kompositör som ifrågasatte vad musik egentligen är. Mest känd för att ha skrivit ett stycke som är helt tyst.</li>
+          <li><strong>Philip Glass (1937–):</strong> Känd minimalist som även skrivit mycket filmmusik.</li>
+        </ul>
+
+        <h3>6. Lyssningstips</h3>
+        <ul>
+          <li>"Våroffer" (Stravinskij) – Balettmusik med våldsamma rytmer.</li>
+          <li>"Boléro" (Ravel) – Ett enda långt crescendo.</li>
+          <li>"4’33”" (Cage) – 4 min 33 sek tystnad.</li>
+          <li>"Gymnopédies" (Satie) – Lugn pianomusik.</li>
+          <li>"Koyaanisqatsi" (Glass) – Minimalistisk musik.</li>
+        </ul>
       `
     }
   ];
