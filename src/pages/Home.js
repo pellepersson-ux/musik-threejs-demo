@@ -3,14 +3,13 @@ export function Home() {
   container.className = 'home-page';
 
   // ==========================================
-  // 1. "NUCLEAR OPTION" FÖR FÄRGEN
+  // 1. SÄKERSTÄLL MÖRK BAKGRUND (NUCLEAR OPTION)
   // ==========================================
-  // Detta skriver över sidans globala bakgrundsfärg direkt via JS
   document.body.style.backgroundColor = "#121212";
   document.body.style.backgroundImage = "none";
 
   // ==========================================
-  // 2. DATA (Bara de 3 viktigaste)
+  // 2. DATA
   // ==========================================
   const features = [
     {
@@ -42,62 +41,67 @@ export function Home() {
       padding: 40px 20px;
       max-width: 1100px;
       margin: 0 auto;
-      color: #e0e0e0;
       font-family: 'Segoe UI', Roboto, sans-serif;
       text-align: center;
-      min-height: 100vh; /* Säkerställer höjden */
+      min-height: 100vh;
     }
 
-    /* HERO SECTION */
-    .hero-section {
-      margin-top: 40px; /* Lite luft från menyn */
+    /* --- HERO BANNER (REKTANGELN) --- */
+    .hero-banner {
+      /* Här är färgtoningen (Gradient). Vill du ha grönt igen?
+         Byt ut färgerna nedan mot t.ex. #43e97b och #38f9d7 */
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      
+      /* HÄR ÄR DE RUNDA HÖRNEN */
+      border-radius: 30px; 
+      
+      padding: 60px 20px;
+      margin-top: 20px;
       margin-bottom: 60px;
+      box-shadow: 0 10px 40px rgba(0, 242, 254, 0.2); /* Snyggt sken under */
       animation: fadeIn 0.8s ease-out;
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Centrerar allt, inklusive knappen */
+      color: #000; /* Mörk text eftersom bakgrunden är ljus */
     }
 
     .hero-title {
       font-size: 3.5rem;
       margin-bottom: 15px;
       font-weight: 800;
-      background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #1a1a1a;
       line-height: 1.1;
     }
 
     .hero-subtitle {
       font-size: 1.2rem;
-      color: #aaa;
+      color: #333;
       max-width: 650px;
-      margin: 0 auto 30px auto; /* 30px ner till knappen */
+      margin: 0 auto 30px auto;
       line-height: 1.5;
+      font-weight: 500;
     }
 
     .cta-btn {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: #000;
-      padding: 14px 40px; /* Lite tajtare padding */
+      background: #1a1a1a; /* Mörk knapp för kontrast mot den ljusa bannern */
+      color: #fff;
+      padding: 15px 45px;
       border-radius: 50px;
       font-weight: 700;
       border: none;
       cursor: pointer;
       font-size: 1.1rem;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
     }
 
     .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      background: #333;
     }
 
-    /* GRID FÖR DE 3 KORTEN */
+    /* --- GRID FÖR KORTEN --- */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Lite bredare kort nu när de är färre */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
       margin-bottom: 50px;
     }
@@ -108,7 +112,7 @@ export function Home() {
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.3s, border-color 0.3s;
       text-align: left;
       display: flex;
       flex-direction: column;
@@ -119,11 +123,10 @@ export function Home() {
     }
 
     .card-img-wrapper {
-      height: 200px; /* Lite högre bilder */
+      height: 200px;
       overflow: hidden;
       border-bottom: 1px solid #333;
     }
-    
     .card-img {
       width: 100%;
       height: 100%;
@@ -147,22 +150,22 @@ export function Home() {
   container.appendChild(style);
 
   // ==========================================
-  // 4. LOGIK & NAVIGATION
+  // 4. LOGIK
   // ==========================================
 
-  // Hero-sektionen
-  const hero = document.createElement('div');
-  hero.className = 'hero-section';
-  hero.innerHTML = `
+  // Vi lägger "Hero"-texten i en DIV som heter 'hero-banner'
+  const banner = document.createElement('div');
+  banner.className = 'hero-banner';
+  banner.innerHTML = `
     <h1 class="hero-title">Välkommen till<br>Tonverkstan 🎵</h1>
     <p class="hero-subtitle">
       Din digitala plattform för musikutbildning. Välj ett område nedan för att starta din resa.
     </p>
     <button class="cta-btn" id="start-btn">Kom igång</button>
   `;
-  container.appendChild(hero);
+  container.appendChild(banner);
 
-  // Grid-sektionen
+  // Korten under bannern
   const grid = document.createElement('div');
   grid.className = 'features-grid';
 
@@ -188,35 +191,24 @@ export function Home() {
 
   container.appendChild(grid);
 
-  // Koppla knappen "Kom igång" till Instrument-sidan
+  // Koppla knappen
   setTimeout(() => {
-    const btn = hero.querySelector('#start-btn');
+    const btn = banner.querySelector('#start-btn');
     if (btn) btn.onclick = () => simulateMenuClick("instrument");
   }, 0);
 
-  // --- NAVIGATIONSHJÄLP ---
-  // Denna funktion letar efter en länk/knapp i din meny som innehåller ordet (t.ex "ensemble")
+  // Navigationshjälp
   function simulateMenuClick(keyword) {
-    const allLinks = document.querySelectorAll('nav a, nav button, .menu-item'); // Försöker träffa olika typer av menyer
-
+    const allLinks = document.querySelectorAll('nav a, nav button, .menu-item');
     let matchFound = false;
     for (let link of allLinks) {
-      // Gör både länktexten och sökordet till små bokstäver för att matcha säkert
-      const text = link.innerText.toLowerCase();
-      const search = keyword.toLowerCase();
-
-      if (text.includes(search)) {
+      if (link.innerText.toLowerCase().includes(keyword.toLowerCase())) {
         link.click();
         matchFound = true;
         break;
       }
     }
-
-    if (!matchFound) {
-      console.log(`Hittade ingen länk för: ${keyword}. Testar fallback.`);
-      // Fallback: Ändra URL-hash om menyn inte hittades
-      window.location.hash = keyword;
-    }
+    if (!matchFound) window.location.hash = keyword;
   }
 
   return container;
