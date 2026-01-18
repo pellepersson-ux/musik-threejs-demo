@@ -2,152 +2,58 @@ export function History() {
   const container = document.createElement('div');
   container.className = 'history-page';
 
-  // --- 1. DATA (Din text) ---
-  const chapters = [
+  // --- 1. DATA: KLASSISK MUSIK ---
+  const classicalData = [
     {
-      title: "1. Inledning: Rock’n’roll som historiskt fenomen",
-      image: "https://images.unsplash.com/photo-1572061489710-18868673a559?auto=format&fit=crop&w=800&q=80", // 50-tals känsla/vinyl
-      content: `
-        <p>Rock’n’roll uppstod under 1950-talet i USA som en musikalisk hybridform, men utvecklades snabbt till ett omfattande kulturellt, socialt och politiskt fenomen. Musikstilen representerade inte bara ett nytt sound, utan också ett brott mot tidigare normer kring ras, klass, ungdomskultur och sexualitet.</p>
-        <p>Filmen <em>History of Rock & Roll – The 1950s</em> placerar denna utveckling i sitt historiska sammanhang och analyserar hur rock’n’roll växte fram ur afroamerikanska musiktraditioner och spreds till en bred, i huvudsak vit, ungdomspublik.</p>
-        <p>1950-talet präglades av efterkrigstidens ekonomiska expansion, kalla kriget, ökad konsumtion och framväxten av tonåringen som en egen social kategori. Rock’n’roll blev ett uttryck för denna nya generation och deras behov av identitet, självständighet och emotionellt utlopp.¹</p>
-      `
+      title: "Barocken (1600–1750)",
+      year: "1600–1750",
+      desc: "Musiken var pampig och dekorativ, precis som perukerna. Cembalon var viktig och man gillade 'kontrapunkt' (flera melodier samtidigt).",
+      composers: "Bach, Vivaldi, Händel",
+      img: "https://images.unsplash.com/photo-1558584876-06830501a52e?auto=format&fit=crop&w=800&q=80"
     },
     {
-      title: "2. Musikaliska rötter: Afroamerikanska traditioner",
-      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80", // Mikrofon/Blues känsla
-      content: `
-        <h3>2.1 Rhythm & Blues och blues</h3>
-        <p>Rock’n’rollens direkta föregångare var rhythm & blues (R&B), en genre som i sin tur utvecklades ur blues, gospel och jazz. R&B kännetecknades av:</p>
-        <ul>
-          <li>Tydlig backbeat (betoning på slag 2 och 4)</li>
-          <li>Elektrifierade instrument</li>
-          <li>Repetitiva harmoniska strukturer</li>
-          <li>Stark rytmisk energi</li>
-        </ul>
-        <p>Artister som Muddy Waters, Howlin’ Wolf och Big Joe Turner lade grunden för den musikaliska estetik som senare skulle populariseras som rock’n’roll.²</p>
-        
-        <h3>2.2 Gospelns inflytande</h3>
-        <p>Gospelmusiken bidrog främst med:</p>
-        <ul>
-          <li>Vokala uttryck (rop, melismer)</li>
-          <li>Call-and-response-strukturer</li>
-          <li>Emotionell intensitet</li>
-        </ul>
-        <p>Denna bakgrund är särskilt tydlig hos artister som Little Richard, vars sångstil kombinerade kyrklig extas med sekulär sexualitet — något som uppfattades som både fascinerande och hotfullt av samtida moralväktare.³</p>
-      `
+      title: "Wienklassicismen (1750–1820)",
+      year: "1750–1820",
+      desc: "Allt skulle vara lagom, balanserat och elegant. Melodin blev viktigast. Pianot ersatte cembalon och symfoniorkestern växte fram.",
+      composers: "Mozart, Haydn, Beethoven (tidig)",
+      img: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80"
     },
     {
-      title: "3. Ras, segregation och musikindustrin",
-      image: "https://images.unsplash.com/photo-1514525253440-b393452e8d26?auto=format&fit=crop&w=800&q=80", // Gammal radio/svartvitt
-      content: `
-        <h3>3.1 Jim Crow-systemet</h3>
-        <p>Under 1950-talet var USA fortfarande djupt segregerat. Svarta artister fick sällan tillträde till vita radiostationer, skivbolag eller konsertscener. Rock’n’rollens spridning blev därför en indirekt utmaning mot Jim Crow-systemet.⁴</p>
-
-        <h3>3.2 “Cover versions” och kulturell appropriering</h3>
-        <p>Ett centralt tema i filmen är hur vita artister ofta spelade in covers av svarta artisters låtar — exempelvis Pat Boone, vars versioner ansågs “säkrare” för vit publik. Detta ledde till:</p>
-        <ul>
-          <li>Kommersiell framgång för vita artister</li>
-          <li>Ekonomisk marginalisering av svarta upphovspersoner</li>
-          <li>En omdebatterad form av kulturell appropriering⁵</li>
-        </ul>
-      `
-    },
-    {
-      title: "4. Alan Freed och begreppet “rock’n’roll”",
-      content: `
-        <p>Radiopersonligheten Alan Freed spelade en avgörande roll i att popularisera termen “rock’n’roll”. Han använde uttrycket för att marknadsföra R&B-musik till en vit publik, samtidigt som han arrangerade konserter där svarta och vita ungdomar deltog tillsammans — något radikalt för sin tid.⁶</p>
-        <p>Freed bidrog till:</p>
-        <ul>
-          <li>Genredefinitionen</li>
-          <li>Kommersiell spridning</li>
-          <li>Normalisering av interracial ungdomskultur</li>
-        </ul>
-      `
-    },
-    {
-      title: "5. Elvis Presley: Symbol och katalysator",
-      image: "https://images.unsplash.com/photo-1621360841011-d76eb697196d?auto=format&fit=crop&w=800&q=80", // 50-tals mikrofon/stil
-      content: `
-        <h3>5.1 Musikaliskt uttryck</h3>
-        <p>Elvis Presley kombinerade svart R&B-sångstil, countrymusikens harmonik och gospelns emotionella intensitet. Hans röst, frasering och kroppsspråk skapade en ny artisttyp som var både sexuell och rebellisk.⁷</p>
-
-        <h3>5.2 Kulturell betydelse</h3>
-        <p>Elvis blev en symbol för:</p>
-        <ul>
-          <li>Generationskonflikt</li>
-          <li>Vit appropriering av svart kultur</li>
-          <li>Rock’n’rollens kommersiella genombrott</li>
-        </ul>
-        <p>Filmen betonar både hans betydelse och de strukturella ojämlikheter som möjliggjorde hans framgång.</p>
-      `
-    },
-    {
-      title: "6. Andra nyckelartister",
-      image: "https://images.unsplash.com/photo-1460039230329-eb070fc6c77c?auto=format&fit=crop&w=800&q=80", // Gitarr
-      content: `
-        <h3>6.1 Chuck Berry</h3>
-        <p>Chuck Berry utvecklade den elektriska gitarrens roll som soloinstrument, narrativa texter om ungdomsliv och ett sceniskt uttryck som blev mall för senare rockartister.⁸</p>
-
-        <h3>6.2 Little Richard</h3>
-        <p>Little Richard utmanade könsnormer, sexualmoral och religiösa gränser. Hans musik var snabb, aggressiv och extatisk — ett tydligt brott mot 1950-talets konservativa ideal.⁹</p>
-
-        <h3>6.3 Buddy Holly</h3>
-        <p>Buddy Holly representerade en mer “intellektuell” rock’n’roll-tradition: låtskrivande artist, experimentella inspelningstekniker och inflytande på framtida bandformat.¹⁰</p>
-      `
-    },
-    {
-      title: "7. Ungdomskultur och moralpanik",
-      content: `
-        <p>Rock’n’roll kopplades tidigt till kriminalitet, sexuell omoral och våld. Media, kyrkor och politiker beskrev musiken som ett hot mot samhällets stabilitet.</p>
-        <p>Filmen analyserar hur denna moralpanik paradoxalt nog ökade musikens attraktionskraft bland ungdomar.¹¹</p>
-      `
-    },
-    {
-      title: "8. Kön, sexualitet och scenuttryck",
-      content: `
-        <p>Rock’n’roll innebar ett nytt sätt att använda kroppen på scen:</p>
-        <ul>
-          <li>Höftrörelser</li>
-          <li>Intensiv blickkontakt</li>
-          <li>Fysiskt uttryck av begär</li>
-        </ul>
-        <p>Detta var särskilt kontroversiellt i televisionens barndom, där artister ofta censurerades eller filmades endast från midjan och uppåt.¹²</p>
-      `
-    },
-    {
-      title: "9. Musikindustrins institutionalisering",
-      content: `
-        <p>Mot slutet av 1950-talet började rock’n’roll standardiseras, kommersialiseras och integreras i mainstream-kulturen.</p>
-        <p>Skivbolag, managers och TV-program formade genren till en mer kontrollerad produkt, vilket lade grunden för 1960-talets popindustri.¹³</p>
-      `
-    },
-    {
-      title: "10. Sammanfattning och slutsats",
-      content: `
-        <p>Filmen visar att rock’n’roll under 1950-talet inte enbart var en musikstil, utan ett historiskt brott. Den förändrade relationen mellan svart och vit kultur, ungdomars sociala roll, musikens ekonomiska strukturer och normer kring kropp, sexualitet och identitet.</p>
-        <p>Rock’n’rollens arv lever vidare som ett exempel på hur populärkultur kan fungera som en kraft för både konflikt och förändring.</p>
-      `
+      title: "Romantiken (1820–1900)",
+      year: "1820–1900",
+      desc: "Känslor, sagor och dramatik! Musiken blev större, starkare och friare. Man ville beskriva naturen och det övernaturliga.",
+      composers: "Beethoven (sen), Chopin, Wagner",
+      img: "https://images.unsplash.com/photo-1507838153414-b4b713384ebd?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
-  const footnotes = [
-    "Gillett, C. The Sound of the City. Pantheon Books, 1970.",
-    "Wald, E. How the Beatles Destroyed Rock ’n’ Roll. Oxford University Press, 2009.",
-    "MacDonald, I. Revolution in the Head. Pimlico, 1994.",
-    "Lipsitz, G. Footsteps in the Dark. University of Minnesota Press, 2007.",
-    "Ward, B. Just My Soul Responding. University of California Press, 1998.",
-    "Miller, J. Flowers in the Dustbin. Simon & Schuster, 1999.",
-    "Marcus, G. Mystery Train. Plume, 1997.",
-    "Szatmary, D. Rockin’ in Time. Pearson, 2013.",
-    "White, C. The Life and Times of Little Richard. Harmony Books, 2003.",
-    "Norman, P. Buddy Holly. Pan Books, 1996.",
-    "Springhall, J. Youth, Popular Culture and Moral Panics. Palgrave, 1998.",
-    "Frith, S. Performing Rites. Harvard University Press, 1996.",
-    "Peterson, R. Creating Country Music. University of Chicago Press, 1997."
+  // --- 2. DATA: ROCK 'N' ROLL (Din akademiska text) ---
+  const rockChapters = [
+    {
+      title: "1. Inledning: Rock’n’roll som fenomen",
+      content: `<p>Rock’n’roll uppstod under 1950-talet som en musikalisk hybridform och utvecklades till ett kulturellt fenomen som bröt mot normer kring ras, klass och ungdomskultur.</p>`
+    },
+    {
+      title: "2. Musikaliska rötter: R&B och Gospel",
+      content: `<p>Genren växte fram ur Rhythm & Blues (stark rytm, backbeat) och Gospel (vokala uttryck, intensitet). Artister som Muddy Waters och Sister Rosetta Tharpe lade grunden.</p>`
+    },
+    {
+      title: "3. Elvis Presley: Symbol och katalysator",
+      img: "https://images.unsplash.com/photo-1621360841011-d76eb697196d?auto=format&fit=crop&w=800&q=80",
+      content: `<p>Elvis kombinerade svart R&B med vit Country. Han blev symbolen för rockens genombrott, men också för den rassegregation som präglade USA.</p>`
+    },
+    {
+      title: "4. Ungdomskultur och Moralpanik",
+      content: `<p>Rocken kopplades till kriminalitet och sexuell frigörelse. Media och kyrkan varnade för musiken, vilket paradoxalt nog gjorde den ännu mer populär bland unga.</p>`
+    },
+    {
+      title: "5. Instrumenten: Gitarrens intåg",
+      img: "https://images.unsplash.com/photo-1460039230329-eb070fc6c77c?auto=format&fit=crop&w=800&q=80",
+      content: `<p>Chuck Berry gjorde elgitarren till rockens huvudinstrument. Det handlade inte längre bara om att sjunga, utan om riff, solon och show.</p>`
+    }
   ];
 
-  // --- 2. CSS ---
+  // --- 3. CSS ---
   const style = document.createElement('style');
   style.innerHTML = `
     .history-page {
@@ -155,179 +61,242 @@ export function History() {
       max-width: 900px;
       margin: 0 auto;
       color: #e0e0e0;
-      font-family: 'Georgia', serif; /* Mer akademisk/bok-känsla */
     }
-    .hero-header {
-      text-align: center;
-      margin-bottom: 50px;
-      border-bottom: 2px solid #b71c1c; /* Mörkröd färg för rock-känsla */
+    
+    /* TAB MENU */
+    .tab-menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #444;
       padding-bottom: 20px;
     }
-    .hero-header h1 {
-      font-family: sans-serif;
-      font-size: 2.5rem;
-      margin: 0;
-      color: white;
+    .tab-btn {
+      background: transparent;
+      border: 2px solid #4facfe;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s;
     }
-    .hero-header p {
-      color: #aaa;
-      font-style: italic;
-      margin-top: 10px;
+    .tab-btn:hover {
+      background: rgba(79, 172, 254, 0.2);
+    }
+    .tab-btn.active {
+      background: #4facfe;
+      color: #000;
+      font-weight: bold;
     }
 
-    /* ACCORDION STYLES */
-    .chapter {
-      margin-bottom: 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    /* CONTENT AREAS */
+    .content-section {
+      display: none; /* Dölj som standard */
+      animation: fadeIn 0.5s;
+    }
+    .content-section.active {
+      display: block; /* Visa om aktiv */
+    }
+
+    /* KLASSISK STIL (Timeline Cards) */
+    .classical-card {
+      display: flex;
+      flex-direction: column; /* Mobil-first */
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 30px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+    .c-img {
+      height: 200px;
+      object-fit: cover;
+    }
+    .c-info {
+      padding: 20px;
+    }
+    .c-year {
+      color: #4facfe;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .c-composers {
+      margin-top: 10px;
+      font-style: italic;
+      color: #aaa;
+    }
+
+    /* ROCK STIL (Accordion) */
+    .accordion-item {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      margin-bottom: 10px;
       border-radius: 8px;
       overflow: hidden;
     }
-    .chapter-header {
-      padding: 20px;
+    .accordion-header {
+      padding: 15px 20px;
+      background: #222;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.2);
-      transition: background 0.2s;
     }
-    .chapter-header:hover {
-      background: rgba(255, 255, 255, 0.05);
+    .accordion-header:hover {
+      background: #2a2a2a;
     }
-    .chapter-title {
-      font-family: sans-serif;
+    .accordion-title {
       font-weight: bold;
-      font-size: 1.2rem;
-      color: #fff;
+      color: #fca311; /* Lite mer 'rockig' accentfärg */
     }
-    .toggle-icon {
-      font-size: 1.5rem;
-      color: #b71c1c;
-      transition: transform 0.3s;
-    }
-    .chapter.active .toggle-icon {
-      transform: rotate(45deg);
-    }
-
-    .chapter-body {
+    .accordion-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s ease-out;
-      background: rgba(0, 0, 0, 0.2);
+      transition: max-height 0.3s ease-out;
+      padding: 0 20px;
     }
-    .chapter.active .chapter-body {
-      max-height: 1000px; /* Tillräckligt högt för innehållet */
-      transition: max-height 0.5s ease-in;
+    .accordion-content.open {
+      padding: 20px;
+      max-height: 500px; /* Tillräckligt för texten */
     }
-    
-    .body-content {
-      padding: 25px;
-      line-height: 1.8;
-      font-size: 1.1rem;
-    }
-    .body-content h3 {
-      font-family: sans-serif;
-      color: #b71c1c;
-      margin-top: 25px;
-      margin-bottom: 10px;
-      font-size: 1.1rem;
-    }
-    .body-content ul {
-      margin-bottom: 20px;
-      padding-left: 20px;
-    }
-    .body-content li {
-      margin-bottom: 5px;
-    }
-    
-    .chapter-img {
+    .rock-img {
       width: 100%;
-      height: 200px;
+      height: 150px;
       object-fit: cover;
+      margin-bottom: 15px;
       border-radius: 4px;
-      margin-bottom: 20px;
-      border: 1px solid #333;
     }
 
-    .footnotes {
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid #333;
-      font-size: 0.8rem;
-      color: #777;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .footnotes h4 {
-      color: #aaa;
-    }
-    .footnotes ol {
-      padding-left: 20px;
-    }
-    .footnotes li {
-      margin-bottom: 5px;
+
+    @media (min-width: 700px) {
+      .classical-card {
+        flex-direction: row;
+      }
+      .c-img {
+        width: 40%;
+        height: auto;
+      }
     }
   `;
   container.appendChild(style);
 
-  // --- 3. RENDERING ---
+  // --- 4. RENDER STRUCTURE ---
 
   // Header
   const header = document.createElement('div');
-  header.className = 'hero-header';
-  header.innerHTML = `
-    <h1>History of Rock & Roll</h1>
-    <p>The 1950s – En akademisk sammanfattning av rockens födelse.</p>
-  `;
+  header.style.textAlign = 'center';
+  header.innerHTML = `<h1>Musikhistoria 📜🎸</h1>`;
   container.appendChild(header);
 
-  // Chapters (Accordion)
-  const listContainer = document.createElement('div');
+  // Tabs
+  const tabContainer = document.createElement('div');
+  tabContainer.className = 'tab-menu';
 
-  chapters.forEach((chapter) => {
-    const chapterDiv = document.createElement('div');
-    chapterDiv.className = 'chapter';
+  const btnClassical = document.createElement('button');
+  btnClassical.className = 'tab-btn active';
+  btnClassical.innerText = 'Klassisk Musik';
 
-    // Om det finns en bild, lägg till den i HTML-strängen
-    const imageHTML = chapter.image
-      ? `<img src="${chapter.image}" alt="Illustration" class="chapter-img">`
-      : '';
+  const btnRock = document.createElement('button');
+  btnRock.className = 'tab-btn';
+  btnRock.innerText = "Rock 'n' Roll (50-tal)";
 
-    chapterDiv.innerHTML = `
-      <div class="chapter-header">
-        <span class="chapter-title">${chapter.title}</span>
-        <span class="toggle-icon">+</span>
+  tabContainer.appendChild(btnClassical);
+  tabContainer.appendChild(btnRock);
+  container.appendChild(tabContainer);
+
+  // --- 5. CONTENT SECTIONS ---
+
+  // KLASSISK SECTION
+  const classicalSection = document.createElement('div');
+  classicalSection.className = 'content-section active'; // Börjar synlig
+
+  classicalData.forEach(period => {
+    const card = document.createElement('div');
+    card.className = 'classical-card';
+    card.innerHTML = `
+      <img src="${period.img}" class="c-img">
+      <div class="c-info">
+        <h2>${period.title}</h2>
+        <div class="c-year">${period.year}</div>
+        <p>${period.desc}</p>
+        <div class="c-composers">Kända namn: ${period.composers}</div>
       </div>
-      <div class="chapter-body">
-        <div class="body-content">
-          ${imageHTML}
-          ${chapter.content}
-        </div>
+    `;
+    classicalSection.appendChild(card);
+  });
+  container.appendChild(classicalSection);
+
+  // ROCK SECTION
+  const rockSection = document.createElement('div');
+  rockSection.className = 'content-section'; // Börjar dold
+
+  // Intro text för rocken
+  const rockIntro = document.createElement('div');
+  rockIntro.innerHTML = `
+    <h2 style="color:#fca311; text-align:center;">The History of Rock & Roll</h2>
+    <p style="text-align:center; max-width:600px; margin:0 auto 30px auto;">
+      En djupdykning i hur 1950-talet förändrade musiken för alltid.
+    </p>
+  `;
+  rockSection.appendChild(rockIntro);
+
+  rockChapters.forEach(chap => {
+    const item = document.createElement('div');
+    item.className = 'accordion-item';
+
+    // Om bild finns, lägg till den i content
+    const imgHtml = chap.img ? `<img src="${chap.img}" class="rock-img">` : '';
+
+    item.innerHTML = `
+      <div class="accordion-header">
+        <span class="accordion-title">${chap.title}</span>
+        <span>▼</span>
+      </div>
+      <div class="accordion-content">
+        ${imgHtml}
+        ${chap.content}
       </div>
     `;
 
-    // Click logic (Controller logic inside the loop)
-    const headerEl = chapterDiv.querySelector('.chapter-header');
-    headerEl.addEventListener('click', () => {
-      // Toggle current
-      chapterDiv.classList.toggle('active');
+    // Click logic
+    const headerEl = item.querySelector('.accordion-header');
+    const contentEl = item.querySelector('.accordion-content');
 
-      // Optional: Stäng andra när man öppnar en? (Just nu tillåter vi flera öppna)
+    headerEl.addEventListener('click', () => {
+      const isOpen = contentEl.classList.contains('open');
+
+      // Stäng alla andra (valfritt, men snyggt)
+      rockSection.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+
+      if (!isOpen) {
+        contentEl.classList.add('open');
+      }
     });
 
-    listContainer.appendChild(chapterDiv);
+    rockSection.appendChild(item);
   });
-  container.appendChild(listContainer);
+  container.appendChild(rockSection);
 
-  // Footnotes section
-  const footer = document.createElement('div');
-  footer.className = 'footnotes';
-  footer.innerHTML = `
-    <h4>Källförteckning & Referenser</h4>
-    <ol>
-      ${footnotes.map(note => `<li>${note}</li>`).join('')}
-    </ol>
-  `;
-  container.appendChild(footer);
+  // --- 6. TAB LOGIC ---
+  btnClassical.addEventListener('click', () => {
+    btnClassical.classList.add('active');
+    btnRock.classList.remove('active');
+    classicalSection.classList.add('active');
+    rockSection.classList.remove('active');
+  });
+
+  btnRock.addEventListener('click', () => {
+    btnRock.classList.add('active');
+    btnClassical.classList.remove('active');
+    rockSection.classList.add('active');
+    classicalSection.classList.remove('active');
+  });
 
   return container;
 }
