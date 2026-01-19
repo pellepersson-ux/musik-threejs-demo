@@ -1,11 +1,6 @@
-// ==========================================
-// OM DU HAR INSTALLERAT VIA NPM (Local)
-// ==========================================
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
-// OBS: Om raden ovan med OrbitControls ger fel, prova denna istället:
-// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import ThreeGlobe from 'three-globe'; // VIKTIGT: Detta paket krävs för länderna
 
 export function WorldMusic() {
   const container = document.createElement('div');
@@ -14,59 +9,77 @@ export function WorldMusic() {
   container.style.height = '100vh';
   container.style.backgroundColor = '#000';
   container.style.overflow = 'hidden';
-  container.style.position = 'relative';
+  container.style.position = 'relative'; // För att kunna placera modaler/text ovanpå
 
   // ==========================================
-  // 1. OPTIMERING: CHROMEBOOK-LÄGE
+  // 1. DINA MUSIK-LÄNDER (DATA)
+  // ==========================================
+  // Här lägger du in informationen som ska visas
+  const musicCountries = {
+    "Sweden": {
+      info: "Sverige: Här är popundret, ABBA och Max Martin.",
+      color: "#f6c138" // Gul
+    },
+    "Brazil": {
+      info: "Brasilien: Hemlandet för Samba och Bossa Nova.",
+      color: "#009c3b" // Grön
+    },
+    "Nigeria": {
+      info: "Nigeria: Afrobeatens hemland med Fela Kuti och Burna Boy.",
+      color: "#008751" // Mörkgrön
+    }
+    // Lägg till fler länder här vid behov
+  };
+
+  // ==========================================
+  // 2. DETEKTERA CHROMEBOOK / PRESTANDA
   // ==========================================
   const isLowSpec = /CrOS/.test(navigator.userAgent) || navigator.hardwareConcurrency <= 4;
 
   const config = isLowSpec ? {
     mode: 'Lite Mode (Chromebook)',
     antialias: false,
-    pixelRatio: 1,
-    segments: 32,
-    useLighting: false,
-    // Vi behåller webblänkar för texturen så det funkar direkt, 
-    // men du kan byta till lokala filer, t.ex: './assets/earth-dark.jpg'
-    texture: 'https://unpkg.com/three-globe/example/img/earth-dark.jpg'
+    pixelRatio: 1, // Tvinga 1.0 (sparar massor av VRAM)
+    enableAtmosphere: false, // Stäng av snyggt men tungt "glow"
+    materialType: 'MeshBasicMaterial', // Inget ljus/skuggor = Snabbt
+    globeImg: 'https://unpkg.com/three-globe/example/img/earth-dark.jpg' // Lågupplöst
   } : {
     mode: 'High Performance',
     antialias: true,
     pixelRatio: window.devicePixelRatio,
-    segments: 64,
-    useLighting: true,
-    texture: 'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
+    enableAtmosphere: true, // Snyggt "glow" runt jorden
+    materialType: 'MeshPhongMaterial', // Snyggare ljus
+    globeImg: 'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg' // Högupplöst
   };
 
   console.log(`WorldMusic laddad i: ${config.mode}`);
 
+  // Visa info om lite-läge
   if (isLowSpec) {
     const info = document.createElement('div');
-    info.innerText = "Lite-läge aktiverat 🚀";
-    info.style.cssText = "position:absolute; bottom:10px; left:10px; color:#555; font-size:10px; z-index:10; pointer-events:none;";
+    info.innerText = "Lite-läge 🚀";
+    info.style.cssText = "position:absolute; bottom:10px; left:10px; color:#555; font-size:12px; z-index:10; pointer-events:none;";
     container.appendChild(info);
   }
 
   // ==========================================
-  // 2. THREE.JS SETUP
+  // 3. THREE.JS SETUP
   // ==========================================
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000); // Svart bakgrund
 
-  // Stjärnor (bara för starka datorer)
-  if (!isLowSpec) {
-    const starGeo = new THREE.BufferGeometry();
-    const starCount = 1000;
-    const starPos = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 600;
-    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-    const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
-    const stars = new THREE.Points(starGeo, starMat);
-    scene.add(stars);
-  }
+  // Lägg till ljus (behövs främst för High Performance-läget)
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+  const dLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  dLight.position.set(-200, 500, 200);
+  scene.add(dLight);
+  const dLight2 = new THREE.DirectionalLight(0x7982f6, 1.0);
+  dLight2.position.set(-200, 500, 200);
+  scene.add(dLight2);
 
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 18;
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+  camera.position.z = 250; // Zooma ut lagom för ThreeGlobe
 
   const renderer = new THREE.WebGLRenderer({
     antialias: config.antialias,
@@ -78,87 +91,99 @@ export function WorldMusic() {
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
-  controls.dampingFactor = 0.05;
-  controls.minDistance = 12;
-  controls.maxDistance = 30;
+  controls.dampingFactor = 0.1;
+  controls.rotateSpeed = 0.5;
+  controls.minDistance = 150;
+  controls.maxDistance = 500;
 
   // ==========================================
-  // 3. GLOBEN
+  // 4. SKAPA GLOBEN (ThreeGlobe)
   // ==========================================
-  const textureLoader = new THREE.TextureLoader();
-  const earthGeo = new THREE.SphereGeometry(5, config.segments, config.segments);
-  let earthMat;
+  const globe = new ThreeGlobe()
+    .globeImageUrl(config.globeImg)
+    .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png');
 
-  if (config.useLighting) {
-    // TUNG (PC/Mac)
-    earthMat = new THREE.MeshPhongMaterial({
-      map: textureLoader.load(config.texture),
-      bumpScale: 0.05,
-      specular: new THREE.Color('grey'),
-      shininess: 10
-    });
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(10, 10, 10);
-    scene.add(dirLight);
+  // OPTIMERING: Material på själva jordklotet
+  // Vi kommer åt den interna sfären och byter material om det är en Chromebook
+  const globeMaterial = globe.globeMaterial();
+  if (isLowSpec) {
+    // Byt till BasicMaterial för att slippa ljusberäkningar
+    globeMaterial.color = new THREE.Color(0xffffff);
+    // Vi kan inte enkelt byta hela materialklassen på en instansierad globe, 
+    // men vi kan stänga av atmosfären som drar mest kraft.
+    globe.showAtmosphere(false);
   } else {
-    // LÄTT (Chromebook)
-    earthMat = new THREE.MeshBasicMaterial({
-      map: textureLoader.load(config.texture)
+    globe.showAtmosphere(true);
+    globe.atmosphereColor('lightskyblue');
+    globe.atmosphereAltitude(0.15);
+  }
+
+  // Ladda GeoJSON data (Länderna)
+  // Vi använder en standardfil med alla världens länder
+  fetch('https://raw.githubusercontent.com/vasturiano/three-globe/master/example/datasets/ne_110m_admin_0_countries.geojson')
+    .then(res => res.json())
+    .then(countries => {
+      globe.polygonsData(countries)
+        .polygonCapColor(d => {
+          // Om landet finns i vår musicData-lista, ge den rätt färg
+          if (musicCountries[d.properties.NAME]) {
+            return musicCountries[d.properties.NAME].color;
+          } else if (musicCountries[d.properties.NAME_LONG]) { // Ibland heter de NAME_LONG
+            return musicCountries[d.properties.NAME_LONG].color;
+          }
+          return isLowSpec ? 'rgba(200,200,200, 0.3)' : 'rgba(200,200,200, 0.1)'; // Standardfärg (grå)
+        })
+        .polygonSideColor(() => 'rgba(0,0,0,0.5)')
+        .polygonStrokeColor(() => '#111')
+        .polygonAltitude(d => {
+          // Höj upp länderna vi har musikfakta om så de syns tydligare
+          const name = d.properties.NAME || d.properties.NAME_LONG;
+          return musicCountries[name] ? 0.03 : 0.01;
+        })
+        .onPolygonClick((d) => {
+          const name = d.properties.NAME || d.properties.NAME_LONG;
+          if (musicCountries[name]) {
+            // HÄR VISAR VI INFORMATIONEN
+            showModal(name, musicCountries[name].info);
+          } else {
+            console.log("Klickade på: ", name);
+          }
+        })
+        .polygonLabel(({ properties: d }) => `
+          <div style="background:#333; color:#fff; padding:4px 8px; border-radius:4px;">
+            <b>${d.NAME}</b> <br />
+            ${musicCountries[d.NAME] ? "🎵 Klicka för info" : ""}
+          </div>
+        `); // Hover-text
     });
-  }
 
-  const earth = new THREE.Mesh(earthGeo, earthMat);
-  scene.add(earth);
+  scene.add(globe);
 
   // ==========================================
-  // 4. INTERAKTIVITET
+  // 5. ENKEL MODAL (FÖR INFO)
   // ==========================================
-  const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2();
-  const interactables = [];
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: rgba(20,20,30, 0.95); border: 1px solid #444; border-radius: 12px;
+    padding: 30px; color: #fff; max-width: 400px; display: none; z-index: 100;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8); font-family: sans-serif;
+  `;
+  modal.innerHTML = `<h2 id="m-title"></h2><p id="m-text"></p><button id="m-close" style="margin-top:20px; padding:5px 15px; cursor:pointer;">Stäng</button>`;
+  container.appendChild(modal);
 
-  function addMusicMarker(lat, lon, name, color) {
-    const phi = (90 - lat) * (Math.PI / 180);
-    const theta = (lon + 180) * (Math.PI / 180);
-    const radius = 5.1;
+  const mClose = modal.querySelector('#m-close');
+  mClose.onclick = () => { modal.style.display = 'none'; };
 
-    const x = -(radius * Math.sin(phi) * Math.cos(theta));
-    const z = (radius * Math.sin(phi) * Math.sin(theta));
-    const y = (radius * Math.cos(phi));
-
-    const markerGeo = new THREE.SphereGeometry(0.2, 16, 16);
-    const markerMat = new THREE.MeshBasicMaterial({ color: color });
-    const marker = new THREE.Mesh(markerGeo, markerMat);
-
-    marker.position.set(x, y, z);
-    marker.userData = { name: name };
-
-    earth.add(marker);
-    interactables.push(marker);
+  function showModal(title, text) {
+    modal.querySelector('#m-title').innerText = title;
+    modal.querySelector('#m-text').innerText = text;
+    modal.style.display = 'block';
   }
 
-  // TEST-MARKERS
-  addMusicMarker(59.32, 18.06, "Sverige: Pop & Visa", 0xffff00);
-  addMusicMarker(35.67, 139.65, "Japan: J-Pop", 0xff0000);
-  addMusicMarker(-14.23, -51.92, "Brasilien: Samba", 0x00ff00);
-  addMusicMarker(36.16, -86.78, "USA: Country", 0x0000ff);
-
-  function onMouseClick(event) {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(interactables);
-
-    if (intersects.length > 0) {
-      const hit = intersects[0].object;
-      alert(`Du klickade på: ${hit.userData.name}`);
-    }
-  }
-
-  window.addEventListener('click', onMouseClick);
+  // ==========================================
+  // 6. ANIMATION & SKALNING
+  // ==========================================
 
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -167,34 +192,38 @@ export function WorldMusic() {
   }
   window.addEventListener('resize', onWindowResize);
 
-  // ==========================================
-  // 5. LOOP
-  // ==========================================
   let frameId;
   function animate() {
     frameId = requestAnimationFrame(animate);
-    earth.rotation.y += 0.001;
+
+    // Långsam rotation (bara om ingen interagerar, valfritt)
+    // globe.rotation.y += 0.0005; 
+
     controls.update();
     renderer.render(scene, camera);
   }
   animate();
 
   // ==========================================
-  // 6. CLEANUP (MEMORY LEAK FIX)
+  // 7. CLEANUP (VIKTIGT FÖR ATT GLOBEN SKA DÖ)
   // ==========================================
   container.cleanup = function () {
-    console.log("🧹 Städar WorldMusic...");
+    console.log("🧹 Städar ThreeGlobe...");
     cancelAnimationFrame(frameId);
     window.removeEventListener('resize', onWindowResize);
-    window.removeEventListener('click', onMouseClick);
 
-    scene.traverse((object) => {
-      if (!object.isMesh) return;
-      object.geometry.dispose();
-      if (object.material.isMaterial) {
-        cleanMaterial(object.material);
-      } else if (Array.isArray(object.material)) {
-        object.material.forEach(cleanMaterial);
+    // Ta bort objekt från scenen
+    scene.remove(globe);
+
+    // Försök rensa ThreeGlobe-specifika resurser
+    // (ThreeGlobe bygger mycket interna geometrier)
+    scene.traverse((obj) => {
+      if (obj.isMesh) {
+        if (obj.geometry) obj.geometry.dispose();
+        if (obj.material) {
+          if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+          else obj.material.dispose();
+        }
       }
     });
 
@@ -202,11 +231,6 @@ export function WorldMusic() {
     renderer.forceContextLoss();
     if (renderer.domElement) renderer.domElement.remove();
   };
-
-  function cleanMaterial(material) {
-    material.dispose();
-    if (material.map) material.map.dispose();
-  }
 
   return container;
 }
