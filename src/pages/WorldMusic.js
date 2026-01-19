@@ -1,139 +1,138 @@
-import Globe from 'globe.gl';
+import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js';
 
 export function WorldMusic() {
-  const section = document.createElement('section');
-  section.style.height = "100vh";
-  section.style.background = "#000";
-  section.style.position = "relative";
-  section.style.overflow = "hidden";
+  const container = document.createElement('div');
+  container.className = 'world-page';
+  container.style.height = '100vh'; // Full höjd
+  container.style.width = '100%';
+  container.style.overflow = 'hidden';
+  container.style.position = 'relative';
 
-  // --- DATA ---
-  const musicData = {
-    SE: { name: "Sverige", title: "Sverige: Folkmusik", text: "Fiol, nyckelharpa och polska." },
-    IE: { name: "Irland", title: "Irland: Folk", text: "Jigs, reels och pubkultur." },
-    BR: { name: "Brasilien", title: "Brasilien: Samba", text: "Karneval och Bossa Nova." },
-    IN: { name: "Indien", title: "Indien: Raga", text: "Sitar och Tabla." },
-    US: { name: "USA", title: "USA: Blues & Jazz", text: "Musikhistoriens vagga." },
-    ES: { name: "Spanien", title: "Spanien: Flamenco", text: "Gitarr och dans." },
-    CN: { name: "Kina", title: "Kina: Opera", text: "Pekingopera." }
+  // 1. Text-överlägg (så man vet vad man ser)
+  const overlay = document.createElement('div');
+  overlay.innerHTML = `
+    <h1 style="color:white; text-shadow:0 2px 4px rgba(0,0,0,0.8);">Världsmusik 🌍</h1>
+    <p style="color:#ddd;">Snurra på jorden för att upptäcka musikstilar.</p>
+  `;
+  overlay.style.position = 'absolute';
+  overlay.style.top = '20px';
+  overlay.style.left = '50%';
+  overlay.style.transform = 'translateX(-50%)';
+  overlay.style.zIndex = '10';
+  overlay.style.textAlign = 'center';
+  overlay.style.pointerEvents = 'none'; // Så man kan klicka igenom texten
+  container.appendChild(overlay);
+
+  // 2. SETUP THREE.JS
+  const scene = new THREE.Scene();
+  // Mörk rymdbakgrund
+  scene.background = new THREE.Color(0x111111);
+
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 15;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(renderer.domElement);
+
+  // Ljus
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight(0xffffff, 1);
+  pointLight.position.set(10, 10, 10);
+  scene.add(pointLight);
+
+  // 3. SKAPA JORDGLOBEN
+  const geometry = new THREE.SphereGeometry(5, 64, 64);
+
+  // Vi laddar en textur (bild) av jorden
+  const textureLoader = new THREE.TextureLoader();
+  const earthTexture = textureLoader.load('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Aurora_as_seen_by_IMAGE.jpg/1280px-Aurora_as_seen_by_IMAGE.jpg'); // En fri rymdbild som exempel
+
+  const material = new THREE.MeshPhongMaterial({
+    map: earthTexture,
+    bumpScale: 0.05,
+    specular: new THREE.Color('grey')
+  });
+
+  const earth = new THREE.Mesh(geometry, material);
+  scene.add(earth);
+
+  // Stjärnor i bakgrunden
+  const starGeo = new THREE.BufferGeometry();
+  const starCount = 1000;
+  const starPos = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount * 3; i++) {
+    starPos[i] = (Math.random() - 0.5) * 200;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.1 });
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  // Kontroller (så man kan snurra)
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.enableZoom = false;
+
+  // Variabel för att hålla koll på animationen
+  let animationId;
+
+  // ==========================================
+  // 4. ANIMATION LOOP (MED KILL SWITCH)
+  // ==========================================
+  const animate = () => {
+    // --- HÄR ÄR FIXEN ---
+    // Vi kollar: Finns "container" kvar i webbläsaren?
+    if (!document.body.contains(container)) {
+      // Om nej: STOPPA ALLT!
+      cleanup();
+      return;
+    }
+
+    animationId = requestAnimationFrame(animate);
+
+    earth.rotation.y += 0.002; // Snurra långsamt
+    stars.rotation.y -= 0.0005; // Rymden rör sig lite
+
+    controls.update();
+    renderer.render(scene, camera);
   };
 
-  // --- HTML ---
-  section.innerHTML = `
-    <style>
-      #globe-viz { width: 100%; height: 100%; }
-      .overlay-title {
-        position: absolute; top: 100px; left: 20px;
-        color: #fff; font-family: 'Outfit', sans-serif; 
-        pointer-events: none; z-index: 10;
-      }
-      .modal-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.85); z-index: 3000;
-        display: flex; justify-content: center; align-items: center;
-        padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-      }
-      .modal-overlay.active { opacity: 1; pointer-events: all; }
-      .modal-box {
-        background: #fff; max-width: 500px; width: 100%;
-        padding: 30px; border-radius: 12px; position: relative; color: #333;
-      }
-      .close-btn {
-        position: absolute; top: 10px; right: 15px;
-        font-size: 2rem; cursor: pointer; color: #333;
-      }
-    </style>
+  // ==========================================
+  // 5. STÄDA OCH AVSLUTA (Memory Management)
+  // ==========================================
+  function cleanup() {
+    console.log("Städar upp Världsmusik... 🧹");
 
-    <div class="overlay-title">
-      <h1>Världsmusik 🌏</h1>
-      <p>Håll musen över länderna!</p>
-    </div>
+    // Stoppa loopen
+    cancelAnimationFrame(animationId);
 
-    <div id="globe-viz"></div>
+    // Töm minnet (GPU)
+    geometry.dispose();
+    material.dispose();
+    starGeo.dispose();
+    starMat.dispose();
+    renderer.dispose();
+  }
 
-    <div id="modal" class="modal-overlay">
-      <div class="modal-box">
-        <span class="close-btn">&times;</span>
-        <h2 id="modal-title">Land</h2>
-        <p id="modal-text">Fakta...</p>
-      </div>
-    </div>
-  `;
+  // Starta loopen
+  animate();
 
-  setTimeout(() => {
-    const vizDiv = section.querySelector('#globe-viz');
-    if (!window.Globe) return;
-
-    const world = Globe()
-      (vizDiv)
-      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-      .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
-      .polygonAltitude(0.06)
-      .polygonCapColor(() => 'rgba(200, 200, 200, 0.6)')
-      .polygonSideColor(() => 'rgba(0, 100, 0, 0.15)')
-
-      // --- FAIL-SAFE FIX FÖR NAMN ---
-      .polygonLabel(d => {
-        const p = d.properties;
-
-        // FELSÖKNING: Detta skriver ut exakt vad landet har för data i konsolen (F12)
-        // Om du undrar varför något inte funkar, kolla här!
-        // console.log("Land-data:", p); 
-
-        // 1. Försök hitta namnet på ALLA tänkbara sätt
-        let labelName = p.ADMIN || p.NAME || p.name || p.sovereignt || p.name_long || "Okänt namn";
-
-        // 2. Kolla ISO-koder (ibland heter koden ISO_A2, ibland ISO_A3)
-        const code = p.ISO_A2 || p.ISO_A3;
-
-        // 3. Om vi har svensk översättning, använd den
-        if (code && musicData[code]) {
-          labelName = musicData[code].name;
-        }
-
-        return `
-            <div style="background: #333; color: #fff; padding: 5px 10px; border-radius: 4px; font-family: sans-serif;">
-                <b>${labelName}</b>
-            </div>
-        `;
-      })
-
-      .onPolygonHover(hoverD => {
-        world
-          .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
-          .polygonCapColor(d => d === hoverD ? '#3498db' : 'rgba(200, 200, 200, 0.6)');
-      })
-      .onPolygonClick(d => {
-        const p = d.properties;
-        const code = p.ISO_A2 || p.ISO_A3;
-
-        if (code && musicData[code]) {
-          showModal(musicData[code]);
-        }
-      });
-
-    // Fetch data
-    fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
-      .then(res => res.json())
-      .then(countries => {
-        world.polygonsData(countries.features);
-        world.controls().autoRotate = true;
-        world.controls().autoRotateSpeed = 0.5;
-      });
-
-    // Modal
-    const modal = section.querySelector('#modal');
-    const closeBtn = section.querySelector('.close-btn');
-
-    function showModal(data) {
-      section.querySelector('#modal-title').textContent = data.title;
-      section.querySelector('#modal-text').textContent = data.text;
-      modal.classList.add('active');
+  // Hantera fönsterstorlek (Responsivitet)
+  const handleResize = () => {
+    if (!document.body.contains(container)) {
+      window.removeEventListener('resize', handleResize);
+      return;
     }
-    closeBtn.onclick = () => modal.classList.remove('active');
-    modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  };
+  window.addEventListener('resize', handleResize);
 
-  }, 100);
-
-  return section;
+  return container;
 }
