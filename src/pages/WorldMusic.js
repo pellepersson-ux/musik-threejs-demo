@@ -7,7 +7,7 @@ export function WorldMusic() {
   section.style.position = "relative";
   section.style.overflow = "hidden";
 
-  // --- DIN DATA (Dessa koder MÅSTE matcha ISO_A2 i filen) ---
+  // --- DATA ---
   const musicData = {
     SE: { name: "Sverige", title: "Sverige: Folkmusik", text: "Fiol, nyckelharpa och polska." },
     IE: { name: "Irland", title: "Irland: Folk", text: "Jigs, reels och pubkultur." },
@@ -72,26 +72,30 @@ export function WorldMusic() {
       .polygonCapColor(() => 'rgba(200, 200, 200, 0.6)')
       .polygonSideColor(() => 'rgba(0, 100, 0, 0.15)')
 
-      // --- HÄR ÄR FIXEN ---
+      // --- FAIL-SAFE FIX FÖR NAMN ---
       .polygonLabel(d => {
-        // Vi hämtar datan från 'd.properties'
-        // 'ADMIN' är standardnamnet i denna fil
-        // 'ISO_A2' är landskoden (SE, US, etc)
         const p = d.properties;
 
-        // Namn från filen (fallback om inget annat finns)
-        let labelName = p.ADMIN || "Okänt land";
+        // FELSÖKNING: Detta skriver ut exakt vad landet har för data i konsolen (F12)
+        // Om du undrar varför något inte funkar, kolla här!
+        // console.log("Land-data:", p); 
 
-        // Har vi ett svenskt namn i vår lista? Använd det!
-        if (p.ISO_A2 && musicData[p.ISO_A2]) {
-          labelName = musicData[p.ISO_A2].name;
+        // 1. Försök hitta namnet på ALLA tänkbara sätt
+        let labelName = p.ADMIN || p.NAME || p.name || p.sovereignt || p.name_long || "Okänt namn";
+
+        // 2. Kolla ISO-koder (ibland heter koden ISO_A2, ibland ISO_A3)
+        const code = p.ISO_A2 || p.ISO_A3;
+
+        // 3. Om vi har svensk översättning, använd den
+        if (code && musicData[code]) {
+          labelName = musicData[code].name;
         }
 
         return `
-                    <div style="background: #333; color: #fff; padding: 5px 10px; border-radius: 4px; font-family: sans-serif;">
-                       <b>${labelName}</b>
-                    </div>
-                `;
+            <div style="background: #333; color: #fff; padding: 5px 10px; border-radius: 4px; font-family: sans-serif;">
+                <b>${labelName}</b>
+            </div>
+        `;
       })
 
       .onPolygonHover(hoverD => {
@@ -100,13 +104,15 @@ export function WorldMusic() {
           .polygonCapColor(d => d === hoverD ? '#3498db' : 'rgba(200, 200, 200, 0.6)');
       })
       .onPolygonClick(d => {
-        // Klick-funktion
-        if (d.properties.ISO_A2 && musicData[d.properties.ISO_A2]) {
-          showModal(musicData[d.properties.ISO_A2]);
+        const p = d.properties;
+        const code = p.ISO_A2 || p.ISO_A3;
+
+        if (code && musicData[code]) {
+          showModal(musicData[code]);
         }
       });
 
-    // Hämta den korrekta kartfilen (GeoJSON) som innehåller ADMIN och ISO_A2
+    // Fetch data
     fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
       .then(res => res.json())
       .then(countries => {
@@ -115,7 +121,7 @@ export function WorldMusic() {
         world.controls().autoRotateSpeed = 0.5;
       });
 
-    // Modal hantering
+    // Modal
     const modal = section.querySelector('#modal');
     const closeBtn = section.querySelector('.close-btn');
 
