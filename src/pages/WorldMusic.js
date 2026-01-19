@@ -194,3 +194,19 @@ export function WorldMusic() {
       if (object.material.isMaterial) {
         cleanMaterial(object.material);
       } else if (Array.isArray(object.material)) {
+        object.material.forEach(cleanMaterial);
+      }
+    });
+
+    renderer.dispose();
+    renderer.forceContextLoss();
+    if (renderer.domElement) renderer.domElement.remove();
+  };
+
+  function cleanMaterial(material) {
+    material.dispose();
+    if (material.map) material.map.dispose();
+  }
+
+  return container;
+}
