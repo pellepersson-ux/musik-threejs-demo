@@ -26,44 +26,43 @@ export function WorldMusic() {
 
   // 2. SETUP THREE.JS
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x050505); // Mycket mörk rymd
+  scene.background = new THREE.Color(0x050505);
 
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 16;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio); // Skarpare på moderna skärmar
+  renderer.setPixelRatio(window.devicePixelRatio);
   container.appendChild(renderer.domElement);
 
-  // Ljus (Viktigt för att se texturen!)
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Allmänt ljus
+  // Ljus
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
   scene.add(ambientLight);
-
-  const pointLight = new THREE.PointLight(0xffddbb, 1.2); // Varmt "solljus" från sidan
+  const pointLight = new THREE.PointLight(0xffddbb, 1.2);
   pointLight.position.set(20, 10, 20);
   scene.add(pointLight);
 
-  // 3. SKAPA JORDGLOBEN (MED TEXTUR IGEN!)
-  const geometry = new THREE.SphereGeometry(6, 64, 64); // Hög detaljrikedom
+  // 3. SKAPA JORDGLOBEN
+  const geometry = new THREE.SphereGeometry(6, 64, 64);
 
-  // --- HÄR LADDAR VI BILDEN IGEN ---
   const textureLoader = new THREE.TextureLoader();
-  // En bra, högupplöst bild på jorden
-  const earthTexture = textureLoader.load('https://i.imgur.com/45NAzR3.jpeg');
+
+  // LÄNK: Officiell Three.js-textur (Mycket stabilare)
+  const earthTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
 
   const material = new THREE.MeshPhongMaterial({
-    map: earthTexture,   // Lägg på kartan
-    bumpScale: 0.05,     // Lite struktur
-    specular: new THREE.Color(0x333333), // Lite blänk i haven
+    map: earthTexture,
+    color: 0xaaaaaa,    // Fallback-färg (om bilden inte laddar blir jorden ljusgrå/blå, inte svart)
+    bumpScale: 0.05,
+    specular: new THREE.Color(0x333333),
     shininess: 5
   });
 
   const earth = new THREE.Mesh(geometry, material);
   scene.add(earth);
 
-
-  // Stjärnor (Lite fler och mindre för bättre djup)
+  // Stjärnor
   const starGeo = new THREE.BufferGeometry();
   const starCount = 3000;
   const starPos = new Float32Array(starCount * 3);
@@ -80,46 +79,35 @@ export function WorldMusic() {
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
   controls.enableZoom = false;
-  controls.autoRotate = true;     // Den snurrar automatiskt...
-  controls.autoRotateSpeed = 0.5; // ...långsamt och snyggt
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.5;
 
   let animationId;
 
-  // ==========================================
   // 4. ANIMATION & KILL SWITCH
-  // ==========================================
   const animate = () => {
-    // KOLL: Finns containern i dokumentet?
     if (!document.body.contains(container)) {
       cleanup();
       return;
     }
-
     animationId = requestAnimationFrame(animate);
-
-    stars.rotation.y -= 0.0001; // Rymden rör sig jättelite
-
-    controls.update(); // Sköter auto-rotationen
+    stars.rotation.y -= 0.0001;
+    controls.update();
     renderer.render(scene, camera);
   };
 
   function cleanup() {
-    // Städa minnet när vi lämnar
     cancelAnimationFrame(animationId);
-
-    // Viktigt: Städa bort texturen också!
-    earthTexture.dispose();
+    earthTexture.dispose(); // Städa texturen
     geometry.dispose();
     material.dispose();
     starGeo.dispose();
     starMat.dispose();
     renderer.dispose();
-    console.log("Jorden och texturer borttagna ur minnet. 🗑️");
+    console.log("Jorden städad. 🧹");
   }
 
-  // ==========================================
-  // 5. START MED FÖRDRÖJNING (Fixen för att den inte ska dö direkt)
-  // ==========================================
+  // 5. START MED FÖRDRÖJNING
   setTimeout(() => {
     animate();
   }, 100);
