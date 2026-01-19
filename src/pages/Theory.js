@@ -1,7 +1,28 @@
 export function Theory() {
   const section = document.createElement('section');
 
-  // --- 1. CSS (Blått färgtema istället för orange) ---
+  // ==========================================
+  // 1. DATA: NOTVÄRDEN (För tabellen)
+  // ==========================================
+  const notesData = [
+    { symbol: "𝅝", name: "Helnot", duration: "4 slag" },
+    { symbol: "𝅗𝅥", name: "Halvnot", duration: "2 slag" },
+    { symbol: "𝅘𝅥", name: "Fjärdedelsnot", duration: "1 slag" },
+    { symbol: "𝅘𝅥𝅮", name: "Åttondelsnot", duration: "1/2 slag" }
+  ];
+
+  // Bygger HTML-rader för tabellen
+  const tableRows = notesData.map(note => `
+    <tr>
+      <td class="note-symbol">${note.symbol}</td>
+      <td><strong>${note.name}</strong></td>
+      <td>${note.duration}</td>
+    </tr>
+  `).join('');
+
+  // ==========================================
+  // 2. CSS
+  // ==========================================
   const styles = `
     <style>
       .hidden-force { display: none !important; }
@@ -11,6 +32,7 @@ export function Theory() {
         margin: 0 auto;
         text-align: center;
         padding-bottom: 50px;
+        padding-top: 20px;
       }
 
       .grid-section {
@@ -21,7 +43,7 @@ export function Theory() {
         text-align: left;
       }
 
-      /* KORT DESIGN (Blå) */
+      /* KORT DESIGN */
       .theory-card {
         background: #fff;
         border-radius: 12px;
@@ -31,7 +53,7 @@ export function Theory() {
         cursor: pointer;
         position: relative;
         overflow: hidden;
-        border-left: 5px solid #3498db; /* Blå för teori */
+        border-left: 5px solid #3498db;
       }
 
       .theory-card:hover {
@@ -80,12 +102,12 @@ export function Theory() {
         overflow-y: auto;
         border-radius: 8px;
         position: relative;
-        padding: 50px;
+        padding: 40px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         font-family: 'Georgia', serif; 
       }
 
-      .article-content h2 { font-family: 'Outfit', sans-serif; color: #3498db; margin-bottom: 5px; }
+      .article-content h2 { font-family: 'Outfit', sans-serif; color: #3498db; margin-bottom: 5px; margin-top: 0; }
       .article-content h3 { font-family: 'Outfit', sans-serif; margin-top: 30px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;}
       .article-content h4 { font-family: 'Outfit', sans-serif; margin-top: 20px; color: #444; font-size: 1.1rem; }
       .article-content p { line-height: 1.8; color: #222; font-size: 1.1rem; margin-bottom: 15px; }
@@ -99,10 +121,58 @@ export function Theory() {
         line-height: 0.8;
       }
       .close-btn:hover { color: #e74c3c; }
+
+      /* --- NYTT: PIANO STYLES --- */
+      .piano-wrapper {
+        background: #222;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .piano {
+        display: inline-flex;
+        background: #111;
+        padding: 10px;
+        border-radius: 8px;
+        position: relative;
+      }
+      .key {
+        position: relative; cursor: pointer; border-radius: 0 0 4px 4px;
+        user-select: none; transition: background 0.1s;
+      }
+      .white-key {
+        width: 40px; height: 140px; background: #fff; border: 1px solid #ccc;
+        margin: 0 2px; display: flex; align-items: flex-end; justify-content: center;
+        padding-bottom: 10px; font-weight: bold; font-family: sans-serif;
+      }
+      .white-key.active { background: #ddd; transform: translateY(2px); }
+      
+      .black-key {
+        width: 30px; height: 85px; background: #000; position: absolute; z-index: 2;
+        border-radius: 0 0 3px 3px; color: #fff;
+      }
+      .black-key.active { background: #333; transform: translateY(2px); }
+
+      /* Positionering av svarta tangenter */
+      .bk-1 { left: 32px; } .bk-2 { left: 78px; }
+      .bk-3 { left: 168px; } .bk-4 { left: 214px; } .bk-5 { left: 260px; }
+
+      .note-display {
+        color: #fff; margin-top: 10px; font-family: sans-serif; font-weight: bold; height: 20px;
+      }
+
+      /* --- NYTT: NOT-TABELL STYLES --- */
+      .rhythm-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      .rhythm-table th { text-align: left; padding: 10px; border-bottom: 2px solid #ddd; font-family: sans-serif; }
+      .rhythm-table td { padding: 10px; border-bottom: 1px solid #eee; }
+      .note-symbol { font-size: 2.5rem; line-height: 1; }
     </style>
   `;
 
-  // --- DATA: TEORI ARTIKLAR ---
+  // ==========================================
+  // 3. ARTIKEL-INNEHÅLL
+  // ==========================================
   const theoryArticles = [
     {
       id: "copyright",
@@ -112,80 +182,60 @@ export function Theory() {
       content: `
         <p><b>- En guide för årskurs 7–9 -</b></p>
         <p>Musik är något vi lyssnar på, skapar och delar varje dag. Men vem äger egentligen musiken? Och vad får du göra med låtar som du gillar? Här reder vi ut begreppen utifrån upphovsrättslagen.</p>
-
         <h3>1. Vad är upphovsrätt?</h3>
-        <p>Upphovsrätten är en lag som skyddar skapande. Den som har skapat ett "litterärt eller konstnärligt verk" har automatiskt upphovsrätt till det. Det spelar ingen roll om det är en topplistelåt, en film, ett datorprogram eller en text du skrivit i skolan – principen är densamma.</p>
-        <p>Lagen ger skaparen ensamrätt att bestämma över sitt verk. Det innebär att ingen annan får sprida det eller göra om det utan tillstånd.</p>
-
-        <h4>Två delar av upphovsrätten</h4>
+        <p>Upphovsrätten är en lag som skyddar skapande. Den som har skapat ett "litterärt eller konstnärligt verk" har automatiskt upphovsrätt till det.</p>
         <ul>
-          <li><b>Den ekonomiska rätten:</b> Rätten att tjäna pengar på verket och bestämma hur det ska spridas (t.ex. tryckas, spelas in eller läggas ut på nätet).</li>
-          <li><b>Den ideella rätten:</b> Rätten att bli namngiven. När någon använder din musik eller text måste de ange att det är du som har gjort den. Ingen får heller ändra i ditt verk på ett sätt som är kränkande för dig.</li>
+           <li><b>Stim:</b> Bevakar låtskrivarnas rättigheter.</li>
+           <li><b>SAMI:</b> Bevakar artisternas och musikernas rättigheter.</li>
         </ul>
-
-        <h3>2. Vem äger musiken?</h3>
-        <p>I musikbranschen är det ofta flera personer inblandade i en enda låt. Det är viktigt att skilja på vilka som gör vad, eftersom de företräds av olika organisationer.</p>
-
-        <h4>Upphovspersoner (Låtskrivarna)</h4>
-        <p>Detta är de som skrivit texten och musiken/kompositionen. De äger själva verket (låten).</p>
-        <ul>
-          <li><b>Organisation: Stim</b> bevakar deras rättigheter. När musik spelas offentligt ser Stim till att låtskrivarna får betalt.</li>
-        </ul>
-
-        <h4>Utövande konstnärer (Artisterna)</h4>
-        <p>Detta är de som framför musiken – sångare och musiker som spelar på inspelningen.</p>
-        <ul>
-          <li><b>Organisation: SAMI</b> bevakar artisternas och musikernas rättigheter.</li>
-        </ul>
-
-        <p><i>Viktigt att veta: Om du spelar upp en låt offentligt (t.ex. på ett disco där ni tar inträde) behöver ni ofta licens från både Stim (för låtskrivaren) och SAMI (för artisten).</i></p>
-
-        <h3>3. Dina rättigheter – När du skapar musik</h3>
-        <p>När du gör en egen låt, spelar in en video eller skriver en text i skolan har du samma skydd som kända artister.</p>
-        <ul>
-          <li><b>Du bestämmer:</b> Ingen får ta din låt och lägga upp den på Spotify eller YouTube utan att fråga dig.</li>
-          <li><b>Du ska nämnas:</b> Om någon citerar din text eller använder din musik ska ditt namn finnas med.</li>
-          <li><b>Privat bruk:</b> Du får göra kopior av andras verk för privat bruk (t.ex. spara en låtlistan offline till dig själv), men du får inte sprida dem till hela världen.</li>
-        </ul>
-
-        <h3>4. Dina skyldigheter – När du använder andras musik</h3>
-        <p>Vad får du göra i skolan och på fritiden?</p>
-
-        <h4>I skolan (Undervisning)</h4>
-        <p>Det finns ett undantag i lagen för skolor. Lärare och elever får använda verk i undervisningen för att "illustrera" något. Ni får också spela in era egna framträdanden av andras låtar om det är för utbildningssyfte, men dessa inspelningar får inte spridas utanför skolan.</p>
-
-        <h4>På internet och sociala medier</h4>
-        <p>Här gäller strikta regler. Att lägga ut något på internet räknas som att göra det "tillgängligt för allmänheten".</p>
-        <ul>
-          <li>Du får inte ta en känd låt och lägga som bakgrundsmusik i en video du publicerar öppet (t.ex. på YouTube eller TikTok) utan tillstånd.</li>
-          <li>Plattformar som TikTok och YouTube har ofta egna avtal med musikbolagen, men om avtal saknas kan din video tas bort eller så kan du bli skyldig pengar.</li>
-        </ul>
-
-        <h4>Konsert vs. Musikal (Stora och små rättigheter)</h4>
-        <p>Om ni ska sätta upp en föreställning i skolan är det skillnad på hur musiken används:</p>
-        <ul>
-          <li><b>Små rättigheter:</b> Om ni spelar musik på en konsert, eller som pausmusik, täcks detta ofta av en vanlig Stim-licens.</li>
-          <li><b>Stora rättigheter:</b> Om ni sätter upp en musikal eller teater där musiken driver handlingen framåt (t.ex. Grease eller Lejonkungen), räcker inte en vanlig licens. Då måste man söka tillstånd direkt från de som äger musikalen. Detta kallas "stora rättigheter".</li>
-        </ul>
-
-        <h3>Sammanfattning</h3>
-        <ul>
-          <li><b>Fråga om lov:</b> Huvudregeln är att du måste ha tillstånd för att använda andras musik offentligt.</li>
-          <li><b>Namnge källan:</b> Ange alltid vem som skrivit musiken eller tagit bilden.</li>
-          <li><b>Skilj på privat och offentligt:</b> Det du gör hemma för dig själv är oftast okej. Det du lägger ut på nätet räknas som offentligt och kräver att du följer lagen.</li>
-        </ul>
-        <p style="font-size:0.9rem; color:#666; margin-top:30px;">Källor: Lag (1960:729) om upphovsrätt till litterära och konstnärliga verk, samt information från Stim och SAMI.</p>
+        <h3>2. På internet</h3>
+        <p>Du får inte ta en känd låt och lägga som bakgrundsmusik i en video du publicerar öppet (t.ex. på YouTube eller TikTok) utan tillstånd, såvida inte plattformen har avtal.</p>
+        <p><i>Läs hela lagen på riksdagen.se</i></p>
       `
     },
     {
-      id: "basics",
+      id: "basics", // Viktigt ID för pianot
       title: "Noter & Rytm",
-      subtitle: "Grundläggande musikteori",
-      summary: "Lär dig läsa noter, förstå taktarter och vad som skiljer dur från moll.",
+      subtitle: "Interaktiv Teori",
+      summary: "Testa pianot, lär dig noternas namn och förstå de vanligaste takterna.",
       content: `
-        <h3>Musikens byggstenar</h3>
-        <p>Här kommer snart en guide om G-klav, pulsslag och hur man räknar takter.</p>
-        <p><i>Innehåll under konstruktion...</i></p>
+        <h3>Det interaktiva pianot</h3>
+        <p>Tryck på tangenterna nedan för att se vad tonen heter. De vita tangenterna är stamtoner (C, D, E...) och de svarta är härledda toner (korsförtecken/b-förtecken).</p>
+        
+        <div class="piano-wrapper">
+          <div class="piano">
+            <div class="key white-key" data-note="C">C</div>
+            <div class="key black-key bk-1" data-note="C# / Db"></div>
+            
+            <div class="key white-key" data-note="D">D</div>
+            <div class="key black-key bk-2" data-note="D# / Eb"></div>
+            
+            <div class="key white-key" data-note="E">E</div>
+            
+            <div class="key white-key" data-note="F">F</div>
+            <div class="key black-key bk-3" data-note="F# / Gb"></div>
+            
+            <div class="key white-key" data-note="G">G</div>
+            <div class="key black-key bk-4" data-note="G# / Ab"></div>
+            
+            <div class="key white-key" data-note="A">A</div>
+            <div class="key black-key bk-5" data-note="A# / Bb"></div>
+            
+            <div class="key white-key" data-note="B">B</div>
+            <div class="key white-key" data-note="C (oktav)">C</div>
+          </div>
+          <div class="note-display" id="note-output">Spela på mig! 🎵</div>
+        </div>
+
+        <h3>Notvärden</h3>
+        <p>I en vanlig 4/4-takt (fyra fjärdedelstakt) räknar man till fyra i varje takt. Här är hur länge noterna ska klinga:</p>
+        
+        <table class="rhythm-table">
+          <thead><tr><th>Tecken</th><th>Namn</th><th>Längd</th></tr></thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
       `
     },
     {
@@ -203,10 +253,9 @@ export function Theory() {
 
   section.innerHTML = styles + `
     <div class="page-detail theory-container">
-      
       <h1 style="color: #ffffff;">Teori & Fakta 📘</h1>
       <p style="color: #e0e0e0; max-width:600px; margin: 0 auto 40px auto; font-size: 1.1rem;">
-        Här lär du dig hur musik fungerar, vilka lagar som gäller och grunderna i musikteori.
+        Klicka på korten nedan för att lära dig mer.
       </p>
 
       <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; color:#ffffff;">Samhälle & Lagar</h2>
@@ -214,7 +263,6 @@ export function Theory() {
 
       <h2 style="text-align:left; border-bottom:1px solid #555; padding-bottom:10px; margin-top:50px; color:#ffffff;">Musikteori</h2>
       <div id="theory-grid" class="grid-section"></div>
-
     </div>
 
     <div id="article-modal" class="article-modal-overlay hidden-force">
@@ -226,7 +274,7 @@ export function Theory() {
     </div>
   `;
 
-  // --- LOGIK ---
+  // --- 4. LOGIK ---
   const lawGrid = section.querySelector('#law-grid');
   const theoryGrid = section.querySelector('#theory-grid');
   const articleModal = section.querySelector('#article-modal');
@@ -234,33 +282,55 @@ export function Theory() {
   const artTitle = section.querySelector('#article-title');
   const artBody = section.querySelector('#article-body');
 
+  // Funktion för att aktivera pianot när modalen öppnas
+  const initPiano = () => {
+    const keys = artBody.querySelectorAll('.key');
+    const display = artBody.querySelector('#note-output');
+
+    if (keys.length === 0) return; // Inget piano i denna artikel
+
+    keys.forEach(key => {
+      // Hantera musklick
+      key.addEventListener('mousedown', () => {
+        key.classList.add('active');
+        display.textContent = `Ton: ${key.getAttribute('data-note')}`;
+      });
+      key.addEventListener('mouseup', () => key.classList.remove('active'));
+      key.addEventListener('mouseleave', () => key.classList.remove('active'));
+    });
+  };
+
   // Funktion för att skapa kort
   const createCard = (item, container) => {
     const card = document.createElement('div');
     card.className = 'theory-card';
     card.innerHTML = `
-      <span class="card-label">Ämne</span>
+      <span class="card-label">Läs mer</span>
       <h3 class="card-title">${item.title}</h3>
       <p style="font-weight:bold; color:#3498db; margin-bottom:10px;">${item.subtitle}</p>
       <p style="color:#444;">${item.summary}</p>
-      <span class="read-more-btn">Läs mer ➡</span>
     `;
+
     card.addEventListener('click', () => {
       artTitle.innerText = item.title;
       artBody.innerHTML = item.content;
       articleModal.classList.remove('hidden-force');
+
+      // OM det är teorisidan, aktivera pianot!
+      if (item.id === "basics") {
+        initPiano();
+      }
     });
+
     container.appendChild(card);
   };
 
-  // 1. Lägg in Upphovsrätt i "Samhälle"-grid
-  createCard(theoryArticles[0], lawGrid);
+  // Skapa korten
+  createCard(theoryArticles[0], lawGrid);     // Upphovsrätt
+  createCard(theoryArticles[1], theoryGrid);  // Noter (med piano!)
+  createCard(theoryArticles[2], theoryGrid);  // Instrument
 
-  // 2. Lägg in övriga i "Musikteori"-grid
-  createCard(theoryArticles[1], theoryGrid);
-  createCard(theoryArticles[2], theoryGrid);
-
-
+  // Stäng modal
   closeArticleBtn.addEventListener('click', () => { articleModal.classList.add('hidden-force'); });
   articleModal.addEventListener('click', (e) => { if (e.target === articleModal) articleModal.classList.add('hidden-force'); });
 
