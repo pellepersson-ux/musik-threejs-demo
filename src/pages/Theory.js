@@ -5,7 +5,6 @@ export function Theory() {
   // ==========================================
   // 1. DATA: NOTVÄRDEN (Till tabellen)
   // ==========================================
-  // Vi använder säkra Unicode-symboler här för att undvika "fyrkanter"
   const notesData = [
     { symbol: "𝅝", name: "Helnot", val: "4 slag" },
     { symbol: "𝅗𝅥", name: "Halvnot", val: "2 slag" },
@@ -61,8 +60,8 @@ export function Theory() {
           <li><b>Undre siffran:</b> VILKET notvärde som räknas som ett slag.</li>
         </ul>
         <p><b>Vanliga taktarter:</b><br>
-        - <b>4/4</b>: Vanligaste pop-takten.<br>
-        - <b>3/4</b>: Vals (Tänk "Ja må han leva").</p>
+        - <b>4/4</b>: Vanligaste pop-takten. (Tänk "Ja må han leva" eller "Smoke on the Water").<br>
+        - <b>3/4</b>: Vals-takt. (Tänk "Vem kan segla förutan vind" eller "Idas sommarvisa" i valstakt).</p>
       `
     },
 
@@ -114,25 +113,77 @@ export function Theory() {
       `
     },
 
-    // --- KATEGORI: SAMHÄLLE ---
+    // --- KATEGORI: SAMHÄLLE (Här är din nya text!) ---
     {
       category: "samhälle",
       id: "copyright",
       title: "Upphovsrätt & Regler",
       subtitle: "Lagar på internet",
-      summary: "Vem äger musiken? Vad gäller på YouTube? Stim & SAMI.",
+      summary: "Vem äger musiken? Vad gäller på YouTube? En guide om Stim, SAMI och lagen.",
       content: `
-        <h3>Vem äger musiken? ©</h3>
-        <p>När du skapar en låt skyddas den av <b>Upphovsrättslagen</b>.</p>
-        
-        <h4>Viktiga organisationer</h4>
+        <h3>Musik och Upphovsrätt – Vad gäller för dig?</h3>
+        <p><b>En guide om rättigheter och skyldigheter för årskurs 7–9</b></p>
+        <p>Musik är något vi lyssnar på, skapar och delar varje dag. Men vem äger egentligen musiken? Och vad får du göra med låtar som du gillar? Här reder vi ut begreppen utifrån upphovsrättslagen.</p>
+
+        <h4 style="margin-top:30px; color:#fff;">1. Vad är upphovsrätt?</h4>
+        <p>Upphovsrätten är en lag som skyddar skapande. Den som har skapat ett "litterärt eller konstnärligt verk" har automatiskt upphovsrätt till det. Det spelar ingen roll om det är en topplistelåt, en film, ett datorprogram eller en text du skrivit i skolan – principen är densamma.</p>
+        <p>Lagen ger skaparen ensamrätt att bestämma över sitt verk. Det innebär att ingen annan får sprida det eller göra om det utan tillstånd.</p>
+
+        <p><b>Två delar av upphovsrätten</b><br>
+        Upphovsrätten består av två viktiga delar:</p>
         <ul>
-          <li><b>Stim:</b> Ser till att <i>låtskrivarna</i> får betalt.</li>
-          <li><b>SAMI:</b> Ser till att <i>artisterna</i> får betalt.</li>
+          <li><b>Den ekonomiska rätten:</b> Rätten att tjäna pengar på verket och bestämma hur det ska spridas (t.ex. tryckas, spelas in eller läggas ut på nätet).</li>
+          <li><b>Den ideella rätten:</b> Rätten att bli namngiven. När någon använder din musik eller text måste de ange att det är du som har gjort den. Ingen får heller ändra i ditt verk på ett sätt som är kränkande för dig.</li>
         </ul>
 
-        <h4>På sociala medier</h4>
-        <p>Huvudregeln är: Du får inte lägga upp andras musik i dina videor utan lov eller licens.</p>
+        <h4 style="margin-top:30px; color:#fff;">2. Vem äger musiken?</h4>
+        <p>I musikbranschen är det ofta flera personer inblandade i en enda låt. Det är viktigt att skilja på vilka som gör vad, eftersom de företräds av olika organisationer.</p>
+
+        <p><b>Upphovspersoner (Låtskrivarna)</b><br>
+        Detta är de som skrivit texten och musiken/kompositionen. De äger själva verket (låten).<br>
+        <i>Organisation: <b>Stim</b> bevakar deras rättigheter. När musik spelas offentligt ser Stim till att låtskrivarna får betalt.</i></p>
+
+        <p><b>Utövande konstnärer (Artisterna)</b><br>
+        Detta är de som framför musiken – sångare och musiker som spelar på inspelningen.<br>
+        <i>Organisation: <b>SAMI</b> bevakar artisternas och musikernas rättigheter.</i></p>
+
+        <p><i>Viktigt att veta: Om du spelar upp en låt offentligt (t.ex. på ett disco där ni tar inträde) behöver ni ofta licens från både Stim (för låtskrivaren) och SAMI (för artisten).</i></p>
+
+        <h4 style="margin-top:30px; color:#fff;">3. Dina rättigheter – När du skapar musik</h4>
+        <p>När du gör en egen låt, spelar in en video eller skriver en text i skolan har du samma skydd som kända artister.</p>
+        <ul>
+          <li><b>Du bestämmer:</b> Ingen får ta din låt och lägga upp den på Spotify eller YouTube utan att fråga dig.</li>
+          <li><b>Du ska nämnas:</b> Om någon citerar din text eller använder din musik ska ditt namn finnas med.</li>
+          <li><b>Privat bruk:</b> Du får göra kopior av andras verk för privat bruk (t.ex. spara en låtlistan offline till dig själv), men du får inte sprida dem till hela världen.</li>
+        </ul>
+
+        <h4 style="margin-top:30px; color:#fff;">4. Dina skyldigheter – När du använder andras musik</h4>
+        <p>Vad får du göra i skolan och på fritiden?</p>
+
+        <p><b>I skolan (Undervisning)</b><br>
+        Det finns ett undantag i lagen för skolor. Lärare och elever får använda verk i undervisningen för att "illustrera" något. Ni får också spela in era egna framträdanden av andras låtar om det är för utbildningssyfte, men dessa inspelningar får inte spridas utanför skolan.</p>
+
+        <p><b>På internet och sociala medier</b><br>
+        Här gäller strikta regler. Att lägga ut något på internet räknas som att göra det "tillgängligt för allmänheten".</p>
+        <ul>
+          <li>Du får inte ta en känd låt och lägga som bakgrundsmusik i en video du publicerar öppet (t.ex. på YouTube eller TikTok) utan tillstånd.</li>
+          <li>Plattformar som TikTok och YouTube har ofta egna avtal med musikbolagen, men om avtal saknas kan din video tas bort eller så kan du bli skyldig pengar.</li>
+        </ul>
+
+        <p><b>Konsert vs. Musikal (Stora och små rättigheter)</b><br>
+        Om ni ska sätta upp en föreställning i skolan är det skillnad på hur musiken används:</p>
+        <ul>
+          <li><b>Små rättigheter:</b> Om ni spelar musik på en konsert, eller som pausmusik, täcks detta ofta av en vanlig Stim-licens.</li>
+          <li><b>Stora rättigheter:</b> Om ni sätter upp en musikal eller teater där musiken driver handlingen framåt (t.ex. Grease eller Lejonkungen), räcker inte en vanlig licens. Då måste man söka tillstånd direkt från de som äger musikalen. Detta kallas "stora rättigheter".</li>
+        </ul>
+
+        <h4 style="margin-top:30px; color:#fff;">Sammanfattning</h4>
+        <ul>
+          <li><b>Fråga om lov:</b> Huvudregeln är att du måste ha tillstånd för att använda andras musik offentligt.</li>
+          <li><b>Namnge källan:</b> Ange alltid vem som skrivit musiken eller tagit bilden.</li>
+          <li><b>Skilj på privat och offentligt:</b> Det du gör hemma för dig själv är oftast okej. Det du lägger ut på nätet räknas som offentligt och kräver att du följer lagen.</li>
+        </ul>
+        <p style="font-size:0.9rem; color:#888; margin-top:30px;">Källor: Lag (1960:729) om upphovsrätt till litterära och konstnärliga verk, samt information från Stim och SAMI.</p>
       `
     }
   ];
@@ -222,7 +273,10 @@ export function Theory() {
     }
     .modal-close:hover { color: #fff; }
     .modal-content h3 { color: #a18cd1; margin-top: 0; font-size: 2rem; }
-    .modal-content h4 { color: #fff; margin-top: 30px; font-size: 1.3rem; }
+    .modal-content h4 { font-size: 1.3rem; margin-bottom: 10px; font-weight: bold; }
+    .modal-content p { line-height: 1.6; margin-bottom: 15px; }
+    .modal-content ul { margin-bottom: 20px; padding-left: 20px; }
+    .modal-content li { margin-bottom: 8px; }
     
     /* PIANO & TABLE styles */
     .theory-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #252525; border-radius: 8px; }
