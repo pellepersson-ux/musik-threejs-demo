@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import ThreeGlobe from 'three-globe'; // VIKTIGT: Detta paket krävs för länderna
+import ThreeGlobe from 'three-globe';
 
 export function WorldMusic() {
   const container = document.createElement('div');
@@ -8,83 +8,53 @@ export function WorldMusic() {
   container.style.width = '100%';
   container.style.height = '100vh';
   container.style.backgroundColor = '#000';
+  container.style.position = 'relative';
   container.style.overflow = 'hidden';
-  container.style.position = 'relative'; // För att kunna placera modaler/text ovanpå
 
   // ==========================================
-  // 1. DINA MUSIK-LÄNDER (DATA)
+  // 1. DATA & INSTÄLLNINGAR
   // ==========================================
-  // Här lägger du in informationen som ska visas
   const musicCountries = {
-    "Sweden": {
-      info: "Sverige: Här är popundret, ABBA och Max Martin.",
-      color: "#f6c138" // Gul
-    },
-    "Brazil": {
-      info: "Brasilien: Hemlandet för Samba och Bossa Nova.",
-      color: "#009c3b" // Grön
-    },
-    "Nigeria": {
-      info: "Nigeria: Afrobeatens hemland med Fela Kuti och Burna Boy.",
-      color: "#008751" // Mörkgrön
-    }
-    // Lägg till fler länder här vid behov
+    "Sweden": { info: "Sverige: ABBA, Roxette, Max Martin.", color: "#f6c138" },
+    "Brazil": { info: "Brasilien: Samba, Bossa Nova.", color: "#009c3b" },
+    "Nigeria": { info: "Nigeria: Afrobeat, Fela Kuti.", color: "#008751" },
+    "United States of America": { info: "USA: Blues, Jazz, Hip Hop.", color: "#3c3b6e" },
+    "Japan": { info: "Japan: J-Pop, Koto.", color: "#bc002d" }
   };
 
-  // ==========================================
-  // 2. DETEKTERA CHROMEBOOK / PRESTANDA
-  // ==========================================
+  // Lite-läge för Chromebooks
   const isLowSpec = /CrOS/.test(navigator.userAgent) || navigator.hardwareConcurrency <= 4;
-
   const config = isLowSpec ? {
-    mode: 'Lite Mode (Chromebook)',
     antialias: false,
-    pixelRatio: 1, // Tvinga 1.0 (sparar massor av VRAM)
-    enableAtmosphere: false, // Stäng av snyggt men tungt "glow"
-    materialType: 'MeshBasicMaterial', // Inget ljus/skuggor = Snabbt
-    globeImg: 'https://unpkg.com/three-globe/example/img/earth-dark.jpg' // Lågupplöst
+    pixelRatio: 1, // Tvinga låg upplösning
+    globeImg: '//unpkg.com/three-globe/example/img/earth-dark.jpg',
+    atmosphere: false
   } : {
-    mode: 'High Performance',
     antialias: true,
     pixelRatio: window.devicePixelRatio,
-    enableAtmosphere: true, // Snyggt "glow" runt jorden
-    materialType: 'MeshPhongMaterial', // Snyggare ljus
-    globeImg: 'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg' // Högupplöst
+    globeImg: '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg',
+    atmosphere: true
   };
 
-  console.log(`WorldMusic laddad i: ${config.mode}`);
-
-  // Visa info om lite-läge
-  if (isLowSpec) {
-    const info = document.createElement('div');
-    info.innerText = "Lite-läge 🚀";
-    info.style.cssText = "position:absolute; bottom:10px; left:10px; color:#555; font-size:12px; z-index:10; pointer-events:none;";
-    container.appendChild(info);
-  }
+  console.log(isLowSpec ? "Läge: Chromebook (Lite)" : "Läge: High Performance");
 
   // ==========================================
-  // 3. THREE.JS SETUP
+  // 2. SCEN, KAMERA, RENDERER
   // ==========================================
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000); // Svart bakgrund
+  scene.background = new THREE.Color(0x050505); // Nästan svart
 
-  // Lägg till ljus (behövs främst för High Performance-läget)
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  // VIKTIGT: Starkt ljus så allt syns
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
-  const dLight = new THREE.DirectionalLight(0xffffff, 1.0);
-  dLight.position.set(-200, 500, 200);
-  scene.add(dLight);
-  const dLight2 = new THREE.DirectionalLight(0x7982f6, 1.0);
-  dLight2.position.set(-200, 500, 200);
-  scene.add(dLight2);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(200, 500, 300);
+  scene.add(dirLight);
 
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.z = 250; // Zooma ut lagom för ThreeGlobe
+  camera.position.z = 250;
 
-  const renderer = new THREE.WebGLRenderer({
-    antialias: config.antialias,
-    powerPreference: "high-performance"
-  });
+  const renderer = new THREE.WebGLRenderer({ antialias: config.antialias, alpha: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(config.pixelRatio);
   container.appendChild(renderer.domElement);
@@ -92,88 +62,92 @@ export function WorldMusic() {
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
-  controls.rotateSpeed = 0.5;
   controls.minDistance = 150;
-  controls.maxDistance = 500;
+  controls.maxDistance = 600;
 
   // ==========================================
-  // 4. SKAPA GLOBEN (ThreeGlobe)
+  // 3. GLOBEN & LÄNDER
   // ==========================================
   const globe = new ThreeGlobe()
     .globeImageUrl(config.globeImg)
-    .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png');
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');
 
-  // OPTIMERING: Material på själva jordklotet
-  // Vi kommer åt den interna sfären och byter material om det är en Chromebook
-  const globeMaterial = globe.globeMaterial();
-  if (isLowSpec) {
-    // Byt till BasicMaterial för att slippa ljusberäkningar
-    globeMaterial.color = new THREE.Color(0xffffff);
-    // Vi kan inte enkelt byta hela materialklassen på en instansierad globe, 
-    // men vi kan stänga av atmosfären som drar mest kraft.
-    globe.showAtmosphere(false);
-  } else {
+  // Ställ in atmosfär baserat på prestanda
+  if (config.atmosphere) {
     globe.showAtmosphere(true);
     globe.atmosphereColor('lightskyblue');
     globe.atmosphereAltitude(0.15);
+  } else {
+    globe.showAtmosphere(false);
   }
 
-  // Ladda GeoJSON data (Länderna)
-  // Vi använder en standardfil med alla världens länder
-  fetch('https://raw.githubusercontent.com/vasturiano/three-globe/master/example/datasets/ne_110m_admin_0_countries.geojson')
-    .then(res => res.json())
+  // --- HÄR LADDAR VI DATAN (Ny länk + Felhantering) ---
+
+  // Vi använder jsDelivr CDN istället för Raw Github (oftare tillåtet i skolor)
+  const GEOJSON_URL = 'https://cdn.jsdelivr.net/gh/vasturiano/three-globe/example/datasets/ne_110m_admin_0_countries.geojson';
+
+  fetch(GEOJSON_URL)
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP fel! Status: ${res.status}`);
+      return res.json();
+    })
     .then(countries => {
-      globe.polygonsData(countries)
+      console.log("Länder laddade, antal:", countries.features.length);
+
+      globe.polygonsData(countries.features)
         .polygonCapColor(d => {
-          // Om landet finns i vår musicData-lista, ge den rätt färg
-          if (musicCountries[d.properties.NAME]) {
-            return musicCountries[d.properties.NAME].color;
-          } else if (musicCountries[d.properties.NAME_LONG]) { // Ibland heter de NAME_LONG
-            return musicCountries[d.properties.NAME_LONG].color;
-          }
-          return isLowSpec ? 'rgba(200,200,200, 0.3)' : 'rgba(200,200,200, 0.1)'; // Standardfärg (grå)
-        })
-        .polygonSideColor(() => 'rgba(0,0,0,0.5)')
-        .polygonStrokeColor(() => '#111')
-        .polygonAltitude(d => {
-          // Höj upp länderna vi har musikfakta om så de syns tydligare
           const name = d.properties.NAME || d.properties.NAME_LONG;
-          return musicCountries[name] ? 0.03 : 0.01;
+          if (musicCountries[name]) return musicCountries[name].color;
+          return 'rgba(255, 255, 255, 0)'; // Genomskinliga länder om ingen data finns
         })
-        .onPolygonClick((d) => {
+        .polygonSideColor(() => 'rgba(255, 255, 255, 0.05)') // Svag kantfärg
+        .polygonStrokeColor(() => '#555') // Grå gränslinjer
+        .polygonAltitude(0.01) // Lyft upp länderna lite från ytan
+        .onPolygonClick(d => {
           const name = d.properties.NAME || d.properties.NAME_LONG;
           if (musicCountries[name]) {
-            // HÄR VISAR VI INFORMATIONEN
             showModal(name, musicCountries[name].info);
           } else {
-            console.log("Klickade på: ", name);
+            console.log("Klickade på:", name, "(Ingen musikdata)");
           }
         })
-        .polygonLabel(({ properties: d }) => `
-          <div style="background:#333; color:#fff; padding:4px 8px; border-radius:4px;">
-            <b>${d.NAME}</b> <br />
-            ${musicCountries[d.NAME] ? "🎵 Klicka för info" : ""}
-          </div>
-        `); // Hover-text
+        // Hover-effekt (label)
+        .polygonLabel(({ properties: d }) => {
+          const name = d.NAME || d.NAME_LONG;
+          if (musicCountries[name]) {
+            return `<div style="background:#222; color:#fff; padding:5px; border-radius:4px;">🎵 ${name}</div>`;
+          }
+          return null;
+        });
+
+      // Tvinga en uppdatering av globen när datan är klar
+      globe.rotation.y = 0;
+    })
+    .catch(err => {
+      console.error("FEL vid laddning av länder:", err);
+      alert("Kunde inte ladda kartan. Kolla internetuppkopplingen eller konsolen (F12).");
     });
 
   scene.add(globe);
 
   // ==========================================
-  // 5. ENKEL MODAL (FÖR INFO)
+  // 4. MODAL (Popup-ruta)
   // ==========================================
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: rgba(20,20,30, 0.95); border: 1px solid #444; border-radius: 12px;
-    padding: 30px; color: #fff; max-width: 400px; display: none; z-index: 100;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8); font-family: sans-serif;
+    background: #1e1e1e; color: #fff; padding: 30px; border-radius: 10px;
+    border: 1px solid #444; width: 80%; max-width: 400px; display: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); z-index: 1000; text-align: center;
   `;
-  modal.innerHTML = `<h2 id="m-title"></h2><p id="m-text"></p><button id="m-close" style="margin-top:20px; padding:5px 15px; cursor:pointer;">Stäng</button>`;
+  modal.innerHTML = `
+    <h2 id="m-title" style="color:#f6c138; margin-top:0;"></h2>
+    <p id="m-text" style="line-height:1.5; font-size:1.1rem;"></p>
+    <button id="m-close" style="margin-top:20px; padding:10px 20px; border:none; background:#444; color:#fff; cursor:pointer; border-radius:5px;">Stäng</button>
+  `;
   container.appendChild(modal);
 
-  const mClose = modal.querySelector('#m-close');
-  mClose.onclick = () => { modal.style.display = 'none'; };
+  modal.querySelector('#m-close').onclick = () => modal.style.display = 'none';
 
   function showModal(title, text) {
     modal.querySelector('#m-title').innerText = title;
@@ -182,7 +156,7 @@ export function WorldMusic() {
   }
 
   // ==========================================
-  // 6. ANIMATION & SKALNING
+  // 5. LOOP & CLEANUP
   // ==========================================
 
   function onWindowResize() {
@@ -195,38 +169,20 @@ export function WorldMusic() {
   let frameId;
   function animate() {
     frameId = requestAnimationFrame(animate);
-
-    // Långsam rotation (bara om ingen interagerar, valfritt)
-    // globe.rotation.y += 0.0005; 
-
     controls.update();
     renderer.render(scene, camera);
   }
   animate();
 
-  // ==========================================
-  // 7. CLEANUP (VIKTIGT FÖR ATT GLOBEN SKA DÖ)
-  // ==========================================
   container.cleanup = function () {
-    console.log("🧹 Städar ThreeGlobe...");
+    console.log("Städar ThreeGlobe...");
     cancelAnimationFrame(frameId);
     window.removeEventListener('resize', onWindowResize);
 
-    // Ta bort objekt från scenen
-    scene.remove(globe);
+    // Töm scenen
+    scene.clear();
 
-    // Försök rensa ThreeGlobe-specifika resurser
-    // (ThreeGlobe bygger mycket interna geometrier)
-    scene.traverse((obj) => {
-      if (obj.isMesh) {
-        if (obj.geometry) obj.geometry.dispose();
-        if (obj.material) {
-          if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
-          else obj.material.dispose();
-        }
-      }
-    });
-
+    // Frigör minne
     renderer.dispose();
     renderer.forceContextLoss();
     if (renderer.domElement) renderer.domElement.remove();
