@@ -93,7 +93,7 @@ export function WorldMusic() {
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.2));
   container.appendChild(renderer.domElement);
 
   // Ljus
